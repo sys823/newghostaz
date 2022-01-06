@@ -1,4 +1,4 @@
-#pragma execution_character_set("utf-8")
+ï»¿#pragma execution_character_set("utf-8")
 #include "Talisman.h"
 #include "../GCAddon/GCAddon.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -12,7 +12,7 @@ void Talisman::Load()
 {
 	TalismanMap.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ·¨±¦ÎïÆ·ID,·Ö×éID FROM __·¨±¦" :
+		"SELECT æ³•å®ç‰©å“ID,åˆ†ç»„ID FROM __æ³•å®" :
 		"SELECT entry,groupid FROM _talisman");
 	if (!result)
 		return;
@@ -20,8 +20,7 @@ void Talisman::Load()
 	{
 		Field* fields = result->Fetch();
 		uint32 entry = fields[0].GetUInt32();
-		if (ItemTemplate const* proto = sObjectMgr->GetItemTemplate(entry))
-			TalismanMap.insert(std::make_pair(entry, fields[1].GetUInt32()));
+		TalismanMap.insert(std::make_pair(entry, fields[1].GetUInt32()));
 	} while (result->NextRow());
 }
 
@@ -63,7 +62,7 @@ std::string Talisman::GetName(uint32 entry)
 	std::string name = sCF->GetItemLink(entry);
 
 	if (name.empty())
-		return "[Î´Á¶»¯]";
+		return "[æœªç‚¼åŒ–]";
 
 	return name;
 }
@@ -93,7 +92,7 @@ void Talisman::ApplyOnEquip(Player* player, uint32 entry, bool apply)
 	if (!proto)
 		return;
 
-#pragma region ×°±¸ÊôĞÔ
+#pragma region è£…å¤‡å±æ€§
 	for (uint8 k = 0; k < MAX_ITEM_PROTO_STATS; ++k)
 	{
 		if (k >= proto->StatsCount)
@@ -307,7 +306,7 @@ void Talisman::ApplyOnEquip(Player* player, uint32 entry, bool apply)
 	if (proto->ArcaneRes)
 		player->HandleStatModifier(UNIT_MOD_RESISTANCE_ARCANE, BASE_VALUE, float(proto->ArcaneRes), apply);
 #pragma endregion
-#pragma region ×°±¸¼¼ÄÜ
+#pragma region è£…å¤‡æŠ€èƒ½
 	for (uint8 k = 0; k < MAX_ITEM_PROTO_SPELLS; ++k)
 	{
 		uint32 spellId = proto->Spells[k].SpellId;
@@ -333,7 +332,7 @@ void Talisman::ApplyOnLogin(Player* player)
 		if (!proto)
 			continue;
 
-#pragma region ×°±¸ÊôĞÔ
+#pragma region è£…å¤‡å±æ€§
 		for (uint8 k = 0; k < MAX_ITEM_PROTO_STATS; ++k)
 		{
 			if (k >= proto->StatsCount)
@@ -562,7 +561,7 @@ void Talisman::EquipTalisman(Player* player, uint32 ID, uint32 entry)
 {
 	if (player->IsInCombat())
 	{
-		ChatHandler(player->GetSession()).PSendSysMessage("ÄãÕı´¦ÔÚÕ½¶·ÖĞ£¬¸üĞÂ·¨±¦Ê§°Ü£¡", sCF->GetItemLink(entry).c_str());
+		ChatHandler(player->GetSession()).PSendSysMessage("ä½ æ­£å¤„åœ¨æˆ˜æ–—ä¸­ï¼Œæ›´æ–°æ³•å®å¤±è´¥ï¼", sCF->GetItemLink(entry).c_str());
 		return;
 	}
 
@@ -577,7 +576,7 @@ void Talisman::EquipTalisman(Player* player, uint32 ID, uint32 entry)
 		}
 	}
 
-	//È¡ÏÂ·¨±¦
+	//å–ä¸‹æ³•å®
 	if (entry == 0)
 	{
 		std::unordered_map<uint32, uint32>::iterator iter = player->TalismanMap.find(ID);
@@ -587,14 +586,14 @@ void Talisman::EquipTalisman(Player* player, uint32 ID, uint32 entry)
 			uint32 ori = iter->second;
 			iter->second = 0;
 
-			//»ñµÃÔ­·¨±¦
+			//è·å¾—åŸæ³•å®
 			if (const ItemTemplate* temp = sObjectMgr->GetItemTemplate(ori))
 			{
-				//È¥³ı×°±¸ÊôĞÔ¼°¼¼ÄÜ
+				//å»é™¤è£…å¤‡å±æ€§åŠæŠ€èƒ½
 				ApplyOnEquip(player, temp->ItemId, false);
 				player->AddItem(temp->ItemId, 1);
 
-				//ÒÆ³ı±¾Ãü·¨±¦ÊôĞÔ
+				//ç§»é™¤æœ¬å‘½æ³•å®å±æ€§
 				if (IsMidItem(ori))
 					UpdateTalismanValueOnEquip(player, false);
 			}
@@ -602,24 +601,24 @@ void Talisman::EquipTalisman(Player* player, uint32 ID, uint32 entry)
 	}
 	else
 	{
-		//ÅĞ¶Ï¸ÃÎ»ÖÃÊÇ·ñÒÑ¾­×°±¸·¨±¦
+		//åˆ¤æ–­è¯¥ä½ç½®æ˜¯å¦å·²ç»è£…å¤‡æ³•å®
 		auto i = player->TalismanMap.find(ID);
 		if (i != player->TalismanMap.end())
 		{
 			if (i->second != 0)
 			{
-				ChatHandler(player->GetSession()).PSendSysMessage("ÇëÏÈÓÒ¼üÈ¡ÏÂ¸ÃÎ»ÖÃ·¨±¦%s£¡", sCF->GetItemLink(i->second).c_str());
+				ChatHandler(player->GetSession()).PSendSysMessage("è¯·å…ˆå³é”®å–ä¸‹è¯¥ä½ç½®æ³•å®%sï¼", sCF->GetItemLink(i->second).c_str());
 				return;
 			}
 		}
 
-		//ÅĞ¶ÏÊÇ·ñÊÇ·¨±¦
+		//åˆ¤æ–­æ˜¯å¦æ˜¯æ³•å®
 
 		auto itr = TalismanMap.find(entry);
 
 		if (itr == TalismanMap.end())
 		{
-			ChatHandler(player->GetSession()).PSendSysMessage("%s²»ÊÇ·¨±¦£¡", sCF->GetItemLink(entry).c_str());
+			ChatHandler(player->GetSession()).PSendSysMessage("%sä¸æ˜¯æ³•å®ï¼", sCF->GetItemLink(entry).c_str());
 			return;
 		}
 		else
@@ -630,47 +629,47 @@ void Talisman::EquipTalisman(Player* player, uint32 ID, uint32 entry)
 				for (std::unordered_map<uint32, uint32>::iterator iter = player->TalismanMap.begin(); iter != player->TalismanMap.end(); iter++)
 					if (itr->second == GetGroupId(iter->second))
 					{
-						ChatHandler(player->GetSession()).PSendSysMessage("ÄãÒÑ¾­×°±¸Ò»¸öÍ¬Ò»ÀàĞÍµÄ·¨±¦%s£¡", sCF->GetItemLink(iter->second).c_str());
+						ChatHandler(player->GetSession()).PSendSysMessage("ä½ å·²ç»è£…å¤‡ä¸€ä¸ªåŒä¸€ç±»å‹çš„æ³•å®%sï¼", sCF->GetItemLink(iter->second).c_str());
 						return;
 					}
 			}
 		}
 
-		//ÅĞ¶ÏÊÇ·ñÓµÓĞ¸Ã·¨±¦
+		//åˆ¤æ–­æ˜¯å¦æ‹¥æœ‰è¯¥æ³•å®
 		if (!player->HasItemCount(entry, 1))
 			return;
 
-		//ÅĞ¶ÏÊÇ·ñÒÑ×°±¸¸Ã·¨±¦
+		//åˆ¤æ–­æ˜¯å¦å·²è£…å¤‡è¯¥æ³•å®
 		for (std::unordered_map<uint32, uint32>::iterator iter = player->TalismanMap.begin(); iter != player->TalismanMap.end(); iter++)
 			if (entry == iter->second)
 			{
-				ChatHandler(player->GetSession()).PSendSysMessage("ÄãÒÑ¾­×°±¸·¨±¦%s£¡", sCF->GetItemLink(entry).c_str());
+				ChatHandler(player->GetSession()).PSendSysMessage("ä½ å·²ç»è£…å¤‡æ³•å®%sï¼", sCF->GetItemLink(entry).c_str());
 				return;
 			}
 
-		//ÅĞ¶ÏÊÇ·ñ±¾Ãü·¨±¦
+		//åˆ¤æ–­æ˜¯å¦æœ¬å‘½æ³•å®
 		if (IsMidItem(entry) && ID != 7)
 		{
-			ChatHandler(player->GetSession()).PSendSysMessage("±¾Ãü·¨±¦Ö»ÄÜ×°±¸ÔÚÖĞ¼äÎ»ÖÃ£¡", sCF->GetItemLink(entry).c_str());
+			ChatHandler(player->GetSession()).PSendSysMessage("æœ¬å‘½æ³•å®åªèƒ½è£…å¤‡åœ¨ä¸­é—´ä½ç½®ï¼", sCF->GetItemLink(entry).c_str());
 			return;
 		}
 
 		if (!IsMidItem(entry) && ID == 7)
 		{
-			ChatHandler(player->GetSession()).PSendSysMessage("ÖĞ¼äÎ»ÖÃÖ»ÄÜ×°±¸±¾Ãü·¨±¦£¡", sCF->GetItemLink(entry).c_str());
+			ChatHandler(player->GetSession()).PSendSysMessage("ä¸­é—´ä½ç½®åªèƒ½è£…å¤‡æœ¬å‘½æ³•å®ï¼", sCF->GetItemLink(entry).c_str());
 			return;
 		}
 
 
-		//´İ»Ù¸Ã·¨±¦
+		//æ‘§æ¯è¯¥æ³•å®
 		player->DestroyItemCount(entry, 1, true, false);
 
-		//×°±¸¸Ã·¨±¦
+		//è£…å¤‡è¯¥æ³•å®
 		std::unordered_map<uint32, uint32>::iterator iter = player->TalismanMap.find(ID);
 
 		if (iter != player->TalismanMap.end())
 		{
-			//Íê³É·¨±¦Á¶»¯ÈÎÎñ 91146
+			//å®Œæˆæ³•å®ç‚¼åŒ–ä»»åŠ¡ 91146
 			//if (IsMidItem(entry))
 			//sCF->CompleteQuest(player, 30001);
 
@@ -678,18 +677,18 @@ void Talisman::EquipTalisman(Player* player, uint32 ID, uint32 entry)
 
 			iter->second = entry;
 
-			//»ñµÃÔ­·¨±¦
+			//è·å¾—åŸæ³•å®
 			if (const ItemTemplate* temp = sObjectMgr->GetItemTemplate(ori))
 			{
-				//È¥³ı×°±¸ÊôĞÔ¼°¼¼ÄÜ
+				//å»é™¤è£…å¤‡å±æ€§åŠæŠ€èƒ½
 				ApplyOnEquip(player, temp->ItemId, false);
 				player->AddItem(temp->ItemId, 1);
 			}
 		}
-		//Ìí¼Ó×°±¸ÊôĞÔ¼°¼¼ÄÜ
+		//æ·»åŠ è£…å¤‡å±æ€§åŠæŠ€èƒ½
 		ApplyOnEquip(player, entry, true);
 
-		//Ôö¼Ó±¾Ãü·¨±¦ÊôĞÔ
+		//å¢åŠ æœ¬å‘½æ³•å®å±æ€§
 		if (IsMidItem(entry))
 		{
 			UpdateTalismanValueOnEquip(player, true);
@@ -697,10 +696,10 @@ void Talisman::EquipTalisman(Player* player, uint32 ID, uint32 entry)
 		}
 	}
 
-	//¸üĞÂ¿Í»§¶ËÏÔÊ¾
+	//æ›´æ–°å®¢æˆ·ç«¯æ˜¾ç¤º
 	SendPacket(player);
 
-	//¸üĞÂÊı¾İ¿â
+	//æ›´æ–°æ•°æ®åº“
 	PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_REP_TALISMAN);
 	stmt->setUInt32(0, player->GetGUIDLow());
 	for (uint32 i = 1; i < 8; i++)
@@ -708,7 +707,7 @@ void Talisman::EquipTalisman(Player* player, uint32 ID, uint32 entry)
 	CharacterDatabase.Execute(stmt);
 
 
-	//ÕÆÌìÆ¿
+	//æŒå¤©ç“¶
 	//if (player->HasSpell(120003))
 	//	player->SpiritPowerInterval = player->SpiritPowerInterval / 2;
 	//else if (player->HasSpell(120004))
@@ -777,7 +776,7 @@ void Talisman::SaveTalisManValue(Player* player, bool logout)
 	else if (sSwitch->GetValue(ST_TALISMAN) > player->TalismanValue)
 	{
 		CharacterDatabase.DirectPExecute("UPDATE characters SET TalismanValue = '%u' WHERE guid = '%u'", player->TalismanValue, player->GetGUIDLow());
-		ChatHandler(player->GetSession()).PSendSysMessage("±¾Ãü·¨±¦ĞÅÏ¢ÒÑ±£´æ");
+		ChatHandler(player->GetSession()).PSendSysMessage("æœ¬å‘½æ³•å®ä¿¡æ¯å·²ä¿å­˜");
 	}
 }
 

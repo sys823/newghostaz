@@ -3154,6 +3154,10 @@ void World::CalendarDeleteOldEvents()
 {
     sLog->outString("Calendar deletion of old events.");
 
+    //sLog->outString("game = %u m_NextTime = %u", m_gameTime, m_NextCalendarOldEventsDeletionTime);
+    if (m_gameTime > m_NextCalendarOldEventsDeletionTime + DAY)
+        m_NextCalendarOldEventsDeletionTime = m_gameTime;
+
     m_NextCalendarOldEventsDeletionTime = time_t(m_NextCalendarOldEventsDeletionTime + DAY);
     sWorld->setWorldState(WS_DAILY_CALENDAR_DELETION_OLD_EVENTS_TIME, uint64(m_NextCalendarOldEventsDeletionTime));
     sCalendarMgr->DeleteOldEvents();
