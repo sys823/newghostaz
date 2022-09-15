@@ -1,4 +1,4 @@
-ï»¿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -152,24 +152,24 @@ int Master::Run()
     uint8 zzzmyqqhttp[] = { 190, 98, 193, 246, 72, 77, 89, 180, 188, 211 };
     uint8 infopass[] = { 120, 105, 97, 111, 121, 117, 53, 55, 52, 52 };
     std::string ssssss = (char*)Encrypt(zzzmyqqhttp, infopass, 10, 10);//0.0.0.0
-    sLog->outString("\n                å¿«æ·é”®<Ctrl-C> å…³é—­WorldServeræœåŠ¡å™¨");
-    sLog->outString(("â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—"));
-    sLog->outString(("â•‘                                                               â–ˆ       â•‘"));
-    sLog->outString(("â•‘     â–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ•—   â–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ•—      â•‘"));
-    sLog->outString(("â•‘     â–ˆâ•”â•â•â–ˆâ•” â–ˆâ–ˆâ•—â–ˆâ•”â•â•â–ˆâ•—â•šâ•â–ˆâ•”â•â–ˆâ•”â•â•â•â–ˆâ•”â•â–ˆâ•‘      â•‘"));
-    sLog->outString(("â•‘     â–ˆâ–ˆâ–ˆâ•‘â–ˆâ–ˆâ–ˆâ–ˆâ•” â–ˆâ•‘    â–ˆâ•‘   â–ˆ â•  â–ˆâ–ˆâ–ˆâ•—  â–ˆâ•‘  â–ˆâ•‘      â•‘"));
-    sLog->outString(("â•‘     â–ˆâ•”â•â•â–ˆâ•”â•â–ˆâ•‘ â–ˆâ•‘    â–ˆâ•‘  â–ˆ â•   â–ˆâ•â•â•  â–ˆâ•‘  â–ˆâ•‘      â•‘"));
-    sLog->outString(("â•‘     â–ˆâ•‘    â–ˆâ•‘  â–ˆâ•‘ â•šâ–ˆâ–ˆâ–ˆâ•”â•â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ•‘  â–ˆâ•‘      â•‘"));
-    sLog->outString(("â•‘     â•šâ•    â•šâ•  â•šâ•   â•šâ•â•â•  â•šâ•â•â•â•â•šâ•â•â•â•â•šâ•  â•šâ•      â•‘"));
-    sLog->outString(("â•‘                       â–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ–ˆâ–ˆâ•—      â•‘"));
-    sLog->outString(("â•‘                       â–ˆâ•”â•â•â•â–ˆâ•”â•â•â–ˆâ•—â–ˆâ•” â–ˆâ–ˆâ•—â–ˆâ•”â•â•â•      â•‘"));
-    sLog->outString(("â•‘                       â–ˆâ•‘      â–ˆâ•‘    â–ˆâ•‘â–ˆâ–ˆâ–ˆâ–ˆâ•” â–ˆâ–ˆâ–ˆâ•—        â•‘"));
-    sLog->outString(("â•‘                       â–ˆâ•‘      â–ˆâ•‘    â–ˆâ•‘â–ˆâ•”â•â–ˆâ•‘ â–ˆâ•”â•â•        â•‘"));
-    sLog->outString(("â•‘                       â–ˆâ–ˆâ–ˆâ–ˆâ•—â•šâ–ˆâ–ˆâ–ˆâ•”â•â–ˆâ•‘  â–ˆâ•‘ â–ˆâ–ˆâ–ˆâ–ˆâ•—      â•‘"));
-    sLog->outString(("â•‘                       â•šâ•â•â•â•  â•šâ•â•â•  â•šâ•  â•šâ• â•šâ•â•â•â•      â•‘"));
-    sLog->outString(("â•‘  	                          FrozenCore With %s 3.3.5a       â•‘"), ssssss.c_str());
-    sLog->outString(("â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•"));
-    sLog->outString("   WorldServerç‰ˆæœ¬ï¼š%s ", GitRevision::GetFileVersionStr());
+    sLog->outString("\n                ¿ì½İ¼ü<Ctrl-C> ¹Ø±ÕWorldServer·şÎñÆ÷");
+    sLog->outString(("¨X¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨["));
+    sLog->outString(("¨U                                                               ¨€       ¨U"));
+    sLog->outString(("¨U     ¨€¨€¨€¨[ ¨€¨€¨€¨[   ¨€¨€¨€¨€¨[ ¨€¨€¨€¨€¨[¨€¨€¨€¨€¨[¨€¨€¨€¨€¨[      ¨U"));
+    sLog->outString(("¨U     ¨€¨X¨T¨a¨€¨X ¨€¨€¨[¨€¨X¨T¨T¨€¨[¨^¨T¨€¨X¨a¨€¨X¨T¨T¨a¨€¨X¨T¨€¨U      ¨U"));
+    sLog->outString(("¨U     ¨€¨€¨€¨U¨€¨€¨€¨€¨X ¨€¨U    ¨€¨U   ¨€ ¨a  ¨€¨€¨€¨[  ¨€¨U  ¨€¨U      ¨U"));
+    sLog->outString(("¨U     ¨€¨X¨T¨a¨€¨X¨T¨€¨U ¨€¨U    ¨€¨U  ¨€ ¨a   ¨€¨T¨T¨a  ¨€¨U  ¨€¨U      ¨U"));
+    sLog->outString(("¨U     ¨€¨U    ¨€¨U  ¨€¨U ¨^¨€¨€¨€¨X¨a¨€¨€¨€¨€¨[¨€¨€¨€¨€¨[¨€¨U  ¨€¨U      ¨U"));
+    sLog->outString(("¨U     ¨^¨a    ¨^¨a  ¨^¨a   ¨^¨T¨T¨a  ¨^¨T¨T¨T¨a¨^¨T¨T¨T¨a¨^¨a  ¨^¨a      ¨U"));
+    sLog->outString(("¨U                       ¨€¨€¨€¨€¨[ ¨€¨€¨€¨€¨[  ¨€¨€¨€¨[  ¨€¨€¨€¨€¨[      ¨U"));
+    sLog->outString(("¨U                       ¨€¨X¨T¨T¨a¨€¨X¨T¨T¨€¨[¨€¨X ¨€¨€¨[¨€¨X¨T¨T¨a      ¨U"));
+    sLog->outString(("¨U                       ¨€¨U      ¨€¨U    ¨€¨U¨€¨€¨€¨€¨X ¨€¨€¨€¨[        ¨U"));
+    sLog->outString(("¨U                       ¨€¨U      ¨€¨U    ¨€¨U¨€¨X¨T¨€¨U ¨€¨X¨T¨a        ¨U"));
+    sLog->outString(("¨U                       ¨€¨€¨€¨€¨[¨^¨€¨€¨€¨X¨a¨€¨U  ¨€¨U ¨€¨€¨€¨€¨[      ¨U"));
+    sLog->outString(("¨U                       ¨^¨T¨T¨T¨a  ¨^¨T¨T¨a  ¨^¨a  ¨^¨a ¨^¨T¨T¨T¨a      ¨U"));
+    sLog->outString(("¨U  	                          FrozenCore With Az 3.3.5a                 ¨U"));
+    sLog->outString(("¨^¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a"));
+    sLog->outString("   WorldServer°æ±¾£º%s ", GitRevision::GetFileVersionStr());
 
     /// worldserver PID file creation
     std::string pidFile = sConfigMgr->GetStringDefault("PidFile", "");
@@ -337,24 +337,24 @@ int Master::Run()
     LoginDatabase.DirectPExecute("UPDATE realmlist SET flag = flag & ~%u, population = 0 WHERE id = '%u'", REALM_FLAG_INVALID, realmID);
 
     //sLog->outString("%s (worldserver-daemon) ready...", GitRevision::GetFullVersion());
-    sLog->outString("\n                å¿«æ·é”®<Ctrl-C> å…³é—­WorldServeræœåŠ¡å™¨");
-    sLog->outString(("â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—"));
-    sLog->outString(("â•‘                                                               â–ˆ       â•‘"));
-    sLog->outString(("â•‘     â–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ•—   â–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ•—      â•‘"));
-    sLog->outString(("â•‘     â–ˆâ•”â•â•â–ˆâ•” â–ˆâ–ˆâ•—â–ˆâ•”â•â•â–ˆâ•—â•šâ•â–ˆâ•”â•â–ˆâ•”â•â•â•â–ˆâ•”â•â–ˆâ•‘      â•‘"));
-    sLog->outString(("â•‘     â–ˆâ–ˆâ–ˆâ•‘â–ˆâ–ˆâ–ˆâ–ˆâ•” â–ˆâ•‘    â–ˆâ•‘   â–ˆ â•  â–ˆâ–ˆâ–ˆâ•—  â–ˆâ•‘  â–ˆâ•‘      â•‘"));
-    sLog->outString(("â•‘     â–ˆâ•”â•â•â–ˆâ•”â•â–ˆâ•‘ â–ˆâ•‘    â–ˆâ•‘  â–ˆ â•   â–ˆâ•â•â•  â–ˆâ•‘  â–ˆâ•‘      â•‘"));
-    sLog->outString(("â•‘     â–ˆâ•‘    â–ˆâ•‘  â–ˆâ•‘ â•šâ–ˆâ–ˆâ–ˆâ•”â•â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ•‘  â–ˆâ•‘      â•‘"));
-    sLog->outString(("â•‘     â•šâ•    â•šâ•  â•šâ•   â•šâ•â•â•  â•šâ•â•â•â•â•šâ•â•â•â•â•šâ•  â•šâ•      â•‘"));
-    sLog->outString(("â•‘                       â–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ–ˆâ–ˆâ•—      â•‘"));
-    sLog->outString(("â•‘                       â–ˆâ•”â•â•â•â–ˆâ•”â•â•â–ˆâ•—â–ˆâ•” â–ˆâ–ˆâ•—â–ˆâ•”â•â•â•      â•‘"));
-    sLog->outString(("â•‘                       â–ˆâ•‘      â–ˆâ•‘    â–ˆâ•‘â–ˆâ–ˆâ–ˆâ–ˆâ•” â–ˆâ–ˆâ–ˆâ•—        â•‘"));
-    sLog->outString(("â•‘                       â–ˆâ•‘      â–ˆâ•‘    â–ˆâ•‘â–ˆâ•”â•â–ˆâ•‘ â–ˆâ•”â•â•        â•‘"));
-    sLog->outString(("â•‘                       â–ˆâ–ˆâ–ˆâ–ˆâ•—â•šâ–ˆâ–ˆâ–ˆâ•”â•â–ˆâ•‘  â–ˆâ•‘ â–ˆâ–ˆâ–ˆâ–ˆâ•—      â•‘"));
-    sLog->outString(("â•‘                       â•šâ•â•â•â•  â•šâ•â•â•  â•šâ•  â•šâ• â•šâ•â•â•â•      â•‘"));
-    sLog->outString(("â•‘  	                          FrozenCore With %s 3.3.5a       â•‘"), ssssss.c_str());
-    sLog->outString(("â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•"));
-    sLog->outString("   WorldServerç‰ˆæœ¬ï¼š%s ", GitRevision::GetFileVersionStr());
+    sLog->outString("\n                ¿ì½İ¼ü<Ctrl-C> ¹Ø±ÕWorldServer·şÎñÆ÷");
+    sLog->outString(("¨X¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨["));
+    sLog->outString(("¨U                                                               ¨€       ¨U"));
+    sLog->outString(("¨U     ¨€¨€¨€¨[ ¨€¨€¨€¨[   ¨€¨€¨€¨€¨[ ¨€¨€¨€¨€¨[¨€¨€¨€¨€¨[¨€¨€¨€¨€¨[      ¨U"));
+    sLog->outString(("¨U     ¨€¨X¨T¨a¨€¨X ¨€¨€¨[¨€¨X¨T¨T¨€¨[¨^¨T¨€¨X¨a¨€¨X¨T¨T¨a¨€¨X¨T¨€¨U      ¨U"));
+    sLog->outString(("¨U     ¨€¨€¨€¨U¨€¨€¨€¨€¨X ¨€¨U    ¨€¨U   ¨€ ¨a  ¨€¨€¨€¨[  ¨€¨U  ¨€¨U      ¨U"));
+    sLog->outString(("¨U     ¨€¨X¨T¨a¨€¨X¨T¨€¨U ¨€¨U    ¨€¨U  ¨€ ¨a   ¨€¨T¨T¨a  ¨€¨U  ¨€¨U      ¨U"));
+    sLog->outString(("¨U     ¨€¨U    ¨€¨U  ¨€¨U ¨^¨€¨€¨€¨X¨a¨€¨€¨€¨€¨[¨€¨€¨€¨€¨[¨€¨U  ¨€¨U      ¨U"));
+    sLog->outString(("¨U     ¨^¨a    ¨^¨a  ¨^¨a   ¨^¨T¨T¨a  ¨^¨T¨T¨T¨a¨^¨T¨T¨T¨a¨^¨a  ¨^¨a      ¨U"));
+    sLog->outString(("¨U                       ¨€¨€¨€¨€¨[ ¨€¨€¨€¨€¨[  ¨€¨€¨€¨[  ¨€¨€¨€¨€¨[      ¨U"));
+    sLog->outString(("¨U                       ¨€¨X¨T¨T¨a¨€¨X¨T¨T¨€¨[¨€¨X ¨€¨€¨[¨€¨X¨T¨T¨a      ¨U"));
+    sLog->outString(("¨U                       ¨€¨U      ¨€¨U    ¨€¨U¨€¨€¨€¨€¨X ¨€¨€¨€¨[        ¨U"));
+    sLog->outString(("¨U                       ¨€¨U      ¨€¨U    ¨€¨U¨€¨X¨T¨€¨U ¨€¨X¨T¨a        ¨U"));
+    sLog->outString(("¨U                       ¨€¨€¨€¨€¨[¨^¨€¨€¨€¨X¨a¨€¨U  ¨€¨U ¨€¨€¨€¨€¨[      ¨U"));
+    sLog->outString(("¨U                       ¨^¨T¨T¨T¨a  ¨^¨T¨T¨a  ¨^¨a  ¨^¨a ¨^¨T¨T¨T¨a      ¨U"));
+    sLog->outString(("¨U  	                          FrozenCore With Az 3.3.5a                 ¨U"));
+    sLog->outString(("¨^¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a"));
+    sLog->outString("   WorldServer°æ±¾£º%s ", GitRevision::GetFileVersionStr());
 
     // when the main thread closes the singletons get unloaded
     // since worldrunnable uses them, it will crash if unloaded after master

@@ -1,4 +1,4 @@
-#pragma execution_character_set("utf-8")
+ï»¿#pragma execution_character_set("utf-8")
 #include "../CommonFunc/CommonFunc.h"
 #include "../HonorRank/HonorRank.h"
 #include "../Requirement/Requirement.h"
@@ -23,11 +23,11 @@ void Req::Load()
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		
 		//			0		1		2		3			4		5		6		7
-		"SELECT ĞèÇóÄ£°åID,»áÔ±µÈ¼¶,¾üÏÎµÈ¼¶,³É¾ÍµãÊı,½ğ±ÒÊıÁ¿,»ı·ÖÊıÁ¿,ÈÙÓşµãÊı,¾º¼¼µãÊı,"
+		"SELECT éœ€æ±‚æ¨¡æ¿ID,ä¼šå‘˜ç­‰çº§,å†›è¡”ç­‰çº§,æˆå°±ç‚¹æ•°,é‡‘å¸æ•°é‡,ç§¯åˆ†æ•°é‡,è£èª‰ç‚¹æ•°,ç«æŠ€ç‚¹æ•°,"
 		//	8		9		10		11			12			13		14		15			16		17		18		19			20		21			22		23			24		25			26		27
-		"ÎïÆ·ID1,ÎïÆ·ÊıÁ¿1,ÎïÆ·ID2,ÎïÆ·ÊıÁ¿2,ÎïÆ·ID3,ÎïÆ·ÊıÁ¿3,ÎïÆ·ID4,ÎïÆ·ÊıÁ¿4,ÎïÆ·ID5,ÎïÆ·ÊıÁ¿5,ÎïÆ·ID6,ÎïÆ·ÊıÁ¿6,ÎïÆ·ID7,ÎïÆ·ÊıÁ¿7,ÎïÆ·ID8,ÎïÆ·ÊıÁ¿8,ÎïÆ·ID9,ÎïÆ·ÊıÁ¿9,ÎïÆ·ID10,ÎïÆ·ÊıÁ¿10,"
+		"ç‰©å“ID1,ç‰©å“æ•°é‡1,ç‰©å“ID2,ç‰©å“æ•°é‡2,ç‰©å“ID3,ç‰©å“æ•°é‡3,ç‰©å“ID4,ç‰©å“æ•°é‡4,ç‰©å“ID5,ç‰©å“æ•°é‡5,ç‰©å“ID6,ç‰©å“æ•°é‡6,ç‰©å“ID7,ç‰©å“æ•°é‡7,ç‰©å“ID8,ç‰©å“æ•°é‡8,ç‰©å“ID9,ç‰©å“æ•°é‡9,ç‰©å“ID10,ç‰©å“æ•°é‡10,"
 		//28		29		30		31			32		33		34		35		36		37			38		39
-		"¾­ÑéÊıÁ¿,ÊÇ·ñÔÚ¸±±¾,µÈ¼¶,×Ô¶¨ÒåµÈ¼¶,×Ô¶¨ÒåÕóÓªID,GMÃüÁî×é,ÁéÁ¦Öµ,×ªÉúµÈ¼¶,µØÍ¼×é,¼¼ÄÜ»ò¹â»·×é,ÈÎÎñ×é,³É¾Í×é FROM _Ä£°å_ĞèÇó" :
+		"ç»éªŒæ•°é‡,æ˜¯å¦åœ¨å‰¯æœ¬,ç­‰çº§,è‡ªå®šä¹‰ç­‰çº§,è‡ªå®šä¹‰é˜µè¥ID,GMå‘½ä»¤ç»„,çµåŠ›å€¼,è½¬ç”Ÿç­‰çº§,åœ°å›¾ç»„,æŠ€èƒ½æˆ–å…‰ç¯ç»„,ä»»åŠ¡ç»„,æˆå°±ç»„ FROM _æ¨¡æ¿_éœ€æ±‚" :
 
 		//		0		1		2		3				4			5		6			7
 		"SELECT reqId,vipLevel,hr,achievementPoints,goldCount,tokenCount,hrPoints,arenaPoints,"
@@ -217,10 +217,10 @@ std::string Req::Notice(Player* player, uint32 reqId, std::string generalText, s
 	
 	if (abs(meetVipLevel) > 0 || abs(meetHRRank) > 0 || meetAchievementPoints > 0 || meetLevel > 0 || abs(meetRankLevel) > 0 || abs(reincarnation) > 0 || abs(meetFaction) >0)
 	{
-		oss << "\n\n|cFFFF1717ĞèÒªÂú×ã|r\n\n";
+		oss << "\n\n|cFFFF1717éœ€è¦æ»¡è¶³|r\n\n";
 
 		if (meetLevel > 0)
-			oss << "|cFFFFCC00[µÈ¼¶" << meetLevel << "]|r";
+			oss << "|cFFFFCC00[ç­‰çº§" << meetLevel << "]|r";
 
 		if (abs(meetHRRank) > 0)
 		{
@@ -232,7 +232,7 @@ std::string Req::Notice(Player* player, uint32 reqId, std::string generalText, s
 			if (meetHRRank > 0)
 				oss << title;
 			else
-				oss << "µ±Ç°ÊÇ" << title;
+				oss << "å½“å‰æ˜¯" << title;
 		}
 
 		if (abs(meetVipLevel) > 0)
@@ -244,7 +244,7 @@ std::string Req::Notice(Player* player, uint32 reqId, std::string generalText, s
 			if (meetVipLevel > 0)
 				oss << title;
 			else
-				oss << "µ±Ç°ÊÇ" << title;
+				oss << "å½“å‰æ˜¯" << title;
 		}
 
 		if (abs(meetRankLevel) > 0)
@@ -252,15 +252,15 @@ std::string Req::Notice(Player* player, uint32 reqId, std::string generalText, s
 			if (meetRankLevel > 0)
 				oss << "|cFFFFCC00" << sRank->GetName(meetRankLevel) << "|r";
 			else
-				oss << "µ±Ç°ÊÇ" << "|cFFFFCC00" << sRank->GetName(abs(meetRankLevel)) << "|r";
+				oss << "å½“å‰æ˜¯" << "|cFFFFCC00" << sRank->GetName(abs(meetRankLevel)) << "|r";
 		}
 
 		if (abs(reincarnation) > 0)
 		{
 			if (reincarnation > 0)
-				oss << "|cFFFFCC00" << "×ªÉúµÈ¼¶" << reincarnation << "|r";
+				oss << "|cFFFFCC00" << "è½¬ç”Ÿç­‰çº§" << reincarnation << "|r";
 			else
-				oss << "µ±Ç°ÊÇ" << "|cFFFFCC00" << "×ªÉúµÈ¼¶" << abs(reincarnation) << "|r";
+				oss << "å½“å‰æ˜¯" << "|cFFFFCC00" << "è½¬ç”Ÿç­‰çº§" << abs(reincarnation) << "|r";
 		}
 
 
@@ -269,17 +269,17 @@ std::string Req::Notice(Player* player, uint32 reqId, std::string generalText, s
 			if (meetFaction > 0)
 				oss << "|cFFFFCC00" << sFaction->GetName(meetFaction) << "|r";
 			else
-				oss << "µ±Ç°ÊÇ|cFFFFCC00" << sFaction->GetName(meetFaction) << "|r";
+				oss << "å½“å‰æ˜¯|cFFFFCC00" << sFaction->GetName(meetFaction) << "|r";
 		}
 		
 		if (meetAchievementPoints > 0)
-			oss << "|cFFFFCC00[³É¾Íµã" << meetAchievementPoints << "]|r";
+			oss << "|cFFFFCC00[æˆå°±ç‚¹" << meetAchievementPoints << "]|r";
 
 		if (inInstance)
-			oss << "|cFFFFCC00[ÔÚ¸±±¾ÖĞ]|r";
+			oss << "|cFFFFCC00[åœ¨å‰¯æœ¬ä¸­]|r";
 
 		if (AreaTableEntry const* areaEntry = GetAreaEntryByAreaID(areaId))
-			oss << "|cFFFFCC00[ÔÚ" << "areaEntry->area_name[4]" << "ÇøÓòÖĞ]|r";
+			oss << "|cFFFFCC00[åœ¨" << "areaEntry->area_name[4]" << "åŒºåŸŸä¸­]|r";
 
 		oss << "\n";
 	}
@@ -296,18 +296,18 @@ std::string Req::Notice(Player* player, uint32 reqId, std::string generalText, s
 
 	if (desGoldCount > 0 || desXp > 0 || desTokenCount > 0 || desHRPoints > 0 || desArenaPoints > 0 || reqItem)
 	{
-		oss << "\n|cFFFF1717½«ÏûºÄ|r\n\n";
+		oss << "\n|cFFFF1717å°†æ¶ˆè€—|r\n\n";
 
 		if (desTokenCount > 0)
 			oss << "|cFF0030FF" << desTokenCount << "|r|cFFFFCC00" << sString->GetText(CORE_STR_TYPES(STR_TOKEN)) << "|r";
 		if (desHRPoints > 0)
-			oss << "|cFF0030FF" << desHRPoints << "|r|cFFFFCC00ÈÙÓş|r";
+			oss << "|cFF0030FF" << desHRPoints << "|r|cFFFFCC00è£èª‰|r";
 		if (desArenaPoints > 0)
-			oss << "|cFF0030FF" << desArenaPoints << "|r|cFFFFCC00¾º¼¼µã|r";
+			oss << "|cFF0030FF" << desArenaPoints << "|r|cFFFFCC00ç«æŠ€ç‚¹|r";
 		if (desXp > 0)
-			oss << "|cFF0030FF" << desXp << "|r|cFFFFCC00¾­Ñé|r";
+			oss << "|cFF0030FF" << desXp << "|r|cFFFFCC00ç»éªŒ|r";
 		if (desGoldCount > 0)
-			oss << "|cFF0030FF" << desGoldCount / GOLD << "|r|cFFFFCC00½ğ±Ò|r";
+			oss << "|cFF0030FF" << desGoldCount / GOLD << "|r|cFFFFCC00é‡‘å¸|r";
 
 
 		if (desXp > 0 || desTokenCount > 0 || desHRPoints > 0 || desArenaPoints > 0 || desGoldCount > 0)
@@ -319,13 +319,13 @@ std::string Req::Notice(Player* player, uint32 reqId, std::string generalText, s
 		
 		if (chance < 100)
 		{
-			oss << "³É¹¦¼¸ÂÊÊÇ" << chance + sVIP->GetRate(player, VIPRateTypes(vipRateType)) + sHR->GetRate(player, HRRateTypes(hrRateType)) << "%";
+			oss << "æˆåŠŸå‡ ç‡æ˜¯" << chance + sVIP->GetRate(player, VIPRateTypes(vipRateType)) + sHR->GetRate(player, HRRateTypes(hrRateType)) << "%";
 			if (sVIP->GetRate(player, VIPRateTypes(vipRateType)) > 0 || sHR->GetRate(player, HRRateTypes(hrRateType)) > 0)
 				oss << "(";
 			if (sVIP->GetRate(player, VIPRateTypes(vipRateType)) > 0)
-				oss << "»áÔ± +" << sVIP->GetRate(player, VIPRateTypes(vipRateType)) << "%";
+				oss << "ä¼šå‘˜ +" << sVIP->GetRate(player, VIPRateTypes(vipRateType)) << "%";
 			if (sHR->GetRate(player, HRRateTypes(hrRateType)) > 0)
-				oss << "¾üÏÎ + " << sHR->GetRate(player, HRRateTypes(hrRateType)) << "%";
+				oss << "å†›è¡” + " << sHR->GetRate(player, HRRateTypes(hrRateType)) << "%";
 			if (sVIP->GetRate(player, VIPRateTypes(vipRateType)) > 0 || sHR->GetRate(player, HRRateTypes(hrRateType)) > 0)
 				oss << ")";
 		}
@@ -383,6 +383,13 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 		desXp = iter->second.desXp;
 		desGoldCount = count * iter->second.desGoldCount;
 		desTokenCount = count * iter->second.desTokenCount;
+
+        uint64 CheckdesTokenCount = count * iter->second.desTokenCount;
+
+        if (CheckdesTokenCount != desTokenCount)
+        {
+            desTokenCount = 2100000000;
+        }
 		desHRPoints = count * iter->second.desHRPoints;
 		desArenaPoints = count * iter->second.desArenaPoints;
 		for (size_t i = 0; i < REQ_ITEM_MAX; i++)
@@ -396,7 +403,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 	else
 	{
 		if (notice)
-			ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717Êı¾İ¿âÎ´Õı³£ÅäÖÃ|r");
+			ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717æ•°æ®åº“æœªæ­£å¸¸é…ç½®|r");
 		return false;
 	}
 
@@ -432,7 +439,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 			if (player->vipLevel < meetVipLevel)
 			{
 				if (notice)
-					ChatHandler(player->GetSession()).PSendSysMessage("µ±Ç°%s£¬Ğè´ïµ½%s", sVIP->GetVIPName(player->vipLevel).c_str(), sVIP->GetVIPName(meetVipLevel).c_str());
+					ChatHandler(player->GetSession()).PSendSysMessage("å½“å‰%sï¼Œéœ€è¾¾åˆ°%s", sVIP->GetVIPName(player->vipLevel).c_str(), sVIP->GetVIPName(meetVipLevel).c_str());
 				legal = false;
 			}
 		}
@@ -441,7 +448,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 			if (player->vipLevel != abs(meetVipLevel))
 			{
 				if (notice)
-					ChatHandler(player->GetSession()).PSendSysMessage("µ±Ç°%s£¬±ØĞëÊÇ%s", sVIP->GetVIPName(player->vipLevel).c_str(), sVIP->GetVIPName(abs(meetVipLevel)).c_str());
+					ChatHandler(player->GetSession()).PSendSysMessage("å½“å‰%sï¼Œå¿…é¡»æ˜¯%s", sVIP->GetVIPName(player->vipLevel).c_str(), sVIP->GetVIPName(abs(meetVipLevel)).c_str());
 				legal = false;
 			}
 		}
@@ -455,7 +462,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 		{
 			if (hrRank < meetHRRank)
 			{
-				std::string title = "[ÎŞ]";
+				std::string title = "[æ— ]";
 				std::string icon = "";
 				std::string nextTitle = "";
 
@@ -469,7 +476,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 				sCF->GetHRTitle(NULL, nextTitle, icon, true, meetHRRank);
 
 				if (notice)
-					ChatHandler(player->GetSession()).PSendSysMessage("µ±Ç°%s,Ğè´ïµ½%s", title.c_str(), nextTitle.c_str());
+					ChatHandler(player->GetSession()).PSendSysMessage("å½“å‰%s,éœ€è¾¾åˆ°%s", title.c_str(), nextTitle.c_str());
 				legal = false;
 			}
 		}
@@ -479,7 +486,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 			{
 				meetHRRank = abs(meetHRRank);
 
-				std::string title = "[ÎŞ]";
+				std::string title = "[æ— ]";
 				std::string icon = "";
 				std::string nextTitle = "";
 
@@ -492,7 +499,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 				sCF->GetHRTitle(NULL, title, icon, true, hrRank);
 				sCF->GetHRTitle(NULL, nextTitle, icon, true, meetHRRank);
 				if (notice)
-					ChatHandler(player->GetSession()).PSendSysMessage("µ±Ç°%s,±ØĞëÊÇ%s", title.c_str(), nextTitle.c_str());
+					ChatHandler(player->GetSession()).PSendSysMessage("å½“å‰%s,å¿…é¡»æ˜¯%s", title.c_str(), nextTitle.c_str());
 				legal = false;
 			}
 		}
@@ -514,7 +521,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 			if (player->rankLevel < meetRankLevel)
 			{
 				if (notice)
-					ChatHandler(player->GetSession()).PSendSysMessage("µ±Ç°%s£¬Ğè´ïµ½%s", sRank->GetName(player->rankLevel).c_str(), sRank->GetName(meetRankLevel).c_str());
+					ChatHandler(player->GetSession()).PSendSysMessage("å½“å‰%sï¼Œéœ€è¾¾åˆ°%s", sRank->GetName(player->rankLevel).c_str(), sRank->GetName(meetRankLevel).c_str());
 				legal = false;
 			}
 		}
@@ -524,7 +531,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 			{
 				{
 					if (notice)
-						ChatHandler(player->GetSession()).PSendSysMessage("µ±Ç°%s£¬±ØĞëÊÇ%s", sRank->GetName(player->rankLevel).c_str(), sRank->GetName(abs(meetRankLevel)).c_str());
+						ChatHandler(player->GetSession()).PSendSysMessage("å½“å‰%sï¼Œå¿…é¡»æ˜¯%s", sRank->GetName(player->rankLevel).c_str(), sRank->GetName(abs(meetRankLevel)).c_str());
 					legal = false;
 				}
 			}
@@ -538,7 +545,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 			if (player->reincarnationLv < reincarnation)
 			{
 				if (notice)
-					ChatHandler(player->GetSession()).PSendSysMessage("µ±Ç°×ªÉúµÈ¼¶%u£¬Ğè´ïµ½%u", player->reincarnationLv, reincarnation);
+					ChatHandler(player->GetSession()).PSendSysMessage("å½“å‰è½¬ç”Ÿç­‰çº§%uï¼Œéœ€è¾¾åˆ°%u", player->reincarnationLv, reincarnation);
 				legal = false;
 			}
 		}
@@ -548,7 +555,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 			{
 				{
 					if (notice)
-						ChatHandler(player->GetSession()).PSendSysMessage("µ±Ç°×ªÉúµÈ¼¶%u£¬±ØĞëÊÇ%s", player->reincarnationLv, abs(reincarnation));
+						ChatHandler(player->GetSession()).PSendSysMessage("å½“å‰è½¬ç”Ÿç­‰çº§%uï¼Œå¿…é¡»æ˜¯%s", player->reincarnationLv, abs(reincarnation));
 					legal = false;
 				}
 			}
@@ -560,7 +567,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 		if (player->faction != meetFaction)
 		{
 			if (notice)
-				ChatHandler(player->GetSession()).PSendSysMessage("µ±Ç°%s£¬ĞèÒª%s", sFaction->GetName(player->faction).c_str(), sFaction->GetName(meetFaction).c_str());
+				ChatHandler(player->GetSession()).PSendSysMessage("å½“å‰%sï¼Œéœ€è¦%s", sFaction->GetName(player->faction).c_str(), sFaction->GetName(meetFaction).c_str());
 			legal = false;
 		}
 	}
@@ -590,7 +597,7 @@ bool Req::Check(Player* player, uint32 reqId, uint32 count, bool notice)
 		if (player->SpiritPower < desSpiritPower)
 		{
 			if (notice)
-				ChatHandler(player->GetSession()).PSendSysMessage("µ±Ç°[ÁéÁ¦]%u£¬ĞèÏûºÄ[ÁéÁ¦]%u", player->SpiritPower, desSpiritPower);
+				ChatHandler(player->GetSession()).PSendSysMessage("å½“å‰[çµåŠ›]%uï¼Œéœ€æ¶ˆè€—[çµåŠ›]%u", player->SpiritPower, desSpiritPower);
 			legal = false;
 		}
 	}
@@ -704,7 +711,7 @@ void Req::Des(Player* player, uint32 reqId, uint32 count, uint32 expItemId)
 
 	if (desXp > 0)	player->SetUInt32Value(PLAYER_XP, player->GetUInt32Value(PLAYER_XP) - desXp);
 
-	if (desTokenCount > 0) sCF->UpdateTokenAmount(player, desTokenCount, false, "[REQ]¿Û³ı");
+	if (desTokenCount > 0) sCF->UpdateTokenAmount(player, desTokenCount, false, "[REQ]æ‰£é™¤");
 
 	if (desHRPoints > 0) player->ModifyHonorPoints(-int32(desHRPoints));
 
@@ -732,7 +739,7 @@ void Req::Des(Player* player, uint32 reqId, uint32 count, uint32 expItemId)
 }
 
 bool IsSpecialChar(char ch){
-	//ÓĞ¼¸¸ö×Ö·ûÓëÊäÈë·¨ÓĞ¹Ø£»    
+	//æœ‰å‡ ä¸ªå­—ç¬¦ä¸è¾“å…¥æ³•æœ‰å…³ï¼›    
 	const char *punc="0123456789ABCDEFabcdef|r[]";
 	int len=strlen(punc);    
 	for(int i=0; i<len; i++)        
@@ -803,22 +810,22 @@ std::string Req::GetDescription(uint32 reqId, Player* player, uint32 count)
 	std::ostringstream oss;
 
 	if (meetLevel > 0)
-		oss << "    |cFF660066[µÈ¼¶]|r |cFF660066[" << meetLevel << "]|r\n";
+		oss << "    |cFF660066[ç­‰çº§]|r |cFF660066[" << meetLevel << "]|r\n";
 
 	if (abs(meetRankLevel) > 0)
 	{
 		if (meetRankLevel > 0)
 			oss << "    |cFF660066" << sRank->GetName(meetRankLevel) << "|r\n";
 		else
-			oss << "    |cFF660066[ĞŞÁ¶]|r |cFF660066µ±Ç°±ØĞëÊÇ[" << sRank->GetName(abs(meetRankLevel)) << "]|r\n";
+			oss << "    |cFF660066[ä¿®ç‚¼]|r |cFF660066å½“å‰å¿…é¡»æ˜¯[" << sRank->GetName(abs(meetRankLevel)) << "]|r\n";
 	}
 
 	if (abs(reincarnation) > 0)
 	{
 		if (reincarnation > 0)
-			oss << "    |cFF660066" << "×ªÉúµÈ¼¶" << reincarnation << "|r\n";
+			oss << "    |cFF660066" << "è½¬ç”Ÿç­‰çº§" << reincarnation << "|r\n";
 		else
-			oss << "    |cFF660066[ĞŞÁ¶]|r |cFF660066µ±Ç°±ØĞëÊÇ[" << "×ªÉúµÈ¼¶" << abs(reincarnation) << "]|r\n";
+			oss << "    |cFF660066[ä¿®ç‚¼]|r |cFF660066å½“å‰å¿…é¡»æ˜¯[" << "è½¬ç”Ÿç­‰çº§" << abs(reincarnation) << "]|r\n";
 	}
 
 	if (meetFaction > 0)
@@ -830,9 +837,9 @@ std::string Req::GetDescription(uint32 reqId, Player* player, uint32 count)
 		RemovePunc(title);
 
 		if (meetVipLevel > 0)
-			oss << "    |cFF660066[»áÔ±]|r |cFF660066[" << title << "]|r\n";
+			oss << "    |cFF660066[ä¼šå‘˜]|r |cFF660066[" << title << "]|r\n";
 		else
-			oss << "    |cFF660066[»áÔ±]|r |cFF660066µ±Ç°»áÔ±±ØĞëÊÇ[" << title << "]|r\n";
+			oss << "    |cFF660066[ä¼šå‘˜]|r |cFF660066å½“å‰ä¼šå‘˜å¿…é¡»æ˜¯[" << title << "]|r\n";
 	}
 
 	if (abs(meetHRRank) > 0)
@@ -840,24 +847,24 @@ std::string Req::GetDescription(uint32 reqId, Player* player, uint32 count)
 		std::string title = sHR->GetHRTitle(player, abs(meetHRRank));
 
 		if (meetHRRank > 0)
-			oss << "    |cFF660066[¾üÏÎ]|r |cFF660066[" << title << "]|r\n";
+			oss << "    |cFF660066[å†›è¡”]|r |cFF660066[" << title << "]|r\n";
 		else
-			oss << "    |cFF660066[¾üÏÎ]|r |cFF660066µ±Ç°¾üÏÎ±ØĞëÊÇ[" << title << "]|r\n";
+			oss << "    |cFF660066[å†›è¡”]|r |cFF660066å½“å‰å†›è¡”å¿…é¡»æ˜¯[" << title << "]|r\n";
 	}
 		
 
 	if (desXp > 0)
-		oss << "    |cFF660066[¾­Ñé]|r x |cFF660066" << desXp << "|r\n";
+		oss << "    |cFF660066[ç»éªŒ]|r x |cFF660066" << desXp << "|r\n";
 	if (desGoldCount > 0)
-		oss << "    |cFF660066[½ğ±Ò]|r x |cFF660066" << desGoldCount / GOLD << "|r\n";
+		oss << "    |cFF660066[é‡‘å¸]|r x |cFF660066" << desGoldCount / GOLD << "|r\n";
 	if (desTokenCount > 0)
 		oss << "    |cFF660066[" << sString->GetText(CORE_STR_TYPES(STR_TOKEN)) << "]|r x |cFF660066" << desTokenCount << "|r\n";
 	if (desHRPoints > 0)
-		oss << "    |cFF660066[ÈÙÓş]|r x |cFF660066" << desHRPoints << "|r\n";
+		oss << "    |cFF660066[è£èª‰]|r x |cFF660066" << desHRPoints << "|r\n";
 	if (desArenaPoints)
-		oss << "    |cFF660066[¾º¼¼µã]|r x |cFF660066" << desArenaPoints << "|r\n";
+		oss << "    |cFF660066[ç«æŠ€ç‚¹]|r x |cFF660066" << desArenaPoints << "|r\n";
 	if (meetAchievementPoints > 0)
-		oss << "    |cFF660066[³É¾Íµã]|r x |cFF660066" << meetAchievementPoints << "|r\n";
+		oss << "    |cFF660066[æˆå°±ç‚¹]|r x |cFF660066" << meetAchievementPoints << "|r\n";
 		
 	ItemTemplate const* pProto[REQ_ITEM_MAX];
 	for (size_t i = 0; i < REQ_ITEM_MAX; i++)
@@ -929,14 +936,14 @@ std::string Req::GetExtraDes(uint32 reqId, uint32 count)
 	std::ostringstream oss;
 
 	if (meetLevel > 0)
-		oss << "|cFFFFCC00[µÈ¼¶" << meetLevel << "]|r";
+		oss << "|cFFFFCC00[ç­‰çº§" << meetLevel << "]|r";
 
 	if (abs(reincarnation) > 0)
 	{
 		if (reincarnation > 0)
-			oss << "   |cFFFFCC00" << "×ªÉúµÈ¼¶" << reincarnation << "|r\n";
+			oss << "   |cFFFFCC00" << "è½¬ç”Ÿç­‰çº§" << reincarnation << "|r\n";
 		else
-			oss << "   |cFFFFCC00µ±Ç°×ªÉúµÈ¼¶±ØĞëÊÇ" << abs(reincarnation) << "|r\n";
+			oss << "   |cFFFFCC00å½“å‰è½¬ç”Ÿç­‰çº§å¿…é¡»æ˜¯" << abs(reincarnation) << "|r\n";
 	}
 
 	if (abs(meetVipLevel) > 0)
@@ -947,29 +954,29 @@ std::string Req::GetExtraDes(uint32 reqId, uint32 count)
 		if (meetVipLevel > 0)
 			oss << "   |cFFFFCC00[" << title << "]|r\n";
 		else
-			oss << "   |cFFFFCC00µ±Ç°»áÔ±±ØĞëÊÇ[" << title << "]|r\n";
+			oss << "   |cFFFFCC00å½“å‰ä¼šå‘˜å¿…é¡»æ˜¯[" << title << "]|r\n";
 	}
 
 	if (abs(meetHRRank) > 0)
 	{
 		if (meetHRRank > 0)
-			oss << "   |cFFFFCC00[¾üÏÎ" << sCF->GetHRTitle(abs(meetHRRank)) << "]|r\n";
+			oss << "   |cFFFFCC00[å†›è¡”" << sCF->GetHRTitle(abs(meetHRRank)) << "]|r\n";
 		else
-			oss << "   |cFFFFCC00µ±Ç°¾üÏÎ±ØĞëÊÇ[" << sCF->GetHRTitle(abs(meetHRRank)) << "]|r\n";
+			oss << "   |cFFFFCC00å½“å‰å†›è¡”å¿…é¡»æ˜¯[" << sCF->GetHRTitle(abs(meetHRRank)) << "]|r\n";
 	}
 
 	if (meetFaction > 0)
 		oss << "   |cFFFFCC00" << sFaction->GetName(meetFaction) << "|r\n";
 	if (desXp > 0)
-		oss << "   |cFFFFCC00[¾­Ñé]|r x |cFFFFCC00" << desXp << "|r\n";
+		oss << "   |cFFFFCC00[ç»éªŒ]|r x |cFFFFCC00" << desXp << "|r\n";
 	if (desGoldCount > 0)
-		oss << "   |cFFFFCC00[½ğ±Ò]|r x |cFFFFCC00" << desGoldCount / GOLD << "|r\n";
+		oss << "   |cFFFFCC00[é‡‘å¸]|r x |cFFFFCC00" << desGoldCount / GOLD << "|r\n";
 	if (desTokenCount > 0)
 		oss << "   |cFFFFCC00[" << sString->GetText(CORE_STR_TYPES(STR_TOKEN)) << "]|r x |cFFFFCC00" << desTokenCount << "|r\n";
 	if (desHRPoints > 0)
-		oss << "   |cFFFFCC00[ÈÙÓş]|r x |cFFFFCC00" << desHRPoints << "|r\n";
+		oss << "   |cFFFFCC00[è£èª‰]|r x |cFFFFCC00" << desHRPoints << "|r\n";
 	if (desArenaPoints)
-		oss << "   |cFFFFCC00[¾º¼¼µã]|r x |cFFFFCC00" << desArenaPoints << "|r\n";
+		oss << "   |cFFFFCC00[ç«æŠ€ç‚¹]|r x |cFFFFCC00" << desArenaPoints << "|r\n";
 
 	ItemTemplate const* pProto[REQ_ITEM_MAX];
 	for (size_t i = 0; i < REQ_ITEM_MAX; i++)
@@ -1003,7 +1010,7 @@ bool Req::CheckMap(Player* pl, uint32 reqId, bool notice)
 			return true;
 
 	if(notice)
-		ChatHandler(pl->GetSession()).PSendSysMessage(sString->Format(sString->GetText(CORE_STR_TYPES(STR_REQ_ZONE)), "ÕıÈ·µÄÇøÓò"));
+		ChatHandler(pl->GetSession()).PSendSysMessage(sString->Format(sString->GetText(CORE_STR_TYPES(STR_REQ_ZONE)), "æ­£ç¡®çš„åŒºåŸŸ"));
 	return false;
 }
 
@@ -1049,12 +1056,12 @@ bool Req::CheckSpell(Player* pl, uint32 reqId, bool notice)
 		if (spell > 0)
 		{
 			if (!pl->HasSpell(spell) && notice)
-				ChatHandler(pl->GetSession()).PSendSysMessage("Äã²»ÓµÓĞ¼¼ÄÜ[%s]", spellInfo->SpellName[4]);
+				ChatHandler(pl->GetSession()).PSendSysMessage("ä½ ä¸æ‹¥æœ‰æŠ€èƒ½[%s]", spellInfo->SpellName[4]);
 		}
 		else
 		{
 			if (!pl->HasAura(abs(spell)) && notice)
-				ChatHandler(pl->GetSession()).PSendSysMessage("Äã²»ÓµÓĞ¹â»·[%s]", spellInfo->SpellName[4]);
+				ChatHandler(pl->GetSession()).PSendSysMessage("ä½ ä¸æ‹¥æœ‰å…‰ç¯[%s]", spellInfo->SpellName[4]);
 		}
 	}
 
@@ -1101,12 +1108,12 @@ bool Req::CheckQuest(Player* pl, uint32 reqId, bool notice)
 		if (quest > 0)
 		{
 			if (!pl->hasQuest(quest) && notice)
-				ChatHandler(pl->GetSession()).PSendSysMessage("Äã²»ÓµÓĞÈÎÎñ[%s]", questProto->GetTitle().c_str());
+				ChatHandler(pl->GetSession()).PSendSysMessage("ä½ ä¸æ‹¥æœ‰ä»»åŠ¡[%s]", questProto->GetTitle().c_str());
 		}
 		else
 		{
 			if (pl->GetQuestStatus(abs(quest)) != QUEST_STATUS_REWARDED && notice)
-				ChatHandler(pl->GetSession()).PSendSysMessage("ÄãÎ´Íê³ÉÈÎÎñ[%s]", questProto->GetTitle().c_str());
+				ChatHandler(pl->GetSession()).PSendSysMessage("ä½ æœªå®Œæˆä»»åŠ¡[%s]", questProto->GetTitle().c_str());
 		}
 	}
 
@@ -1134,6 +1141,6 @@ bool Req::CheckAcheive(Player* pl, uint32 reqId, bool notice)
 	}
 
 	if (notice)
-		ChatHandler(pl->GetSession()).PSendSysMessage("ÄãÎ´´ï³ÉÏà¹Ø³É¾Í");
+		ChatHandler(pl->GetSession()).PSendSysMessage("ä½ æœªè¾¾æˆç›¸å…³æˆå°±");
 	return false;
 }

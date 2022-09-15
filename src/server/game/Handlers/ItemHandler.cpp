@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -934,9 +934,28 @@ void WorldSession::HandleBuyItemInSlotOpcode(WorldPacket & recvData)
         }
     }
 
+    uint32 vendor = GUID_ENPART(vendorguid);
+
+    if (count >= 255)
+        count = 255;
+
+    if (VendorFromCommand())
+        vendor = GetCurrentVendorGUID();
+
     // bag not found, cheating?
     if (bag == NULL_BAG)
         return;
+
+    if (VendorItemData const * items = sObjectMgr->GetNpcVendorItemList(vendor))
+    {
+        if (VendorItem const * is = items->GetItem(slot))
+        {
+            if (is->item != item)
+                return;
+        }
+        else
+            return;
+    }
 
     uint32 reqId = VendorFromCommand() ? sItemMod->GetBuyReqId(item, GetCurrentVendorGUID(), slot + 1) : sItemMod->GetBuyReqId(item, GUID_ENPART(vendorguid), slot + 1);
 
@@ -970,9 +989,22 @@ void WorldSession::HandleBuyItemOpcode(WorldPacket & recvData)
 
     uint32 vendor = GUID_ENPART(vendorguid);
 
+    if (count >= 255)
+        count = 255;
+
     if (VendorFromCommand())
         vendor = GetCurrentVendorGUID();
 
+    if (VendorItemData const * items = sObjectMgr->GetNpcVendorItemList(vendor))
+    {
+        if (VendorItem const * is = items->GetItem(slot))
+        {
+            if (is->item != item)
+                return;
+        }
+        else
+            return;
+    }
     uint32 reqId = sItemMod->GetBuyReqId(item, vendor, slot + 1);
 
     if (sReq->IsExist(reqId))
