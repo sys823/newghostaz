@@ -805,7 +805,8 @@ void Player::UpdateParryPercentage()
         // Modify value from defense skill (only bonus from defense rating diminishes)
         nondiminishing += (GetSkillValue(SKILL_DEFENSE) - GetMaxSkillValueForLevel()) * 0.04f;
         diminishing += (int32(GetRatingBonusValue(CR_DEFENSE_SKILL))) * 0.04f;
-
+        // Parry from SPELL_AURA_MOD_PARRY_PERCENT aura
+        nondiminishing += GetTotalAuraModifier(SPELL_AURA_MOD_PARRY_PERCENT);
         // apply diminishing formula to diminishing parry chance
         m_realParry = nondiminishing + diminishing * parry_cap[pclass] / (diminishing + parry_cap[pclass] * m_diminishing_k[pclass]);
         m_realParry = m_realParry < 0.0f ? 0.0f : m_realParry;
@@ -813,10 +814,7 @@ void Player::UpdateParryPercentage()
         //招架
         m_realParry = m_realParry < p_parryLimit ? m_realParry : p_parryLimit;
 
-        // Parry from SPELL_AURA_MOD_PARRY_PERCENT aura
-        nondiminishing += GetTotalAuraModifier(SPELL_AURA_MOD_PARRY_PERCENT);
-
-        value = std::max(diminishing + nondiminishing, 0.0f);
+        value = std::max(m_realParry, 0.0f);
 
         //招架
         value = value < p_parryLimit ? value : p_parryLimit;
@@ -847,6 +845,8 @@ void Player::UpdateDodgePercentage()
     // Modify value from defense skill (only bonus from defense rating diminishes)
     nondiminishing += (GetSkillValue(SKILL_DEFENSE) - GetMaxSkillValueForLevel()) * 0.04f;
     diminishing += (int32(GetRatingBonusValue(CR_DEFENSE_SKILL))) * 0.04f;
+    // Dodge from SPELL_AURA_MOD_DODGE_PERCENT aura
+    nondiminishing += GetTotalAuraModifier(SPELL_AURA_MOD_DODGE_PERCENT);
     // Dodge from rating
     diminishing += GetRatingBonusValue(CR_DODGE);
     // apply diminishing formula to diminishing dodge chance
@@ -856,10 +856,9 @@ void Player::UpdateDodgePercentage()
     m_realDodge = m_realDodge < 0.0f ? 0.0f : m_realDodge;
     //闪避
     m_realDodge = m_realDodge < p_dodgeLimit ? m_realDodge : p_dodgeLimit;
-    // Dodge from SPELL_AURA_MOD_DODGE_PERCENT aura
-    nondiminishing += GetTotalAuraModifier(SPELL_AURA_MOD_DODGE_PERCENT);
+    
 
-    float value = std::max(diminishing + nondiminishing, 0.0f);
+    float value = std::max(m_realDodge, 0.0f);
 
     //闪避
     value = value < p_dodgeLimit ? value : p_dodgeLimit;
