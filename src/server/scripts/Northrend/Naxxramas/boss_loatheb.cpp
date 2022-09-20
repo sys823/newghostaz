@@ -99,7 +99,7 @@ public:
             me->SetInCombatWithZone();
             events.ScheduleEvent(EVENT_SPELL_NECROTIC_AURA, 10000);
             events.ScheduleEvent(EVENT_SPELL_DEATHBLOOM, 6000);
-            events.ScheduleEvent(EVENT_SUMMON_SPORE, 12000);
+            events.ScheduleEvent(EVENT_SUMMON_SPORE, 15000);
             events.ScheduleEvent(EVENT_SPELL_BERSERK, 720000);
         }
 
@@ -124,7 +124,7 @@ public:
             {
                 case EVENT_SUMMON_SPORE:
                     me->CastSpell(me, SPELL_SUMMON_SPORE, true);
-                    events.RepeatEvent(12000);
+                    events.RepeatEvent(15000);
                     break;
                 case EVENT_SPELL_NECROTIC_AURA:
                     me->CastSpell(me, SPELL_NECROTIC_AURA, true);
