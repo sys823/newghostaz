@@ -1,4 +1,4 @@
-﻿enum SwithTypes
+enum SwithTypes
 {
 	ST_NONE,
 
@@ -98,6 +98,7 @@
 
 	ST_SS = 100,				//魂玉开关
 	ST_SSEX = 101,				//魂玉扩展开关
+    FB_CLEARSPELL = 103,
 	ST_SS_CXREQ = 110,			//魂玉开关
 	ST_SSEX_CXREQ = 111,		//魂玉扩展开关
 

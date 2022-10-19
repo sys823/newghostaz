@@ -4916,6 +4916,38 @@ void Player::RemoveAllSpellCooldown()
     }
 }
 
+void Player::RemoveFbSpellCooldown()
+{
+    uint32 infTime = World::GetGameTimeMS() + infinityCooldownDelayCheck;
+    if (!m_spellCooldowns.empty())
+    {
+        for (SpellCooldowns::const_iterator itr = m_spellCooldowns.begin(); itr != m_spellCooldowns.end();)
+        {
+            bool isnotcoolspell = false;
+            Tokenizer spelllist(sSwitch->GetParam(FB_CLEARSPELL), '|');
+            if (spelllist.size())
+            {
+                for (size_t i = 0; i < spelllist.size(); i++)
+                {
+                    if (itr->first == sSwitch->GetValueByIndex(FB_CLEARSPELL, i + 1))
+                    {
+                        isnotcoolspell = true;
+                        break;
+                    }
+                }
+            }
+
+            if (itr->second.end < infTime && !isnotcoolspell && itr->second.itemid == 0)
+            {
+                SendClearCooldown(itr->first, this);
+                m_spellCooldowns.erase(itr++);
+            }
+            else
+                ++itr;
+        }
+    }
+}
+
 void Player::_LoadSpellCooldowns(PreparedQueryResult result)
 {
     // some cooldowns can be already set at aura loading...

@@ -119,6 +119,17 @@ public:
 
 	void OnCreatureKill(Player* killer, Creature* killed) override
 	{
+        if (killed->GetMap())
+        {
+            if (killed->GetMap()->IsRaid() && (killed->isWorldBoss() || killed->IsDungeonBoss()))
+            {
+                Map::PlayerList const& PlayerList = killed->GetMap()->GetPlayers();
+                for (Map::PlayerList::const_iterator itr = PlayerList.begin(); itr != PlayerList.end(); ++itr)
+                    if (Player* player = itr->GetSource())
+                        player->RemoveFbSpellCooldown();           
+            }
+        }
+
 		if (killed->C_KillRewGameObject != 0)
 			killer->SummonGameObject(killed->C_KillRewGameObject, killed->GetPositionX(), killed->GetPositionY(), killed->GetPositionZ(), killed->GetOrientation(), 0, 0, 0, 0, 0);
 

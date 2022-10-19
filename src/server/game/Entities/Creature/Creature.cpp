@@ -1,4 +1,4 @@
-ï»¿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -42,7 +42,7 @@
 #include "WorldPacket.h"
 
 #include "Transport.h"
-
+#include "Config.h"
 
 #ifdef ELUNA
 #include "LuaEngine.h"
@@ -205,26 +205,26 @@ m_homePosition(), m_transportHomePosition(), m_creatureInfo(nullptr), m_creature
     reset_timer = 0;
 
     //creature mod
-    C_Level = 0;				//ç­‰çº§
-    C_Health = 0;				//ç”Ÿå‘½å€¼
-    C_HpMod = 1.0f;				//ç”Ÿå‘½å€¼å€ç‡
-    C_Armor = -1;				//æŠ¤ç”²-1 creature_templateè¡¨ç¡®å®š
-    C_MeleeDmg = 0;				//ç‰©ç†ä¼¤å®³
-    C_SpellDmgMod = 1;				//æ³•æœ¯ä¼¤å®³å€ç‡
-    C_HealMod = 1;				//æ²»ç–—å€ç‡
-    C_ReduceDmgPct = 0;				//å‡ä¼¤ç™¾åˆ†æ¯”
-    C_Resistance = -1;				//æŠ—æ€§-1 creature_templateè¡¨ç¡®å®š
+    C_Level = 0;				//µÈ¼¶
+    C_Health = 0;				//ÉúÃüÖµ
+    C_HpMod = 1.0f;				//ÉúÃüÖµ±¶ÂÊ
+    C_Armor = -1;				//»¤¼×-1 creature_template±íÈ·¶¨
+    C_MeleeDmg = 0;				//ÎïÀíÉËº¦
+    C_SpellDmgMod = 1;				//·¨ÊõÉËº¦±¶ÂÊ
+    C_HealMod = 1;				//ÖÎÁÆ±¶ÂÊ
+    C_ReduceDmgPct = 0;				//¼õÉË°Ù·Ö±È
+    C_Resistance = -1;				//¿¹ĞÔ-1 creature_template±íÈ·¶¨
 
     for (size_t i = 0; i < MAX_CUSTOM_LOOT_COUNT; i++)
-        C_LootId[i] = 0;				//æ‰è½ creaute_loot_template
-    C_SrcLoot = true;				//æ˜¯å¦åŒ…å«åŸLoot
+        C_LootId[i] = 0;				//µôÂä creaute_loot_template
+    C_SrcLoot = true;				//ÊÇ·ñ°üº¬Ô­Loot
 
-    C_KillRewId = 0;				//å‡»æ€è€…è·å¾—å¥–åŠ±
-    C_KillRewChance = 0;				//å‡»æ€è€…è·å¾—å¥–åŠ±å‡ ç‡
-    C_KillGroupRewId = 0;				//å‡»æ€è€…é˜Ÿä¼è·å¾—å¥–åŠ±
-    C_KillGroupRewChance = 0;			//å‡»æ€è€…é˜Ÿä¼è·å¾—å¥–åŠ±å‡ ç‡
-    C_KillAnnounce = false;			//å‡»æ€æ—¶å¹¿æ’­å†…å®¹
-    C_AttackTime = 0;				//æ”»å‡»é—´éš”
+    C_KillRewId = 0;				//»÷É±Õß»ñµÃ½±Àø
+    C_KillRewChance = 0;				//»÷É±Õß»ñµÃ½±Àø¼¸ÂÊ
+    C_KillGroupRewId = 0;				//»÷É±Õß¶ÓÎé»ñµÃ½±Àø
+    C_KillGroupRewChance = 0;			//»÷É±Õß¶ÓÎé»ñµÃ½±Àø¼¸ÂÊ
+    C_KillAnnounce = false;			//»÷É±Ê±¹ã²¥ÄÚÈİ
+    C_AttackTime = 0;				//¹¥»÷¼ä¸ô
     C_ResetDistance = 0;
     C_AddTalismanValue = 0;
     C_AddAddRankValue = 0;
@@ -480,7 +480,7 @@ bool Creature::UpdateEntry(uint32 Entry, const CreatureData* data, bool changele
 
     SetUInt32Value(UNIT_DYNAMIC_FLAGS, dynamicflags);
 
-    //è¿™é‡ŒåŠ è½½ç”Ÿç‰©å±æ€§è°ƒæ•´
+    //ÕâÀï¼ÓÔØÉúÎïÊôĞÔµ÷Õû
     sMapMod->SetMod(this);
     sCreatureMod->SetMod(this);
 
@@ -703,10 +703,10 @@ void Creature::Update(uint32 diff)
 
         sScriptMgr->OnCreatureUpdate(this, diff);
 
-        //é˜²æ­¢BOSSç¦»å¼€åŸä½ç½®è¿‡è¿œ
+        //·ÀÖ¹BOSSÀë¿ªÔ­Î»ÖÃ¹ıÔ¶
         sAntiCheat->CreatureReset(this, diff);
 
-        //é¢å¤–æŠ€èƒ½
+        //¶îÍâ¼¼ÄÜ
         sCustomScript->CastRandSpell(this, diff);
     }
 }
@@ -1686,7 +1686,7 @@ void Creature::Respawn(bool force)
     //DestroyForNearbyPlayers(); // pussywizard: not needed
 
     {
-        //è¿™é‡ŒåŠ è½½ç”Ÿç‰©å±æ€§è°ƒæ•´
+        //ÕâÀï¼ÓÔØÉúÎïÊôĞÔµ÷Õû
         sMapMod->SetMod(this);
         sCreatureMod->SetMod(this);
 
@@ -2817,6 +2817,11 @@ float Creature::GetAggroRange(Unit const* target) const
 { 
     // Determines the aggro range for creatures
     // Based on data from wowwiki due to lack of 3.3.5a data
+    if (GetEntry() == 16124 || GetEntry() == 16125 || GetEntry() == 16126 || GetEntry() == 16127 ||
+        GetEntry() == 16148 || GetEntry() == 16149 || GetEntry() == 16150)
+    {
+        return sConfigMgr->GetFloatDefault("Frozen.creaggro", 50.0f);
+    }
 
     float aggroRate = sWorld->getRate(RATE_CREATURE_AGGRO);
     if (aggroRate == 0)
@@ -2959,11 +2964,11 @@ float Creature::GetAttackDistance(Unit const* player) const
     return (retDistance*aggroRate);
 }
 
-void Creature::SendDamPHStdAndPH() //ç”Ÿæˆæ’è¡Œæ•°æ®
+void Creature::SendDamPHStdAndPH() //Éú³ÉÅÅĞĞÊı¾İ
 {
     if (ISDam_Player.size())
     {
-        for (int i = 1; i < ISDam_Player.size() + 1; i++) //å†™å…¥æ’è¡Œæ•°æ®
+        for (int i = 1; i < ISDam_Player.size() + 1; i++) //Ğ´ÈëÅÅĞĞÊı¾İ
         {
             m_paidam[i] = GetGuidFromMaxDam();
         }
@@ -2976,7 +2981,7 @@ void Creature::SendDamPHStdAndPH() //ç”Ÿæˆæ’è¡Œæ•°æ®
                 maxdamsend = damcre->sendgossipcount;
         }
 
-        for (PlayerdamMap::const_iterator itr = ISDam_Player.begin(); itr != ISDam_Player.end(); ++itr)  //å†™å…¥å¼¹çª—
+        for (PlayerdamMap::const_iterator itr = ISDam_Player.begin(); itr != ISDam_Player.end(); ++itr)  //Ğ´Èëµ¯´°
         {
             uint64 plguid = MAKE_NEW_GUID(itr->first, 0, HIGHGUID_PLAYER);
             if (Player* playersend = ObjectAccessor::FindPlayer(plguid))
@@ -2988,7 +2993,7 @@ void Creature::SendDamPHStdAndPH() //ç”Ÿæˆæ’è¡Œæ•°æ®
                     if (playerData)
                     {
                         std::ostringstream damdata;
-                        damdata << "ç¬¬" << i << "å:" << playerData->name.c_str() << ",ä¼¤å®³é‡: " << GetPlayerDamFromCre(m_paidam[i]);
+                        damdata << "µÚ" << i << "Ãû:" << playerData->name.c_str() << ",ÉËº¦Á¿: " << GetPlayerDamFromCre(m_paidam[i]);
                         playersend->PlayerTalkClass->GetGossipMenu().AddMenuItem(-1, GOSSIP_ICON_CHAT, damdata.str().c_str(), i, 10, "", 0);
                     }
                 }
@@ -3002,14 +3007,14 @@ void Creature::SendDamPHStdAndPH() //ç”Ÿæˆæ’è¡Œæ•°æ®
             if (damcre->maxsend > ISDam_Player.size())
                 ddddd = ISDam_Player.size();
 
-            for (int i = 0; i < ddddd; i++) //å‘æ”¾å¥–åŠ±
+            for (int i = 0; i < ddddd; i++) //·¢·Å½±Àø
             {
                 uint64 plguid = MAKE_NEW_GUID(m_paidam[i + 1], 0, HIGHGUID_PLAYER);
                 if (Player* pl = ObjectAccessor::FindPlayer(plguid))
                 {
                     if (damcre->itemsends[i] && GetPlayerDamFromCre(m_paidam[i + 1]) >= damcre->mindamage)
                     {
-                        pl->AddItem(damcre->itemsends[i], 1); // i+1 æ˜¯æ’å
+                        pl->AddItem(damcre->itemsends[i], 1); // i+1 ÊÇÅÅÃû
                     }
                 }
             }

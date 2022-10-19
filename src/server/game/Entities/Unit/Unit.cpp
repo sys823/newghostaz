@@ -1,4 +1,4 @@
-ï»¿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -4918,6 +4918,18 @@ void Unit::RemoveEvadeAuras()
         else
             RemoveOwnedAura(iter, AURA_REMOVE_BY_DEFAULT);
     }
+
+    if (ToCreature() && GetMap())
+    {
+        if (GetMap()->IsRaid() && (ToCreature()->isWorldBoss() || ToCreature()->IsDungeonBoss()))
+        {
+            Map::PlayerList const& PlayerList = GetMap()->GetPlayers();
+            for (Map::PlayerList::const_iterator itr = PlayerList.begin(); itr != PlayerList.end(); ++itr)
+                if (Player* player = itr->GetSource())
+                    player->RemoveFbSpellCooldown();
+        }
+    }
+
 }
 
 void Unit::DelayOwnedAuras(uint32 spellId, uint64 caster, int32 delaytime)
@@ -11105,7 +11117,7 @@ int32 Unit::SpellBaseDamageBonusDone(SpellSchoolMask schoolMask)
 
     if (GetTypeId() == TYPEID_PLAYER)
     {
-        //è¿™é‡Œè°ƒæ•´æ™ºåŠ›åŠ æ³•ä¼¤ã€ç²¾ç¥žåŠ æ³•ä¼¤
+        //ÕâÀïµ÷ÕûÖÇÁ¦¼Ó·¨ÉË¡¢¾«Éñ¼Ó·¨ÉË
         DoneAdvertisedBenefit += sCharMod->GetExtraSP(ToPlayer());
         // Base value
         DoneAdvertisedBenefit += ToPlayer()->GetBaseSpellPowerBonus();
@@ -11850,7 +11862,7 @@ int32 Unit::SpellBaseHealingBonusDone(SpellSchoolMask schoolMask)
     // Healing bonus of spirit, intellect and strength
     if (GetTypeId() == TYPEID_PLAYER)
     {
-        //è¿™é‡Œè°ƒæ•´æ™ºåŠ›åŠ æ²»ç–—é‡ã€ç²¾ç¥žåŠ æ²»ç–—é‡
+        //ÕâÀïµ÷ÕûÖÇÁ¦¼ÓÖÎÁÆÁ¿¡¢¾«Éñ¼ÓÖÎÁÆÁ¿
         AdvertisedBenefit += sCharMod->GetExtraHeal(ToPlayer());
         // Base value
         AdvertisedBenefit += ToPlayer()->GetBaseSpellPowerBonus();
@@ -16874,7 +16886,7 @@ void Unit::Kill(Unit* killer, Unit* victim, bool durabilityLoss, WeaponAttackTyp
     // Hook for OnPVPKill Event
     if (killer)
     {
-        //å® ç‰©å‡»æ€
+        //³èÎï»÷É±
         {
             if (Unit* owner = killer->GetOwner())
             {
@@ -16893,7 +16905,7 @@ void Unit::Kill(Unit* killer, Unit* victim, bool durabilityLoss, WeaponAttackTyp
                     else if (Creature* killedCre = victim->ToCreature())
                         sScriptMgr->OnCreatureKill(pl, killedCre);
 
-                    ////é­”é¾™åˆƒ
+                    ////Ä§ÁúÈÐ
                     //if (pl->HasSpell(81213))
                     //	sSpiritPower->Update(pl, 30, true, false);
                 }
