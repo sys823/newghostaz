@@ -4921,7 +4921,7 @@ void Unit::RemoveEvadeAuras()
 
     if (ToCreature() && GetMap())
     {
-        if (GetMap()->IsRaid() && (ToCreature()->isWorldBoss() || ToCreature()->IsDungeonBoss()))
+        if (GetMap()->IsRaid() && (ToCreature()->isWorldBoss() || ToCreature()->IsDungeonBoss()) && (GetEntry() != 32930))
         {
             Map::PlayerList const& PlayerList = GetMap()->GetPlayers();
             for (Map::PlayerList::const_iterator itr = PlayerList.begin(); itr != PlayerList.end(); ++itr)
@@ -11117,7 +11117,7 @@ int32 Unit::SpellBaseDamageBonusDone(SpellSchoolMask schoolMask)
 
     if (GetTypeId() == TYPEID_PLAYER)
     {
-        //ÕâÀïµ÷ÕûÖÇÁ¦¼Ó·¨ÉË¡¢¾«Éñ¼Ó·¨ÉË
+        //è¿™é‡Œè°ƒæ•´æ™ºåŠ›åŠ æ³•ä¼¤ã€ç²¾ç¥åŠ æ³•ä¼¤
         DoneAdvertisedBenefit += sCharMod->GetExtraSP(ToPlayer());
         // Base value
         DoneAdvertisedBenefit += ToPlayer()->GetBaseSpellPowerBonus();
@@ -11862,7 +11862,7 @@ int32 Unit::SpellBaseHealingBonusDone(SpellSchoolMask schoolMask)
     // Healing bonus of spirit, intellect and strength
     if (GetTypeId() == TYPEID_PLAYER)
     {
-        //ÕâÀïµ÷ÕûÖÇÁ¦¼ÓÖÎÁÆÁ¿¡¢¾«Éñ¼ÓÖÎÁÆÁ¿
+        //è¿™é‡Œè°ƒæ•´æ™ºåŠ›åŠ æ²»ç–—é‡ã€ç²¾ç¥åŠ æ²»ç–—é‡
         AdvertisedBenefit += sCharMod->GetExtraHeal(ToPlayer());
         // Base value
         AdvertisedBenefit += ToPlayer()->GetBaseSpellPowerBonus();
@@ -16886,7 +16886,7 @@ void Unit::Kill(Unit* killer, Unit* victim, bool durabilityLoss, WeaponAttackTyp
     // Hook for OnPVPKill Event
     if (killer)
     {
-        //³èÎï»÷É±
+        //å® ç‰©å‡»æ€
         {
             if (Unit* owner = killer->GetOwner())
             {
@@ -16905,7 +16905,7 @@ void Unit::Kill(Unit* killer, Unit* victim, bool durabilityLoss, WeaponAttackTyp
                     else if (Creature* killedCre = victim->ToCreature())
                         sScriptMgr->OnCreatureKill(pl, killedCre);
 
-                    ////Ä§ÁúÈĞ
+                    ////é­”é¾™åˆƒ
                     //if (pl->HasSpell(81213))
                     //	sSpiritPower->Update(pl, 30, true, false);
                 }
