@@ -1081,6 +1081,7 @@ Player::Player(WorldSession* session): Unit(true), m_mover(this)
     m_Last_tick = m_logintime;
     m_Played_time[PLAYED_TIME_TOTAL] = 0;
     m_Played_time[PLAYED_TIME_LEVEL] = 0;
+    m_Played_time[PLAYED_TIME_BOT] = 0;
     m_WeaponProficiency = 0;
     m_ArmorProficiency = 0;
     m_canParry = false;
@@ -1413,7 +1414,7 @@ bool Player::Create(uint32 guidlow, CharacterCreateInfo* createInfo)
     m_Last_tick = time(nullptr);
     m_Played_time[PLAYED_TIME_TOTAL] = 0;
     m_Played_time[PLAYED_TIME_LEVEL] = 0;
-
+    m_Played_time[PLAYED_TIME_BOT] = 0;
     // base stats and related field values
     InitStatsForLevel();
     InitTaxiNodesForLevel();
@@ -19141,7 +19142,7 @@ bool Player::LoadFromDB(uint32 guid, SQLQueryHolder *holder)
     m_cinematic = fields[23].GetUInt8();
     m_Played_time[PLAYED_TIME_TOTAL] = fields[24].GetUInt32();
     m_Played_time[PLAYED_TIME_LEVEL] = fields[25].GetUInt32();
-
+    m_Played_time[PLAYED_TIME_BOT] = 0;
     m_resetTalentsCost = fields[29].GetUInt32();
     m_resetTalentsTime = time_t(fields[30].GetUInt32());
 

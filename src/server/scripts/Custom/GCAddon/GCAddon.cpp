@@ -1,4 +1,4 @@
-#pragma execution_character_set("utf-8")
+ï»¿#pragma execution_character_set("utf-8")
 #include "GCAddon.h"
 #include "../ItemMod/ItemMod.h"
 #include "../Requirement/Requirement.h"
@@ -186,7 +186,7 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 		
 		if (count != 1 && count != 10)
 		{
-			ChatHandler(player->GetSession()).PSendSysMessage("´íÎóµÄ³é½±´ÎÊı");
+			ChatHandler(player->GetSession()).PSendSysMessage("é”™è¯¯çš„æŠ½å¥–æ¬¡æ•°");
 			sGCAddon->SendPacketTo(player, "GC_S_LUCKDRAW_STOP", "");
 			return true;
 		}
@@ -247,7 +247,7 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 				if (sTransmogrification->PresetTransmog(player, item, fakeEntry, slot))
 					SendTransMogData(player);
 				else
-					ChatHandler(player->GetSession()).PSendSysMessage("»Ã»¯Ê§°Ü£¬Ïà¹Ø²¿Î»²»ÄÜ»Ã»¯´ËÎïÆ·");
+					ChatHandler(player->GetSession()).PSendSysMessage("å¹»åŒ–å¤±è´¥ï¼Œç›¸å…³éƒ¨ä½ä¸èƒ½å¹»åŒ–æ­¤ç‰©å“");
 			}
 		}
 	
@@ -275,7 +275,7 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 		ItemTemplate const* pProto = sObjectMgr->GetItemTemplate(entry);
 		if (!pProto)
 		{
-			player->GetSession()->SendNotification("¸ÃÎïÆ·²»´æÔÚ");
+			player->GetSession()->SendNotification("è¯¥ç‰©å“ä¸å­˜åœ¨");
 			return true;
 		}
 
@@ -338,14 +338,14 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 
 		if (slot == EQUIPMENT_SLOT_END)
 		{
-			player->GetSession()->SendNotification("¸ÃÎïÆ·²»ÄÜÓÃÓÚ»Ã»¯");
+			player->GetSession()->SendNotification("è¯¥ç‰©å“ä¸èƒ½ç”¨äºå¹»åŒ–");
 			return true;
 		}
 
 		if (entry > 56806 && !player->HasItemCount(entry, 1, true))
 		{
 			std::ostringstream oss;
-			oss << "ÇëÏÈ¹ºÂò" << sCF->GetItemLink(entry);
+			oss << "è¯·å…ˆè´­ä¹°" << sCF->GetItemLink(entry);
 			player->GetSession()->SendNotification(oss.str().c_str());
 			return true;
 		}
@@ -357,14 +357,14 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 		{
 			if (sTransmogrification->PresetTransmog(player, itemTransmogrified, entry, slot))
 			{
-				player->GetSession()->SendAreaTriggerMessage("»Ã»¯³É¹¦");
+				player->GetSession()->SendAreaTriggerMessage("å¹»åŒ–æˆåŠŸ");
 				sReq->Des(player, reqId);
 			}
 			else
-				player->GetSession()->SendNotification("Ä¿±ê²¿Î»²»ÔÊĞí»Ã»¯³É¸ÃÎïÆ·£¬»Ã»¯Ê§°Ü");
+				player->GetSession()->SendNotification("ç›®æ ‡éƒ¨ä½ä¸å…è®¸å¹»åŒ–æˆè¯¥ç‰©å“ï¼Œå¹»åŒ–å¤±è´¥");
 		}
 		else
-			player->GetSession()->SendNotification("¸Ã²¿Î»Î´×°±¸ÎïÆ·£¬»Ã»¯Ê§°Ü");
+			player->GetSession()->SendNotification("è¯¥éƒ¨ä½æœªè£…å¤‡ç‰©å“ï¼Œå¹»åŒ–å¤±è´¥");
 
 		return true;
 	}else if (IsOpcode(opcode, "GC_C_ITEMENTRY"))
@@ -374,11 +374,14 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 	}
 	else if (IsOpcode(opcode, "SSC_ITEM_TO_SLOT"))
 	{
-		sLog->outString("ÊÕµ½»êÓñ²Ù×÷Âë5");
+		sLog->outString("æ”¶åˆ°é­‚ç‰æ“ä½œç 5");
 		sLog->outString(msg.c_str());
 		std::string str = SplitStr(msg, 1);
 		std::vector<std::string> vec = sSoulStone->split(str, "#");
-
+        if (vec.size() != 3)
+        {
+            return false;
+        }
 		uint32 page = atoi(vec[0].c_str());
 		uint32 slot = atoi(vec[1].c_str());
 		uint32 item = atoi(vec[2].c_str());
@@ -387,10 +390,13 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 	}
 	else if (IsOpcode(opcode, "SSC_REMOVE_SLOT_ITEM"))
 	{
-		sLog->outString("ÊÕµ½»êÓñ²Ù×÷Âë4");
+		sLog->outString("æ”¶åˆ°é­‚ç‰æ“ä½œç 4");
 		std::string str = SplitStr(msg, 1);
 		std::vector<std::string> vec = sSoulStone->split(str, "#");
-
+        if (vec.size() != 2)
+        {
+            return false;
+        }
 		uint32 page = atoi(vec[0].c_str());
 		uint32 slot = atoi(vec[1].c_str());
 
@@ -400,7 +406,7 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 	{
 		if (SplitStr(msg, 1) == "VAL")
 		{
-			sLog->outString("ÊÕµ½»êÓñ²Ù×÷Âë1");
+			sLog->outString("æ”¶åˆ°é­‚ç‰æ“ä½œç 1");
 			sSoulStone->SendMutualData(player);
 		}
 	}
@@ -408,13 +414,13 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 	{
 		if (SplitStr(msg, 1) == "ISOK")
 		{
-			sLog->outString("ÊÕµ½»êÓñ²Ù×÷Âë2");
+			sLog->outString("æ”¶åˆ°é­‚ç‰æ“ä½œç 2");
 			sSoulStone->SendAllActiData(player);
 		}
 	}
 	else if (IsOpcode(opcode, "SSC_BUY_PAGE"))
 	{
-		sLog->outString("ÊÕµ½»êÓñ²Ù×÷Âë3");
+		sLog->outString("æ”¶åˆ°é­‚ç‰æ“ä½œç 3");
 		std::string str = SplitStr(msg, 1);
 		uint32 page = atoi(str.c_str());
 
@@ -425,7 +431,7 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 	}
 	else if (IsOpcode(opcode, "SSCEX_ITEM_TO_SLOT"))
 	{
-		sLog->outString("ÊÕµ½»êÓñÀ©Õ¹²Ù×÷Âë5");
+		sLog->outString("æ”¶åˆ°é­‚ç‰æ‰©å±•æ“ä½œç 5");
 		sLog->outString(msg.c_str());
 		std::string str = SplitStr(msg, 1);
 		std::vector<std::string> vec = sSoulStoneEx->split(str, "#");
@@ -441,7 +447,7 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 	}
 	else if (IsOpcode(opcode, "SSCEX_REMOVE_SLOT_ITEM"))
 	{
-		sLog->outString("ÊÕµ½»êÓñÀ©Õ¹²Ù×÷Âë4");
+		sLog->outString("æ”¶åˆ°é­‚ç‰æ‰©å±•æ“ä½œç 4");
 		std::string str = SplitStr(msg, 1);
 		std::vector<std::string> vec = sSoulStoneEx->split(str, "#");
 
@@ -454,7 +460,7 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 	{
 		if (SplitStr(msg, 1) == "VAL")
 		{
-			sLog->outString("ÊÕµ½»êÓñÀ©Õ¹²Ù×÷Âë1");
+			sLog->outString("æ”¶åˆ°é­‚ç‰æ‰©å±•æ“ä½œç 1");
 			sSoulStoneEx->SendMutualData(player);
 		}
 	}
@@ -462,13 +468,13 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 	{
 		if (SplitStr(msg, 1) == "ISOK")
 		{
-			sLog->outString("ÊÕµ½»êÓñÀ©Õ¹²Ù×÷Âë2");
+			sLog->outString("æ”¶åˆ°é­‚ç‰æ‰©å±•æ“ä½œç 2");
 			sSoulStoneEx->SendAllActiData(player);
 		}
 	}
 	else if (IsOpcode(opcode, "SSCEX_BUY_PAGE"))
 	{
-		sLog->outString("ÊÕµ½»êÓñÀ©Õ¹²Ù×÷Âë3");
+		sLog->outString("æ”¶åˆ°é­‚ç‰æ‰©å±•æ“ä½œç 3");
 		std::string str = SplitStr(msg, 1);
 		uint32 page = atoi(str.c_str());
 
@@ -624,11 +630,11 @@ uint32 GCAddon::GetTransReqId(uint32 itemId)
 }
 
 //#include "mail.h"
-// subject ÓÊ¼ş±êÌâ
-// text		ÓÊ¼şÄÚÈİ
-//guid		Íæ¼Òguid
-//itemEntry ÎïÆ·ID
-//itemCount ÎïÆ·ÊıÁ¿
+// subject é‚®ä»¶æ ‡é¢˜
+// text		é‚®ä»¶å†…å®¹
+//guid		ç©å®¶guid
+//itemEntry ç‰©å“ID
+//itemCount ç‰©å“æ•°é‡
 
 void SendMail(std::string subject, std::string text,uint32 guid,uint32 itemEntry,uint32 itemCount)
 {
@@ -986,25 +992,25 @@ void GCAddon::SendEnchantData(Player* player)
 		SendPacketTo(player, "GC_S_ENCHANT", oss.str());
 	}
 
-	//Ö÷±³°ü
+	//ä¸»èƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_ITEM_START; i < INVENTORY_SLOT_ITEM_END; i++)
 		if (Item* item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
 			SendItemEnchantData(player, item);
 			
 
-	//¶îÍâÈı¸ö±³°ü
+	//é¢å¤–ä¸‰ä¸ªèƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_BAG_START; i < INVENTORY_SLOT_BAG_END; i++)
 		if (Bag* pBag = player->GetBagByPos(i))
 			for (uint32 j = 0; j < pBag->GetBagSize(); j++)
 				if (Item* item = player->GetItemByPos(i, j))
 					SendItemEnchantData(player, item);
 
-	//ÒøĞĞ
+	//é“¶è¡Œ
 	for (uint8 i = BANK_SLOT_ITEM_START; i < BANK_SLOT_BAG_END; ++i)
 		if (Item* item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
 			SendItemEnchantData(player, item);
 				
-	//ÒøĞĞ±³°ü
+	//é“¶è¡ŒèƒŒåŒ…
 	for (uint8 i = BANK_SLOT_BAG_START; i < BANK_SLOT_BAG_END; ++i)
 		if (Bag* pBag = player->GetBagByPos(i))
 			for (uint32 j = 0; j < pBag->GetBagSize(); j++)
