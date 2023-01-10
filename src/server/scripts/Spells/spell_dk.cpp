@@ -950,6 +950,9 @@ class spell_dk_pet_scaling : public SpellScriptLoader
 
             void CalculateHasteAmount(AuraEffect const*  /*aurEff*/, int32 & amount, bool & /*canBeRecalculated*/)
             {
+                if (GetUnitOwner()->GetEntry() != NPC_EBON_GARGOYLE)
+                    return;
+
                 // xinef: scale haste with owners melee haste
                 if (Unit* owner = GetUnitOwner()->GetOwner())
                     if (owner->m_modAttackSpeedPct[BASE_ATTACK] < 1.0f) // inherit haste only

@@ -2527,20 +2527,6 @@ void Spell::EffectSummonType(SpellEffIndex effIndex)
     {
         summon->SetCreatorGUID(m_originalCaster->GetGUID());
         ExecuteLogEffectSummonObject(effIndex, summon);
-
-        Unit* Owner = summon->GetOwner();
-        if (Owner && Owner->GetTypeId() == TYPEID_PLAYER)
-        {
-            if (Player* p = Owner->ToPlayer())
-            {
-                if (properties->Id == 42651 || properties->Id == 46585 || properties->Id == 46584)
-                {
-                    summon->SetAttackTime(BASE_ATTACK, p->GetAttackTime(BASE_ATTACK));
-                    summon->SetAttackTime(OFF_ATTACK, p->GetAttackTime(OFF_ATTACK));
-                    summon->SetAttackTime(RANGED_ATTACK, p->GetAttackTime(RANGED_ATTACK));
-                }
-            }
-        }
     }
 }
 
@@ -6036,6 +6022,22 @@ void Spell::SummonGuardian(uint32 i, uint32 entry, SummonPropertiesEntry const* 
             case 60478:
                 caster->AddAura(SPELL_RITUAL_ENSLAVEMENT, summon);
                 break;
+        }
+
+        if (caster && caster->GetTypeId() == TYPEID_PLAYER)
+        {
+            if (Player* p = caster->ToPlayer())
+            {
+                if (m_spellInfo->Id == 42651 || m_spellInfo->Id == 46585 || m_spellInfo->Id == 46584 || m_spellInfo->Id == 49206)
+                {
+                    summon->SetAttackTime(BASE_ATTACK, p->GetAttackTime(BASE_ATTACK));
+                    summon->SetAttackTime(OFF_ATTACK, p->GetAttackTime(OFF_ATTACK));
+                    summon->SetAttackTime(RANGED_ATTACK, p->GetAttackTime(RANGED_ATTACK));
+
+                    float newVal = p->GetRatingBonusValue(CR_HASTE_SPELL);
+                    summon->ApplyCastTimePercentMod(newVal, true);
+                }
+            }
         }
     }
 }
