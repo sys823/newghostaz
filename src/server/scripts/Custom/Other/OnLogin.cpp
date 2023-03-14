@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "../AuthCheck/AuthCheck.h"
 #include "../DataLoader/DataLoader.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -16,32 +15,32 @@ public:
 	{
 		player->SetUnderACKmount();
 
-		////¸üÐÂ¾üÏÎ
+		////æ›´æ–°å†›è¡”
 		if (sSwitch->GetOnOff(ST_HR_ACCOUNT_BIND))
 			sCF->updateHRTitle(player);
 		
-		//ÉèÖÃÍæ¼ÒµôÂÊ
+		//è®¾ç½®çŽ©å®¶æŽ‰çŽ‡
 		sCF->SetLootRate(player);
 
-		//¼ì²âÍæ¼ÒÔÚÏßÊýÁ¿£¬³¬¹ýÏÞÖÆ£¬Ìßµô
+		//æ£€æµ‹çŽ©å®¶åœ¨çº¿æ•°é‡ï¼Œè¶…è¿‡é™åˆ¶ï¼Œè¸¢æŽ‰
 		if (!sCF->onlineIsAllowed(player))
 			player->GetSession()->KickPlayer();
 
-		//Í³Ò»RELIC
+		//ç»Ÿä¸€RELIC
 		if (sSwitch->GetOnOff(ST_SAME_RELIC))
 		{
 			if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_DRUID || player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_DEATH_KNIGHT)
 			{
-				//Ä§Ó¡
+				//é­”å°
 				if (!player->HasSpell(52665))
 					player->learnSpell(52665);
-				//Ê¥Îï
+				//åœ£ç‰©
 				if (!player->HasSpell(27762))
 					player->learnSpell(27762);
-				//Í¼ÌÚ
+				//å›¾è…¾
 				if (!player->HasSpell(27763))
 					player->learnSpell(27763);
-				//ÉñÏñ
+				//ç¥žåƒ
 				if (!player->HasSpell(27764))
 					player->learnSpell(27764);
 			}	
@@ -50,16 +49,16 @@ public:
 		{
 			if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_DRUID || player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_DEATH_KNIGHT)
 			{
-				//Ä§Ó¡
+				//é­”å°
 				if (!player->HasSpell(52665))
 					player->removeSpell(52665, SPEC_MASK_ALL, true);
-				//Ê¥Îï
+				//åœ£ç‰©
 				if (!player->HasSpell(27762))
 					player->removeSpell(27762, SPEC_MASK_ALL, true);
-				//Í¼ÌÚ
+				//å›¾è…¾
 				if (!player->HasSpell(27763))
 					player->removeSpell(27763, SPEC_MASK_ALL, true);
-				//ÉñÏñ
+				//ç¥žåƒ
 				if (!player->HasSpell(27764))
 					player->removeSpell(27764, SPEC_MASK_ALL, true);
 			}
@@ -92,8 +91,8 @@ public:
 		if (sender == atoi(code))
 		{
 			player->LootCheckReset();
-			player->GetSession()->SendAreaTriggerMessage("[Ê°È¡ÑéÖ¤]¹§Ï²Äã£¬ÑéÖ¤Í¨¹ý£¡");
-			ChatHandler(player->GetSession()).PSendSysMessage("[Ê°È¡ÑéÖ¤]¹§Ï²Äã£¬ÑéÖ¤Í¨¹ý£¡");
+			player->GetSession()->SendAreaTriggerMessage("[æ‹¾å–éªŒè¯]æ­å–œä½ ï¼ŒéªŒè¯é€šè¿‡ï¼");
+			ChatHandler(player->GetSession()).PSendSysMessage("[æ‹¾å–éªŒè¯]æ­å–œä½ ï¼ŒéªŒè¯é€šè¿‡ï¼");
 			player->ModifyMoney(sWorld->getIntConfig(CONFIG_LOOTCHECK_MONEY));
 		}
 		else

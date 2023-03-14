@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "SpellMod.h"
 #include "../Requirement/Requirement.h"
 #include "Battlefield.h"
@@ -29,7 +28,7 @@ void SpellMod::Load()
 
 	SpellModMap.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ¼¼ÄÜID, ÊÍ·Å¼¼ÄÜĞèÇóÄ£°åID,ÉËº¦±¶ÂÊ,ÖÎÁÆ±¶ÂÊ,ÊÇ·ñÕËºÅ°ó¶¨,ÊÇ·ñ½ûÓÃ,Ê©·¨Ê±¼ä,³ÖĞøÊ±¼ä,ÀäÈ´Ê±¼ä,´¥·¢»úÂÊ,ÖÜÆÚÊ±¼ä1,ÖÜÆÚÊ±¼ä2,ÖÜÆÚÊ±¼ä3 FROM _¼¼ÄÜ" :
+		"SELECT æŠ€èƒ½ID, é‡Šæ”¾æŠ€èƒ½éœ€æ±‚æ¨¡æ¿ID,ä¼¤å®³å€ç‡,æ²»ç–—å€ç‡,æ˜¯å¦è´¦å·ç»‘å®š,æ˜¯å¦ç¦ç”¨,æ–½æ³•æ—¶é—´,æŒç»­æ—¶é—´,å†·å´æ—¶é—´,è§¦å‘æœºç‡,å‘¨æœŸæ—¶é—´1,å‘¨æœŸæ—¶é—´2,å‘¨æœŸæ—¶é—´3 FROM _æŠ€èƒ½" :
 		"SELECT spellId, reqId,dmgMod,healMod,accountBind,disable,castingtime,duration,cooldown,procChance,Periodic1,Periodic2,Periodic3 FROM _spellmod"))
 	{
 		do
@@ -79,7 +78,7 @@ void SpellMod::Load()
 		"SpellMaskC1,SpellMaskC2,SpellMaskC3,"
 		"EffectTarget1,EffectTarget2,EffectTarget3,"
 		"targetspell1,targetspell2,targetspell3,"
-		"cooldown,targetflag,chance,charges,SpellFamilyName FROM _¼¼ÄÜ_Êı¾İ¿âĞŞ¸Ä" :
+		"cooldown,targetflag,chance,charges,SpellFamilyName FROM _æŠ€èƒ½_æ•°æ®åº“ä¿®æ”¹" :
 		"SELECT spellId,"
 		"Effect1,Effect2,Effect3,"
 		"AuraName1,AuraName2,AuraName3,MiscValue1,MiscValue2,MiscValue3,"
@@ -122,10 +121,10 @@ void SpellMod::Load()
 
 			switch (procFlags)
 			{
-			case 1:Temp.procFlags = 20;					break;//ÎïÀí
-			case 2:Temp.procFlags = 320;				break;//Ô¶³Ì
-			case 4:Temp.procFlags = 81920;				break;//·¨Êõ
-			case 7:Temp.procFlags = 20 + 320 + 81920;	break;//ËùÓĞ
+			case 1:Temp.procFlags = 20;					break;//ç‰©ç†
+			case 2:Temp.procFlags = 320;				break;//è¿œç¨‹
+			case 4:Temp.procFlags = 81920;				break;//æ³•æœ¯
+			case 7:Temp.procFlags = 20 + 320 + 81920;	break;//æ‰€æœ‰
 			case 3:Temp.procFlags = 20 + 320;			break;
 			case 5:Temp.procFlags = 20 + 81920;			break;
 			case 6:Temp.procFlags = 320 + 81920;		break;
@@ -142,7 +141,7 @@ void SpellMod::Load()
 
 	SpellCusTargetMaskMap.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ¼¼ÄÜID,Ä¿±êÑÚÂë FROM _¼¼ÄÜ_Ä¿±êÏŞÖÆ" :
+		"SELECT æŠ€èƒ½ID,ç›®æ ‡æ©ç  FROM _æŠ€èƒ½_ç›®æ ‡é™åˆ¶" :
 		"SELECT spellId,targetMask FROM _spellmod_target"))
 	{
 		do
@@ -154,7 +153,7 @@ void SpellMod::Load()
 
 	OnRemoveSpellMap.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ¼¼ÄÜID, GMÃüÁî×é FROM _¼¼ÄÜ_µ±ÒÅÍüÊ±" :
+		"SELECT æŠ€èƒ½ID, GMå‘½ä»¤ç»„ FROM _æŠ€èƒ½_å½“é—å¿˜æ—¶" :
 		"SELECT spellId, command FROM _spellmod_on_remove"))
 	{
 		do
@@ -166,7 +165,7 @@ void SpellMod::Load()
 
 	OnLearnSpellMap.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ¼¼ÄÜID, GMÃüÁî×é FROM _¼¼ÄÜ_µ±Ñ§Ï°Ê±" :
+		"SELECT æŠ€èƒ½ID, GMå‘½ä»¤ç»„ FROM _æŠ€èƒ½_å½“å­¦ä¹ æ—¶" :
 		"SELECT spellId, command FROM _spellmod_on_learn"))
 	{
 		do
@@ -178,7 +177,7 @@ void SpellMod::Load()
 
 	AuraTriggerSpellMap.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ¹â»·ID,¹¥Ç¿°Ù·Ö±ÈÔö¼Ó»ù´¡Öµ1,¹¥Ç¿°Ù·Ö±ÈÔö¼Ó»ù´¡Öµ2,¹¥Ç¿°Ù·Ö±ÈÔö¼Ó»ù´¡Öµ3,·¨ÉË°Ù·Ö±ÈÔö¼Ó»ù´¡Öµ1,·¨ÉË°Ù·Ö±ÈÔö¼Ó»ù´¡Öµ2,·¨ÉË°Ù·Ö±ÈÔö¼Ó»ù´¡Öµ3,Á´½Ó¼¼ÄÜ×é,´¥·¢¼¸ÂÊ,´¥·¢¼¼ÄÜ×é,ÀäÈ´Ê±¼ä,ºöÂÔÄ¿±êÀàĞÍ,Ä¿±ê×î´óÊıÁ¿,Ä¿±ê·¶Î§,´¥·¢ÀàĞÍ  FROM _¼¼ÄÜ_¹â»·´¥·¢" :
+		"SELECT å…‰ç¯ID,æ”»å¼ºç™¾åˆ†æ¯”å¢åŠ åŸºç¡€å€¼1,æ”»å¼ºç™¾åˆ†æ¯”å¢åŠ åŸºç¡€å€¼2,æ”»å¼ºç™¾åˆ†æ¯”å¢åŠ åŸºç¡€å€¼3,æ³•ä¼¤ç™¾åˆ†æ¯”å¢åŠ åŸºç¡€å€¼1,æ³•ä¼¤ç™¾åˆ†æ¯”å¢åŠ åŸºç¡€å€¼2,æ³•ä¼¤ç™¾åˆ†æ¯”å¢åŠ åŸºç¡€å€¼3,é“¾æ¥æŠ€èƒ½ç»„,è§¦å‘å‡ ç‡,è§¦å‘æŠ€èƒ½ç»„,å†·å´æ—¶é—´,å¿½ç•¥ç›®æ ‡ç±»å‹,ç›®æ ‡æœ€å¤§æ•°é‡,ç›®æ ‡èŒƒå›´,è§¦å‘ç±»å‹  FROM _æŠ€èƒ½_å…‰ç¯è§¦å‘" :
 		"SELECT aura,bp0ApPct,bp1ApPct,bp2ApPct,bp0SpPct,bp1SpPct,bp2SpPct,linkSpellData,procChance,triggerSpell,cooldown,ignoreMask,MaxTargets,TargetsRange,procFlags  FROM _spellmod_aura_trigger"))
 	{
 		do
@@ -211,7 +210,7 @@ void SpellMod::Load()
 
 	SpellLeechVec.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ÎüÑª¼¼ÄÜID,ÎüÑª¼¸ÂÊ,ÎüÑªÀàĞÍ,»ù´¡Öµ,ÎüÑªÊÇ·ñ¸½´øÉËº¦,ĞèÒªÂú×ãµÄ¹â»·ID FROM _¼¼ÄÜ_ÎüÑª¼¼ÄÜ" :
+		"SELECT å¸è¡€æŠ€èƒ½ID,å¸è¡€å‡ ç‡,å¸è¡€ç±»å‹,åŸºç¡€å€¼,å¸è¡€æ˜¯å¦é™„å¸¦ä¼¤å®³,éœ€è¦æ»¡è¶³çš„å…‰ç¯ID FROM _æŠ€èƒ½_å¸è¡€æŠ€èƒ½" :
 		"SELECT spell,chance,type,basepoints,addDamage,meetAura FROM _spellmod_leech_spell"))
 	{
 		do
@@ -223,17 +222,17 @@ void SpellMod::Load()
 
 			const char* str = fields[2].GetCString();
 
-			if (strcmp(str, "×ÔÉíµ±Ç°ÉúÃüÖµ°Ù·Ö±È") == 0)
+			if (strcmp(str, "è‡ªèº«å½“å‰ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”") == 0)
 				Temp.type = LEECH_TYPE_SELF_CUR_PCT;
-			else if (strcmp(str, "×ÔÉí×î´óÉúÃüÖµ°Ù·Ö±È") == 0)
+			else if (strcmp(str, "è‡ªèº«æœ€å¤§ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”") == 0)
 				Temp.type = LEECH_TYPE_SELF_MAX_PCT;
-			else if (strcmp(str, "Ä¿±êµ±Ç°ÉúÃüÖµ°Ù·Ö±È") == 0)
+			else if (strcmp(str, "ç›®æ ‡å½“å‰ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”") == 0)
 				Temp.type = LEECH_TYPE_TARGET_CUR_PCT;
-			else if (strcmp(str, "Ä¿±ê×î´óÉúÃüÖµ°Ù·Ö±È") == 0)
+			else if (strcmp(str, "ç›®æ ‡æœ€å¤§ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”") == 0)
 				Temp.type = LEECH_TYPE_TARGET_MAX_PCT;
-			else if (strcmp(str, "¹Ì¶¨ÊıÖµ") == 0)
+			else if (strcmp(str, "å›ºå®šæ•°å€¼") == 0)
 				Temp.type = LEECH_TYPE_STATIC;
-			else if (strcmp(str, "¼¼ÄÜÉËº¦°Ù·Ö±È") == 0)
+			else if (strcmp(str, "æŠ€èƒ½ä¼¤å®³ç™¾åˆ†æ¯”") == 0)
 				Temp.type = LEECH_TYPE_DAMGE_PCT;
 			else
 				Temp.type = LEECH_TYPE_NONE;
@@ -247,7 +246,7 @@ void SpellMod::Load()
 
 	AuraLeechMap.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ÎüÑª¹â»·¼¼ÄÜID,ÎüÑª¼¸ÂÊ,ÎüÑªÀàĞÍ,»ù´¡Öµ,ÎüÑªÊÇ·ñ¸½´øÉËº¦ FROM _¼¼ÄÜ_ÎüÑª¹â»·" :
+		"SELECT å¸è¡€å…‰ç¯æŠ€èƒ½ID,å¸è¡€å‡ ç‡,å¸è¡€ç±»å‹,åŸºç¡€å€¼,å¸è¡€æ˜¯å¦é™„å¸¦ä¼¤å®³ FROM _æŠ€èƒ½_å¸è¡€å…‰ç¯" :
 		"SELECT aura,chance,type,basepoints,addDamage FROM _spellmod_leech_aura"))
 	{
 		do
@@ -259,17 +258,17 @@ void SpellMod::Load()
 
 			const char* str = fields[2].GetCString();
 
-			if (strcmp(str, "×ÔÉíµ±Ç°ÉúÃüÖµ°Ù·Ö±È") == 0)
+			if (strcmp(str, "è‡ªèº«å½“å‰ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”") == 0)
 				Temp.type = LEECH_TYPE_SELF_CUR_PCT;
-			else if (strcmp(str, "×ÔÉí×î´óÉúÃüÖµ°Ù·Ö±È") == 0)
+			else if (strcmp(str, "è‡ªèº«æœ€å¤§ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”") == 0)
 				Temp.type = LEECH_TYPE_SELF_MAX_PCT;
-			else if (strcmp(str, "Ä¿±êµ±Ç°ÉúÃüÖµ°Ù·Ö±È") == 0)
+			else if (strcmp(str, "ç›®æ ‡å½“å‰ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”") == 0)
 				Temp.type = LEECH_TYPE_TARGET_CUR_PCT;
-			else if (strcmp(str, "Ä¿±ê×î´óÉúÃüÖµ°Ù·Ö±È") == 0)
+			else if (strcmp(str, "ç›®æ ‡æœ€å¤§ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”") == 0)
 				Temp.type = LEECH_TYPE_TARGET_MAX_PCT;
-			else if (strcmp(str, "¹Ì¶¨ÊıÖµ") == 0)
+			else if (strcmp(str, "å›ºå®šæ•°å€¼") == 0)
 				Temp.type = LEECH_TYPE_STATIC;
-			else if (strcmp(str, "¼¼ÄÜÉËº¦°Ù·Ö±È") == 0)
+			else if (strcmp(str, "æŠ€èƒ½ä¼¤å®³ç™¾åˆ†æ¯”") == 0)
 				Temp.type = LEECH_TYPE_DAMGE_PCT;
 			else
 				Temp.type = LEECH_TYPE_NONE;
@@ -283,7 +282,7 @@ void SpellMod::Load()
 	AuraModClassSpellMap.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		"SELECT aura, spellfamily,type1,op1,value1,"
-		"type2,op2,value2,type3,op3,value3 FROM _¼¼ÄÜ_Ö°ÒµÈ«¾Ö¹â»·" :
+		"type2,op2,value2,type3,op3,value3 FROM _æŠ€èƒ½_èŒä¸šå…¨å±€å…‰ç¯" :
 		"SELECT aura, spellfamily,type1,op1,value1,"
 		"type2,op2,value2,type3,op3,value3 FROM _spellmod_aura_on_classmask"))
 	{
@@ -306,7 +305,7 @@ void SpellMod::Load()
 
 	AuraModStatMap.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ¹â»·¼¼ÄÜID,¹â»·ÀàĞÍ1,ÊôĞÔÀàĞÍ1,×ª»»°Ù·Ö±È1,¹â»·ÀàĞÍ2,ÊôĞÔÀàĞÍ2,×ª»»°Ù·Ö±È2,¹â»·ÀàĞÍ3,ÊôĞÔÀàĞÍ3,×ª»»°Ù·Ö±È3 FROM _¼¼ÄÜ_Ö÷ÊôĞÔ×ª»»" :
+		"SELECT å…‰ç¯æŠ€èƒ½ID,å…‰ç¯ç±»å‹1,å±æ€§ç±»å‹1,è½¬æ¢ç™¾åˆ†æ¯”1,å…‰ç¯ç±»å‹2,å±æ€§ç±»å‹2,è½¬æ¢ç™¾åˆ†æ¯”2,å…‰ç¯ç±»å‹3,å±æ€§ç±»å‹3,è½¬æ¢ç™¾åˆ†æ¯”3 FROM _æŠ€èƒ½_ä¸»å±æ€§è½¬æ¢" :
 		"SELECT aura,auraType1,statType1,pct1,auraType2,statType2,pct2,auraType3,statType3,pct3 FROM _spellmod_aura_pct_on_stat"))
 	{
 		do
@@ -349,7 +348,7 @@ void SpellMod::Load()
 
 	AuraPctMap.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ¹â»·¼¼ÄÜID,Ğ§¹ûÀàĞÍ1,ÌáÉıÀàĞÍ1,ÌáÉıÊıÖµ1,Ğ§¹ûÀàĞÍ2,ÌáÉıÀàĞÍ2,ÌáÉıÊıÖµ2,Ğ§¹ûÀàĞÍ3,ÌáÉıÀàĞÍ3,ÌáÉıÊıÖµ3 FROM _¼¼ÄÜ_¹â»·°Ù·Ö±ÈĞ§¹û" :
+		"SELECT å…‰ç¯æŠ€èƒ½ID,æ•ˆæœç±»å‹1,æå‡ç±»å‹1,æå‡æ•°å€¼1,æ•ˆæœç±»å‹2,æå‡ç±»å‹2,æå‡æ•°å€¼2,æ•ˆæœç±»å‹3,æå‡ç±»å‹3,æå‡æ•°å€¼3 FROM _æŠ€èƒ½_å…‰ç¯ç™¾åˆ†æ¯”æ•ˆæœ" :
 		"SELECT aura,auraType1,modType1,value1,auraType2,modType2,value2,auraType3,modType3,value3 FROM _spellmod_aura_pct"))
 	{
 		do
@@ -391,7 +390,7 @@ void SpellMod::Load()
 
 	MountSpellMap.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT Ö÷×øÆï¼¼ÄÜID,60ËÙ¶È×øÆï¼¼ÄÜID,100ËÙ¶È×øÆï¼¼ÄÜID,150ËÙ¶È×øÆï¼¼ÄÜID,280ËÙ¶È×øÆï¼¼ÄÜID,310ËÙ¶È×øÆï¼¼ÄÜID FROM _¼¼ÄÜ_ÆïÊõ¸Ä±äËÙ¶È" :
+		"SELECT ä¸»åéª‘æŠ€èƒ½ID,60é€Ÿåº¦åéª‘æŠ€èƒ½ID,100é€Ÿåº¦åéª‘æŠ€èƒ½ID,150é€Ÿåº¦åéª‘æŠ€èƒ½ID,280é€Ÿåº¦åéª‘æŠ€èƒ½ID,310é€Ÿåº¦åéª‘æŠ€èƒ½ID FROM _æŠ€èƒ½_éª‘æœ¯æ”¹å˜é€Ÿåº¦" :
 		"SELECT spellId,spell_60,spell_100,spell_150,spell_280,spell_310 FROM _spellmod_mount"))
 	{
 		do
@@ -410,7 +409,7 @@ void SpellMod::Load()
 
 	AuraStackTriggerMap.clear();
 	result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?	
-		"SELECT ¹â»·¼¼ÄÜID, µş¼Ó²ãÊı, ´¥·¢¼¼ÄÜ×é, ´¥·¢¼¼ÄÜºóÒÆ³ı²ãÊı  FROM _¼¼ÄÜ_¹â»·µş¼Ó" :
+		"SELECT å…‰ç¯æŠ€èƒ½ID, å åŠ å±‚æ•°, è§¦å‘æŠ€èƒ½ç»„, è§¦å‘æŠ€èƒ½åç§»é™¤å±‚æ•°  FROM _æŠ€èƒ½_å…‰ç¯å åŠ " :
 		"SELECT AuraId, Stacks, TriggerSpellData, RemoveStacks  FROM _spellmod_aura_stack");
 
 	if (result)
@@ -431,7 +430,7 @@ void SpellMod::Load()
 
 	AuraTriggerOnDeathMap.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
-		"SELECT ¹â»·¼¼ÄÜID, ÀäÈ´Ê±¼ä, ¶Ô¹¥»÷ÕßÊ©·Å¼¼ÄÜID, ¶Ô¹¥»÷ÕßÊ©·Å¼¼ÄÜ¼¸ÂÊ, ¶Ô×ÔÉíÊ©·Å¼¼ÄÜID,¶Ô×ÔÉíÊ©·Å¼¼ÄÜ¼¸ÂÊ,ÊÇ·ñ×èÖ¹ËÀÍö  FROM _¼¼ÄÜ_¹â»·ËÀÍö´¥·¢" :
+		"SELECT å…‰ç¯æŠ€èƒ½ID, å†·å´æ—¶é—´, å¯¹æ”»å‡»è€…æ–½æ”¾æŠ€èƒ½ID, å¯¹æ”»å‡»è€…æ–½æ”¾æŠ€èƒ½å‡ ç‡, å¯¹è‡ªèº«æ–½æ”¾æŠ€èƒ½ID,å¯¹è‡ªèº«æ–½æ”¾æŠ€èƒ½å‡ ç‡,æ˜¯å¦é˜»æ­¢æ­»äº¡  FROM _æŠ€èƒ½_å…‰ç¯æ­»äº¡è§¦å‘" :
 		"SELECT AuraId,CoolDown,AttackerTriggerSpell,AttackerTriggerChance,SelfTriggerSpell,SelfTriggerChance,PreventLastDamage FROM _spellmod_aura_death_trigger"))
 	{
 		do
@@ -494,37 +493,37 @@ void SpellMod::GetParams_PctOnStat(const char* strAuraType, const char* strStatT
 {
 	int32 i = -1;
 
-	if (strcmp(strStatType, "¾«Éñ") == 0)
+	if (strcmp(strStatType, "ç²¾ç¥") == 0)
 		i = STAT_SPIRIT;
-	else if (strcmp(strStatType, "Á¦Á¿") == 0)
+	else if (strcmp(strStatType, "åŠ›é‡") == 0)
 		i = STAT_STRENGTH;
-	else if (strcmp(strStatType, "Ãô½İ") == 0)
+	else if (strcmp(strStatType, "æ•æ·") == 0)
 		i = STAT_AGILITY;
-	else if (strcmp(strStatType, "ÄÍÁ¦") == 0)
+	else if (strcmp(strStatType, "è€åŠ›") == 0)
 		i = STAT_STAMINA;
-	else if (strcmp(strStatType, "ÖÇÁ¦") == 0)
+	else if (strcmp(strStatType, "æ™ºåŠ›") == 0)
 		i = STAT_INTELLECT;
 
-	if (strcmp(strAuraType, "·¨ÊõÇ¿¶È") == 0)
+	if (strcmp(strAuraType, "æ³•æœ¯å¼ºåº¦") == 0)
 	{
 		auraType = SPELL_AURA_MOD_SPELL_DAMAGE_OF_STAT_PERCENT;
 		misc = SPELL_SCHOOL_MASK_MAGIC;
 		miscB = i;
 	}
 
-	if (strcmp(strAuraType, "½üÕ½¹¥»÷Ç¿¶È") == 0)
+	if (strcmp(strAuraType, "è¿‘æˆ˜æ”»å‡»å¼ºåº¦") == 0)
 	{
 		auraType = SPELL_AURA_MOD_ATTACK_POWER_OF_STAT_PERCENT;
 		misc = i;
 	}
 
-	if (strcmp(strAuraType, "Ô¶³Ì¹¥»÷Ç¿¶È") == 0)
+	if (strcmp(strAuraType, "è¿œç¨‹æ”»å‡»å¼ºåº¦") == 0)
 	{
 		auraType = SPELL_AURA_MOD_RANGED_ATTACK_POWER_OF_STAT_PERCENT;
 		misc = i;
 	}
 
-	if (strcmp(strAuraType, "ÖÎÁÆĞ§¹û") == 0)
+	if (strcmp(strAuraType, "æ²»ç–—æ•ˆæœ") == 0)
 	{
 		auraType = SPELL_AURA_MOD_SPELL_HEALING_OF_STAT_PERCENT;
 		misc = i;
@@ -533,67 +532,67 @@ void SpellMod::GetParams_PctOnStat(const char* strAuraType, const char* strStatT
 
 void SpellMod::GetParams_Pct(const char* strAuraType, const char* strModType, AuraType &auraType, int32 &misc, int32 &miscB)
 {
-	if (strcmp(strAuraType, "Ê©·¨ËÙ¶È") == 0)
+	if (strcmp(strAuraType, "æ–½æ³•é€Ÿåº¦") == 0)
 		auraType = SPELL_AURA_MOD_CASTING_SPEED_NOT_STACK;
-	if (strcmp(strAuraType, "½üÕ½¹¥»÷ËÙ¶È") == 0)
+	if (strcmp(strAuraType, "è¿‘æˆ˜æ”»å‡»é€Ÿåº¦") == 0)
 		auraType = SPELL_AURA_MOD_MELEE_HASTE;
-	if (strcmp(strAuraType, "Ô¶³Ì¹¥»÷ËÙ¶È") == 0)
+	if (strcmp(strAuraType, "è¿œç¨‹æ”»å‡»é€Ÿåº¦") == 0)
 		auraType = SPELL_AURA_MOD_RANGED_HASTE;
 
-	if (strcmp(strAuraType, "Ôì³É±©»÷ÉËº¦") == 0)
+	if (strcmp(strAuraType, "é€ æˆæš´å‡»ä¼¤å®³") == 0)
 	{
 		auraType = SPELL_AURA_MOD_CRIT_DAMAGE_BONUS;
 		misc = SPELL_SCHOOL_MASK_ALL;
 	}
 
-	bool pct = strcmp(strModType, "°Ù·Ö±È") == 0;
+	bool pct = strcmp(strModType, "ç™¾åˆ†æ¯”") == 0;
 
-	if (strcmp(strAuraType, "ÉúÃüÖµ") == 0)
+	if (strcmp(strAuraType, "ç”Ÿå‘½å€¼") == 0)
 		pct ? auraType = SPELL_AURA_MOD_INCREASE_HEALTH_PERCENT : auraType = SPELL_AURA_MOD_INCREASE_HEALTH;
 
-	if (strcmp(strAuraType, "È«ÊôĞÔ") == 0)
+	if (strcmp(strAuraType, "å…¨å±æ€§") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_PERCENT_STAT : auraType = SPELL_AURA_MOD_STAT;
 		misc = -1;
 	}
 
-	if (strcmp(strAuraType, "ÄÍÁ¦") == 0)
+	if (strcmp(strAuraType, "è€åŠ›") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_PERCENT_STAT : auraType = SPELL_AURA_MOD_STAT;
 		misc = STAT_STAMINA;
 	}
 
-	if (strcmp(strAuraType, "Ãô½İ") == 0)
+	if (strcmp(strAuraType, "æ•æ·") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_PERCENT_STAT : auraType = SPELL_AURA_MOD_STAT;
 		misc = STAT_AGILITY;
 	}
 
-	if (strcmp(strAuraType, "Á¦Á¿") == 0)
+	if (strcmp(strAuraType, "åŠ›é‡") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_PERCENT_STAT : auraType = SPELL_AURA_MOD_STAT;
 		misc = STAT_STRENGTH;
 	}
 
-	if (strcmp(strAuraType, "ÖÇÁ¦") == 0)
+	if (strcmp(strAuraType, "æ™ºåŠ›") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_PERCENT_STAT : auraType = SPELL_AURA_MOD_STAT;
 		misc = STAT_INTELLECT;
 	}
 
-	if (strcmp(strAuraType, "¾«Éñ") == 0)
+	if (strcmp(strAuraType, "ç²¾ç¥") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_PERCENT_STAT : auraType = SPELL_AURA_MOD_STAT;
 		misc = STAT_STRENGTH;
 	}
 
-	if (strcmp(strAuraType, "½üÕ½¹¥»÷Ç¿¶È") == 0)
+	if (strcmp(strAuraType, "è¿‘æˆ˜æ”»å‡»å¼ºåº¦") == 0)
 		pct ? auraType = SPELL_AURA_MOD_ATTACK_POWER_PCT : auraType = SPELL_AURA_MOD_ATTACK_POWER;
 
-	if (strcmp(strAuraType, "Ô¶³Ì¹¥»÷Ç¿¶È") == 0)
+	if (strcmp(strAuraType, "è¿œç¨‹æ”»å‡»å¼ºåº¦") == 0)
 		pct ? auraType = SPELL_AURA_MOD_RANGED_ATTACK_POWER_PCT : auraType = SPELL_AURA_MOD_RANGED_ATTACK_POWER;
 
-	if (strcmp(strAuraType, "·¨ÊõÇ¿¶È") == 0)
+	if (strcmp(strAuraType, "æ³•æœ¯å¼ºåº¦") == 0)
 	{
 		if (pct)
 		{
@@ -606,7 +605,7 @@ void SpellMod::GetParams_Pct(const char* strAuraType, const char* strModType, Au
 		misc = SPELL_SCHOOL_MASK_MAGIC;
 	}
 
-	if (strcmp(strAuraType, "°ÂÊõ·¨ÊõÇ¿¶È") == 0)
+	if (strcmp(strAuraType, "å¥¥æœ¯æ³•æœ¯å¼ºåº¦") == 0)
 	{
 		if (pct)
 		{
@@ -619,7 +618,7 @@ void SpellMod::GetParams_Pct(const char* strAuraType, const char* strModType, Au
 		misc = SPELL_SCHOOL_MASK_ARCANE;
 	}
 
-	if (strcmp(strAuraType, "»ğÑæ·¨ÊõÇ¿¶È") == 0)
+	if (strcmp(strAuraType, "ç«ç„°æ³•æœ¯å¼ºåº¦") == 0)
 	{
 		if (pct)
 		{
@@ -632,7 +631,7 @@ void SpellMod::GetParams_Pct(const char* strAuraType, const char* strModType, Au
 		misc = SPELL_SCHOOL_MASK_FIRE;
 	}
 
-	if (strcmp(strAuraType, "±ùËª·¨ÊõÇ¿¶È") == 0)
+	if (strcmp(strAuraType, "å†°éœœæ³•æœ¯å¼ºåº¦") == 0)
 	{
 		if (pct)
 		{
@@ -645,7 +644,7 @@ void SpellMod::GetParams_Pct(const char* strAuraType, const char* strModType, Au
 		misc = SPELL_SCHOOL_MASK_FROST;
 	}
 
-	if (strcmp(strAuraType, "ÉñÊ¥·¨ÊõÇ¿¶È") == 0)
+	if (strcmp(strAuraType, "ç¥åœ£æ³•æœ¯å¼ºåº¦") == 0)
 	{
 		if (pct)
 		{
@@ -658,7 +657,7 @@ void SpellMod::GetParams_Pct(const char* strAuraType, const char* strModType, Au
 		misc = SPELL_SCHOOL_MASK_HOLY;
 	}
 
-	if (strcmp(strAuraType, "°µÓ°·¨ÊõÇ¿¶È") == 0)
+	if (strcmp(strAuraType, "æš—å½±æ³•æœ¯å¼ºåº¦") == 0)
 	{
 		if (pct)
 		{
@@ -671,7 +670,7 @@ void SpellMod::GetParams_Pct(const char* strAuraType, const char* strModType, Au
 		misc = SPELL_SCHOOL_MASK_SHADOW;
 	}
 
-	if (strcmp(strAuraType, "×ÔÈ»·¨ÊõÇ¿¶È") == 0)
+	if (strcmp(strAuraType, "è‡ªç„¶æ³•æœ¯å¼ºåº¦") == 0)
 	{
 		if (pct)
 		{
@@ -684,7 +683,7 @@ void SpellMod::GetParams_Pct(const char* strAuraType, const char* strModType, Au
 		misc = SPELL_SCHOOL_MASK_NATURE;
 	}
 
-	if (strcmp(strAuraType, "ÖÎÁÆĞ§¹û") == 0)
+	if (strcmp(strAuraType, "æ²»ç–—æ•ˆæœ") == 0)
 	{
 		if (pct)
 		{
@@ -697,57 +696,57 @@ void SpellMod::GetParams_Pct(const char* strAuraType, const char* strModType, Au
 		misc = SPELL_SCHOOL_MASK_MAGIC;
 	}
 
-	if (strcmp(strAuraType, "Ôì³ÉËùÓĞÉËº¦") == 0)
+	if (strcmp(strAuraType, "é€ æˆæ‰€æœ‰ä¼¤å®³") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE : auraType = SPELL_AURA_MOD_DAMAGE_DONE;
 		misc = SPELL_SCHOOL_MASK_ALL;
 	}
 
-	if (strcmp(strAuraType, "Ôì³ÉÎïÀíÉËº¦") == 0)
+	if (strcmp(strAuraType, "é€ æˆç‰©ç†ä¼¤å®³") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE : auraType = SPELL_AURA_MOD_DAMAGE_DONE;
 		misc = SPELL_SCHOOL_MASK_NORMAL;
 	}
 
-	if (strcmp(strAuraType, "Ôì³É·¨ÊõÉËº¦") == 0)
+	if (strcmp(strAuraType, "é€ æˆæ³•æœ¯ä¼¤å®³") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE : auraType = SPELL_AURA_MOD_DAMAGE_DONE;
 		misc = SPELL_SCHOOL_MASK_MAGIC;
 	}
 
-	if (strcmp(strAuraType, "Ôì³É°ÂÊõÉËº¦") == 0)
+	if (strcmp(strAuraType, "é€ æˆå¥¥æœ¯ä¼¤å®³") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE : auraType = SPELL_AURA_MOD_DAMAGE_DONE;
 		misc = SPELL_SCHOOL_MASK_ARCANE;
 	}
 
-	if (strcmp(strAuraType, "Ôì³É»ğÑæÉËº¦") == 0)
+	if (strcmp(strAuraType, "é€ æˆç«ç„°ä¼¤å®³") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE : auraType = SPELL_AURA_MOD_DAMAGE_DONE;
 		misc = SPELL_SCHOOL_MASK_FIRE;
 	}
-	if (strcmp(strAuraType, "Ôì³É±ùËªÉËº¦") == 0)
+	if (strcmp(strAuraType, "é€ æˆå†°éœœä¼¤å®³") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE : auraType = SPELL_AURA_MOD_DAMAGE_DONE;
 		misc = SPELL_SCHOOL_MASK_FROST;
 	}
-	if (strcmp(strAuraType, "Ôì³ÉÉñÊ¥ÉËº¦") == 0)
+	if (strcmp(strAuraType, "é€ æˆç¥åœ£ä¼¤å®³") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE : auraType = SPELL_AURA_MOD_DAMAGE_DONE;
 		misc = SPELL_SCHOOL_MASK_HOLY;
 	}
-	if (strcmp(strAuraType, "Ôì³É°µÓ°ÉËº¦") == 0)
+	if (strcmp(strAuraType, "é€ æˆæš—å½±ä¼¤å®³") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE : auraType = SPELL_AURA_MOD_DAMAGE_DONE;
 		misc = SPELL_SCHOOL_MASK_SHADOW;
 	}
-	if (strcmp(strAuraType, "Ôì³É×ÔÈ»ÉËº¦") == 0)
+	if (strcmp(strAuraType, "é€ æˆè‡ªç„¶ä¼¤å®³") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE : auraType = SPELL_AURA_MOD_DAMAGE_DONE;
 		misc = SPELL_SCHOOL_MASK_NATURE;
 	}
 
-	if (strcmp(strAuraType, "ÊÜµ½ËùÓĞÉËº¦") == 0)
+	if (strcmp(strAuraType, "å—åˆ°æ‰€æœ‰ä¼¤å®³") == 0)
 	{
 		pct ? auraType = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN : auraType = SPELL_AURA_MOD_DAMAGE_TAKEN;
 		misc = SPELL_SCHOOL_MASK_ALL;
@@ -1028,7 +1027,7 @@ bool SpellMod::AuraTrigger(Unit* caster, Unit* victim, SpellInfo const* auraSpel
 		int bp1 = triggerSpellInfo->Effects[EFFECT_1].BasePoints + int(ap * iter->second.bp1ApPct / 100 + sp * iter->second.bp1SpPct / 100);
 		int bp2 = triggerSpellInfo->Effects[EFFECT_2].BasePoints + int(ap * iter->second.bp2ApPct / 100 + sp * iter->second.bp2SpPct / 100);
 
-		//×î´óÄ¿±ê¸öÊıÎª1Ê±
+		//æœ€å¤§ç›®æ ‡ä¸ªæ•°ä¸º1æ—¶
 		if (iter->second.Targets == 1)
 		{
 			caster->CastCustomSpell(target, triggerSpell, &bp0, &bp1, &bp2, true, NULL, triggeredByAura, NULL);
@@ -1036,7 +1035,7 @@ bool SpellMod::AuraTrigger(Unit* caster, Unit* victim, SpellInfo const* auraSpel
 			return true;
 		}
 
-		//×î´óÄ¿±ê¸öÊı´óÓÚ1Ê± Ñ¡Ôñ¾àÀëÊ©·¨Õß×î½üµÄ×÷ÎªÄ¿±ê
+		//æœ€å¤§ç›®æ ‡ä¸ªæ•°å¤§äº1æ—¶ é€‰æ‹©è·ç¦»æ–½æ³•è€…æœ€è¿‘çš„ä½œä¸ºç›®æ ‡
 		std::list<Unit*> UnitList;
 
 		if (target == victim)
@@ -1083,7 +1082,7 @@ bool SpellMod::AuraTrigger(Unit* caster, Unit* victim, SpellInfo const* auraSpel
 
 void SpellMod::HealOnDamage(Unit* caster, Unit* target, SpellInfo const* spellInfo, uint32 &damage)
 {
-	//ÎüÑª¼¼ÄÜ
+	//å¸è¡€æŠ€èƒ½
 	for (auto iter = SpellLeechVec.begin(); iter != SpellLeechVec.end(); iter++)
 	{
 		if (iter->spellid == spellInfo->Id)
@@ -1128,7 +1127,7 @@ void SpellMod::HealOnDamage(Unit* caster, Unit* target, SpellInfo const* spellIn
 		}
 	}
 
-	//ÎüÑª¹â»·
+	//å¸è¡€å…‰ç¯
 	for (std::unordered_map<uint32, AuraLeechTemplate>::iterator it = AuraLeechMap.begin(); it != AuraLeechMap.end(); it++)
 	{
 		if (roll_chance_f(it->second.chance))

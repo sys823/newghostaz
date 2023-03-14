@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "BattleIC.h"
 #include "../Event.h"
 #include "Transport.h"
@@ -28,7 +27,7 @@ void BGIC::Stop()
 	std::ostringstream oss1;
 	uint32 count = 0;
 
-	oss << "³Ô¼¦°ñ\n\n";
+	oss << "åƒé¸¡æ¦œ\n\n";
 
 	for (auto itr = _PlayersMap.begin(); itr != _PlayersMap.end(); itr++)
 	{
@@ -48,14 +47,14 @@ void BGIC::Stop()
 		{
 			if (itr == _PlayersMap.begin())
 			{
-				oss1 << "\n´ó¼ª´óÀû£¬½ñÍí³Ô¼¦£¡\n";
-				oss1 << "\nÄãµÄ¸öÈËÕ½¼¨" << " - " << itr->second.kills << "\n";
+				oss1 << "\nå¤§å‰å¤§åˆ©ï¼Œä»Šæ™šåƒé¸¡ï¼\n";
+				oss1 << "\nä½ çš„ä¸ªäººæˆ˜ç»©" << " - " << itr->second.kills << "\n";
 				sRew->Rew(pl, BGIC_SSS_REWARD_ID);
 				sCF->SendAcceptOrCancel(pl, 0, oss.str() + oss1.str());
 			}
 			else
 			{
-				oss1 << "ÄãµÄ¸öÈËÕ½¼¨" << " - " << itr->second.kills;
+				oss1 << "ä½ çš„ä¸ªäººæˆ˜ç»©" << " - " << itr->second.kills;
 				sRew->Rew(pl, BGIC_REWARD_ID, itr->second.kills);
 				sCF->SendAcceptOrCancel(pl, 0, oss.str() + oss1.str());
 			}
@@ -136,7 +135,7 @@ void BGIC::RemovePlayer(Player* pl)
 	if (itr != _PlayersMap.end())
 	{
 		_PlayersMap.erase(itr);
-		ChatHandler(pl->GetSession()).PSendSysMessage("ÄãÒÑ¾­Àë¿ª³Ô¼¦Õ½³¡£¡");
+		ChatHandler(pl->GetSession()).PSendSysMessage("ä½ å·²ç»ç¦»å¼€åƒé¸¡æˆ˜åœºï¼");
 		ResetPlayer(pl);
 	}	
 }
@@ -289,7 +288,7 @@ void BGIC::OnPVPKill(Player* killer, Player* victim)
 	if (!InWar(killer) || !InWar(victim))
 		return;
 
-	std::string text = "³Ô¼¦Õ½³¡:" + sCF->GetNameLink(killer) + "»÷É±ÁË" + sCF->GetNameLink(victim) + "!";
+	std::string text = "åƒé¸¡æˆ˜åœº:" + sCF->GetNameLink(killer) + "å‡»æ€äº†" + sCF->GetNameLink(victim) + "!";
 
 	if (GameObject* chest = victim->SummonGameObject(BGIC_GOB_KILL_CHEST, victim->GetPositionX(), victim->GetPositionY(), victim->GetPositionZ(), 0, 0, 0, 0, 0, 0))
 	{
@@ -320,7 +319,7 @@ void BGIC::OnPVPKill(Player* killer, Player* victim)
 			for (auto itr = chest->LootExtraItems.begin(); itr != chest->LootExtraItems.end(); itr++)
 				text += sCF->GetItemLink(itr->first);
 
-			text += "ÒÑµôÂä£¡";
+			text += "å·²æ‰è½ï¼";
 		}
 			
 	}
@@ -344,7 +343,7 @@ void BGIC::OnCreatureKill(Creature* creature, Player* victim)
 	if (!InWar(victim))
 		return;
 
-	std::string text = "³Ô¼¦Õ½³¡:" + sCF->GetNameLink(victim) + "±»¾ç¶¾ÍÌÊÉ!";
+	std::string text = "åƒé¸¡æˆ˜åœº:" + sCF->GetNameLink(victim) + "è¢«å‰§æ¯’åå™¬!";
 
 	if (GameObject* chest = victim->SummonGameObject(BGIC_GOB_KILL_CHEST, victim->GetPositionX(), victim->GetPositionY(), victim->GetPositionZ(), 0, 0, 0, 0, 0, 0))
 	{
@@ -375,7 +374,7 @@ void BGIC::OnCreatureKill(Creature* creature, Player* victim)
 			for (auto itr = chest->LootExtraItems.begin(); itr != chest->LootExtraItems.end(); itr++)
 				text += sCF->GetItemLink(itr->first);
 
-			text += "ÒÑµôÂä£¡";
+			text += "å·²æ‰è½ï¼";
 		}
 	}
 
@@ -425,7 +424,7 @@ bool BGIC::IsAllowed(Unit* caster, uint32 spellId)
 	if (!Valid(caster))
 		return false;
 
-	//ÒÔÏÂ¼¼ÄÜÔÊĞíÆ½¾²×´Ì¬ÏÂÊ¹ÓÃ
+	//ä»¥ä¸‹æŠ€èƒ½å…è®¸å¹³é™çŠ¶æ€ä¸‹ä½¿ç”¨
 	return false;
 }
 

@@ -33,11 +33,11 @@ public:
 	uint32 GetItemEntry(std::string itemLink);
 	std::string GetItemLink(Item* item, WorldSession* session);
 
-	//»ñÈ¡ÏûºÄ¡¢½±Àø×Ö·û´®
+	//è·å–æ¶ˆè€—ã€å¥–åŠ±å­—ç¬¦ä¸²
 	std::string GetReqString(Player* player, uint32 reqId);
 	std::string GetRewString(Player* player, uint32 rewId);
 
-	//»Ã»¯
+	//å¹»åŒ–
 	uint32 GetTransReqId(uint32 itemId);
 	std::string GetItemIcon(uint32 entry);
 

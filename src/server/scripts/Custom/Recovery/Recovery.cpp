@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Recovery.h"
 #include "../GCAddon/GCAddon.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -7,13 +6,14 @@
 std::unordered_map<uint32/*entry*/, RecoveryTemplate> RecoveryMap;
 std::unordered_map<uint32/*categoryId*/, std::string/*categoryName*/> RecoveryCategoryMap;
 
+
 void Recovery::Load()
 {
 	RecoveryMap.clear();
 	RecoveryCategoryMap.clear();
 
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
-        "SELECT ÎïÆ·ID,·Ö×éID,½±Àø»ı·ÖÊıÁ¿,ÎïÆ·,ÊıÁ¿,½±ÀøÄ£°åID FROM _ÎïÆ·_»ØÊÕ" :
+        "SELECT ç‰©å“ID,åˆ†ç»„ID,å¥–åŠ±ç§¯åˆ†æ•°é‡,ç‰©å“,æ•°é‡,å¥–åŠ±æ¨¡æ¿ID FROM _ç‰©å“_å›æ”¶" :
 		"SELECT entry,categoryId,rewToken FROM _recovery");
 	if (result)
 	{
@@ -32,7 +32,7 @@ void Recovery::Load()
 	}
 	
 	result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
-		"SELECT ·Ö×éID,·Ö×éÃû³Æ FROM _ÎïÆ·_»ØÊÕ·Ö×é" :
+		"SELECT åˆ†ç»„ID,åˆ†ç»„åç§° FROM _ç‰©å“_å›æ”¶åˆ†ç»„" :
 		"SELECT categoryId,categoryName FROM _recovery_category");
 	if (result)
 	{
@@ -56,7 +56,7 @@ std::string Recovery::GetDes(uint32 entry)
 	std::unordered_map<uint32, RecoveryTemplate>::iterator iter = RecoveryMap.find(entry);
 
 	if (iter != RecoveryMap.end())
-		return "|cFF00FF00¡¸¿É»ØÊÕ¡¹|r\n";
+		return "|cFF00FF00ã€Œå¯å›æ”¶ã€|r\n";
 
 	return "";
 }
@@ -94,7 +94,7 @@ uint32 Recovery::GetTokenAmount(Player* player, uint32 categoryId)
 {
 	float tokenAmount = 0;
 
-	//Ö÷±³°ü
+	//ä¸»èƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_ITEM_START; i < INVENTORY_SLOT_ITEM_END; i++)
 		if (Item* item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
 		{
@@ -107,7 +107,7 @@ uint32 Recovery::GetTokenAmount(Player* player, uint32 categoryId)
 				tokenAmount += _tokenAmount;
 		}
 
-	//¶îÍâÈı¸ö±³°ü
+	//é¢å¤–ä¸‰ä¸ªèƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_BAG_START; i < INVENTORY_SLOT_BAG_END; i++)
 		if (Bag* pBag = player->GetBagByPos(i))
 			for (uint32 j = 0; j < pBag->GetBagSize(); j++)
@@ -129,7 +129,7 @@ bool Recovery::HasCategoryItem(Player* player, uint32 categoryId)
 {
 	uint32 flag = false;
 
-	//Ö÷±³°ü
+	//ä¸»èƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_ITEM_START; i < INVENTORY_SLOT_ITEM_END; i++)
 		if (Item* item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
 		{
@@ -145,7 +145,7 @@ bool Recovery::HasCategoryItem(Player* player, uint32 categoryId)
 	if (flag)
 		return true;
 
-	//¶îÍâÈı¸ö±³°ü
+	//é¢å¤–ä¸‰ä¸ªèƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_BAG_START; i < INVENTORY_SLOT_BAG_END; i++)
 		if (Bag* pBag = player->GetBagByPos(i))
 			for (uint32 j = 0; j < pBag->GetBagSize(); j++)
@@ -179,7 +179,7 @@ void Recovery::SendCategoryMsg(Player* player, uint32 categoryId)
 	std::ostringstream oss;
 	oss << "1#" << GetTokenAmount(player, categoryId) << "#";
 
-	//Ö÷±³°ü
+	//ä¸»èƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_ITEM_START; i < INVENTORY_SLOT_ITEM_END; i++)
 		if (Item* item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
 		{
@@ -189,7 +189,7 @@ void Recovery::SendCategoryMsg(Player* player, uint32 categoryId)
 				oss << entry << "-" << count << ":";
 		}
 
-	//¶îÍâÈı¸ö±³°ü
+	//é¢å¤–ä¸‰ä¸ªèƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_BAG_START; i < INVENTORY_SLOT_BAG_END; i++)
 		if (Bag* pBag = player->GetBagByPos(i))
 			for (uint32 j = 0; j < pBag->GetBagSize(); j++)
@@ -208,7 +208,7 @@ void Recovery::Action(Player* player, uint32 categoryId)
 {
 	uint32 tokenAmount = 0;
 
-	//Ö÷±³°ü
+	//ä¸»èƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_ITEM_START; i < INVENTORY_SLOT_ITEM_END; i++)
 		if (Item* item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
 		{
@@ -232,7 +232,7 @@ void Recovery::Action(Player* player, uint32 categoryId)
 			}
 		}
 
-	//¶îÍâÈı¸ö±³°ü
+	//é¢å¤–ä¸‰ä¸ªèƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_BAG_START; i < INVENTORY_SLOT_BAG_END; i++)
 		if (Bag* pBag = player->GetBagByPos(i))
 			for (uint32 j = 0; j < pBag->GetBagSize(); j++)
@@ -261,8 +261,8 @@ void Recovery::Action(Player* player, uint32 categoryId)
 
 	OpenPanel(player);
 
-	ChatHandler(player->GetSession()).PSendSysMessage("»ØÊÕÎïÆ·»ñµÃ[%s] X %u", sString->GetText(CORE_STR_TYPES(STR_TOKEN)), tokenAmount);
-	sCF->UpdateTokenAmount(player, tokenAmount, true, "[»ØÊÕ]½±Àø");
+	ChatHandler(player->GetSession()).PSendSysMessage("å›æ”¶ç‰©å“è·å¾—[%s] X %u", sString->GetText(CORE_STR_TYPES(STR_TOKEN)), tokenAmount);
+	sCF->UpdateTokenAmount(player, tokenAmount, true, "[å›æ”¶]å¥–åŠ±");
 
 	sCF->CompleteQuest(player, 30002);
 }

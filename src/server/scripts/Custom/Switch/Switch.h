@@ -95,7 +95,7 @@ enum SwithTypes
 	GVG_136 = 79,
 	GVG_137 = 80,
 	GVG_138 = 81,
-
+    ST_CF_GOLD_JF = 99,
 	ST_SS = 100,				//魂玉开关
 	ST_SSEX = 101,				//魂玉扩展开关
     FB_CLEARSPELL = 103,

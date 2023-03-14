@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "GS.h"
 #include "../ItemMod/ItemMod.h"
 #include "../GCAddon/GCAddon.h"
@@ -21,11 +20,11 @@ void GS::Load()
 	//
 	//	const char*  str = fields[1].GetCString();
 	//
-	//	if (strcmp("×°±¸", str) == 0)
+	//	if (strcmp("è£…å¤‡", str) == 0)
 	//		Temp.type = GS_TYPE_ITEM_EQUIP;
-	//	else if (strcmp("¼¼ÄÜ", str) == 0)
+	//	else if (strcmp("æŠ€èƒ½", str) == 0)
 	//		Temp.type = GS_TYPE_SPELL;
-	//	else if (strcmp("Òş²ØÎïÆ·", str) == 0)
+	//	else if (strcmp("éšè—ç‰©å“", str) == 0)
 	//		Temp.type = GS_TYPE_ITEM_HIDDEN;
 	//
 	//	Temp.gs = fields[2].GetUInt32();
@@ -33,6 +32,7 @@ void GS::Load()
 	//	GSVec.push_back(Temp);
 	//} while (result->NextRow());
 }
+
 
 uint32 GS::GetGS(uint32 id, GSTypes type)
 {
@@ -50,24 +50,24 @@ void GS::UpdateGS(Player* pl)
 {
 	uint32 gs = 0;
 
-	//¼¼ÄÜ
+	//æŠ€èƒ½
 	PlayerSpellMap spellMap = pl->GetSpellMap();
 	for (PlayerSpellMap::const_iterator iter = spellMap.begin(); iter != spellMap.end(); ++iter)
 		gs += GetGS(iter->first, GS_TYPE_SPELL); 
 
-	//×°±¸À¸
+	//è£…å¤‡æ 
 	for (uint8 i = EQUIPMENT_SLOT_START; i < EQUIPMENT_SLOT_END; i++)
 		if (Item* item = pl->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
 			gs += GetGS(item->GetEntry(), GS_TYPE_ITEM_EQUIP);
 
-	//Ö÷±³°ü
+	//ä¸»èƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_ITEM_START; i < INVENTORY_SLOT_ITEM_END; i++)
 		if (Item* item = pl->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
 			for (uint32 k = 0; k < HiddenItemInfo.size(); k++)
 				if (item->GetEntry() == HiddenItemInfo[k].entry)
 					gs += GetGS(item->GetEntry(), GS_TYPE_ITEM_HIDDEN);
 
-	//¶îÍâÈı¸ö±³°ü
+	//é¢å¤–ä¸‰ä¸ªèƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_BAG_START; i < INVENTORY_SLOT_BAG_END; i++)
 		if (Bag* pBag = pl->GetBagByPos(i))
 			for (uint32 j = 0; j < pBag->GetBagSize(); j++)
@@ -76,13 +76,13 @@ void GS::UpdateGS(Player* pl)
 						if (item->GetEntry() == HiddenItemInfo[k].entry)
 							gs += GetGS(item->GetEntry(), GS_TYPE_ITEM_HIDDEN);
 
-	//ÒøĞĞ
+	//é“¶è¡Œ
 	for (uint8 i = BANK_SLOT_ITEM_START; i < BANK_SLOT_BAG_END; ++i)
 		if (Item* item = pl->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
 			for (uint32 k = 0; k < HiddenItemInfo.size(); k++)
 				if (item->GetEntry() == HiddenItemInfo[k].entry)
 					gs += GetGS(item->GetEntry(), GS_TYPE_ITEM_HIDDEN);
-	//ÒøĞĞ±³°ü
+	//é“¶è¡ŒèƒŒåŒ…
 	for (uint8 i = BANK_SLOT_BAG_START; i < BANK_SLOT_BAG_END; ++i)
 		if (Bag* pBag = pl->GetBagByPos(i))
 			for (uint32 j = 0; j < pBag->GetBagSize(); j++)

@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Lottery.h"
 #include "../Switch/Switch.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -17,7 +16,7 @@ void Lottery::Load()
 	QueryResult result = WorldDatabase.PQuery(
 		sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
 		//			0			1		2			3			4			5		6		7
-		"SELECT ¹ºÂò×Ü»ı·ÖÉÏÏŞ,¿ª½±¼ä¸ô,¿ª±ª×Ó·­±¶Êı,¿ª´ó·­±¶Êı,¿ªĞ¡·­±¶Êı,¿ª±ª×Ó¼¸ÂÊ,¿ª´ó¼¸ÂÊ,¿ªĞ¡¼¸ÂÊ FROM __²ÊÆ±" :
+		"SELECT è´­ä¹°æ€»ç§¯åˆ†ä¸Šé™,å¼€å¥–é—´éš”,å¼€è±¹å­ç¿»å€æ•°,å¼€å¤§ç¿»å€æ•°,å¼€å°ç¿»å€æ•°,å¼€è±¹å­å‡ ç‡,å¼€å¤§å‡ ç‡,å¼€å°å‡ ç‡ FROM __å½©ç¥¨" :
 		//			0			1		2			3		4		5		6			7
 		"SELECT tokenLimit,intervals,aaa_muil,max_muil,min_muil,aaa_chance,max_chance,min_chance FROM _lottery");
 	if (!result) return;
@@ -190,13 +189,13 @@ void Lottery::LotteryRunNotice()
 	switch (GetLotteryType())
 	{
 		case LOTTERY_TYPE_AAA:
-			oss << "[²ÊÆ±]£º¿ª³ö[|cFFFF1717±ª×Ó|r]£¬|cFFFF1717" << GetMuilByType(LOTTERY_TYPE_AAA) << "|r±¶½±Àø...";
+			oss << "[å½©ç¥¨]ï¼šå¼€å‡º[|cFFFF1717è±¹å­|r]ï¼Œ|cFFFF1717" << GetMuilByType(LOTTERY_TYPE_AAA) << "|rå€å¥–åŠ±...";
 			break;
 		case LOTTERY_TYPE_MAX:
-			oss << "[²ÊÆ±]£º¿ª³ö[|cFFFF1717´ó|r]£¬|cFFFF1717" << GetMuilByType(LOTTERY_TYPE_MAX) << "|r±¶½±Àø...";
+			oss << "[å½©ç¥¨]ï¼šå¼€å‡º[|cFFFF1717å¤§|r]ï¼Œ|cFFFF1717" << GetMuilByType(LOTTERY_TYPE_MAX) << "|rå€å¥–åŠ±...";
 			break;
 		case LOTTERY_TYPE_MIN:
-			oss << "[²ÊÆ±]£º¿ª³ö[|cFFFF1717Ğ¡|r]£¬|cFFFF1717" << GetMuilByType(LOTTERY_TYPE_MIN) << "|r±¶½±Àø...";
+			oss << "[å½©ç¥¨]ï¼šå¼€å‡º[|cFFFF1717å°|r]ï¼Œ|cFFFF1717" << GetMuilByType(LOTTERY_TYPE_MIN) << "|rå€å¥–åŠ±...";
 			break;
 		default:
 			break;
@@ -206,15 +205,15 @@ void Lottery::LotteryRunNotice()
 
 void Lottery::LotteryEnd()
 {
-	//¿ª½±
+	//å¼€å¥–
 	GenerateLotteryType();
-	//¿ª½±ĞÅÏ¢
+	//å¼€å¥–ä¿¡æ¯
 	LotteryRunNotice();
-	//½±ÀøÖĞ½±Íæ¼Ò
+	//å¥–åŠ±ä¸­å¥–ç©å®¶
 	RewardPlayer(GetLotteryType());
-	//Çå¿Õ²ÊÆ±ÈİÆ÷
+	//æ¸…ç©ºå½©ç¥¨å®¹å™¨
 	LotteryInfo.clear();
-	//Çå¿ÕÊı¾İ±í
+	//æ¸…ç©ºæ•°æ®è¡¨
 	CharacterDatabase.DirectPExecute("truncate table character_lottery");
 }
 
@@ -224,7 +223,7 @@ bool Lottery::PlayerBuyLottery(Player* player, LotteryType type,uint32 lotteryAm
 
 	if (lotteryAmount == 0)
 	{
-		player->GetSession()->SendNotification("Ñ¹×¢Ê§°Ü£¬ÇëÊäÈëÕıÈ·¸ñÊ½µÄ¹ºÂò²ÊÆ±µÄÊıÁ¿£¡");
+		player->GetSession()->SendNotification("å‹æ³¨å¤±è´¥ï¼Œè¯·è¾“å…¥æ­£ç¡®æ ¼å¼çš„è´­ä¹°å½©ç¥¨çš„æ•°é‡ï¼");
 		flag = false;
 	}
 
@@ -236,7 +235,7 @@ bool Lottery::PlayerBuyLottery(Player* player, LotteryType type,uint32 lotteryAm
 	if (lotteryAmount > count)
 	{
 		std::ostringstream oss;
-		oss << "Ñ¹×¢Ê§°Ü£¬" << sString->GetText(CORE_STR_TYPES(STR_TOKEN)) << "²»×ã£¡";
+		oss << "å‹æ³¨å¤±è´¥ï¼Œ" << sString->GetText(CORE_STR_TYPES(STR_TOKEN)) << "ä¸è¶³ï¼";
 		player->GetSession()->SendNotification(oss.str().c_str());
 		flag = false;
 	}
@@ -248,7 +247,7 @@ bool Lottery::PlayerBuyLottery(Player* player, LotteryType type,uint32 lotteryAm
 	{
 		CharacterDatabase.DirectPExecute("INSERT INTO character_lottery VALUES('%u', '%u', '%u')", player->GetGUIDLow(), uint32(type), lotteryAmount);
 		uint32	accountId = sObjectMgr->GetPlayerAccountIdByGUID(MAKE_NEW_GUID(player->GetGUIDLow(), 0, HIGHGUID_PLAYER));
-		sCF->UpdateTokenAmount(player, lotteryAmount, false, "¹ºÂò²ÊÆ±");
+		sCF->UpdateTokenAmount(player, lotteryAmount, false, "è´­ä¹°å½©ç¥¨");
 		LotteryTemplate LotteryTemp;
 		LotteryTemp.guidLow			= player->GetGUIDLow();
 		LotteryTemp.lotteryType		= type;
@@ -256,17 +255,17 @@ bool Lottery::PlayerBuyLottery(Player* player, LotteryType type,uint32 lotteryAm
 		LotteryInfo.push_back(LotteryTemp);
 
 		std::ostringstream oss;
-		oss << "ÄãÑ¹";
+		oss << "ä½ å‹";
 		switch (type)
 		{
 		case LOTTERY_TYPE_AAA:
-			oss << "[|cFFFF1717±ª×Ó|r]";
+			oss << "[|cFFFF1717è±¹å­|r]";
 			break;
 		case LOTTERY_TYPE_MAX:
-			oss << "[|cFFFF1717´ó|r]";
+			oss << "[|cFFFF1717å¤§|r]";
 			break;
 		case LOTTERY_TYPE_MIN:
-			oss << "[|cFFFF1717Ğ¡|r]";
+			oss << "[|cFFFF1717å°|r]";
 			break;
 		default:
 			break;
@@ -274,7 +273,7 @@ bool Lottery::PlayerBuyLottery(Player* player, LotteryType type,uint32 lotteryAm
 
 		oss << " X |cFFFF1717";
 		oss << lotteryAmount;
-		oss << "|r×¢£¬³É¹¦£¡";
+		oss << "|ræ³¨ï¼ŒæˆåŠŸï¼";
 		player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 	}
 
@@ -288,9 +287,9 @@ bool Lottery::PlayerCanBuy(Player* player,uint32 lotteryAmount)
 	if (GetPlayerLotteryAmount(player) + lotteryAmount > GetLotterAmountLimit())
 	{
 		std::ostringstream oss;
-		oss << "ÏŞÖÆ¹ºÂò²ÊÆ±×Ü¼Æ" << GetLotterAmountLimit();
-		oss << ",ÄãÒÑÀÛ¼Æ¹ºÂò²ÊÆ±" << GetPlayerLotteryAmount(player);
-		oss << "\n±¾´Î¹ºÂòÊıÁ¿½«²»µÃ³¬¹ı" << GetLotterAmountLimit() - GetPlayerLotteryAmount(player);
+		oss << "é™åˆ¶è´­ä¹°å½©ç¥¨æ€»è®¡" << GetLotterAmountLimit();
+		oss << ",ä½ å·²ç´¯è®¡è´­ä¹°å½©ç¥¨" << GetPlayerLotteryAmount(player);
+		oss << "\næœ¬æ¬¡è´­ä¹°æ•°é‡å°†ä¸å¾—è¶…è¿‡" << GetLotterAmountLimit() - GetPlayerLotteryAmount(player);
 		player->GetSession()->SendNotification(oss.str().c_str());
 
 		return false;
@@ -314,11 +313,11 @@ std::string Lottery::GetLotteryName(LotteryType type)
 	switch (type)
 	{
 	case LOTTERY_TYPE_AAA:
-		return "[|cFFFF1717±ª×Ó|r]";
+		return "[|cFFFF1717è±¹å­|r]";
 	case LOTTERY_TYPE_MAX:
-		return "[|cFFFF1717´ó|r]";
+		return "[|cFFFF1717å¤§|r]";
 	case LOTTERY_TYPE_MIN:
-		return "[|cFFFF1717Ğ¡|r]";
+		return "[|cFFFF1717å°|r]";
 	default:
 		return "";
 		break;
@@ -337,10 +336,10 @@ void Lottery::RewardPlayer(LotteryType type)
 			if (player)
 			{
 				std::ostringstream oss;
-				oss << "[²ÊÆ±]£ºÄãÖĞÁË|cFFFF1717" << LotteryInfo[i].lotteryAmount << "|r×¢" << GetLotteryName(type) << "£¬»ñµÃ" << lotteryTokenAmount << sString->GetText(CORE_STR_TYPES(STR_TOKEN));
+				oss << "[å½©ç¥¨]ï¼šä½ ä¸­äº†|cFFFF1717" << LotteryInfo[i].lotteryAmount << "|ræ³¨" << GetLotteryName(type) << "ï¼Œè·å¾—" << lotteryTokenAmount << sString->GetText(CORE_STR_TYPES(STR_TOKEN));
 				player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 				ChatHandler(player->GetSession()).PSendSysMessage(oss.str().c_str());
-				sCF->UpdateTokenAmount(player, lotteryTokenAmount, true, "²ÊÆ±ÖĞ½±");
+				sCF->UpdateTokenAmount(player, lotteryTokenAmount, true, "å½©ç¥¨ä¸­å¥–");
 			}
 			else
 			{
@@ -353,16 +352,16 @@ void Lottery::RewardPlayer(LotteryType type)
 void Lottery::AddLotteryGossip(Player* player, Object* obj)
 {
 	player->PlayerTalkClass->ClearMenus();
-	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Ñ¹±ª×Ó", LOTTERY_TYPE_AAA, GOSSIP_ACTION_INFO_DEF, "", 0, true);
-	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Ñ¹´ó", LOTTERY_TYPE_MAX, GOSSIP_ACTION_INFO_DEF, "", 0, true);
-	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Ñ¹Ğ¡", LOTTERY_TYPE_MIN, GOSSIP_ACTION_INFO_DEF, "", 0, true);
+	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "å‹è±¹å­", LOTTERY_TYPE_AAA, GOSSIP_ACTION_INFO_DEF, "", 0, true);
+	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "å‹å¤§", LOTTERY_TYPE_MAX, GOSSIP_ACTION_INFO_DEF, "", 0, true);
+	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "å‹å°", LOTTERY_TYPE_MIN, GOSSIP_ACTION_INFO_DEF, "", 0, true);
 	if (obj->ToCreature())
 		player->SEND_GOSSIP_MENU(obj->GetEntry(), obj->GetGUID());
 	else
 		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, obj->GetGUID());
 
-	ChatHandler(player->GetSession()).PSendSysMessage("[²ÊÆ±]£ºÇëµã»÷ÄãÒªÑ¹×¢µÄ²ÊÆ±ÀàĞÍ£¬²¢ÊäÈëÄãÒªÑ¹×¢µÄÊıÁ¿");
-	ChatHandler(player->GetSession()).PSendSysMessage("[²ÊÆ±]£º1×¢µÈÓÚ1%s£¬Ñ¹×¢ÕıÈ·½±Àø·­±¶£¡", sString->GetText(CORE_STR_TYPES(STR_TOKEN)));
+	ChatHandler(player->GetSession()).PSendSysMessage("[å½©ç¥¨]ï¼šè¯·ç‚¹å‡»ä½ è¦å‹æ³¨çš„å½©ç¥¨ç±»å‹ï¼Œå¹¶è¾“å…¥ä½ è¦å‹æ³¨çš„æ•°é‡");
+	ChatHandler(player->GetSession()).PSendSysMessage("[å½©ç¥¨]ï¼š1æ³¨ç­‰äº1%sï¼Œå‹æ³¨æ­£ç¡®å¥–åŠ±ç¿»å€ï¼", sString->GetText(CORE_STR_TYPES(STR_TOKEN)));
 }
 
 class Lottery_WorldScript : public WorldScript
@@ -387,7 +386,7 @@ public:
 		if (Timer > (LotteryVec[0].interval * MINUTE * IN_MILLISECONDS - 10 * IN_MILLISECONDS) && !remind)
 		{
 			remind = true;
-			sWorld->SendScreenMessage("10ÃëÖÓºó¿ª½±...");
+			sWorld->SendScreenMessage("10ç§’é’Ÿåå¼€å¥–...");
 		}
 		else if (Timer > LotteryVec[0].interval * MINUTE * IN_MILLISECONDS)
 		{

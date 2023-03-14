@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "../PrecompiledHeaders/ScriptPCH.h"
 #include "../CommonFunc/CommonFunc.h"
 
@@ -21,13 +20,13 @@ public:
 	{
 		return new NPC_QuestAI(creature);
 	}
-	//½ÓÊÜÈÎÎñ
+	//æ¥å—ä»»åŠ¡
 	bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest)
 	{
 		switch (quest->GetQuestId())
 		{
 		break;
-		//ôä´äËÄÁú
+		//ç¿¡ç¿ å››é¾™
 		case 100001:
 			player->SetPhaseMask(1, true);//chatHandler.cpp /sleep
 			player->RemoveAura(35838);
@@ -37,12 +36,12 @@ public:
 		}
 		return false;
 	}
-	//Íê³ÉÈÎÎñ
+	//å®Œæˆä»»åŠ¡
 	bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32)
 	{
 		switch (quest->GetQuestId())
 		{
-			//ôä´äËÄÁú
+			//ç¿¡ç¿ å››é¾™
 		case 100001:
 			player->SetPhaseMask(1, true);
 			player->RemoveAura(35838);
@@ -54,23 +53,23 @@ public:
 	}
 };
 
-//³éÈ¡ÃÎ÷ÊÈÎÎñ
+//æŠ½å–æ¢¦é­‡ä»»åŠ¡
 
 enum Events
 {
 	EVENT_CALL_Y = 1,
 
-	EVENT_Y_SAY1 = 2,//ÒÁÀ¼Äá¿âË¹:½Æ»«µÄ¾«Áé£¬ÄãÃÇÉèÏÂ¿É¶ñµÄÈ¦Ì×·âÓ¡ÁËÎÒ£¬ÏÖÔÚÓÖÒªÀ´È¡Ğ¦ÎÒµÄÃ´£¿ÃÎ÷Ê±©¾ı¾ø²»»á¶ÔÄãÃÇ±°¹ªÇüÏ¥£¡
-	EVENT_REMULUS_SAY1 = 3,//ÊØ»¤ÕßÀ×Ä·ÂåË¹£ºÒÁÀ¼Äá¿âË¹£¬ÄãÔøÓÃÃÎ÷ÊÖ®Á¦ÕÛÄ¥ÁËÎŞÊıÎŞ¹¼µÄÊÜº¦Õß£¬ÕâÊÇ¶ÔÄãÓ¦ÓĞµÄ³Í·££¬ÏÖÔÚ£¬ÄãÓĞÒ»¸ö×ÔÎÒ¾ÈÊêµÄ»ú»á
-	EVENT_REMULUS_SAY2 = 4, //ÊØ»¤ÕßÀ×Ä·ÂåË¹£ºÄã±ØĞë´ÓÕâ°Ñ½£ÖĞÍêÈ«³éÈ¡³ö²Ğ´æµÄÃÎ÷ÊÓ¡¼Ç£¬²¢·¢ÊÄ²»ÔÙ²Ğº¦°¬ÔóÀ­Ë¹µÄÎŞ¹¼ÉúÃü£¬·ñÔòÎÒ½«ÈÃÄãÏİÈëÓÀ¾ÃµÄ³ÁË¯¡£
-	EVENT_Y_SAY2 = 5,//ÒÁÀ¼Äá¿âË¹:ÎÒ¡­´ğÓ¦ÄãµÄÒªÇó£¬µ«Õâ¸öÊÄÑÔÖĞ²»°üÀ¨¶ÔÄãµÄ³ğºŞ£¬ÎÒÒ»¶¨»áÈÃÄã¸¶³ö´ú¼ÛµÄ£¡
-	EVENT_REMULUS_SAY3 = 6, //ÊØ»¤ÕßÀ×Ä·ÂåË¹£ºÎÒÍ¬Òâ£¬ÎÒ»áÔÚÕâÒ»Ö±µÈ×ÅÄã¡£ÄÇÃ´£¬¿ªÊ¼°É
+	EVENT_Y_SAY1 = 2,//ä¼Šå…°å°¼åº“æ–¯:ç‹¡çŒ¾çš„ç²¾çµï¼Œä½ ä»¬è®¾ä¸‹å¯æ¶çš„åœˆå¥—å°å°äº†æˆ‘ï¼Œç°åœ¨åˆè¦æ¥å–ç¬‘æˆ‘çš„ä¹ˆï¼Ÿæ¢¦é­‡æš´å›ç»ä¸ä¼šå¯¹ä½ ä»¬å‘èº¬å±ˆè†ï¼
+	EVENT_REMULUS_SAY1 = 3,//å®ˆæŠ¤è€…é›·å§†æ´›æ–¯ï¼šä¼Šå…°å°¼åº“æ–¯ï¼Œä½ æ›¾ç”¨æ¢¦é­‡ä¹‹åŠ›æŠ˜ç£¨äº†æ— æ•°æ— è¾œçš„å—å®³è€…ï¼Œè¿™æ˜¯å¯¹ä½ åº”æœ‰çš„æƒ©ç½šï¼Œç°åœ¨ï¼Œä½ æœ‰ä¸€ä¸ªè‡ªæˆ‘æ•‘èµçš„æœºä¼š
+	EVENT_REMULUS_SAY2 = 4, //å®ˆæŠ¤è€…é›·å§†æ´›æ–¯ï¼šä½ å¿…é¡»ä»è¿™æŠŠå‰‘ä¸­å®Œå…¨æŠ½å–å‡ºæ®‹å­˜çš„æ¢¦é­‡å°è®°ï¼Œå¹¶å‘èª“ä¸å†æ®‹å®³è‰¾æ³½æ‹‰æ–¯çš„æ— è¾œç”Ÿå‘½ï¼Œå¦åˆ™æˆ‘å°†è®©ä½ é™·å…¥æ°¸ä¹…çš„æ²‰ç¡ã€‚
+	EVENT_Y_SAY2 = 5,//ä¼Šå…°å°¼åº“æ–¯:æˆ‘â€¦ç­”åº”ä½ çš„è¦æ±‚ï¼Œä½†è¿™ä¸ªèª“è¨€ä¸­ä¸åŒ…æ‹¬å¯¹ä½ çš„ä»‡æ¨ï¼Œæˆ‘ä¸€å®šä¼šè®©ä½ ä»˜å‡ºä»£ä»·çš„ï¼
+	EVENT_REMULUS_SAY3 = 6, //å®ˆæŠ¤è€…é›·å§†æ´›æ–¯ï¼šæˆ‘åŒæ„ï¼Œæˆ‘ä¼šåœ¨è¿™ä¸€ç›´ç­‰ç€ä½ ã€‚é‚£ä¹ˆï¼Œå¼€å§‹å§
 
 	EVENT_HOLD_SWORD = 7,
 	EVENT_CLEAN_SOWRD = 8,
 	EVENT_CALL_4_DK = 9,
 
-	//¿â¶ûËş×È¹«¾ô960020 Å®²®¾ô²¼ÀÍçÑ¿ËË¹960021 ÉªÀïÒ®¿Ë¾ôÊ¿960022 ÈğÎÄ´÷¶ûÄĞ¾ô960023 ÒÁÀ¼Äá¿âË¹960016
+	//åº“å°”å¡”å…¹å…¬çˆµ960020 å¥³ä¼¯çˆµå¸ƒåŠ³ç¼ªå…‹æ–¯960021 ç‘Ÿé‡Œè€¶å…‹çˆµå£«960022 ç‘æ–‡æˆ´å°”ç”·çˆµ960023 ä¼Šå…°å°¼åº“æ–¯960016
 	EVENT_K_SAY = 10,
 	EVENT_N_SAY = 11,
 	EVENT_S_SAY = 12,
@@ -96,7 +95,7 @@ public:
 	bool OnGossipHello(Player *player, Creature *creature)
 	{
 		if (PureSwordStartFlag) return true;
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ÈÃÎÒÃÇ¿ªÊ¼", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "è®©æˆ‘ä»¬å¼€å§‹", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
 		player->SEND_GOSSIP_MENU(player->GetGossipTextId(creature), creature->GetGUID());
 		return true;
 	}
@@ -111,7 +110,7 @@ public:
 	{
 		npc_remulusAI(Creature* creature) : ScriptedAI(creature) {}
 
-		Creature *k, *n, *s, *r, *y;//¿â¶ûËş×È¹«¾ô960020 Å®²®¾ô²¼ÀÍçÑ¿ËË¹960021 ÉªÀïÒ®¿Ë¾ôÊ¿960022 ÈğÎÄ´÷¶ûÄĞ¾ô960023 ÒÁÀ¼Äá¿âË¹960016
+		Creature *k, *n, *s, *r, *y;//åº“å°”å¡”å…¹å…¬çˆµ960020 å¥³ä¼¯çˆµå¸ƒåŠ³ç¼ªå…‹æ–¯960021 ç‘Ÿé‡Œè€¶å…‹çˆµå£«960022 ç‘æ–‡æˆ´å°”ç”·çˆµ960023 ä¼Šå…°å°¼åº“æ–¯960016
 
 
 		void Reset() override
@@ -124,7 +123,7 @@ public:
 			{
 				PureSwordStartFlag = false;
 				_events.ScheduleEvent(EVENT_CALL_Y, 2000);
-				sWorld->SendGlobalText("ÊÂ¼ş¿ªÊ¼", NULL);
+				sWorld->SendGlobalText("äº‹ä»¶å¼€å§‹", NULL);
 			}
 			_events.Update(diff);
 
@@ -143,28 +142,28 @@ public:
 				case EVENT_Y_SAY1:
 					if (y = me->FindNearestCreature(960016, 200.0f))
 					{
-						y->MonsterYell("ÊÇË­ÔÚÕÙ»½ÎÒ£¿", LANG_UNIVERSAL, NULL);
-						y->MonsterSay("½Æ»«µÄ¾«Áé£¬ÄãÃÇÉèÏÂ¿É¶ñµÄÈ¦Ì×·âÓ¡ÁËÎÒ£¬ÏÖÔÚÓÖÒªÀ´È¡Ğ¦ÎÒµÄÃ´£¿ÃÎ÷Ê±©¾ı¾ø²»»á¶ÔÄãÃÇ±°¹ªÇüÏ¥£¡", LANG_UNIVERSAL, NULL);
+						y->MonsterYell("æ˜¯è°åœ¨å¬å”¤æˆ‘ï¼Ÿ", LANG_UNIVERSAL, NULL);
+						y->MonsterSay("ç‹¡çŒ¾çš„ç²¾çµï¼Œä½ ä»¬è®¾ä¸‹å¯æ¶çš„åœˆå¥—å°å°äº†æˆ‘ï¼Œç°åœ¨åˆè¦æ¥å–ç¬‘æˆ‘çš„ä¹ˆï¼Ÿæ¢¦é­‡æš´å›ç»ä¸ä¼šå¯¹ä½ ä»¬å‘èº¬å±ˆè†ï¼", LANG_UNIVERSAL, NULL);
 
 					}
 					me->AddAura(63771, me);
 					_events.ScheduleEvent(EVENT_REMULUS_SAY1, 5000);
 					break;
 				case EVENT_REMULUS_SAY1:
-					me->MonsterSay("ÒÁÀ¼Äá¿âË¹£¬ÄãÔøÓÃÃÎ÷ÊÖ®Á¦ÕÛÄ¥ÁËÎŞÊıÎŞ¹¼µÄÊÜº¦Õß£¬ÕâÊÇ¶ÔÄãÓ¦ÓĞµÄ³Í·££¬ÏÖÔÚ£¬ÄãÓĞÒ»¸ö×ÔÎÒ¾ÈÊêµÄ»ú»á¡£", LANG_UNIVERSAL, NULL);
+					me->MonsterSay("ä¼Šå…°å°¼åº“æ–¯ï¼Œä½ æ›¾ç”¨æ¢¦é­‡ä¹‹åŠ›æŠ˜ç£¨äº†æ— æ•°æ— è¾œçš„å—å®³è€…ï¼Œè¿™æ˜¯å¯¹ä½ åº”æœ‰çš„æƒ©ç½šï¼Œç°åœ¨ï¼Œä½ æœ‰ä¸€ä¸ªè‡ªæˆ‘æ•‘èµçš„æœºä¼šã€‚", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(EVENT_REMULUS_SAY2, 5000);
 					break;
 				case EVENT_REMULUS_SAY2:
-					me->MonsterSay("Äã±ØĞë´ÓÕâ°Ñ½£ÖĞÍêÈ«³éÈ¡³ö²Ğ´æµÄÃÎ÷ÊÓ¡¼Ç£¬²¢·¢ÊÄ²»ÔÙ²Ğº¦°¬ÔóÀ­Ë¹µÄÎŞ¹¼ÉúÃü£¬·ñÔòÎÒ½«ÈÃÄãÏİÈëÓÀ¾ÃµÄ³ÁË¯¡£", LANG_UNIVERSAL, NULL);
+					me->MonsterSay("ä½ å¿…é¡»ä»è¿™æŠŠå‰‘ä¸­å®Œå…¨æŠ½å–å‡ºæ®‹å­˜çš„æ¢¦é­‡å°è®°ï¼Œå¹¶å‘èª“ä¸å†æ®‹å®³è‰¾æ³½æ‹‰æ–¯çš„æ— è¾œç”Ÿå‘½ï¼Œå¦åˆ™æˆ‘å°†è®©ä½ é™·å…¥æ°¸ä¹…çš„æ²‰ç¡ã€‚", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(EVENT_Y_SAY2, 5000);
 					break;
 				case EVENT_Y_SAY2:
 					if (y = me->FindNearestCreature(960016, 200.0f))
-						y->MonsterSay("ÎÒ¡­´ğÓ¦ÄãµÄÒªÇó£¬µ«Õâ¸öÊÄÑÔÖĞ²»°üÀ¨¶ÔÄãµÄ³ğºŞ£¬ÎÒÒ»¶¨»áÈÃÄã¸¶³ö´ú¼ÛµÄ£¡", LANG_UNIVERSAL, NULL);
+						y->MonsterSay("æˆ‘â€¦ç­”åº”ä½ çš„è¦æ±‚ï¼Œä½†è¿™ä¸ªèª“è¨€ä¸­ä¸åŒ…æ‹¬å¯¹ä½ çš„ä»‡æ¨ï¼Œæˆ‘ä¸€å®šä¼šè®©ä½ ä»˜å‡ºä»£ä»·çš„ï¼", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(EVENT_REMULUS_SAY3, 5000);
 					break;
 				case EVENT_REMULUS_SAY3:
-					me->MonsterSay("ÎÒÍ¬Òâ£¬ÎÒ»áÔÚÕâÒ»Ö±µÈ×ÅÄã¡£ÄÇÃ´£¬¿ªÊ¼°É¡£", LANG_UNIVERSAL, NULL);
+					me->MonsterSay("æˆ‘åŒæ„ï¼Œæˆ‘ä¼šåœ¨è¿™ä¸€ç›´ç­‰ç€ä½ ã€‚é‚£ä¹ˆï¼Œå¼€å§‹å§ã€‚", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(EVENT_CLEAN_SOWRD, 5000);
 					break;
 				case EVENT_CLEAN_SOWRD:
@@ -185,7 +184,7 @@ public:
 				break;
 				case EVENT_CALL_4_DK:
 
-					//¿â¶ûËş×È¹«¾ô960020 Å®²®¾ô²¼ÀÍçÑ¿ËË¹960021 ÉªÀïÒ®¿Ë¾ôÊ¿960022 ÈğÎÄ´÷¶ûÄĞ¾ô960023 ÒÁÀ¼Äá¿âË¹960016
+					//åº“å°”å¡”å…¹å…¬çˆµ960020 å¥³ä¼¯çˆµå¸ƒåŠ³ç¼ªå…‹æ–¯960021 ç‘Ÿé‡Œè€¶å…‹çˆµå£«960022 ç‘æ–‡æˆ´å°”ç”·çˆµ960023 ä¼Šå…°å°¼åº“æ–¯960016
 
 					me->SummonCreature(960020, me->GetPositionX() + 3, me->GetPositionY() + 15, me->GetPositionZ(), me->GetOrientation(), TEMPSUMMON_TIMED_DESPAWN, 120000);
 					me->SummonCreature(960021, me->GetPositionX() + 1, me->GetPositionY() + 15, me->GetPositionZ(), me->GetOrientation(), TEMPSUMMON_TIMED_DESPAWN, 120000);
@@ -195,37 +194,37 @@ public:
 					break;
 				case EVENT_K_SAY:
 					if (k = me->FindNearestCreature(960020, 200.0f))
-						k->MonsterSay("ÖÕÓÚ³öÀ´ÁË£¬ÎÒ¶¼±»Ê¥¹âÖ®Á¦Ñ¹ÆÈµÄÊÜ²»ÁËÁË¡£", LANG_UNIVERSAL, NULL);
+						k->MonsterSay("ç»ˆäºå‡ºæ¥äº†ï¼Œæˆ‘éƒ½è¢«åœ£å…‰ä¹‹åŠ›å‹è¿«çš„å—ä¸äº†äº†ã€‚", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(EVENT_N_SAY, 5000);
 					break;
 				case EVENT_N_SAY:
 					if (n = me->FindNearestCreature(960021, 200.0f))
-						n->MonsterSay("¸ÃËÀµÄ£¬ÊÇË­¾»»¯ÁË»Ò½ıÊ¹Õß£¡", LANG_UNIVERSAL, NULL);
+						n->MonsterSay("è¯¥æ­»çš„ï¼Œæ˜¯è°å‡€åŒ–äº†ç°çƒ¬ä½¿è€…ï¼", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(EVENT_S_SAY, 5000);
 					break;
 				case EVENT_S_SAY:
 					if (s = me->FindNearestCreature(960022, 200.0f))
-						s->MonsterSay("ÎÒÒª°ÇÁËÄÇ¼Ò»ïµÄÆ¤ÓÃÀ´×°ÊÎÎÒµÄÂí°°£¡", LANG_UNIVERSAL, NULL);
+						s->MonsterSay("æˆ‘è¦æ‰’äº†é‚£å®¶ä¼™çš„çš®ç”¨æ¥è£…é¥°æˆ‘çš„é©¬éï¼", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(EVENT_R_SAY1, 5000);
 					break;
 				case EVENT_R_SAY1:
 					if (r = me->FindNearestCreature(960023, 200.0f))
-						r->MonsterSay("¶¼±ğËµÁË£¬¿´¿´ÑÛÇ°µÄÊÇË­£¬ÃÎ÷Ê±©¾ı¡ªÒÁÀ¼Äá¿âË¹£¬ÎªÊ²Ã´ÎÒÃÇ»áÔÚÕâÀï£¬ÄãÓÖÊÇÀ´¸ÉÊ²Ã´µÄ¡£", LANG_UNIVERSAL, NULL);
+						r->MonsterSay("éƒ½åˆ«è¯´äº†ï¼Œçœ‹çœ‹çœ¼å‰çš„æ˜¯è°ï¼Œæ¢¦é­‡æš´å›â€”ä¼Šå…°å°¼åº“æ–¯ï¼Œä¸ºä»€ä¹ˆæˆ‘ä»¬ä¼šåœ¨è¿™é‡Œï¼Œä½ åˆæ˜¯æ¥å¹²ä»€ä¹ˆçš„ã€‚", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(EVENT_Y_SAY3, 5000);
 					break;
 				case EVENT_Y_SAY3:
 					if (y = me->FindNearestCreature(960016, 200.0f))
-						y->MonsterSay("ÕæÊÇÓŞ´ÀÍ¸¶¥£¬ÄãÃÇÖ»²»¹ıÊÇÄÇËÄ¸ö·ÏÎï²Ğ´æµÄÒâÊ¶°ÕÁË£¬ÊÇÊ±ºòÁË½áÕâ¼şÊÂÁË¡£", LANG_UNIVERSAL, NULL);
+						y->MonsterSay("çœŸæ˜¯æ„šè ¢é€é¡¶ï¼Œä½ ä»¬åªä¸è¿‡æ˜¯é‚£å››ä¸ªåºŸç‰©æ®‹å­˜çš„æ„è¯†ç½¢äº†ï¼Œæ˜¯æ—¶å€™äº†ç»“è¿™ä»¶äº‹äº†ã€‚", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(EVENT_R_SAY2, 5000);
 					break;
 				case EVENT_R_SAY2:
 					if (r = me->FindNearestCreature(960023, 200.0f))
-						r->MonsterSay("ÄãÒÑ¾­±³ÅÑÁËÌìÔÖ¾üÍÅÃ´£¿Î×ÑıÍõ²»»á·Å¹ıÄãµÄ¡£", LANG_UNIVERSAL, NULL);
+						r->MonsterSay("ä½ å·²ç»èƒŒå›äº†å¤©ç¾å†›å›¢ä¹ˆï¼Ÿå·«å¦–ç‹ä¸ä¼šæ”¾è¿‡ä½ çš„ã€‚", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(EVENT_Y_SAY4, 5000);
 					break;
 				case EVENT_Y_SAY4:
 					if (y = me->FindNearestCreature(960016, 200.0f))
-						y->MonsterSay("ÄãÃÇÖ»²»¹ıÊÇµ±³õÎÒ´ÍÓèÄãÃÇÖ÷×ÓµÄÒ»Ë¿ÃÎ÷ÊÖ®Á¦°ÕÁË£¬Õâ¸ù±¾Ëã²»ÉÏ±³ÅÑ£¬ÎÒÖ»²»¹ıÊÇ°ÑÁ¦Á¿ÊÕ»Ø¶øÒÑ¡£ÌìÆôËÄÆïÊ¿µÄÁ¦Á¿»á½øÒ»²½±»Ï÷Èõ¡£", LANG_UNIVERSAL, NULL);
+						y->MonsterSay("ä½ ä»¬åªä¸è¿‡æ˜¯å½“åˆæˆ‘èµäºˆä½ ä»¬ä¸»å­çš„ä¸€ä¸æ¢¦é­‡ä¹‹åŠ›ç½¢äº†ï¼Œè¿™æ ¹æœ¬ç®—ä¸ä¸ŠèƒŒå›ï¼Œæˆ‘åªä¸è¿‡æ˜¯æŠŠåŠ›é‡æ”¶å›è€Œå·²ã€‚å¤©å¯å››éª‘å£«çš„åŠ›é‡ä¼šè¿›ä¸€æ­¥è¢«å‰Šå¼±ã€‚", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(EVENT_KILL_4_DK, 5000);
 					break;
 				case EVENT_KILL_4_DK:
@@ -246,15 +245,15 @@ public:
 				case EVENT_Y_LEAVE:
 					if (y = me->FindNearestCreature(960016, 200.0f))
 					{
-						y->MonsterYell("Ø¬ÃÎÓÀ²»ÖÕ½á...", LANG_UNIVERSAL, NULL);
+						y->MonsterYell("å™©æ¢¦æ°¸ä¸ç»ˆç»“...", LANG_UNIVERSAL, NULL);
 						y->RemoveFromWorld();
 					}
 					_events.ScheduleEvent(EVENT_DONE, 5000);
 					break;
 				case EVENT_DONE:
-					me->MonsterYell("´ø×ÅÄãµÄ×Ô¸ºÓÀÔ¶Àë¿ªÕâ¸öÊÀ½ç£¡", LANG_UNIVERSAL, NULL);
+					me->MonsterYell("å¸¦ç€ä½ çš„è‡ªè´Ÿæ°¸è¿œç¦»å¼€è¿™ä¸ªä¸–ç•Œï¼", LANG_UNIVERSAL, NULL);
 					me->RemoveAura(63771);
-					sWorld->SendGlobalText("ÊÂ¼ş½áÊø", NULL);
+					sWorld->SendGlobalText("äº‹ä»¶ç»“æŸ", NULL);
 					break;
 				default:
 					break;

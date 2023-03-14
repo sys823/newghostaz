@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Event.h"
 #include "GameEventMgr.h"
 #include "Battleground.h"
@@ -24,6 +23,7 @@
 #include "BattleIC/BattleIC.h"
 #include "ArenaDuel/ArenaDuel.h"
 // load db
+
 
 void Player::UpdateEventDamage(Unit* target, float damage)
 { 
@@ -166,7 +166,7 @@ public:
 };
 
 
-//Ò°ÍâÌôÕ½½Å±¾
+//é‡å¤–æŒ‘æˆ˜è„šæœ¬
 class StageTrigger : public CreatureScript
 {
 public:
@@ -202,7 +202,7 @@ public:
 			if (Summons.empty() && active)
 			{
 				std::ostringstream oss;
-				oss << "[Ê¤ÕßÎªÍõ]£ºµÚ" << stage << "¹Ø¿ªÊ¼!";
+				oss << "[èƒœè€…ä¸ºç‹]ï¼šç¬¬" << stage << "å…³å¼€å§‹!";
 				sWorld->SendScreenMessage(oss.str().c_str());
 				me->SummonCreatureGroup(stage);
 			}
@@ -211,7 +211,7 @@ public:
 		void SummonedCreatureDies(Creature* summon, Unit* killer)  override
 		{	
 			std::ostringstream oss;
-			oss << "[Ê¤ÕßÎªÍõ]£º[" << killer->GetName() << "]»÷É±[" << summon->GetCreatureTemplate()->Name << "]£¬ÌôÕ½³É¹¦£¡";
+			oss << "[èƒœè€…ä¸ºç‹]ï¼š[" << killer->GetName() << "]å‡»æ€[" << summon->GetCreatureTemplate()->Name << "]ï¼ŒæŒ‘æˆ˜æˆåŠŸï¼";
 			sWorld->SendScreenMessage(oss.str().c_str());
 			Summons.Despawn(summon);
 
@@ -466,7 +466,7 @@ void Event::LoadPos()
 	PosMap.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//			0	1	2		3	4		5
-		"SELECT µØÍ¼ID,X×ø±ê,Y×ø±ê,Z×ø±ê,O×ø±ê,×ø±êID FROM _Ä£°å_×ø±ê" :
+		"SELECT åœ°å›¾ID,Xåæ ‡,Yåæ ‡,Zåæ ‡,Oåæ ‡,åæ ‡ID FROM _æ¨¡æ¿_åæ ‡" :
 		//		0	1 2 3 4	 5
 		"SELECT map,x,y,z,o,posId FROM _position");
 	if (!result) return;
@@ -543,9 +543,9 @@ void Event::InitParams(uint32 eventId)
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0			1			2			3	4		5			6
-		"SELECT ÊÂ¼şÃû³Æ,µ¯´°ÌáÊ¾ÎÄ±¾,²Ëµ¥ÌáÊ¾ÎÄ±¾,ÇøÓòID,ÊÂ¼şÀàĞÍ,×é¶ÓÀàĞÍ,ÖØĞÂ¼ÓÈëÀàĞÍ,"
+		"SELECT äº‹ä»¶åç§°,å¼¹çª—æç¤ºæ–‡æœ¬,èœå•æç¤ºæ–‡æœ¬,åŒºåŸŸID,äº‹ä»¶ç±»å‹,ç»„é˜Ÿç±»å‹,é‡æ–°åŠ å…¥ç±»å‹,"
 		//		7			8			9					10				11				12
-		"Ê¤Àû½±ÀøÄ£°åID,Ê§°Ü½±ÀøÄ£°åID,»ñµÃ½±Àø×îĞ¡ÉËº¦Öµ,»ñµÃ½±Àø×îĞ¡ÖÎÁÆÖµ,»ñµÃ½±Àø×îĞ¡»÷É±Êı,»ñµÃ½±Àø×îĞ¡±»É±Êı From _ÊÂ¼ş WHERE ÊÂ¼şID = '%u'" :
+		"èƒœåˆ©å¥–åŠ±æ¨¡æ¿ID,å¤±è´¥å¥–åŠ±æ¨¡æ¿ID,è·å¾—å¥–åŠ±æœ€å°ä¼¤å®³å€¼,è·å¾—å¥–åŠ±æœ€å°æ²»ç–—å€¼,è·å¾—å¥–åŠ±æœ€å°å‡»æ€æ•°,è·å¾—å¥–åŠ±æœ€å°è¢«æ€æ•° From _äº‹ä»¶ WHERE äº‹ä»¶ID = '%u'" :
 		//		0			1			2			3		4		5		6
 		"SELECT EventName,NoticeText,GossipText,ZoneId,EventType,GroupType,RejoinType,"
 		//7			8		9				10		11			12
@@ -563,27 +563,27 @@ void Event::InitParams(uint32 eventId)
 
 		if (type && *type != '\0')
 		{
-			if (strcmp(type, "Õ½³¡ - Õ½¸è") == 0)
+			if (strcmp(type, "æˆ˜åœº - æˆ˜æ­Œ") == 0)
 				_EventType = C_ET_WS;
-			else if (strcmp(type, "Õ½³¡ - °¢À­Ï£") == 0)
+			else if (strcmp(type, "æˆ˜åœº - é˜¿æ‹‰å¸Œ") == 0)
 				_EventType = C_ET_AB;
-			else if (strcmp(type, "Õ½³¡ - ·ç±©Ö®ÑÛ") == 0)
+			else if (strcmp(type, "æˆ˜åœº - é£æš´ä¹‹çœ¼") == 0)
 				_EventType = C_ET_EY;
-			else if (strcmp(type, "Õ½³¡ - Ô¶¹Åº£Ì²") == 0)
+			else if (strcmp(type, "æˆ˜åœº - è¿œå¤æµ·æ»©") == 0)
 				_EventType = C_ET_SA;
-			else if (strcmp(type, "Õ½³¡ - °ÂÉ½") == 0)
+			else if (strcmp(type, "æˆ˜åœº - å¥¥å±±") == 0)
 				_EventType = C_ET_AV;
-			else if (strcmp(type, "Õ½³¡ - Õ÷·şÖ®µº") == 0)
+			else if (strcmp(type, "æˆ˜åœº - å¾æœä¹‹å²›") == 0)
 				_EventType = C_ET_IC;
-			else if (strcmp(type, "½ö´«ËÍ") == 0)
+			else if (strcmp(type, "ä»…ä¼ é€") == 0)
 				_EventType = C_ET_TELE;
-			else if (strcmp(type, "¶ÔÏß") == 0)
+			else if (strcmp(type, "å¯¹çº¿") == 0)
 				_EventType = C_ET_LINE;
-			else if (strcmp(type, "×Ô¶¨ÒåÕóÓª") == 0)
+			else if (strcmp(type, "è‡ªå®šä¹‰é˜µè¥") == 0)
 				_EventType = C_ET_FACTION;
-			else if (strcmp(type, "¹«»á") == 0)
+			else if (strcmp(type, "å…¬ä¼š") == 0)
 				_EventType = C_ET_GUILD;
-			else if (strcmp(type, "µ¥ÈË") == 0)
+			else if (strcmp(type, "å•äºº") == 0)
 				_EventType = C_ET_SINGLE;
 		}
 
@@ -607,13 +607,13 @@ void Event::InitParams(uint32 eventId)
 
 		if (type && *type !='\0')
 		{
-			if (strcmp(type, "¶ÔÏß - È«²¿ÕóÓª1") == 0)
+			if (strcmp(type, "å¯¹çº¿ - å…¨éƒ¨é˜µè¥1") == 0)
 				_GroupType = C_GT_ONE_ALL;
-			else if (strcmp(type, "¶ÔÏß - ÁªÃËÕóÓª1BLÕóÓª2") == 0)
+			else if (strcmp(type, "å¯¹çº¿ - è”ç›Ÿé˜µè¥1BLé˜µè¥2") == 0)
 				_GroupType = C_GT_ONE_A;
-			else if (strcmp(type, "¶ÔÏß - ÁªÃË²¿ÂäËæ»ú") == 0)
+			else if (strcmp(type, "å¯¹çº¿ - è”ç›Ÿéƒ¨è½éšæœº") == 0)
 				_GroupType = C_GT_RANDOM_A_H;
-			else if (strcmp(type, "¶ÔÏß - Íæ¼ÒËæ»ú") == 0)
+			else if (strcmp(type, "å¯¹çº¿ - ç©å®¶éšæœº") == 0)
 				_GroupType = C_GT_RANDOM_PLAYER;
 		}
 		
@@ -621,11 +621,11 @@ void Event::InitParams(uint32 eventId)
 
 		if (type && *type != '\0')
 		{
-			if (strcmp(type, "ÖØĞÂ¼ÓÈë - ½ûÖ¹") == 0)
+			if (strcmp(type, "é‡æ–°åŠ å…¥ - ç¦æ­¢") == 0)
 				_RejoinType = C_RT_BANED;
-			else if (strcmp(type, "ÖØĞÂ¼ÓÈë- Ö®Ç°¶ÓÎé") == 0)
+			else if (strcmp(type, "é‡æ–°åŠ å…¥- ä¹‹å‰é˜Ÿä¼") == 0)
 				_RejoinType = C_RT_KEEP_GROUP;
-			else if (strcmp(type, "ÖØĞÂ¼ÓÈë - ÏµÍ³·ÖÅä") == 0)
+			else if (strcmp(type, "é‡æ–°åŠ å…¥ - ç³»ç»Ÿåˆ†é…") == 0)
 				_RejoinType = C_RT_REDIS_GROUP;
 		}
 		
@@ -641,7 +641,7 @@ void Event::InitParams(uint32 eventId)
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0		1		2					3
-		"SELECT ¶ÓÎéID,¶ÓÎéÃû³Æ,ÊÂ¼ş¿ªÊ¼´«ËÍ×ø±êID,ÊÂ¼ş½áÊø´«ËÍ×ø±êID From _ÊÂ¼ş_¶ÓÎéÅäÖÃ WHERE ÊÂ¼şID = '%u'" :
+		"SELECT é˜Ÿä¼ID,é˜Ÿä¼åç§°,äº‹ä»¶å¼€å§‹ä¼ é€åæ ‡ID,äº‹ä»¶ç»“æŸä¼ é€åæ ‡ID From _äº‹ä»¶_é˜Ÿä¼é…ç½® WHERE äº‹ä»¶ID = '%u'" :
 		//		0		1		2					3
 		"SELECT TeamId,TeamName,StartTelePosId,StopTelePosId From _event_team WHERE EventId = '%u'", eventId))
 	{
@@ -658,7 +658,7 @@ void Event::InitParams(uint32 eventId)
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0			1	2		3
-		"SELECT ½áÊøÀàĞÍ,¶ÓÎéID, ²ÎÊı,È¨ÖØÖµ From _ÊÂ¼ş_½áÊøÌõ¼şÅäÖÃ WHERE ÊÂ¼şID = '%u'" :
+		"SELECT ç»“æŸç±»å‹,é˜Ÿä¼ID, å‚æ•°,æƒé‡å€¼ From _äº‹ä»¶_ç»“æŸæ¡ä»¶é…ç½® WHERE äº‹ä»¶ID = '%u'" :
 		//		0			1	 2		3
 		"SELECT StopType,TeamId, Param,Weight From _event_stop WHERE EventId = '%u'", eventId))
 	{
@@ -668,11 +668,11 @@ void Event::InitParams(uint32 eventId)
 			EventStopTemplate Temp;
 
 			const char* type = fields[0].GetCString();
-			if (strcmp(type, "»÷É±ÉúÎï - guid") == 0)
+			if (strcmp(type, "å‡»æ€ç”Ÿç‰© - guid") == 0)
 				Temp.StopType = TYPEID_UNIT;
-			else if (strcmp(type, "´İ»ÙÎïÌå - guid") == 0)
+			else if (strcmp(type, "æ‘§æ¯ç‰©ä½“ - guid") == 0)
 				Temp.StopType = TYPEID_GAMEOBJECT;
-			else if (strcmp(type, "»÷É±Íæ¼Ò - ÊıÁ¿") == 0)
+			else if (strcmp(type, "å‡»æ€ç©å®¶ - æ•°é‡") == 0)
 				Temp.StopType = TYPEID_PLAYER;
 
 			Temp.Faction	= fields[1].GetUInt32();
@@ -684,10 +684,10 @@ void Event::InitParams(uint32 eventId)
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//			0				1				2
-		"SELECT ÉúÎï»òÎïÌåGUID,ÉúÎï»òÎïÌå¼¤»îºóFLAG,¼¤»îÊ±ÌáÊ¾ÎÄ±¾,"
+		"SELECT ç”Ÿç‰©æˆ–ç‰©ä½“GUID,ç”Ÿç‰©æˆ–ç‰©ä½“æ¿€æ´»åFLAG,æ¿€æ´»æ—¶æç¤ºæ–‡æœ¬,"
 		//3						4		5					6		7						8	9						10	11						12
-		"Ğè»÷É±ÉúÎï»ò´İ»ÙÎïÌåID1,ÊıÁ¿1,Ğè»÷É±ÉúÎï»ò´İ»ÙÎïÌåID2,ÊıÁ¿2,Ğè»÷É±ÉúÎï»ò´İ»ÙÎïÌåID3,ÊıÁ¿3,Ğè»÷É±ÉúÎï»ò´İ»ÙÎïÌåID4,ÊıÁ¿4,Ğè»÷É±ÉúÎï»ò´İ»ÙÎïÌåID5,ÊıÁ¿5 "
-		"From _ÊÂ¼ş_ÉúÎï»òÎïÌå¼¤»îÌõ¼şÅäÖÃ WHERE ÊÂ¼şID = '%u'" :		
+		"éœ€å‡»æ€ç”Ÿç‰©æˆ–æ‘§æ¯ç‰©ä½“ID1,æ•°é‡1,éœ€å‡»æ€ç”Ÿç‰©æˆ–æ‘§æ¯ç‰©ä½“ID2,æ•°é‡2,éœ€å‡»æ€ç”Ÿç‰©æˆ–æ‘§æ¯ç‰©ä½“ID3,æ•°é‡3,éœ€å‡»æ€ç”Ÿç‰©æˆ–æ‘§æ¯ç‰©ä½“ID4,æ•°é‡4,éœ€å‡»æ€ç”Ÿç‰©æˆ–æ‘§æ¯ç‰©ä½“ID5,æ•°é‡5 "
+		"From _äº‹ä»¶_ç”Ÿç‰©æˆ–ç‰©ä½“æ¿€æ´»æ¡ä»¶é…ç½® WHERE äº‹ä»¶ID = '%u'" :		
 		//		0		1		2
 		"SELECT GUID,ActiveFlag,NoticeText,"
 		//3				4			5			6				7			8			9				10			11			12
@@ -714,7 +714,7 @@ void Event::InitParams(uint32 eventId)
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0				1		2		3	
-		"SELECT ÉúÎï»òÎïÌåGUID,¶ÓÎéID,»÷É±Íæ¼ÒÊı,Íæ¼Ò±»É±Êı From _ÊÂ¼ş_ÉúÎï»òÎïÌå¼¤»îÌõ¼ş¶ÓÎéÅäÖÃ WHERE ÊÂ¼şID = '%u'" :
+		"SELECT ç”Ÿç‰©æˆ–ç‰©ä½“GUID,é˜Ÿä¼ID,å‡»æ€ç©å®¶æ•°,ç©å®¶è¢«æ€æ•° From _äº‹ä»¶_ç”Ÿç‰©æˆ–ç‰©ä½“æ¿€æ´»æ¡ä»¶é˜Ÿä¼é…ç½® WHERE äº‹ä»¶ID = '%u'" :
 		//		0		1	2		3
 		"SELECT GUID,TeamId,Kills,Killeds From _event_active_team WHERE EventId = '%u'", eventId))
 	{
@@ -732,7 +732,7 @@ void Event::InitParams(uint32 eventId)
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0		1									
-		"SELECT ½×¶ÎID,½×¶Î½áÊøĞè»÷É±ÉúÎï»ò´İ»ÙÎïÌåGUID From _ÊÂ¼ş_½×¶ÎÉúÎï»òÎïÌåÅäÖÃ WHERE ÊÂ¼şID = '%u'" :
+		"SELECT é˜¶æ®µID,é˜¶æ®µç»“æŸéœ€å‡»æ€ç”Ÿç‰©æˆ–æ‘§æ¯ç‰©ä½“GUID From _äº‹ä»¶_é˜¶æ®µç”Ÿç‰©æˆ–ç‰©ä½“é…ç½® WHERE äº‹ä»¶ID = '%u'" :
 		//		0		1
 		"SELECT Phase,StopGUID From _event_phase WHERE EventId = '%u'", eventId))
 	{
@@ -748,8 +748,8 @@ void Event::InitParams(uint32 eventId)
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//			0	1		2			3			4				5					6						7					8					9
-		"SELECT ½×¶ÎID,¶ÓÎéID,Ä¹µØ×ø±êID, Ä¹µØ±£»¤Çø·¶Î§, Ä¹µØÁé»êÒ½ÕßID,½×¶Î½áÊøĞè»÷É±Íæ¼ÒÊı,½×¶Î½áÊøĞèÍæ¼Ò±»É±Êı,½×¶Î½áÊø¼¯Ìå´«ËÍ×ø±êID,½øÈëÄ¹µØ±£»¤ÇøÌáÊ¾ÎÄ±¾,½×¶Î½áÊøÌáÊ¾ÎÄ±¾ "
-		"From _ÊÂ¼ş_½×¶Î¶ÓÎéÅäÖÃ WHERE ÊÂ¼şID = '%u'":
+		"SELECT é˜¶æ®µID,é˜Ÿä¼ID,å¢“åœ°åæ ‡ID, å¢“åœ°ä¿æŠ¤åŒºèŒƒå›´, å¢“åœ°çµé­‚åŒ»è€…ID,é˜¶æ®µç»“æŸéœ€å‡»æ€ç©å®¶æ•°,é˜¶æ®µç»“æŸéœ€ç©å®¶è¢«æ€æ•°,é˜¶æ®µç»“æŸé›†ä½“ä¼ é€åæ ‡ID,è¿›å…¥å¢“åœ°ä¿æŠ¤åŒºæç¤ºæ–‡æœ¬,é˜¶æ®µç»“æŸæç¤ºæ–‡æœ¬ "
+		"From _äº‹ä»¶_é˜¶æ®µé˜Ÿä¼é…ç½® WHERE äº‹ä»¶ID = '%u'":
 		//			0	1		2			3				4				5					6			7					8					9
 		"SELECT Phase,TeamId,GraveyardPos, GraveyardSafe, GraveyardHealer,StopPlayerKills,StopPlayerKilleds,StopTelePos,GraveyardSafeNotice,StopNoticeText "
 		"From _event_phase_team WHERE EventId = '%u'", eventId))
@@ -776,7 +776,7 @@ void Event::InitParams(uint32 eventId)
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0				1			2									3					4									5					6									7					8				9
-		"SELECT ÊÀ½ç×´Ì¬ID,ÊÀ½ç×´Ì¬³õÊ¼Öµ,¸üĞÂÊÀ½ç×´Ì¬ĞèÒª»÷É±ÉúÎï»ò´İ»ÙÎïÌåID1,¸üĞÂÊÀ½ç×´Ì¬Ôö¼õÖµ1,¸üĞÂÊÀ½ç×´Ì¬ĞèÒª»÷É±ÉúÎï»ò´İ»ÙÎïÌåID2,¸üĞÂÊÀ½ç×´Ì¬Ôö¼õÖµ2,¸üĞÂÊÀ½ç×´Ì¬ĞèÒª»÷É±ÉúÎï»ò´İ»ÙÎïÌåID3,¸üĞÂÊÀ½ç×´Ì¬Ôö¼õÖµ3,ÊÀ½ç×´Ì¬´ïµ½¸ÃÖµÊ±ÌáÊ¾,ÌáÊ¾ÎÄ±¾ From _ÊÂ¼ş_ÊÀ½ç×´Ì¬ÅäÖÃ WHERE ÊÂ¼şID = '%u'" :
+		"SELECT ä¸–ç•ŒçŠ¶æ€ID,ä¸–ç•ŒçŠ¶æ€åˆå§‹å€¼,æ›´æ–°ä¸–ç•ŒçŠ¶æ€éœ€è¦å‡»æ€ç”Ÿç‰©æˆ–æ‘§æ¯ç‰©ä½“ID1,æ›´æ–°ä¸–ç•ŒçŠ¶æ€å¢å‡å€¼1,æ›´æ–°ä¸–ç•ŒçŠ¶æ€éœ€è¦å‡»æ€ç”Ÿç‰©æˆ–æ‘§æ¯ç‰©ä½“ID2,æ›´æ–°ä¸–ç•ŒçŠ¶æ€å¢å‡å€¼2,æ›´æ–°ä¸–ç•ŒçŠ¶æ€éœ€è¦å‡»æ€ç”Ÿç‰©æˆ–æ‘§æ¯ç‰©ä½“ID3,æ›´æ–°ä¸–ç•ŒçŠ¶æ€å¢å‡å€¼3,ä¸–ç•ŒçŠ¶æ€è¾¾åˆ°è¯¥å€¼æ—¶æç¤º,æç¤ºæ–‡æœ¬ From _äº‹ä»¶_ä¸–ç•ŒçŠ¶æ€é…ç½® WHERE äº‹ä»¶ID = '%u'" :
 		//		0		1		2		3	4		5		6	7		8			9
 		"SELECT ID,StartValue,Entry1,Step1,Entry2,Step2,Entry3,Step3,NoticeValue,NoticeText From _event_worldstate WHERE EventId = '%u'", eventId))
 	{
@@ -799,7 +799,7 @@ void Event::InitParams(uint32 eventId)
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0			1		2			3					4					5
-		"SELECT ÊÀ½ç×´Ì¬ID,¶ÓÎéID,»÷É±»ò±»É±,¸üĞÂÊÀ½ç×´Ì¬Ôö¼õÖµ,ÊÀ½ç×´Ì¬´ïµ½¸ÃÖµÊ±ÌáÊ¾,ÌáÊ¾ÎÄ±¾ From _ÊÂ¼ş_ÊÀ½ç×´Ì¬¶ÓÎéÅäÖÃ WHERE ÊÂ¼şID  = '%u'" :
+		"SELECT ä¸–ç•ŒçŠ¶æ€ID,é˜Ÿä¼ID,å‡»æ€æˆ–è¢«æ€,æ›´æ–°ä¸–ç•ŒçŠ¶æ€å¢å‡å€¼,ä¸–ç•ŒçŠ¶æ€è¾¾åˆ°è¯¥å€¼æ—¶æç¤º,æç¤ºæ–‡æœ¬ From _äº‹ä»¶_ä¸–ç•ŒçŠ¶æ€é˜Ÿä¼é…ç½® WHERE äº‹ä»¶ID  = '%u'" :
 		//		0	1		2			3		4			5
 		"SELECT ID,TeamId,KillOrKilled,Step,NoticeValue,NoticeText From _event_worldstate_team WHERE EventId = '%u'", eventId))
 	{
@@ -819,9 +819,9 @@ void Event::InitParams(uint32 eventId)
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//					0		1		2		3			4
-		"SELECT Ë¢ĞÂÉúÎï»òÎïÌåID,½×¶ÎID,Ë¢ĞÂÊ±¼ä,Ë¢ĞÂÎ»ÖÃ×ø±êID,³ÖĞøÊ±¼ä,"
+		"SELECT åˆ·æ–°ç”Ÿç‰©æˆ–ç‰©ä½“ID,é˜¶æ®µID,åˆ·æ–°æ—¶é—´,åˆ·æ–°ä½ç½®åæ ‡ID,æŒç»­æ—¶é—´,"
 		//5				6		7		8		9		10
-		"ÌáÊ¾Ê±¼ä1,ÌáÊ¾ÎÄ±¾1,ÌáÊ¾Ê±¼ä2,ÌáÊ¾ÎÄ±¾2,ÌáÊ¾Ê±¼ä3,ÌáÊ¾ÎÄ±¾3 From _ÊÂ¼ş_ÉúÎï»òÎïÌåË¢ĞÂÅäÖÃ WHERE ÊÂ¼şID = '%u'":
+		"æç¤ºæ—¶é—´1,æç¤ºæ–‡æœ¬1,æç¤ºæ—¶é—´2,æç¤ºæ–‡æœ¬2,æç¤ºæ—¶é—´3,æç¤ºæ–‡æœ¬3 From _äº‹ä»¶_ç”Ÿç‰©æˆ–ç‰©ä½“åˆ·æ–°é…ç½® WHERE äº‹ä»¶ID = '%u'":
 		//		0		1		2		3		4
 		"SELECT Entry,Phase,SpawnTime,PosId,Duration,"
 		//5				6			7			8				9		10
@@ -857,7 +857,7 @@ bool Event::AcceptInvitation(Player* player, uint32 menuId)
 
 	if (!sGameEventMgr->IsActiveEvent(eventId))
 	{
-		player->GetSession()->SendNotification("¸Ã»î¶¯ÒÑ¾­½áÊø£¡");
+		player->GetSession()->SendNotification("è¯¥æ´»åŠ¨å·²ç»ç»“æŸï¼");
 		return true;
 	}
 
@@ -868,9 +868,9 @@ bool Event::AcceptInvitation(Player* player, uint32 menuId)
 			auto itr = ArenaDuelMap.find(player->GetGUIDLow());
 			if (itr == ArenaDuelMap.end())
 				sArenaDuel->Signup(player);
-			player->GetSession()->SendAreaTriggerMessage("±¨Ãû³É¹¦£¬ÀŞÌ¨Èü¼´½«¿ªÊ¼£¬Çë±£³ÖÔÚÏß£¡");
+			player->GetSession()->SendAreaTriggerMessage("æŠ¥åæˆåŠŸï¼Œæ“‚å°èµ›å³å°†å¼€å§‹ï¼Œè¯·ä¿æŒåœ¨çº¿ï¼");
 		}else
-			player->GetSession()->SendNotification("±¨ÃûÒÑ¾­½ØÖ¹£¡");
+			player->GetSession()->SendNotification("æŠ¥åå·²ç»æˆªæ­¢ï¼");
 		return true;
 	}
 		
@@ -937,7 +937,7 @@ void Event::AddEventList(Player* player, Object* obj, bool isBG)
 		{
 			std::ostringstream oss;
 			oss << itr->description;
-			oss << "\n|cFF33CC00[ÒÑ¼¤»î£¬¾àÀë½áÊø - ";
+			oss << "\n|cFF33CC00[å·²æ¿€æ´»ï¼Œè·ç¦»ç»“æŸ - ";
 			oss << SecTimeString(sGameEventMgr->NextCheck(itr->eventId), true);
 			oss << "]|r";
 			player->ADD_GOSSIP_ITEM(0, oss.str(), SENDER_CUSTOM_EVENT_ACTIVE, itr->eventId);
@@ -953,7 +953,7 @@ void Event::AddEventList(Player* player, Object* obj, bool isBG)
 		{
 			std::ostringstream oss;
 			oss << itr->description;
-			oss << "\n|cFF666666[Î´¼¤»î£¬¾àÀë¿ªÊ¼ - ";
+			oss << "\n|cFF666666[æœªæ¿€æ´»ï¼Œè·ç¦»å¼€å§‹ - ";
 			oss << SecTimeString(sGameEventMgr->NextCheck(itr->eventId), true);
 			oss << "]|r";
 			player->ADD_GOSSIP_ITEM(0, oss.str(), SENDER_CUSTOM_EVENT_DEACTIVE, itr->eventId);
@@ -976,7 +976,7 @@ void Event::GetTelePos(uint32 posId, uint32 &map, float &x, float &y, float &z, 
 	}
 }
 
-//Unk1 = 1Ê± ¼ì²âÕóÓªÊÇ·ñÒ»ÖÂ Ò»ÖÂÔòÍ¨¹ı ¿ÉÒÔÊÍ·Å¼¼ÄÜ
+//Unk1 = 1æ—¶ æ£€æµ‹é˜µè¥æ˜¯å¦ä¸€è‡´ ä¸€è‡´åˆ™é€šè¿‡ å¯ä»¥é‡Šæ”¾æŠ€èƒ½
 bool Event::GobUnk1Check(Unit* target, GameObject *const gob)
 {
 	if (!target)
@@ -1010,7 +1010,7 @@ bool Event::IpCheck(Player* player)
 	if (count > max)
 	{
 		std::ostringstream oss;
-		oss << "¼ÓÈë»î¶¯µÄÍæ¼ÒÊıÁ¿ÒÑ´ïµ½ÉÏÏŞ£¬¼ÓÈëÊ§°Ü£¡" << count << "/" << max;
+		oss << "åŠ å…¥æ´»åŠ¨çš„ç©å®¶æ•°é‡å·²è¾¾åˆ°ä¸Šé™ï¼ŒåŠ å…¥å¤±è´¥ï¼" << count << "/" << max;
 		player->GetSession()->SendNotification(oss.str().c_str());
 		return false;
 	}
@@ -1018,7 +1018,7 @@ bool Event::IpCheck(Player* player)
 		return true;
 }
 
-//Õ½³¡
+//æˆ˜åœº
 bool Event::IsFixedTimeBgActive(BattlegroundTypeId bgTypeId)
 {
 	EventTypes eventType = C_ET_NONE;
@@ -1060,7 +1060,7 @@ void Event::Start(uint32 eventId)
 		return;
 	}
 	
-	//ÔÚ´Ë×ö¼ÙÈËÉÏÏÂÏß ÇĞ»»ÇøÓòµÈÊÂ¼ş´¦Àí
+	//åœ¨æ­¤åšå‡äººä¸Šä¸‹çº¿ åˆ‡æ¢åŒºåŸŸç­‰äº‹ä»¶å¤„ç†
 	
 	if (eventId == EVENT_ID_FAKE_PLAYER_LOGIN_OR_LOGOUT)
 	{
@@ -1085,14 +1085,14 @@ void Event::Start(uint32 eventId)
 
 	InitParams(eventId);
 
-	//³Ô¼¦³õÊ¼»¯
+	//åƒé¸¡åˆå§‹åŒ–
 	sBGIC->InitParams(eventId, _Map);
 
 	if (_EventType == C_ET_NONE)
 		return;
 
 	std::ostringstream oss;
-	oss << _EventName << "¿ªÊ¼£¡";
+	oss << _EventName << "å¼€å§‹ï¼";
 	sWorld->SendServerMessage(SERVER_MSG_STRING, oss.str().c_str());
 
 	if (eventId == ARENA_DUEL_START_EVENT_ID)
@@ -1122,13 +1122,13 @@ void Event::Start(uint32 eventId)
 	switch (_RejoinType)
 	{
 	case C_RT_BANED:
-		oss << "ÖØĞÂ¼ÓÈë»î¶¯½«±»½ûÖ¹£¡";
+		oss << "é‡æ–°åŠ å…¥æ´»åŠ¨å°†è¢«ç¦æ­¢ï¼";
 		break;
 	case C_RT_KEEP_GROUP:
-		oss << "ÖØĞÂ¼ÓÈë»î¶¯²»»á¸Ä±ä·Ö×é£¡";
+		oss << "é‡æ–°åŠ å…¥æ´»åŠ¨ä¸ä¼šæ”¹å˜åˆ†ç»„ï¼";
 		break;
 	case C_RT_REDIS_GROUP:
-		oss << "ÖØĞÂ¼ÓÈë»î¶¯Ê±£¬ÏµÍ³»áÖØĞÂ·Ö×é£¡";
+		oss << "é‡æ–°åŠ å…¥æ´»åŠ¨æ—¶ï¼Œç³»ç»Ÿä¼šé‡æ–°åˆ†ç»„ï¼";
 		break;
 	}
 
@@ -1165,7 +1165,7 @@ int32 Event::GetWeightLeft(EventFactionId faction)
 
 void Event::Stop(uint32 eventId)
 {
-	//ÇÀ´ğ
+	//æŠ¢ç­”
 	if (eventId == EVENT_ID_QUICK_RESPONSE)
 	{
 		sQuickResponse->Reward();
@@ -1205,7 +1205,7 @@ void Event::Stop(uint32 eventId)
 
 	auto itr = _FactionNameMap.find(_WinFaction);
 	if (itr != _FactionNameMap.end())
-		SendScreenMessage(_EventName + itr->second + "»ñÊ¤£¡");
+		SendScreenMessage(_EventName + itr->second + "è·èƒœï¼");
 
 	ReviveAll(false);
 	_DelayStopCall = true;
@@ -1227,7 +1227,7 @@ void Event::UpdateActive(Object* obj,bool kill)
 				if (targetEntry == itr->TargetEntry[i] && itr->TargetCount[i] != itr->TargetKillCount[i])
 				{
 					itr->TargetKillCount[i]++;
-					SendScreenMessage("»÷É±[" + sObjectMgr->GetCreatureTemplate(obj->GetEntry())->Name + "] " + std::to_string(itr->TargetKillCount[i]) + " / " + std::to_string(itr->TargetCount[i]));
+					SendScreenMessage("å‡»æ€[" + sObjectMgr->GetCreatureTemplate(obj->GetEntry())->Name + "] " + std::to_string(itr->TargetKillCount[i]) + " / " + std::to_string(itr->TargetCount[i]));
 				}
 					
 		break;
@@ -1237,7 +1237,7 @@ void Event::UpdateActive(Object* obj,bool kill)
 				if (targetEntry == -itr->TargetEntry[i] && itr->TargetCount[i] != itr->TargetKillCount[i])
 				{
 					itr->TargetKillCount[i]++;
-					SendScreenMessage("´İ»Ù[" + sObjectMgr->GetGameObjectTemplate(obj->GetEntry())->name + "] " + std::to_string(itr->TargetKillCount[i]) + "/" + std::to_string(itr->TargetCount[i]));
+					SendScreenMessage("æ‘§æ¯[" + sObjectMgr->GetGameObjectTemplate(obj->GetEntry())->name + "] " + std::to_string(itr->TargetKillCount[i]) + "/" + std::to_string(itr->TargetCount[i]));
 				}
 		break;
 	case TYPEID_PLAYER:
@@ -1367,7 +1367,7 @@ void Event::RewAndRest()
 	std::vector<std::pair<std::string, uint32>> tVector;
 	uint32 count;
 
-	oss << "|cffFF0000»÷É±ÅÅĞĞ|r\n";
+	oss << "|cffFF0000å‡»æ€æ’è¡Œ|r\n";
 	count = 0;
 	tVector.clear();
 	SortMapByValue(KillsMap, tVector);
@@ -1381,7 +1381,7 @@ void Event::RewAndRest()
 	}
 
 	//oss << "\n\n";
-	//oss << "±»É±ÅÅĞĞ\n";
+	//oss << "è¢«æ€æ’è¡Œ\n";
 	//count = 0;
 	//tVector.clear();
 	//SortMapByValue(KilledsMap, tVector);
@@ -1395,7 +1395,7 @@ void Event::RewAndRest()
 	//}
 
 	oss << "\n\n";
-	oss << "|cffFF0000ÉËº¦ÅÅĞĞ|r\n";
+	oss << "|cffFF0000ä¼¤å®³æ’è¡Œ|r\n";
 	count = 0;
 	tVector.clear();
 	SortMapByValue(DamageMap, tVector);
@@ -1409,7 +1409,7 @@ void Event::RewAndRest()
 	}
 
 	oss << "\n\n";
-	oss << "|cffFF0000ÖÎÁÆÅÅĞĞ|r\n";
+	oss << "|cffFF0000æ²»ç–—æ’è¡Œ|r\n";
 	count = 0;
 	tVector.clear();
 	SortMapByValue(HealMap, tVector);
@@ -1431,11 +1431,11 @@ void Event::RewAndRest()
 				continue;
 
 			std::ostringstream oss1;
-			oss1 << "|cffFF0000ÄãµÄ¸öÈËÕ½¼¨|r" << "\n";
-			oss1 << "|cFFF49B00»÷É±|r - " << pl->GetEventData().Kills << "\n";
-			oss1 << "|cFFF49B00±»É±|r - " << pl->GetEventData().Killeds << "\n";
-			oss1 << "|cFFF49B00ÉËº¦|r - " << pl->GetEventData().Damage << "\n";
-			oss1 << "|cFFF49B00ÖÎÁÆ|r - " << pl->GetEventData().Heal << "\n";
+			oss1 << "|cffFF0000ä½ çš„ä¸ªäººæˆ˜ç»©|r" << "\n";
+			oss1 << "|cFFF49B00å‡»æ€|r - " << pl->GetEventData().Kills << "\n";
+			oss1 << "|cFFF49B00è¢«æ€|r - " << pl->GetEventData().Killeds << "\n";
+			oss1 << "|cFFF49B00ä¼¤å®³|r - " << pl->GetEventData().Damage << "\n";
+			oss1 << "|cFFF49B00æ²»ç–—|r - " << pl->GetEventData().Heal << "\n";
 
 			sCF->SendAcceptOrCancel(pl, 0, oss.str() + oss1.str());
 
@@ -1467,7 +1467,7 @@ void Event::Update(Map* map, uint32 diff)
 	if (_EventId == BGIC_EVENT_ID)
 		sBGIC->UpdateSpawn(diff);
 
-	//ÑÓ³ÙÕÙ»½
+	//å»¶è¿Ÿå¬å”¤
 	if (_DelayStartCall)
 	{
 		_UpdateDelayNotice += diff;
@@ -1483,7 +1483,7 @@ void Event::Update(Map* map, uint32 diff)
 	if (_EventId == BGIC_EVENT_ID)
 		return;
 
-	//ÑÓ³Ù½±Àø²¢ÖØÖÃ
+	//å»¶è¿Ÿå¥–åŠ±å¹¶é‡ç½®
 	if (_DelayStopCall)
 	{
 		_UpdateDelayNotice += diff;
@@ -1592,7 +1592,7 @@ void Event::UpdateRevive(uint32 diff)
 
 				if (GetDistance(pl, GetPhaseGraveyardPos(pl->GetEventFaction())) < 20.0f)
 				{
-					pl->GetSession()->SendAreaTriggerMessage("%sÄÃ³öÄãµÄÓÂÆø£¬¼ÌĞøÕ½¶·£¡", _EventName.c_str());
+					pl->GetSession()->SendAreaTriggerMessage("%sæ‹¿å‡ºä½ çš„å‹‡æ°”ï¼Œç»§ç»­æˆ˜æ–—ï¼", _EventName.c_str());
 					pl->CastSpell(pl, 24171, true);
 					pl->ResurrectPlayer(1.0f);
 					pl->CastSpell(pl, 6962, true);
@@ -1694,28 +1694,28 @@ void Event::Join(Player* pl)
 {
 	if (!Valid())
 	{
-		ChatHandler(pl->GetSession()).PSendSysMessage("¼ÓÈëÊ§°Ü£¡»î¶¯ÒÑ¾­½áÊø£¡");
+		ChatHandler(pl->GetSession()).PSendSysMessage("åŠ å…¥å¤±è´¥ï¼æ´»åŠ¨å·²ç»ç»“æŸï¼");
 		return;
 	}
 
-	//³¬¹ıIPÏŞÖÆ
+	//è¶…è¿‡IPé™åˆ¶
 	if (!IpCheck(pl))
 		return;
 
-	//ÒÑ¾­ÔÚÊÂ¼şÖĞ
+	//å·²ç»åœ¨äº‹ä»¶ä¸­
 
 	if (pl->InEvent())
 	{
-		ChatHandler(pl->GetSession()).PSendSysMessage("%s¼ÓÈëÊ§°Ü£¡ÄãÒÑ¾­¼ÓÈë»î¶¯£¡", _EventName.c_str());
+		ChatHandler(pl->GetSession()).PSendSysMessage("%såŠ å…¥å¤±è´¥ï¼ä½ å·²ç»åŠ å…¥æ´»åŠ¨ï¼", _EventName.c_str());
 		return;
 	}
-#pragma region ·Ö×é
+#pragma region åˆ†ç»„
 
 	EventFactionId faction = Subgroup(pl);
 
 	if (faction == 0)
 	{
-		ChatHandler(pl->GetSession()).PSendSysMessage("%s¼ÓÈëÊ§°Ü£¡ÎŞ·¨ÖØĞÂ¼ÓÈë£¡", _EventName.c_str());
+		ChatHandler(pl->GetSession()).PSendSysMessage("%såŠ å…¥å¤±è´¥ï¼æ— æ³•é‡æ–°åŠ å…¥ï¼", _EventName.c_str());
 		return;
 	}
 

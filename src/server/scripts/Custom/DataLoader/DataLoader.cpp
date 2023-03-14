@@ -1,4 +1,3 @@
-﻿#pragma execution_character_set("utf-8")
 #include "LFGMgr.h"
 #include "../Requirement/Requirement.h"
 #include "../Reward/Reward.h"
@@ -221,6 +220,7 @@ void DataLoader::LoadAll()
 	sCharMod->Load();
 	sChallengeMod->Load();
 	sVIP->Load();
+    sLog->outString("1111111111");
 	sLottery->Load();
 	sMountVendor->Load();
 	sStage->Load();
@@ -229,12 +229,14 @@ void DataLoader::LoadAll()
 	sString->Load();
 	sResetIns->Load();
 	sFTB->Load();
+    sLog->outString("22222222");
 	sServerAnnounce->Load();
 	sCustomScript->LoadGobScripts();
 	sCustomScript->LoadCreautreScripts();
 	sCustomScript->LoadCircleData();
 	sDeadline->Load();
 	sLeaderReward->Load();
+    sLog->outString("333333333");
 	sTrigger->Load();
 	sQuickResponse->Load();
 	sCustomCommand->Load();
@@ -242,6 +244,7 @@ void DataLoader::LoadAll()
 	sGateWay->Load();
 	sGCAddon->Load();
 	sArmory->Load();
+    sLog->outString("4444444");
 	sGift->Load();
 	sSignIn->Load();
 	sTalisman->Load();
@@ -249,6 +252,7 @@ void DataLoader::LoadAll()
 	sRank->Load();
 	sFaction->Load();
 	sEvent->LoadPos();
+    sLog->outString("555555");
 	//sMorph->Load();
 	sLuckDraw->Load();
 	sRecovery->Load();

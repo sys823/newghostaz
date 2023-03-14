@@ -1,9 +1,7 @@
-#pragma execution_character_set("utf-8")
 #include "CharMod.h"
 #include "../../FunctionCollection/FunctionCollection.h"
 #include "../../Switch/Switch.h"
 #include "../../Requirement/Requirement.h"
-
 std::vector<CharStatTemplate> CharStatVec;
 std::vector<StaticStatTemplate> StaticStatVec;
 std::vector<uint32> AltClassSpellVec;
@@ -13,11 +11,11 @@ void CharMod::Load()
 	CharStatVec.clear();
 	QueryResult result = WorldDatabase.PQuery(
 		//		0			1			2			3			4			5			6				7			8
-		"SELECT Ö°ÒµË÷Òý,ÎïÀíÉËº¦PVP±¶ÂÊ,·¨ÊõÉËº¦PVP±¶ÂÊ,ÖÎÁÆÐ§¹ûPVP±¶ÂÊ,»¤¼×ÖµÉÏÏÞ,¶ãÉÁ°Ù·Ö±ÈÉÏÏÞ,ÕÐ¼Ü°Ù·Ö±ÈÉÏÏÞ,¸ñµ²°Ù·Ö±ÈÉÏÏÞ,±¬»÷°Ù·Ö±ÈÉÏÏÞ,"
+		"SELECT èŒä¸šç´¢å¼•,ç‰©ç†ä¼¤å®³PVPå€çŽ‡,æ³•æœ¯ä¼¤å®³PVPå€çŽ‡,æ²»ç–—æ•ˆæžœPVPå€çŽ‡,æŠ¤ç”²å€¼ä¸Šé™,èº²é—ªç™¾åˆ†æ¯”ä¸Šé™,æ‹›æž¶ç™¾åˆ†æ¯”ä¸Šé™,æ ¼æŒ¡ç™¾åˆ†æ¯”ä¸Šé™,çˆ†å‡»ç™¾åˆ†æ¯”ä¸Šé™,"
 		//		9			10				11			12				13				14				15				16			17				18				19				20			21
-		"¶îÍâ¾«Éñ×ª·¨ÉË, ¶îÍâ¾«Éñ×ªÖÎÁÆ, ¶îÍâÖÇÁ¦×ª·¨ÉË, ¶îÍâÖÇÁ¦×ªÖÎÁÆ, ¶îÍâÁ¦Á¿×ª¹¥Ç¿, ¶îÍâÃô½Ý×ª¹¥Ç¿, ¶îÍâ¾«Éñ×ª¹¥Ç¿, ¶îÍâÖÇÁ¦×ª¹¥Ç¿, ¶îÍâÁ¦Á¿×ª·¨ÉË, ¶îÍâÃô½Ý×ª·¨ÉË, ¶îÍâÁ¦Á¿×ªÖÎÁÆ, ¶îÍâÃô½Ý×ªÖÎÁÆ,¼õÉË°Ù·Ö±È,"
+		"é¢å¤–ç²¾ç¥žè½¬æ³•ä¼¤, é¢å¤–ç²¾ç¥žè½¬æ²»ç–—, é¢å¤–æ™ºåŠ›è½¬æ³•ä¼¤, é¢å¤–æ™ºåŠ›è½¬æ²»ç–—, é¢å¤–åŠ›é‡è½¬æ”»å¼º, é¢å¤–æ•æ·è½¬æ”»å¼º, é¢å¤–ç²¾ç¥žè½¬æ”»å¼º, é¢å¤–æ™ºåŠ›è½¬æ”»å¼º, é¢å¤–åŠ›é‡è½¬æ³•ä¼¤, é¢å¤–æ•æ·è½¬æ³•ä¼¤, é¢å¤–åŠ›é‡è½¬æ²»ç–—, é¢å¤–æ•æ·è½¬æ²»ç–—,å‡ä¼¤ç™¾åˆ†æ¯”,"
 		//		22			23				24				25		26			27		28			29				30
-		"ÎïÀíÉËº¦PVE±¶ÂÊ,·¨ÊõÉËº¦PVE±¶ÂÊ,ÖÎÁÆÐ§¹ûPVE±¶ÂÊ,¼±ËÙµÈ¼¶ÉÏÏÞ,ÉúÃüÖµÉÏÏÞ,·¨Á¦ÖµÉÏÏÞ,ÎïÀíÉËº¦ÉÏÏÞ,·¨ÊõÉËº¦ÉÏÏÞ,ÖÎÁÆÐ§¹ûÉÏÏÞ FROM _ÊôÐÔµ÷Õû_Ö°Òµ");
+		"ç‰©ç†ä¼¤å®³PVEå€çŽ‡,æ³•æœ¯ä¼¤å®³PVEå€çŽ‡,æ²»ç–—æ•ˆæžœPVEå€çŽ‡,æ€¥é€Ÿç­‰çº§ä¸Šé™,ç”Ÿå‘½å€¼ä¸Šé™,æ³•åŠ›å€¼ä¸Šé™,ç‰©ç†ä¼¤å®³ä¸Šé™,æ³•æœ¯ä¼¤å®³ä¸Šé™,æ²»ç–—æ•ˆæžœä¸Šé™ FROM _å±žæ€§è°ƒæ•´_èŒä¸š");
 
 	if (result)
 	{
@@ -69,7 +67,7 @@ void CharMod::Load()
 
 	AltClassSpellVec.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ¼¼ÄÜID FROM __×ªÖ°±£Áô¼¼ÄÜ" :
+		"SELECT æŠ€èƒ½ID FROM __è½¬èŒä¿ç•™æŠ€èƒ½" :
 		"SELECT spellid FROM _alt_class_spells"))
 	{
 		do
@@ -332,21 +330,21 @@ bool CharMod::CheckFamily(Player* player, uint32 SpellFamily)
 bool CharMod::CheckSkill(SpellInfo const* spellInfo)
 {
 	return
-		spellInfo->IsAbilityOfSkillType(SKILL_ALCHEMY) ||			//Á¶½ð
-		spellInfo->IsAbilityOfSkillType(SKILL_BLACKSMITHING) ||		//¶ÍÔì
-		spellInfo->IsAbilityOfSkillType(SKILL_COOKING) ||			//Åëâ¿
-		spellInfo->IsAbilityOfSkillType(SKILL_ENCHANTING) ||		//¸½Ä§
-		spellInfo->IsAbilityOfSkillType(SKILL_ENGINEERING) ||		//¹¤³Ì
-		spellInfo->IsAbilityOfSkillType(SKILL_FIRST_AID) ||			//¼±¾È
-		spellInfo->IsAbilityOfSkillType(SKILL_HERBALISM) ||			//²ÝÒ©
-		spellInfo->IsAbilityOfSkillType(SKILL_LEATHERWORKING) ||	//ÖÆÆ¤
-		spellInfo->IsAbilityOfSkillType(SKILL_INSCRIPTION) ||		//ÃúÎÄ
-		spellInfo->IsAbilityOfSkillType(SKILL_TAILORING) ||			//²Ã·ì
-		spellInfo->IsAbilityOfSkillType(SKILL_MINING) ||			//ÍÚ¿ó
-		spellInfo->IsAbilityOfSkillType(SKILL_FISHING) ||			//µöÓã
-		spellInfo->IsAbilityOfSkillType(SKILL_SKINNING) ||			//°þÆ¤
-		spellInfo->IsAbilityOfSkillType(SKILL_JEWELCRAFTING) ||		//Öé±¦
-		spellInfo->IsAbilityOfSkillType(SKILL_RIDING_HORSE) ||		//ÆïÊõ
+		spellInfo->IsAbilityOfSkillType(SKILL_ALCHEMY) ||			//ç‚¼é‡‘
+		spellInfo->IsAbilityOfSkillType(SKILL_BLACKSMITHING) ||		//é”»é€ 
+		spellInfo->IsAbilityOfSkillType(SKILL_COOKING) ||			//çƒ¹é¥ª
+		spellInfo->IsAbilityOfSkillType(SKILL_ENCHANTING) ||		//é™„é­”
+		spellInfo->IsAbilityOfSkillType(SKILL_ENGINEERING) ||		//å·¥ç¨‹
+		spellInfo->IsAbilityOfSkillType(SKILL_FIRST_AID) ||			//æ€¥æ•‘
+		spellInfo->IsAbilityOfSkillType(SKILL_HERBALISM) ||			//è‰è¯
+		spellInfo->IsAbilityOfSkillType(SKILL_LEATHERWORKING) ||	//åˆ¶çš®
+		spellInfo->IsAbilityOfSkillType(SKILL_INSCRIPTION) ||		//é“­æ–‡
+		spellInfo->IsAbilityOfSkillType(SKILL_TAILORING) ||			//è£ç¼
+		spellInfo->IsAbilityOfSkillType(SKILL_MINING) ||			//æŒ–çŸ¿
+		spellInfo->IsAbilityOfSkillType(SKILL_FISHING) ||			//é’“é±¼
+		spellInfo->IsAbilityOfSkillType(SKILL_SKINNING) ||			//å‰¥çš®
+		spellInfo->IsAbilityOfSkillType(SKILL_JEWELCRAFTING) ||		//ç å®
+		spellInfo->IsAbilityOfSkillType(SKILL_RIDING_HORSE) ||		//éª‘æœ¯
 		spellInfo->IsAbilityOfSkillType(SKILL_RIDING_WOLF) ||
 		spellInfo->IsAbilityOfSkillType(SKILL_RIDING_TIGER) ||
 		spellInfo->IsAbilityOfSkillType(SKILL_RIDING_RAM) ||
@@ -355,8 +353,8 @@ bool CharMod::CheckSkill(SpellInfo const* spellInfo)
 		spellInfo->IsAbilityOfSkillType(SKILL_RIDING_UNDEAD_HORSE) ||
 		spellInfo->IsAbilityOfSkillType(SKILL_RIDING_KODO) ||
 		spellInfo->IsAbilityOfSkillType(SKILL_RIDING) ||
-		spellInfo->HasAura(SPELL_AURA_MOUNTED) ||					//×øÆï
-		spellInfo->IsAbilityOfSkillType(SKILL_COMPANIONS);			//Ð¡³èÎï
+		spellInfo->HasAura(SPELL_AURA_MOUNTED) ||					//åéª‘
+		spellInfo->IsAbilityOfSkillType(SKILL_COMPANIONS);			//å°å® ç‰©
 }
 
 void CharMod::ModClass(Player* player, uint8 targetClass)
@@ -413,9 +411,9 @@ void CharMod::ModClass(Player* player, uint8 targetClass)
 	if (targetClass == CLASS_DEATH_KNIGHT)
 		player->InitRunes();
 
-	//CharacterDatabase.PExecute("update characters set class=%u where guid =%u", targetClass, player->GetGUIDLow()); //¸üÐÂ×ªÖ°ºóµÄÖ°Òµ
-	CharacterDatabase.PExecute("delete from character_glyphs where guid =%u", player->GetGUIDLow()); // É¾³ýµñÎÄ
-	CharacterDatabase.PExecute("delete from character_pet where owner =%u", player->GetGUIDLow());//É¾³ý³èÎï
+	//CharacterDatabase.PExecute("update characters set class=%u where guid =%u", targetClass, player->GetGUIDLow()); //æ›´æ–°è½¬èŒåŽçš„èŒä¸š
+	CharacterDatabase.PExecute("delete from character_glyphs where guid =%u", player->GetGUIDLow()); // åˆ é™¤é›•æ–‡
+	CharacterDatabase.PExecute("delete from character_pet where owner =%u", player->GetGUIDLow());//åˆ é™¤å® ç‰©
 
 	//Customize(GetGUID(), getGender(), 1, 1, 1, 1, 1);
 	sWorld->UpdateGlobalPlayerData(player->GetGUIDLow(), PLAYER_UPDATE_DATA_CLASS, "", 0, 0, 0, targetClass);
@@ -427,25 +425,25 @@ std::string CharMod::GetClassName1(uint32 _class)
 	switch (_class)
 	{
 	case CLASS_WARRIOR:
-		return "[Õ½Ê¿]";
+		return "[æˆ˜å£«]";
 	case CLASS_PALADIN:
-		return "[Ê¥ÆïÊ¿]";
+		return "[åœ£éª‘å£«]";
 	case CLASS_HUNTER:
-		return "[ÁÔÈË]";
+		return "[çŒŽäºº]";
 	case CLASS_ROGUE:
-		return "[µÁÔô]";
+		return "[ç›—è´¼]";
 	case CLASS_PRIEST:
-		return "[ÄÁÊ¦]";
+		return "[ç‰§å¸ˆ]";
 	case CLASS_DEATH_KNIGHT:
-		return "[ËÀÍöÆïÊ¿]";
+		return "[æ­»äº¡éª‘å£«]";
 	case CLASS_SHAMAN:
-		return "[ÈøÂú¼ÀË¾]";
+		return "[è¨æ»¡ç¥­å¸]";
 	case CLASS_MAGE:
-		return "[·¨Ê¦]";
+		return "[æ³•å¸ˆ]";
 	case CLASS_WARLOCK:
-		return "[ÊõÊ¿]";
+		return "[æœ¯å£«]";
 	case CLASS_DRUID:
-		return "[µÂÂ³ÒÁ]";
+		return "[å¾·é²ä¼Š]";
 	default:
 		return "";
 	}
@@ -467,7 +465,7 @@ void CharMod::AddGossip(Player* player, Object* obj)
 			continue;
 
 		std::string name = GetClassName1(i);
-		player->ADD_GOSSIP_ITEM_EXTENDED(0, "×ªÖ° -> " + name, SENDER_ALT_CLASS, i, sReq->Notice(player, sSwitch->GetValue(ST_ALT_CLASS), "×ªÖ°Îª", name), 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(0, "è½¬èŒ -> " + name, SENDER_ALT_CLASS, i, sReq->Notice(player, sSwitch->GetValue(ST_ALT_CLASS), "è½¬èŒä¸º", name), 0, false);
 	}
 
 	if (obj->ToCreature())

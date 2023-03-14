@@ -1,4 +1,4 @@
-#pragma execution_character_set("utf-8")
+
 #include "PvP.h"
 #include "../Switch/Switch.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -17,7 +17,7 @@ void PvP::Load()
 	
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0			1		2			3				4			5	6			7				8			9
-		"SELECT µØÓòID, ÇøÓòÊôÐÔ, ½øÈëÌáÊ¾ÎÄ±¾,½øÈë»ñµÃÃû×ÖÇ°×º,ÉúÃüÖµÏÂÏÞ,ÇøÓòID,ÉúÃüÖµÉÏÏÞ,»÷É±½±ÀøÄ£°åID,±»É±½±ÀøÄ£°åID,»ñµÃ½±ÀøÊ±Âú×ãµÄÊÂ¼þ×é,½øÈë×Ô¶¯ÂúÑª FROM _ÊôÐÔµ÷Õû_ÇøÓò" :
+		"SELECT åœ°åŸŸID, åŒºåŸŸå±žæ€§, è¿›å…¥æç¤ºæ–‡æœ¬,è¿›å…¥èŽ·å¾—åå­—å‰ç¼€,ç”Ÿå‘½å€¼ä¸‹é™,åŒºåŸŸID,ç”Ÿå‘½å€¼ä¸Šé™,å‡»æ€å¥–åŠ±æ¨¡æ¿ID,è¢«æ€å¥–åŠ±æ¨¡æ¿ID,èŽ·å¾—å¥–åŠ±æ—¶æ»¡è¶³çš„äº‹ä»¶ç»„,è¿›å…¥è‡ªåŠ¨æ»¡è¡€ FROM _å±žæ€§è°ƒæ•´_åŒºåŸŸ" :
 		//		0		1		2		3	4	5		6		7		8			9
 		"SELECT area, type, notice,prefix,minHp,zone,maxHp,killRewId,killedRewId,rewEventData FROM _pvp");
 
@@ -31,15 +31,15 @@ void PvP::Load()
 
 			const char*  type = fields[1].GetCString();
 
-			if (strcmp("°²È«Çø", type) == 0)
+			if (strcmp("å®‰å…¨åŒº", type) == 0)
 				Temp.type = PVP_TYPE_SANCTUARY;
-			else if (strcmp("×ÔÓÉPVP", type) == 0)
+			else if (strcmp("è‡ªç”±PVP", type) == 0)
 				Temp.type = PvP_TYPE_FFA;
-			else if (strcmp("×ÔÓÉPVP - ½ûÖ¹×é¶Ó", type) == 0)
+			else if (strcmp("è‡ªç”±PVP - ç¦æ­¢ç»„é˜Ÿ", type) == 0)
 				Temp.type = PvP_TYPE_NO_GROUP_FFA;
-			else if (strcmp("×Ô¶¨ÒåÕóÓª", type) == 0)
+			else if (strcmp("è‡ªå®šä¹‰é˜µè¥", type) == 0)
 				Temp.type = PvP_TYPE_CUSTOM_FACTION;
-			else if (strcmp("¹«»áPVP", type) == 0)
+			else if (strcmp("å…¬ä¼šPVP", type) == 0)
 				Temp.type = PvP_TYPE_GUILD;
 			else
 				Temp.type = PVP_TYPE_NONE;

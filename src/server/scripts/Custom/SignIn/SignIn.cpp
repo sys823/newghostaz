@@ -1,11 +1,9 @@
-#pragma execution_character_set("utf-8")
 #include "SignIn.h"
 #include "../Reward/Reward.h"
 #include "../CommonFunc/CommonFunc.h"
 #include "../GCAddon/GCAddon.h"
 
 std::unordered_map<uint32, uint32> SignInMap;
-
 void SignIn::Load()
 {
 	SignInMap.clear();
@@ -81,7 +79,7 @@ void SignIn::DoAction(Player* player)
 	if (!CanSignIn(player))
 		return;
 
-	//Ç©µ½¼ä¸ô´óÓÚ1Ê±
+	//ç­¾åˆ°é—´éš”å¤§äºŽ1æ—¶
 	if (GetDiffDay(player->signinTime, time(NULL)) > 1)
 		player->signinDays = 0;
 
@@ -156,7 +154,7 @@ public:
 
 		sSignIn->GetInfo(player, signinTime, signinDays);
 
-		//Î´Á¬ÐøÇ©µ½
+		//æœªè¿žç»­ç­¾åˆ°
 		if (sSignIn->GetDiffDay(signinTime, time(NULL)) > 1)
 			signinDays = 0;
 

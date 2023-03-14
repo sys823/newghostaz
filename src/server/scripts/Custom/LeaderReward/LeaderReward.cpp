@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "LeaderReward.h"
 #include "../CommonFunc/CommonFunc.h"
 #include "Group.h"
@@ -168,7 +167,7 @@ bool LeaderReward::CheckLeaderData(Player* killer, Creature* boss)
 
 	GetLeaderInfo(entry,mapIdOrZoneId, isInstance, diff, bossVec, rewId, range, nearbyPlayers, rewType, ipMaxCount);
 	
-	//¸ÃµØÍ¼»òÇøÓò²»ÔÚ±íÖĞ
+	//è¯¥åœ°å›¾æˆ–åŒºåŸŸä¸åœ¨è¡¨ä¸­
 	if (bossVec.empty() || rewId == 0)
 		return false;
 
@@ -186,13 +185,13 @@ bool LeaderReward::CheckLeaderData(Player* killer, Creature* boss)
 
 	if (count < nearbyPlayers && group)
 	{
-		ChatHandler(leader->GetSession()).PSendSysMessage("¹²ÓĞ %d ÈËÔÚ %d Âë·¶Î§ÄÚ£¬ĞèÒª %d ÈË£¬½«ÎŞ·¨»ñµÃ½±Àø", count, range, nearbyPlayers);
+		ChatHandler(leader->GetSession()).PSendSysMessage("å…±æœ‰ %d äººåœ¨ %d ç èŒƒå›´å†…ï¼Œéœ€è¦ %d äººï¼Œå°†æ— æ³•è·å¾—å¥–åŠ±", count, range, nearbyPlayers);
 		return false;
 	}
 
 	if (ipCount > ipMaxCount && group)
 	{
-		ChatHandler(leader->GetSession()).PSendSysMessage("¹²ÓĞ %d ÈËÍ¬Ò»IP£¬³¬¹ıÏŞÖÆ %d£¬½«ÎŞ·¨»ñµÃ½±Àø", ipCount, ipMaxCount);
+		ChatHandler(leader->GetSession()).PSendSysMessage("å…±æœ‰ %d äººåŒä¸€IPï¼Œè¶…è¿‡é™åˆ¶ %dï¼Œå°†æ— æ³•è·å¾—å¥–åŠ±", ipCount, ipMaxCount);
 		return false;
 	}
 
@@ -247,7 +246,7 @@ bool LeaderReward::CheckLeaderData(Player* killer, Creature* boss)
 					sRew->Rew(member, rewId);
 	}
 
-	//½±ÀøÖ®ºóÇå¿Õ
+	//å¥–åŠ±ä¹‹åæ¸…ç©º
 	for (std::vector<LearderDataTemplate>::iterator iter = LeaderDataVec.begin(); iter != LeaderDataVec.end(); ++iter)
 	{
 		if (leader->GetGUIDLow() == iter->guid && mapIdOrZoneId == iter->mapIdOrZoneId && isInstance == iter->isInstance && diff == iter->diff)

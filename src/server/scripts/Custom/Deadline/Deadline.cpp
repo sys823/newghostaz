@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Deadline.h"
 #include "Group.h"
 #include "../Reward/Reward.h"
@@ -11,7 +10,7 @@ void Deadline::Load()
 {
 	DeadlineVec.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT µØÍ¼ID,Ê±¼ä,Í¨¹Ø½±ÀøÄ£°åID,Í¨¹ØĞè»÷É±ÉúÎïID,¸±±¾ÌôÕ½µÈ¼¶,ÊÂ¼ş×´Ì¬ID,Í¨¹ØÕÙ»½ÎïÌåID,¸±±¾ÄÑ¶È FROM _¸±±¾_ÏŞÊ±Ä£Ê½" :
+		"SELECT åœ°å›¾ID,æ—¶é—´,é€šå…³å¥–åŠ±æ¨¡æ¿ID,é€šå…³éœ€å‡»æ€ç”Ÿç‰©ID,å‰¯æœ¬æŒ‘æˆ˜ç­‰çº§,äº‹ä»¶çŠ¶æ€ID,é€šå…³å¬å”¤ç‰©ä½“ID,å‰¯æœ¬éš¾åº¦ FROM _å‰¯æœ¬_é™æ—¶æ¨¡å¼" :
 		"SELECT mapId,countDown,rewId,killedEntry,challengeLv,worldStat,gobEntry,diff FROM _deadline");
 
 	if (!result) return;
@@ -36,7 +35,7 @@ void Deadline::SetActive(Map* map)
 	//if (map->GetDifficulty() != DUNGEON_DIFFICULTY_HEROIC)
 		//return;
 
-	//ÒÑ¼¤»î »ò ÒÑÊ§°Ü
+	//å·²æ¿€æ´» æˆ– å·²å¤±è´¥
 	if (map->deadlineActive || map->deadlineFailed)
 		return;
 

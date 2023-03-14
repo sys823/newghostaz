@@ -1,4 +1,4 @@
-#pragma execution_character_set("utf-8")
+
 #include "MountVendor.h"
 #include "../Requirement/Requirement.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -11,7 +11,7 @@ void MountVendor::Load()
 	MountVendorVec.clear();
 
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ×øÆï¼¼ÄÜID,¹ºÂòÐèÇóÄ£°åID,ÊÇ·ñÊÛÂô FROM _×øÆï_Ô¤ÀÀÓëÊÛÂô" :
+		"SELECT åéª‘æŠ€èƒ½ID,è´­ä¹°éœ€æ±‚æ¨¡æ¿ID,æ˜¯å¦å”®å– FROM _åéª‘_é¢„è§ˆä¸Žå”®å–" :
 		"SELECT mountSpellId,reqId,onSale FROM _mount_vendor");
 	
 	if (!result) 
@@ -36,8 +36,8 @@ public:
 	bool OnGossipHello(Player* player, Creature* creature) override
 	{
 		player->PlayerTalkClass->ClearMenus();
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Â½µØ×øÆï", GOSSIP_SENDER_MAIN + 1, GOSSIP_ACTION_INFO_DEF);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "·ÉÐÐ×øÆï", GOSSIP_SENDER_MAIN + 2, GOSSIP_ACTION_INFO_DEF);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "é™†åœ°åéª‘", GOSSIP_SENDER_MAIN + 1, GOSSIP_ACTION_INFO_DEF);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "é£žè¡Œåéª‘", GOSSIP_SENDER_MAIN + 2, GOSSIP_ACTION_INFO_DEF);
 		player->SEND_GOSSIP_MENU(creature->GetEntry(), creature->GetGUID());
 		return true;
 	}
@@ -49,26 +49,26 @@ public:
 		switch (sender)
 		{
 		case GOSSIP_SENDER_MAIN:
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TAXI, "²é¿´", GOSSIP_SENDER_MAIN + 3, action);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TAXI, "æŸ¥çœ‹", GOSSIP_SENDER_MAIN + 3, action);
 			if (OnSale(action))
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "¹ºÂò", GOSSIP_SENDER_MAIN + 4, action);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "·µ»Ø", GOSSIP_SENDER_MAIN + 5, action);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "è´­ä¹°", GOSSIP_SENDER_MAIN + 4, action);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "è¿”å›ž", GOSSIP_SENDER_MAIN + 5, action);
 			player->SEND_GOSSIP_MENU(creature->GetEntry(), creature->GetGUID());
 			break;
-		case GOSSIP_SENDER_MAIN + 1://Â½µØ×øÆïÁÐ±í
+		case GOSSIP_SENDER_MAIN + 1://é™†åœ°åéª‘åˆ—è¡¨
 			AddMountList(player, false);
 			player->SEND_GOSSIP_MENU(creature->GetEntry(), creature->GetGUID());
 			break;
-		case GOSSIP_SENDER_MAIN + 2://·ÉÐÐ×øÆïÁÐ±í
+		case GOSSIP_SENDER_MAIN + 2://é£žè¡Œåéª‘åˆ—è¡¨
 			AddMountList(player, true);
 			player->SEND_GOSSIP_MENU(creature->GetEntry(), creature->GetGUID());
 			break;
-		case GOSSIP_SENDER_MAIN + 3://²é¿´
+		case GOSSIP_SENDER_MAIN + 3://æŸ¥çœ‹
 		{
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TAXI, "²é¿´", GOSSIP_SENDER_MAIN + 3, action);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TAXI, "æŸ¥çœ‹", GOSSIP_SENDER_MAIN + 3, action);
 			if (OnSale(action))
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "¹ºÂò", GOSSIP_SENDER_MAIN + 4, action);
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "·µ»Ø", GOSSIP_SENDER_MAIN + 5, action);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "è´­ä¹°", GOSSIP_SENDER_MAIN + 4, action);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "è¿”å›ž", GOSSIP_SENDER_MAIN + 5, action);
 			player->SEND_GOSSIP_MENU(creature->GetEntry(), creature->GetGUID());
 			if (player->HasAura(action))
 				break;
@@ -79,7 +79,7 @@ public:
 			}
 
 			std::ostringstream oss;
-			oss << "¸Ã×øÆïÐ§¹û½«ÔÚ" << MountTryTime << "SºóÈ¥³ý";
+			oss << "è¯¥åéª‘æ•ˆæžœå°†åœ¨" << MountTryTime << "SåŽåŽ»é™¤";
 			player->GetSession()->SendNotification(oss.str().c_str());
 			player->AddAura(action, player);
 			player->mountSpellId = action;
@@ -88,15 +88,15 @@ public:
 			ChatHandler(player->GetSession()).PSendSysMessage(GetMountDescription(action).c_str());
 		}
 			break;
-		case GOSSIP_SENDER_MAIN + 4://¹ºÂò
+		case GOSSIP_SENDER_MAIN + 4://è´­ä¹°
 		{
 			player->mountReqId = GetReqId(action);
 			player->mountSpellId = action;
-			std::string notice = sReq->Notice(player, player->mountReqId, "¹ºÂò\n", GetMountName(action));
+			std::string notice = sReq->Notice(player, player->mountReqId, "è´­ä¹°\n", GetMountName(action));
 			sCF->SendAcceptOrCancel(player, 997, notice);
 		}		
 			break;
-		case GOSSIP_SENDER_MAIN + 5://·µ»Ø
+		case GOSSIP_SENDER_MAIN + 5://è¿”å›ž
 			//OnGossipHello(player, creature);
 			if (IsFlyMount(action))
 			{
@@ -223,11 +223,11 @@ public:
 		oss << "[|cFFFF1717" << spellInfo->SpellName[4] << "|r]";
 
 		if (IsFlyMount(spellId))
-			oss << " ·ÉÐÐ×øÆï£¬";
+			oss << " é£žè¡Œåéª‘ï¼Œ";
 		else
-			oss << " Â½µØ×øÆï£¬";
+			oss << " é™†åœ°åéª‘ï¼Œ";
 
-		oss << "ÒÆ¶¯ËÙ¶ÈÌá¸ß|cFFFF1717" << speed << "|r%%¡£";
+		oss << "ç§»åŠ¨é€Ÿåº¦æé«˜|cFFFF1717" << speed << "|r%%ã€‚";
 
 		std::unordered_map<uint32, MountAllowedTemplate>::iterator iter = MountAllowedMap.find(spellInfo->Id);
 
@@ -247,24 +247,24 @@ public:
 			if (!iter->second.indoor)
 			{
 				ban = true;
-				oss << "[" << "|cFFFF1717ÊÒÄÚ|r" << "]";
+				oss << "[" << "|cFFFF1717å®¤å†…|r" << "]";
 			}
 			
 			if (!iter->second.instance)
 			{
 				ban = true;
-				oss << "[" << "|cFFFF1717¸±±¾|r" << "]";
+				oss << "[" << "|cFFFF1717å‰¯æœ¬|r" << "]";
 			}
 				
 
 			if (!iter->second.battleground)
 			{
 				ban = true;
-				oss << "[" << "|cFFFF1717Õ½³¡|r" << "]";
+				oss << "[" << "|cFFFF1717æˆ˜åœº|r" << "]";
 			}
 
 			if (ban)
-				oss << "ÎÞ·¨Ê¹ÓÃÕâÖÖ×øÆï¡£";
+				oss << "æ— æ³•ä½¿ç”¨è¿™ç§åéª‘ã€‚";
 		}
 
 		return oss.str();

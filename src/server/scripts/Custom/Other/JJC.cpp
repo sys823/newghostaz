@@ -1,7 +1,7 @@
 /*
 The Zxtreme - Dev Core
 */
-#pragma execution_character_set("utf-8")
+
 #include <cstring>
 #include <string.h>
 #include "ObjectMgr.h"
@@ -70,27 +70,27 @@ class arena_top_teams : public CreatureScript
         switch (race)
         {
             case RACE_HUMAN:            
-                race_s = "ÈËÀà";       
+                race_s = "äººç±»";       
             break;
                 
             case RACE_ORC:              
-                race_s = "ÊÞÈË";         
+                race_s = "å…½äºº";         
             break;
                 
             case RACE_DWARF:           
-                race_s = "°«ÈË";       
+                race_s = "çŸ®äºº";       
             break;
                 
             case RACE_NIGHTELF:         
-                race_s = "°µÒ¹¾«Áé";   
+                race_s = "æš—å¤œç²¾çµ";   
             break;
                 
             case RACE_UNDEAD_PLAYER:   
-                race_s = "ÍöÁé";      
+                race_s = "äº¡çµ";      
             break;
                 
             case RACE_TAUREN:          
-                race_s = "Å£Í·ÈË";      
+                race_s = "ç‰›å¤´äºº";      
             break;
                 
             case RACE_GNOME:            
@@ -98,15 +98,15 @@ class arena_top_teams : public CreatureScript
             break;
                 
             case RACE_TROLL:            
-                race_s = "¾ÞÄ§";       
+                race_s = "å·¨é­”";       
             break;
                 
             case RACE_BLOODELF:         
-                race_s = "Ñª¾«Áé";   
+                race_s = "è¡€ç²¾çµ";   
             break;
                 
             case RACE_DRAENEI:          
-                race_s = "µÂÀ³Äá";     
+                race_s = "å¾·èŽ±å°¼";     
             break;
         }
         return race_s;
@@ -118,43 +118,43 @@ class arena_top_teams : public CreatureScript
         switch (Class)
         {
             case CLASS_WARRIOR:         
-                Class_s = "Õ½Ê¿";        
+                Class_s = "æˆ˜å£«";        
             break;
                 
             case CLASS_PALADIN:        
-                Class_s = "Ê¥ÆïÊ¿";       
+                Class_s = "åœ£éª‘å£«";       
             break;
                 
             case CLASS_HUNTER:         
-                Class_s = "ÁÔÈË";        
+                Class_s = "çŒŽäºº";        
             break;
                 
             case CLASS_ROGUE:          
-                Class_s = "µÁÔô";          
+                Class_s = "ç›—è´¼";          
             break;
                 
             case CLASS_PRIEST:
-                Class_s = "ÄÁÊ¦";
+                Class_s = "ç‰§å¸ˆ";
             break;
                 
             case CLASS_DEATH_KNIGHT:
-                Class_s = "ËÀÍöÆïÊ¿";
+                Class_s = "æ­»äº¡éª‘å£«";
             break;
                 
             case CLASS_SHAMAN: 
-                Class_s = "ÈøÂú";       
+                Class_s = "è¨æ»¡";       
             break;
                 
             case CLASS_MAGE: 
-                Class_s = "·¨Ê¦";          
+                Class_s = "æ³•å¸ˆ";          
             break;
                 
             case CLASS_WARLOCK: 
-                Class_s = "ÊõÊ¿";       
+                Class_s = "æœ¯å£«";       
             break;
                 
             case CLASS_DRUID:          
-                Class_s = "µÂÂ³ÒÁ";          
+                Class_s = "å¾·é²ä¼Š";          
             break;
         }
         return Class_s;
@@ -177,11 +177,11 @@ class arena_top_teams : public CreatureScript
         
     bool OnGossipHello(Player *player, Creature *creature)
     {
-        player->ADD_GOSSIP_ITEM(4,"|cff00ff00|TInterface\\icons\\spell_chargepositive:26|t|r ¾º¼¼³¡ÅÅÃû?", GOSSIP_SENDER_MAIN, ARENA_HELP);
-        player->ADD_GOSSIP_ITEM(4,"|cff00ff00|TInterface\\icons\\Achievement_Arena_2v2_7:26|t|r ¾º¼¼³¡2v2", GOSSIP_SENDER_MAIN, ARENA_2V2_LADDER);
-        player->ADD_GOSSIP_ITEM(4,"|cff00ff00|TInterface\\icons\\Achievement_Arena_3v3_7:26|t|r ¾º¼¼³¡3v3", GOSSIP_SENDER_MAIN, ARENA_3V3_LADDER);
-        player->ADD_GOSSIP_ITEM(4,"|cff00ff00|TInterface\\icons\\Achievement_Arena_5v5_7:26|t|r ¾º¼¼³¡1v1", GOSSIP_SENDER_MAIN, ARENA_5V5_LADDER);
-        player->ADD_GOSSIP_ITEM(4,"|cff00ff00|TInterface\\icons\\spell_chargenegative:26|t|r ·µ»Ø", GOSSIP_SENDER_MAIN, ARENA_GOODBYE);
+        player->ADD_GOSSIP_ITEM(4,"|cff00ff00|TInterface\\icons\\spell_chargepositive:26|t|r ç«žæŠ€åœºæŽ’å?", GOSSIP_SENDER_MAIN, ARENA_HELP);
+        player->ADD_GOSSIP_ITEM(4,"|cff00ff00|TInterface\\icons\\Achievement_Arena_2v2_7:26|t|r ç«žæŠ€åœº2v2", GOSSIP_SENDER_MAIN, ARENA_2V2_LADDER);
+        player->ADD_GOSSIP_ITEM(4,"|cff00ff00|TInterface\\icons\\Achievement_Arena_3v3_7:26|t|r ç«žæŠ€åœº3v3", GOSSIP_SENDER_MAIN, ARENA_3V3_LADDER);
+        player->ADD_GOSSIP_ITEM(4,"|cff00ff00|TInterface\\icons\\Achievement_Arena_5v5_7:26|t|r ç«žæŠ€åœº1v1", GOSSIP_SENDER_MAIN, ARENA_5V5_LADDER);
+        player->ADD_GOSSIP_ITEM(4,"|cff00ff00|TInterface\\icons\\spell_chargenegative:26|t|r è¿”å›ž", GOSSIP_SENDER_MAIN, ARENA_GOODBYE);
         player->SEND_GOSSIP_MENU(90085, creature->GetGUID());
         return true;
     }
@@ -199,7 +199,7 @@ class arena_top_teams : public CreatureScript
 
             case ARENA_HELP:
             {
-				ChatHandler(player->GetSession()).PSendSysMessage("|cffff6060[Information]:|r Õâ¸öNPCÏÔÊ¾·þÎñÆ÷µÄ½Ç¶·Ê¿ (Top 10).¼òµ¥µÄµã»÷ÍÅ¶ÓÃû³ÆºÍ¿´µ½ÍÅ¶ÓÏ¸½Ú");
+				ChatHandler(player->GetSession()).PSendSysMessage("|cffff6060[Information]:|r è¿™ä¸ªNPCæ˜¾ç¤ºæœåŠ¡å™¨çš„è§’æ–—å£« (Top 10).ç®€å•çš„ç‚¹å‡»å›¢é˜Ÿåç§°å’Œçœ‹åˆ°å›¢é˜Ÿç»†èŠ‚");
 																		  
 				break;
 
@@ -214,14 +214,14 @@ class arena_top_teams : public CreatureScript
                     
                 if(!result) 
                 {
-                    player->ADD_GOSSIP_ITEM(7, "·µ»Ø", GOSSIP_SENDER_MAIN, ARENA_GOODBYE);
+                    player->ADD_GOSSIP_ITEM(7, "è¿”å›ž", GOSSIP_SENDER_MAIN, ARENA_GOODBYE);
                     player->SEND_GOSSIP_MENU(1, creature->GetGUID());
                 } 
                 else
                 {
                     std::string name;
                     uint32 teamId, rating, rank = 1;
-                    player->ADD_GOSSIP_ITEM(0,"¶¥¼¶¾º¼¼³¡Ãûµ¥ - ½Ç¶·Ê¿:", GOSSIP_SENDER_MAIN, ARENA_GOODBYE);
+                    player->ADD_GOSSIP_ITEM(0,"é¡¶çº§ç«žæŠ€åœºåå• - è§’æ–—å£«:", GOSSIP_SENDER_MAIN, ARENA_GOODBYE);
                     do 
                     {
                         Field *fields = result->Fetch();
@@ -231,13 +231,13 @@ class arena_top_teams : public CreatureScript
                             
                         std::stringstream buffer;
                         buffer << rank << ". " << name;
-                        buffer << ": " << "|cFF1E90FF" << rating << "|r" << " ÆÀ¼¶!";
+                        buffer << ": " << "|cFF1E90FF" << rating << "|r" << " è¯„çº§!";
                         player->ADD_GOSSIP_ITEM(4, buffer.str(), GOSSIP_SENDER_MAIN, ARENA_START_TEAM_LOOKUP + teamId);
                             
                         rank++;
                     } 
                     while(result->NextRow());
-                    player->ADD_GOSSIP_ITEM(7, "·µ»Ø", GOSSIP_SENDER_MAIN, ARENA_GOODBYE);
+                    player->ADD_GOSSIP_ITEM(7, "è¿”å›ž", GOSSIP_SENDER_MAIN, ARENA_GOODBYE);
                     player->SEND_GOSSIP_MENU(90086, creature->GetGUID());
                 }
                 break;
@@ -252,7 +252,7 @@ class arena_top_teams : public CreatureScript
                         
                     if(!result) 
                     {
-                        player->GetSession()->SendNotification("¾º¼¼³¡¶ÓÎ´ÕÒµ½...");
+                        player->GetSession()->SendNotification("ç«žæŠ€åœºé˜Ÿæœªæ‰¾åˆ°...");
                         player->PlayerTalkClass->SendCloseGossip();
                         return true;
                     }
@@ -273,25 +273,25 @@ class arena_top_teams : public CreatureScript
                     std::string weekWinPercentage = getWinPercent(weekWins, weekLosses);
                         
                     std::stringstream buf;
-                    buf << "Õ½¶ÓÃû×Ö: " << "|cFF1E90FF" << name << "|r";
+                    buf << "æˆ˜é˜Ÿåå­—: " << "|cFF1E90FF" << name << "|r";
                     player->ADD_GOSSIP_ITEM(7, buf.str(), GOSSIP_SENDER_MAIN, parentOption);
                     buf.str("");
                     
-                    buf << "µÈ¼¶: " << "|cFF1E90FF" << rating << "|r" << " (ÅÅÃû: " << "|cFF1E90FF" << rank << "|r" << ", Type: " << "|cFF1E90FF" << type << "v" << type << "|r"")";
+                    buf << "ç­‰çº§: " << "|cFF1E90FF" << rating << "|r" << " (æŽ’å: " << "|cFF1E90FF" << rank << "|r" << ", Type: " << "|cFF1E90FF" << type << "v" << type << "|r"")";
                     player->ADD_GOSSIP_ITEM(4, buf.str(), GOSSIP_SENDER_MAIN, parentOption);
                     buf.str("");
                     
-                    buf << "±¾ÖÜ: " << "|cFF1E90FF" << weekWins << "-" << weekLosses << "|r"" (" << "|cFF1E90FF" << weekWinPercentage << "|r" << "win)"; 
+                    buf << "æœ¬å‘¨: " << "|cFF1E90FF" << weekWins << "-" << weekLosses << "|r"" (" << "|cFF1E90FF" << weekWinPercentage << "|r" << "win)"; 
                     player->ADD_GOSSIP_ITEM(4, buf.str(), GOSSIP_SENDER_MAIN, parentOption);
                     buf.str("");
                     
-                    buf << "È«Èü¼¾: " << "|cFF1E90FF" << seasonWins << "-" << seasonLosses << "|r" << " (" << "|cFF1E90FF" << seasonWinPercentage << "|r" << " win)"; 
+                    buf << "å…¨èµ›å­£: " << "|cFF1E90FF" << seasonWins << "-" << seasonLosses << "|r" << " (" << "|cFF1E90FF" << seasonWinPercentage << "|r" << " win)"; 
                     player->ADD_GOSSIP_ITEM(4, buf.str(), GOSSIP_SENDER_MAIN, parentOption);
                         
                     QueryResult members = CharacterDatabase.PQuery("SELECT  a.guid, a.personalRating, a.weekWins, a.weekGames - a.weekWins, a.seasonWins, a.seasonGames - a.seasonWins, c.name, c.race, c.class, c.level FROM arena_team_member a LEFT JOIN characters c ON c.guid = a.guid WHERE arenaTeamId = '%u' ORDER BY a.guid = '%u' DESC, a.seasonGames DESC, c.name ASC", teamId, captainGuid);
                     if(!members) 
                     {
-                        player->ADD_GOSSIP_ITEM(7, "Ã»ÓÐ·¢ÏÖÍÅ¶Ó³ÉÔ±¡­£¿", GOSSIP_SENDER_MAIN, parentOption);
+                        player->ADD_GOSSIP_ITEM(7, "æ²¡æœ‰å‘çŽ°å›¢é˜Ÿæˆå‘˜â€¦ï¼Ÿ", GOSSIP_SENDER_MAIN, parentOption);
                     } 
                     else 
                     {
@@ -299,9 +299,9 @@ class arena_top_teams : public CreatureScript
                         uint32 memberCount = members->GetRowCount();
                         uint32 guid, personalRating, level;
                         std::string name, race, Class;
-                            
+                        
                         buf.str("");
-                        buf << "      --- " << memberCount << " ÍÅ¶Ó" << ((memberCount == 1) ? " ³ÉÔ±" : " ³ÉÔ±") << " ·¢ÏÖ" << " ---";
+                        buf << "      --- " << memberCount << " å›¢é˜Ÿ" << ((memberCount == 1) ? " æˆå‘˜" : " æˆå‘˜") << " å‘çŽ°" << " ---";
                         player->ADD_GOSSIP_ITEM(0, buf.str(), GOSSIP_SENDER_MAIN, parentOption);
                         do 
                         {
@@ -323,18 +323,18 @@ class arena_top_teams : public CreatureScript
                             buf.str(""); 
                             buf << memberPos << ". "; 
                             if (guid == captainGuid) 
-                                buf <<  "¶Ó ¶Ó³¤ ";
+                                buf <<  "é˜Ÿ é˜Ÿé•¿ ";
                                 
                             
-                            buf << race << " " << Class << ", " << "|cFF1E90FF" << personalRating << "|r" << " ¸öÈËµÈ¼¶!";
+                            buf << race << " " << Class << ", " << "|cFF1E90FF" << personalRating << "|r" << " ä¸ªäººç­‰çº§!";
                             player->ADD_GOSSIP_ITEM(4, buf.str(), GOSSIP_SENDER_MAIN, parentOption);
                             buf.str("");
                             
-                            buf << "Ê¤Àû: " << "|cFF1E90FF" << weekWins << "-" << weekLosses << "|r" << " (" << "|cFF1E90FF" << weekWinPercentage << "|r" << " Ê¤Àû), " << "|cFF1E90FF" << (weekWins + weekLosses) << "|r" << " played!"; 
+                            buf << "èƒœåˆ©: " << "|cFF1E90FF" << weekWins << "-" << weekLosses << "|r" << " (" << "|cFF1E90FF" << weekWinPercentage << "|r" << " èƒœåˆ©), " << "|cFF1E90FF" << (weekWins + weekLosses) << "|r" << " played!"; 
                             player->ADD_GOSSIP_ITEM(4, buf.str(), GOSSIP_SENDER_MAIN, parentOption);
                             buf.str("");
                             
-                            buf << "Èü¼¾: " << "|cFF1E90FF" << seasonWins << "-" << seasonLosses << "|r" << " (" << "|cFF1E90FF" << seasonWinPercentage << "|r" << " Ê¤Àû), " << "|cFF1E90FF" << (seasonWins + seasonLosses) << "|r" << " played!"; 
+                            buf << "èµ›å­£: " << "|cFF1E90FF" << seasonWins << "-" << seasonLosses << "|r" << " (" << "|cFF1E90FF" << seasonWinPercentage << "|r" << " èƒœåˆ©), " << "|cFF1E90FF" << (seasonWins + seasonLosses) << "|r" << " played!"; 
                             player->ADD_GOSSIP_ITEM(4, buf.str(), GOSSIP_SENDER_MAIN, parentOption);
                             memberPos++;
                         } 

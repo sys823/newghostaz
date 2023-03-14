@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "GvgSys.h"
 #include "MapManager.h"
 #include "GuildMgr.h"
@@ -28,7 +27,7 @@ void Player::GCPlayerInTeam(bool action)
 {
 	if (action)
 	{
-		if (isfirstingvg) //µÚÒ»´ÎµÇÂ½ÉèÖÃÇåÁã
+		if (isfirstingvg) //ç¬¬ä¸€æ¬¡ç™»é™†è®¾ç½®æ¸…é›¶
 		{
 			isfirstingvg = false;
 			m_playereventdam[sSwitch->GetValue(GVG_109)] = 0;
@@ -49,7 +48,7 @@ void Player::GCPlayerInTeam(bool action)
 uint8 Player::GetGcRaceOrRace(bool action)
 {
 	uint8 playerrace = getRace();
-	if (sGvgSys->getGuildId1() == GetGuildId()) //ÊØ³Ç±äÁªÃË
+	if (sGvgSys->getGuildId1() == GetGuildId()) //å®ˆåŸå˜è”ç›Ÿ
 	{
 		if (GetTeamId() == 1)
 			playerrace = RACE_HUMAN;
@@ -63,7 +62,7 @@ uint8 Player::GetGcRaceOrRace(bool action)
 		}
 	}
 
-	if (sGvgSys->getGuildId2() == GetGuildId()) //¹¥³Ç±ä²¿Âä
+	if (sGvgSys->getGuildId2() == GetGuildId()) //æ”»åŸå˜éƒ¨è½
 	{
 		if (GetTeamId() == 0)
 			playerrace = RACE_ORC;
@@ -128,7 +127,7 @@ void Player::IsInDistTELENPC()
 void GvgSys::LoadgvgSys()
 {
 	Vgvgconf.clear();
-	QueryResult resultBuffs = WorldDatabase.Query("SELECT id,mapid,m_x,m_y,m_z,m_o,min_x,max_x,min_y,max_y,min_z,max_z,areaids,itemid FROM _»î¶¯_¹«»áÕ½");
+	QueryResult resultBuffs = WorldDatabase.Query("SELECT id,mapid,m_x,m_y,m_z,m_o,min_x,max_x,min_y,max_y,min_z,max_z,areaids,itemid FROM _æ´»åŠ¨_å…¬ä¼šæˆ˜");
 	if (resultBuffs)
 	{
 		gvgconf tmpspell;
@@ -155,10 +154,10 @@ void GvgSys::LoadgvgSys()
 			Vgvgconf.insert(gvgconf_t::value_type(tmpspell.id, tmpspell));
 			ccccc++;
 		} while (resultBuffs->NextRow());
-		sLog->outString(">> ¶ÁÈ¡×Ô¶¨Òå¹¦ÄÜÊı¾İ±í _»î¶¯_¹«»áÕ½,¹²%uÌõÊı¾İ¶ÁÈ¡¼ÓÔØ...", ccccc);
+		sLog->outString(">> è¯»å–è‡ªå®šä¹‰åŠŸèƒ½æ•°æ®è¡¨ _æ´»åŠ¨_å…¬ä¼šæˆ˜,å…±%uæ¡æ•°æ®è¯»å–åŠ è½½...", ccccc);
 	}
 	else
-		sLog->outString(">> ¶ÁÈ¡×Ô¶¨Òå¹¦ÄÜÊı¾İ±í _»î¶¯_¹«»áÕ½,¹²0ÌõÊı¾İ¶ÁÈ¡¼ÓÔØ...");
+		sLog->outString(">> è¯»å–è‡ªå®šä¹‰åŠŸèƒ½æ•°æ®è¡¨ _æ´»åŠ¨_å…¬ä¼šæˆ˜,å…±0æ¡æ•°æ®è¯»å–åŠ è½½...");
 
 	QueryResult result2 = CharacterDatabase.PQuery("SELECT guild1,guild2,data FROM GuildvsGuild where guid = 1");
 	if (result2)
@@ -176,7 +175,7 @@ void GvgSys::LoadgvgSys()
 
 void GvgSys::StartEventSys(uint16 event_id)
 {
-	if (event_id == sSwitch->GetValue(GVG_109)) //¹¥³ÇÏµÍ³
+	if (event_id == sSwitch->GetValue(GVG_109)) //æ”»åŸç³»ç»Ÿ
 	{
 		if (getGuildId1() > 0 && getGuildId2() > 0)
 		{
@@ -272,11 +271,11 @@ bool GvgSys::IsInDistGC(Player * pl)
 
 	if (pl->GetPositionX() >= aaaaad->min_x && aaaaad->max_x >= pl->GetPositionX() && pl->GetPositionY() >= aaaaad->min_y && aaaaad->max_y >= pl->GetPositionY() && pl->GetPositionZ() >= aaaaad->min_z && aaaaad->max_z >= pl->GetPositionZ())
 	{
-		if (!pl->goindisc) //¿ª¹ØÃ»ÓĞ¿ªÆô
+		if (!pl->goindisc) //å¼€å…³æ²¡æœ‰å¼€å¯
 		{
 			pl->goindisc = true;
 			pl->livedisc = false;
-			ChatHandler(pl->GetSession()).PSendSysMessage("½øÈë¹¤»áÕ½ÇøÓò,ÏÖÔÚ¹¥»÷Ä£Ê½ÎªÆäËû¹«»á³ÉÔ±"); //½øÈë¹¥³ÇÇøÓòÌáÊ¾
+			ChatHandler(pl->GetSession()).PSendSysMessage("è¿›å…¥å·¥ä¼šæˆ˜åŒºåŸŸ,ç°åœ¨æ”»å‡»æ¨¡å¼ä¸ºå…¶ä»–å…¬ä¼šæˆå‘˜"); //è¿›å…¥æ”»åŸåŒºåŸŸæç¤º
 		}
 		return true;
 	}
@@ -284,7 +283,7 @@ bool GvgSys::IsInDistGC(Player * pl)
 	{
 		if (!pl->livedisc)
 		{
-			ChatHandler(pl->GetSession()).PSendSysMessage("Àë¿ª¹¤»áÕ½ÇøÓò"); //Àë¿ª¹¥³ÇÇøÓòÌáÊ¾
+			ChatHandler(pl->GetSession()).PSendSysMessage("ç¦»å¼€å·¥ä¼šæˆ˜åŒºåŸŸ"); //ç¦»å¼€æ”»åŸåŒºåŸŸæç¤º
 			pl->livedisc = true;
 			pl->goindisc = false;
 		}
@@ -312,26 +311,26 @@ void GvgSys::UpdateGvGevent()
 		bool gc2 = false;
 
 		SessionMap::const_iterator itr1;
-		for (itr1 = sWorld->GetAllSessions().begin(); itr1 != sWorld->GetAllSessions().end(); ++itr1)  //ÊØ³Ç¹«»á»áÔ±
+		for (itr1 = sWorld->GetAllSessions().begin(); itr1 != sWorld->GetAllSessions().end(); ++itr1)  //å®ˆåŸå…¬ä¼šä¼šå‘˜
 		{
 			if (itr1->second && itr1->second->GetPlayer() && itr1->second->GetPlayer()->IsInWorld() && itr1->second->GetPlayer()->GetGuildId() == getGuildId1())
 			{
-				if (IsInDistGC(itr1->second->GetPlayer())) //ÔÚÊØ³ÇµÄµØ·½ÓĞÈÎÒâÒ»¸öÁªÃË
+				if (IsInDistGC(itr1->second->GetPlayer())) //åœ¨å®ˆåŸçš„åœ°æ–¹æœ‰ä»»æ„ä¸€ä¸ªè”ç›Ÿ
 					gc1 = true;
 			}
 		}
 
 		SessionMap::const_iterator itr2;
-		for (itr2 = sWorld->GetAllSessions().begin(); itr2 != sWorld->GetAllSessions().end(); ++itr2)  //¹¥³Ç¹¤»á»áÔ±
+		for (itr2 = sWorld->GetAllSessions().begin(); itr2 != sWorld->GetAllSessions().end(); ++itr2)  //æ”»åŸå·¥ä¼šä¼šå‘˜
 		{
 			if (itr2->second && itr2->second->GetPlayer() && itr2->second->GetPlayer()->IsInWorld() && itr2->second->GetPlayer()->GetGuildId() == getGuildId2())
 			{
-				if (IsInDistGC(itr2->second->GetPlayer()))  //ÔÚÊØ³ÇµÄµØ·½ÓĞÈÎÒâÒ»¸ö²¿Âä
+				if (IsInDistGC(itr2->second->GetPlayer()))  //åœ¨å®ˆåŸçš„åœ°æ–¹æœ‰ä»»æ„ä¸€ä¸ªéƒ¨è½
 					gc2 = true;
 			}
 		}
 
-		if (!gc2 && gc1) //ÀïÃæÖ»ÓĞÊØ³ÇÍæ¼Ò
+		if (!gc2 && gc1) //é‡Œé¢åªæœ‰å®ˆåŸç©å®¶
 		{
 			if (GCpoint >= uint32(sSwitch->GetValue(GVG_111)))
 				GCpoint = GCpoint - sSwitch->GetValue(GVG_111);
@@ -342,7 +341,7 @@ void GvgSys::UpdateGvGevent()
 				GCtime = GCtime + 1;
 		}
 
-		if (!gc1 && gc2) //ÀïÃæÖ»ÓĞ¹¥³ÇÍæ¼Ò
+		if (!gc1 && gc2) //é‡Œé¢åªæœ‰æ”»åŸç©å®¶
 		{
 			if (GCpoint <= uint32(100 - sSwitch->GetValue(GVG_111)))
 				GCpoint = GCpoint + sSwitch->GetValue(GVG_111);
@@ -357,7 +356,7 @@ void GvgSys::UpdateGvGevent()
 			if (GCtime <= 10)
 			{
 				SessionMap::const_iterator itr3;
-				for (itr3 = sWorld->GetAllSessions().begin(); itr3 != sWorld->GetAllSessions().end(); ++itr3)  //¹¥³Ç¹¤»á»áÔ±
+				for (itr3 = sWorld->GetAllSessions().begin(); itr3 != sWorld->GetAllSessions().end(); ++itr3)  //æ”»åŸå·¥ä¼šä¼šå‘˜
 				{
 					if (itr3->second && itr3->second->GetPlayer() && itr3->second->GetPlayer()->IsInWorld())
 					{
@@ -367,7 +366,7 @@ void GvgSys::UpdateGvGevent()
 				}
 			}
 
-			if (GCtime == 0) //¹¥³ÇÊ¤Àû
+			if (GCtime == 0) //æ”»åŸèƒœåˆ©
 			{
 				Guild * pguild2 = sGuildMgr->GetGuildById(m_guildId2);
 				if (pguild2)
@@ -375,11 +374,11 @@ void GvgSys::UpdateGvGevent()
 
 				GCtime = sSwitch->GetValue(GVG_110);
 				GCpoint = 0;
-				setGuildId1(m_guildId2); //Õ¼Áì¹«»á¸Ä³ÉÊ¤Àû·½
-				setGuildId2(0);          //¹¥³Ç·½¸ÄÎª0;
+				setGuildId1(m_guildId2); //å é¢†å…¬ä¼šæ”¹æˆèƒœåˆ©æ–¹
+				setGuildId2(0);          //æ”»åŸæ–¹æ”¹ä¸º0;
 
 				SessionMap::const_iterator itr3;
-				for (itr3 = sWorld->GetAllSessions().begin(); itr3 != sWorld->GetAllSessions().end(); ++itr3)  //¹¥³Ç¹¤»á»áÔ±
+				for (itr3 = sWorld->GetAllSessions().begin(); itr3 != sWorld->GetAllSessions().end(); ++itr3)  //æ”»åŸå·¥ä¼šä¼šå‘˜
 				{
 					if (itr3->second && itr3->second->GetPlayer() && itr3->second->GetPlayer()->IsInWorld())
 					{
@@ -398,7 +397,7 @@ void GvgSys::UpdateGvGevent()
 		}
 
 		SessionMap::const_iterator itr5;
-		for (itr5 = sWorld->GetAllSessions().begin(); itr5 != sWorld->GetAllSessions().end(); ++itr5)  //¹¥³Ç¹¤»á»áÔ±
+		for (itr5 = sWorld->GetAllSessions().begin(); itr5 != sWorld->GetAllSessions().end(); ++itr5)  //æ”»åŸå·¥ä¼šä¼šå‘˜
 		{
 			if (itr5->second && itr5->second->GetPlayer() && itr5->second->GetPlayer()->IsInWorld())
 			{
@@ -425,8 +424,8 @@ void GvgSys::StopEventSys(uint16 event_id)
 
 
 				uint32 m_guild1 = getGuildId1();
-				setGuildId1(getGuildId2()); //Õ¼Áì¹«»á¸Ä³ÉÊ¤Àû·½
-				setGuildId2(0);          //¹¥³Ç·½¸ÄÎª0;
+				setGuildId1(getGuildId2()); //å é¢†å…¬ä¼šæ”¹æˆèƒœåˆ©æ–¹
+				setGuildId2(0);          //æ”»åŸæ–¹æ”¹ä¸º0;
 				CharacterDatabase.PExecute("update GuildvsGuild set guild1 = %u,guild2 =%u,data = %u  where guid = 1", getGuildId1(), getGuildId2(), time(NULL));
 			}
 			else
@@ -435,8 +434,8 @@ void GvgSys::StopEventSys(uint16 event_id)
 				if (pguild2)
 					sWorld->SendServerMessage(SERVER_MSG_STRING, sString->Format(sString->GetText(GVG_STR_1155), pguild2->GetName().c_str()));
 
-				setGuildId1(getGuildId1()); //Õ¼Áì¹«»á¸Ä³ÉÊ¤Àû·½
-				setGuildId2(0);          //¹¥³Ç·½¸ÄÎª0;
+				setGuildId1(getGuildId1()); //å é¢†å…¬ä¼šæ”¹æˆèƒœåˆ©æ–¹
+				setGuildId2(0);          //æ”»åŸæ–¹æ”¹ä¸º0;
 				CharacterDatabase.PExecute("update GuildvsGuild set guild1 = %u,guild2 =%u  where guid = 1", getGuildId1(), getGuildId2());
 			}
 
@@ -450,7 +449,7 @@ void GvgSys::StopEventSys(uint16 event_id)
 			}
 
 			SessionMap::const_iterator itr3;
-			for (itr3 = sWorld->GetAllSessions().begin(); itr3 != sWorld->GetAllSessions().end(); ++itr3)  //¹¥³Ç¹¤»á»áÔ±
+			for (itr3 = sWorld->GetAllSessions().begin(); itr3 != sWorld->GetAllSessions().end(); ++itr3)  //æ”»åŸå·¥ä¼šä¼šå‘˜
 			{
 				if (itr3->second && itr3->second->GetPlayer() && itr3->second->GetPlayer()->IsInWorld())
 				{
@@ -475,7 +474,7 @@ void GvgSys::SendGVGItem(Player * pl)
 	if (pl->m_playereventdam[sSwitch->GetValue(GVG_109)] < uint32(sSwitch->GetValue(GVG_136)))
 		return;
 
-	if (pl->GetGuildId() == sGvgSys->getGuildId1()) //Ê¤Àû·½¸ø¶«Î÷
+	if (pl->GetGuildId() == sGvgSys->getGuildId1()) //èƒœåˆ©æ–¹ç»™ä¸œè¥¿
 		pl->AddItem(sSwitch->GetValue(GVG_137), 1);
 	else
 		pl->AddItem(sSwitch->GetValue(GVG_138), 1);
@@ -497,11 +496,11 @@ void GCtijiao(Player * player, Creature* creature)
 		sObjectMgr->GetPlayerNameByGUID(pguild1->GetLeaderGUID(), PlayerNewName);
 		Player* Leader = ObjectAccessor::FindPlayer(pguild1->GetLeaderGUID());
 		//if (Leader)
-		sprintf(tmp, "%s|cFF9900CC%s|r%s|cFF9900CC%s|r%s", ("|cFF0000CC³ÇÖ÷:[|r"), PlayerNewName.c_str(), ("|cFF0000CC]|r\n|cFF0000CC¹«»á:[|r"), pguild1->GetName().c_str(), ("|cFF0000CC]|r"));
+		sprintf(tmp, "%s|cFF9900CC%s|r%s|cFF9900CC%s|r%s", ("|cFF0000CCåŸä¸»:[|r"), PlayerNewName.c_str(), ("|cFF0000CC]|r\n|cFF0000CCå…¬ä¼š:[|r"), pguild1->GetName().c_str(), ("|cFF0000CC]|r"));
 
 	}
 	else
-		sprintf(tmp, "%s", ("|cFF0000CC³ÇÖ÷:[|cFF9900CC ÎŞ |r|cFF0000CC]|r\n|cFF0000CC¹«»á:[|r|cFF9900CC ÎŞ |r|cFF0000CC]|r"));
+		sprintf(tmp, "%s", ("|cFF0000CCåŸä¸»:[|cFF9900CC æ—  |r|cFF0000CC]|r\n|cFF0000CCå…¬ä¼š:[|r|cFF9900CC æ—  |r|cFF0000CC]|r"));
 
 	player->ADD_GOSSIP_ITEM(0, tmp, 1000, 1);
 
@@ -509,7 +508,7 @@ void GCtijiao(Player * player, Creature* creature)
 
 	player->ADD_GOSSIP_ITEM(0, tmp, 1000, 1);
 
-	sprintf(tmp, "%s", ("|cFF0000CCµ±Ç°ÉêÇë¹¥³ÇÕ½¹«»á:|r\n|cFF9900CCÃ¿´ÎÖ»ÄÜÒ»¸ö¹«»áÉêÇë¹«»áÕ½|r"));
+	sprintf(tmp, "%s", ("|cFF0000CCå½“å‰ç”³è¯·æ”»åŸæˆ˜å…¬ä¼š:|r\n|cFF9900CCæ¯æ¬¡åªèƒ½ä¸€ä¸ªå…¬ä¼šç”³è¯·å…¬ä¼šæˆ˜|r"));
 
 	player->ADD_GOSSIP_ITEM(0, tmp, 1000, 1);
 
@@ -519,10 +518,10 @@ void GCtijiao(Player * player, Creature* creature)
 		if (pguild2)
 			sprintf(tmp, "|cFF0000CC[|cFF9900CC%s|r|cFF0000CC]", pguild2->GetName().c_str());
 		else
-			sprintf(tmp, "|cFF0000CC[|cFF9900CC%s|r|cFF0000CC]", (" ÎŞ "));
+			sprintf(tmp, "|cFF0000CC[|cFF9900CC%s|r|cFF0000CC]", (" æ—  "));
 	}
 	else
-		sprintf(tmp, "|cFF0000CC[|cFF9900CC%s|r|cFF0000CC]", (" ÎŞ "));
+		sprintf(tmp, "|cFF0000CC[|cFF9900CC%s|r|cFF0000CC]", (" æ—  "));
 
 	player->ADD_GOSSIP_ITEM(0, tmp, 1000, 1);
 
@@ -537,21 +536,21 @@ void GCtijiao(Player * player, Creature* creature)
 		if (Itemdisplay)
 		{
 			if (player->HasItemCount(sSwitch->GetValue(GVG_119), 1))
-				sprintf(tmp, "%s\n|TInterface\\Icons\\%s.blp :30|t%s x1   |TInterface\\RAIDFRAME\\ReadyCheck-Ready.blp:16|t", ("|cFF0000CCÉêÇë¹¥³ÇĞèÒªÎïÆ·:|r"), Itemdisplay->inventoryIcon, item1->Name1.c_str());
+				sprintf(tmp, "%s\n|TInterface\\Icons\\%s.blp :30|t%s x1   |TInterface\\RAIDFRAME\\ReadyCheck-Ready.blp:16|t", ("|cFF0000CCç”³è¯·æ”»åŸéœ€è¦ç‰©å“:|r"), Itemdisplay->inventoryIcon, item1->Name1.c_str());
 			else
-				sprintf(tmp, "%s\n|TInterface\\Icons\\%s.blp :30|t%s x1   |TInterface\\RAIDFRAME\\ReadyCheck-NotReady.blp:16|t", ("|cFF0000CCÉêÇë¹¥³ÇĞèÒªÎïÆ·:|r"), Itemdisplay->inventoryIcon, item1->Name1.c_str());
+				sprintf(tmp, "%s\n|TInterface\\Icons\\%s.blp :30|t%s x1   |TInterface\\RAIDFRAME\\ReadyCheck-NotReady.blp:16|t", ("|cFF0000CCç”³è¯·æ”»åŸéœ€è¦ç‰©å“:|r"), Itemdisplay->inventoryIcon, item1->Name1.c_str());
 		}
 		else
 		{
 			if (player->HasItemCount(sSwitch->GetValue(GVG_119), 1))
-				sprintf(tmp, "%s\n|TInterface\\Icons\\%s.blp :30|t%s x1   |TInterface\\RAIDFRAME\\ReadyCheck-Ready.blp:16|t", ("|cFF0000CCÉêÇë¹¥³ÇĞèÒªÎïÆ·:|r"), "Ability_Racial_PackHobgoblin", item1->Name1.c_str());
+				sprintf(tmp, "%s\n|TInterface\\Icons\\%s.blp :30|t%s x1   |TInterface\\RAIDFRAME\\ReadyCheck-Ready.blp:16|t", ("|cFF0000CCç”³è¯·æ”»åŸéœ€è¦ç‰©å“:|r"), "Ability_Racial_PackHobgoblin", item1->Name1.c_str());
 			else
-				sprintf(tmp, "%s\n|TInterface\\Icons\\%s.blp :30|t%s x1   |TInterface\\RAIDFRAME\\ReadyCheck-NotReady.blp:16|t", ("|cFF0000CCÉêÇë¹¥³ÇĞèÒªÎïÆ·:|r"), "Ability_Racial_PackHobgoblin", item1->Name1.c_str());
+				sprintf(tmp, "%s\n|TInterface\\Icons\\%s.blp :30|t%s x1   |TInterface\\RAIDFRAME\\ReadyCheck-NotReady.blp:16|t", ("|cFF0000CCç”³è¯·æ”»åŸéœ€è¦ç‰©å“:|r"), "Ability_Racial_PackHobgoblin", item1->Name1.c_str());
 		}
 	}
 	else
 	{
-		sprintf(tmp, "%s", ("|cFF0000CCÉêÇë¹¥³ÇÎïÆ·ÅäÖÃ´íÎó|r"));
+		sprintf(tmp, "%s", ("|cFF0000CCç”³è¯·æ”»åŸç‰©å“é…ç½®é”™è¯¯|r"));
 	}
 	player->ADD_GOSSIP_ITEM(1, tmp, 1000, 1);
 
@@ -559,10 +558,9 @@ void GCtijiao(Player * player, Creature* creature)
 
 	player->ADD_GOSSIP_ITEM(0, tmp, 1000, 1);
 
-	sprintf(tmp, "|cFF0000CC%s|r\n\n|cFF9900CC%s|r", ("ÎÒÒªÉêÇë¹¥´ò¸Ã³ÇÊĞ"), ("ÉêÇëÈË±ØĞëÊÇ¹«»á»á³¤"));
+	sprintf(tmp, "|cFF0000CC%s|r\n\n|cFF9900CC%s|r", ("æˆ‘è¦ç”³è¯·æ”»æ‰“è¯¥åŸå¸‚"), ("ç”³è¯·äººå¿…é¡»æ˜¯å…¬ä¼šä¼šé•¿"));
 
 	player->ADD_GOSSIP_ITEM(2, tmp, 1, 1000);
-
 	player->SEND_GOSSIP_MENU(20001, creature->GetGUID());
 
 	delete[]tmp;
@@ -580,17 +578,17 @@ void GCsy(Player * player, Creature* creature)
 		std::string PlayerNewName;
 		sObjectMgr->GetPlayerNameByGUID(pguild1->GetLeaderGUID(), PlayerNewName);
 
-		sprintf(tmp, "%s\n%s|cFF9900CC%s|r%s\n%s|cFF9900CC%s|r%s", ("|cFF0000CCµ±Ç°Õ¼ÁìµÄÊÆÁ¦ÊÇ:|r"), ("|cFF0000CC»á³¤:[|r"), PlayerNewName.c_str(), ("|cFF0000CC]|r"), ("|cFF0000CC¹«»á:[|r"), pguild1->GetName().c_str(), ("|cFF0000CC]|r"));
+		sprintf(tmp, "%s\n%s|cFF9900CC%s|r%s\n%s|cFF9900CC%s|r%s", ("|cFF0000CCå½“å‰å é¢†çš„åŠ¿åŠ›æ˜¯:|r"), ("|cFF0000CCä¼šé•¿:[|r"), PlayerNewName.c_str(), ("|cFF0000CC]|r"), ("|cFF0000CCå…¬ä¼š:[|r"), pguild1->GetName().c_str(), ("|cFF0000CC]|r"));
 	}
 	else
-		sprintf(tmp, "%s|cFF9900CC%s|r%s", ("|cFF0000CCµ±Ç°Õ¼ÁìÊÆÁ¦:[|r"), ("ÎŞ"), ("|cFF0000CC]|r"));
+		sprintf(tmp, "%s|cFF9900CC%s|r%s", ("|cFF0000CCå½“å‰å é¢†åŠ¿åŠ›:[|r"), ("æ— "), ("|cFF0000CC]|r"));
 	player->ADD_GOSSIP_ITEM(0, tmp, 1002, 1);
 
 	sprintf(tmp, "%s", ("|TInterface\\BUTTONS\\WHITE8X8.blp:1:200|t"));
 
 	player->ADD_GOSSIP_ITEM(0, tmp, 1002, 1);
 
-	sprintf(tmp, "%s", ("|cFF0000CCÁìÈ¡Ã¿ÈÕ½±Àø|r"));
+	sprintf(tmp, "%s", ("|cFF0000CCé¢†å–æ¯æ—¥å¥–åŠ±|r"));
 
 	player->ADD_GOSSIP_ITEM(2, tmp, 1, 1002);
 
@@ -609,16 +607,16 @@ public:
 	{
 		if (player->IsInCombat() || player->isDead())
 		{
-			player->GetSession()->SendAreaTriggerMessage("ÄúÏÖÔÚÎŞ·¨ÓëÎÒ¶Ô»°.");
+			player->GetSession()->SendAreaTriggerMessage("æ‚¨ç°åœ¨æ— æ³•ä¸æˆ‘å¯¹è¯.");
 			return true;
 		}
 		player->CLOSE_GOSSIP_MENU();
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface\\ICONS\\Ability_Paladin_ShieldoftheTemplar.blp:30|t¹«»á¹¥³ÇÌá½»", 1000, 1);
-		//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface\\ICONS\\Trade_BlackSmithing.blp:30|t¹«»á»ı·Ö²Ö¿â", 1001, 1);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface\\ICONS\\Ability_Paladin_ShieldoftheTemplar.blp:30|tå…¬ä¼šæ”»åŸæäº¤", 1000, 1);
+		//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface\\ICONS\\Trade_BlackSmithing.blp:30|tå…¬ä¼šç§¯åˆ†ä»“åº“", 1001, 1);
 		if (sSwitch->GetValue(GVG_120))
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface\\ICONS\\Spell_unused2.blp:30|t¹«»á³ÉÔ±Ã¿ÈÕÊÕÒæ", 1002, 1);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface\\ICONS\\Spell_unused2.blp:30|tå…¬ä¼šæˆå‘˜æ¯æ—¥æ”¶ç›Š", 1002, 1);
 
-		//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface\\ICONS\\Achievement_Arena_2v2_7.blp:30|t¹«»áĞÅÏ¢²éÑ¯", 1003, 1);
+		//player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface\\ICONS\\Achievement_Arena_2v2_7.blp:30|tå…¬ä¼šä¿¡æ¯æŸ¥è¯¢", 1003, 1);
 		player->SEND_GOSSIP_MENU(20001, creature->GetGUID());
 		return true;
 	}
@@ -649,18 +647,18 @@ public:
 							CharacterDatabase.PExecute("update GuildvsGuild set guild1 = %u,guild2 =%u,data=%u  where guid = 1", sGvgSys->getGuildId1(), sGvgSys->getGuildId2(), sGvgSys->m_gvgtime);
 						}
 						else
-							ChatHandler(player->GetSession()).PSendSysMessage("ÄãÃ»ÓĞ¹¥³ÇËùĞèÎïÆ·");
+							ChatHandler(player->GetSession()).PSendSysMessage("ä½ æ²¡æœ‰æ”»åŸæ‰€éœ€ç‰©å“");
 					}
 					else
-						ChatHandler(player->GetSession()).PSendSysMessage("Äã²»ÊÇ¹«»á»á³¤");
+						ChatHandler(player->GetSession()).PSendSysMessage("ä½ ä¸æ˜¯å…¬ä¼šä¼šé•¿");
 				}
 				else
-					ChatHandler(player->GetSession()).PSendSysMessage("ÄãÃ»ÓĞ¼ÓÈëÈÎºÎ¹«»á");
+					ChatHandler(player->GetSession()).PSendSysMessage("ä½ æ²¡æœ‰åŠ å…¥ä»»ä½•å…¬ä¼š");
 			}
 			else
 			{
 				if (sGvgSys->getGuildId2())
-					ChatHandler(player->GetSession()).PSendSysMessage("ÒÑÓĞÆäËû¹«»áÉêÇë¹¥³Ç");
+					ChatHandler(player->GetSession()).PSendSysMessage("å·²æœ‰å…¶ä»–å…¬ä¼šç”³è¯·æ”»åŸ");
 				else
 				{
 					Guild * pguid = sGuildMgr->GetGuildById(player->GetGuildId());
@@ -668,13 +666,13 @@ public:
 					{
 						if (sGvgSys->GCevent)
 						{
-							ChatHandler(player->GetSession()).PSendSysMessage("¹«»áÕ½½øĞĞÖĞ,²»ÄÜÌá½»");
+							ChatHandler(player->GetSession()).PSendSysMessage("å…¬ä¼šæˆ˜è¿›è¡Œä¸­,ä¸èƒ½æäº¤");
 							GCtijiao(player, creature);
 							return true;
 						}
 
 						if (player->GetGuildId() == sGvgSys->getGuildId1())
-							ChatHandler(player->GetSession()).PSendSysMessage("Äã²»ÄÜÕâÑù×ö");
+							ChatHandler(player->GetSession()).PSendSysMessage("ä½ ä¸èƒ½è¿™æ ·åš");
 						else
 						{
 							if (pguid->GetLeaderGUID() == player->GetGUID())
@@ -690,15 +688,15 @@ public:
 									CharacterDatabase.PExecute("update GuildvsGuild set guild1 = %u,guild2 =%u  where guid = 1", sGvgSys->getGuildId1(), sGvgSys->getGuildId2());
 								}
 								else
-									ChatHandler(player->GetSession()).PSendSysMessage("ÄãÃ»ÓĞ¹¥³ÇËùĞèÎïÆ·");
+									ChatHandler(player->GetSession()).PSendSysMessage("ä½ æ²¡æœ‰æ”»åŸæ‰€éœ€ç‰©å“");
 
 							}
 							else
-								ChatHandler(player->GetSession()).PSendSysMessage("Äã²»ÊÇ¹«»á»á³¤");
+								ChatHandler(player->GetSession()).PSendSysMessage("ä½ ä¸æ˜¯å…¬ä¼šä¼šé•¿");
 						}
 					}
 					else
-						ChatHandler(player->GetSession()).PSendSysMessage("ÄãÃ»ÓĞ¼ÓÈëÈÎºÎ¹«»á");
+						ChatHandler(player->GetSession()).PSendSysMessage("ä½ æ²¡æœ‰åŠ å…¥ä»»ä½•å…¬ä¼š");
 				}
 			}
 
@@ -714,7 +712,7 @@ public:
 				{
 					if (player->GetGuildId() == sGvgSys->getGuildId1())
 					{
-						if (player->inguildtime && player->inguildtime < sGvgSys->m_gvgtime) //ÔÚ¹«»áÊ¤ÀûÇ°¼ÓÈë¹«»á
+						if (player->inguildtime && player->inguildtime < sGvgSys->m_gvgtime) //åœ¨å…¬ä¼šèƒœåˆ©å‰åŠ å…¥å…¬ä¼š
 						{
 							time_t now = time(NULL);
 							int32 shengyutime = player->lqguildtime + sSwitch->GetValue(GVG_120) - now;
@@ -729,20 +727,20 @@ public:
 							else if (shengyutime > 0)
 							{
 								std::string timessss = secsToTimeString(shengyutime, true);
-								ChatHandler(player->GetSession()).PSendSysMessage("»¹ĞèÒª%s²Å¿ÉÒÔÁìÈ¡½±Àø", timessss.c_str());
+								ChatHandler(player->GetSession()).PSendSysMessage("è¿˜éœ€è¦%sæ‰å¯ä»¥é¢†å–å¥–åŠ±", timessss.c_str());
 							}
 						}
 						else
-							ChatHandler(player->GetSession()).PSendSysMessage(("¹«»áÕ½Ö®Ç°¼ÓÈë¹«»áµÄÍæ¼Ò²Å¿ÉÒÔÁìÈ¡"));
+							ChatHandler(player->GetSession()).PSendSysMessage(("å…¬ä¼šæˆ˜ä¹‹å‰åŠ å…¥å…¬ä¼šçš„ç©å®¶æ‰å¯ä»¥é¢†å–"));
 					}
 					else
-						ChatHandler(player->GetSession()).PSendSysMessage(("Äã²»ÊÇÕâ¸ö¹«»áµÄ³ÉÔ±"));
+						ChatHandler(player->GetSession()).PSendSysMessage(("ä½ ä¸æ˜¯è¿™ä¸ªå…¬ä¼šçš„æˆå‘˜"));
 				}
 				else
-					ChatHandler(player->GetSession()).PSendSysMessage(("ÄãÃ»ÓĞ¹«»á"));
+					ChatHandler(player->GetSession()).PSendSysMessage(("ä½ æ²¡æœ‰å…¬ä¼š"));
 			}
 			else
-				ChatHandler(player->GetSession()).PSendSysMessage(("³ÇÊĞÃ»ÓĞ±»Õ¼Áì"));
+				ChatHandler(player->GetSession()).PSendSysMessage(("åŸå¸‚æ²¡æœ‰è¢«å é¢†"));
 
 			GCsy(player, creature);
 			return true;

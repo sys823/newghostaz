@@ -21,7 +21,7 @@
 #include "SpellAuras.h"
 #include "Vehicle.h"
 #include "Language.h"
-#pragma execution_character_set("utf-8")
+
 #include "../Custom/CustomEvent/Event.h"
 #include "../Custom/FakePlayers/FakePlayers.h"
 #include "../Custom/Switch/Switch.h"

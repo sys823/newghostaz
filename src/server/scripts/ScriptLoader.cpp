@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -291,6 +291,7 @@ void AddSC_instance_karazhan();              //Karazhan
 void AddSC_boss_servant_quarters();
 void AddSC_boss_attumen();
 void AddSC_boss_curator();
+void AddSC_boss_chess_event();
 void AddSC_boss_maiden_of_virtue();
 void AddSC_boss_shade_of_aran();
 void AddSC_boss_malchezaar();
@@ -1039,6 +1040,7 @@ void AddEasternKingdomsScripts()
     AddSC_boss_servant_quarters();
     AddSC_boss_attumen();
     AddSC_boss_curator();
+    AddSC_boss_chess_event();
     AddSC_boss_maiden_of_virtue();
     AddSC_boss_shade_of_aran();
     AddSC_boss_malchezaar();

@@ -1,8 +1,8 @@
-#pragma execution_character_set("utf-8")
 #include "UnknownBG.h"
 #include "../Event.h"
 #include "../../CommonFunc/CommonFunc.h"
 #include "../../Reward/Reward.h"
+
 
 std::vector<UkBGTemplate> UkBGVec;
 uint32 UKBG_KILLEDSEQUENCE;
@@ -33,13 +33,13 @@ void UkBG::AddPlayer(Player* player)
 {
 	if (!sUkBG->Active)
 	{
-		player->GetSession()->SendNotification("[À¿Õˆ—∞±¶]“—æ≠Ω· ¯£°");
+		player->GetSession()->SendNotification("[Ê≠ª‰∫°ÂØªÂÆù]Â∑≤ÁªèÁªìÊùüÔºÅ");
 		return;
 	}
 
 	if (InUkBG(player))
 	{
-		player->GetSession()->SendNotification("≤ªƒ‹÷ÿ∏¥≤Œ”Î[À¿Õˆ—∞±¶]£°");
+		player->GetSession()->SendNotification("‰∏çËÉΩÈáçÂ§çÂèÇ‰∏é[Ê≠ª‰∫°ÂØªÂÆù]ÔºÅ");
 		return;
 	}
 
@@ -70,7 +70,7 @@ void UkBG::RemovePlayer(Player* player)
 			itr->killedSequence = UKBG_KILLEDSEQUENCE;
 
 			std::ostringstream oss;
-			oss << "|cFFFF1717[À¿Õˆ—∞±¶]|r" << sCF->GetNameLink(player) << "±ª|cFFFF1717[À¿Õˆ÷Æœ¢]|r" << "ÕÃ …£°" << UKBG_KILLEDSEQUENCE << " / " << totalCount;
+			oss << "|cFFFF1717[Ê≠ª‰∫°ÂØªÂÆù]|r" << sCF->GetNameLink(player) << "Ë¢´|cFFFF1717[Ê≠ª‰∫°‰πãÊÅØ]|r" << "ÂêûÂô¨ÔºÅ" << UKBG_KILLEDSEQUENCE << " / " << totalCount;
 
 			sWorld->SendScreenMessage(oss.str().c_str());
 
@@ -98,7 +98,7 @@ void UkBG::SetKilledSequence(Unit* killer, Player* killed)
 		{
 			if (itr->killedSequence > 0)
 			{
-				killed->GetSession()->SendNotification("ƒ„“—‘⁄|cFFFF1717[À¿Õˆ—∞±¶]|r÷–±ª…±À¿£°");
+				killed->GetSession()->SendNotification("‰Ω†Â∑≤Âú®|cFFFF1717[Ê≠ª‰∫°ÂØªÂÆù]|r‰∏≠Ë¢´ÊùÄÊ≠ªÔºÅ");
 				killed->TeleportTo(killed->m_homebindMapId, killed->m_homebindX, killed->m_homebindY, killed->m_homebindZ, 0);
 				break;
 			}
@@ -109,9 +109,9 @@ void UkBG::SetKilledSequence(Unit* killer, Player* killed)
 			std::ostringstream oss;
 
 			if (killer->GetTypeId() == TYPEID_PLAYER)
-				oss << "|cFFFF1717[À¿Õˆ—∞±¶]|r" << sCF->GetNameLink(killed) << "±ª" << sCF->GetNameLink(killer->ToPlayer()) << "ª˜…±£°" << UKBG_KILLEDSEQUENCE << "/" << totalCount;
+				oss << "|cFFFF1717[Ê≠ª‰∫°ÂØªÂÆù]|r" << sCF->GetNameLink(killed) << "Ë¢´" << sCF->GetNameLink(killer->ToPlayer()) << "ÂáªÊùÄÔºÅ" << UKBG_KILLEDSEQUENCE << "/" << totalCount;
 			else if (killer->GetTypeId() == TYPEID_UNIT)
-				oss << "|cFFFF1717[À¿Õˆ—∞±¶]|r" << sCF->GetNameLink(killed) << "±ª|cFFFF1717[" + killer->GetName() + "]|r" << "ÕÃ …£°" << UKBG_KILLEDSEQUENCE << " / " << totalCount;
+				oss << "|cFFFF1717[Ê≠ª‰∫°ÂØªÂÆù]|r" << sCF->GetNameLink(killed) << "Ë¢´|cFFFF1717[" + killer->GetName() + "]|r" << "ÂêûÂô¨ÔºÅ" << UKBG_KILLEDSEQUENCE << " / " << totalCount;
 
 			sWorld->SendScreenMessage(oss.str().c_str());
 
@@ -135,15 +135,15 @@ void UkBG::SetKillCount(Player* player)
 
 void UkBG::CheckDone()
 {
-	//ºÏ≤‚À¿Õˆ—∞±¶ «∑ÒÕÍ≥… ÷ª £œ¬“ª»À«“◊‹»À ˝¥Û”⁄XX
+	//Ê£ÄÊµãÊ≠ª‰∫°ÂØªÂÆùÊòØÂê¶ÂÆåÊàê Âè™Ââ©‰∏ã‰∏Ä‰∫∫‰∏îÊÄª‰∫∫Êï∞Â§ß‰∫éXX
 	uint32 totalCount = UkBGVec.size();
 
 	if (/*deathcount > 3 && */totalCount - UKBG_KILLEDSEQUENCE == 1 && totalCount > 1)
 	{
-		sWorld->SendScreenMessage("À¿Õˆ—∞±¶“—æ≠Ω· ¯£°");
+		sWorld->SendScreenMessage("Ê≠ª‰∫°ÂØªÂÆùÂ∑≤ÁªèÁªìÊùüÔºÅ");
 		Active = false;
 
-		//Ω±¿¯
+		//Â•ñÂä±
 		for (std::vector<UkBGTemplate>::iterator itr = UkBGVec.begin(); itr != UkBGVec.end(); itr++)
 		{
 			if (Player* player = ObjectAccessor::FindPlayerInOrOutOfWorld(itr->guid))
@@ -156,13 +156,13 @@ void UkBG::CheckDone()
 					if (itr->killCount > 0)
 					{
 						rewId = UKBG_H_REWID;
-						oss << "|cFFFF1717[À¿Õˆ—∞±¶]|r" << sCF->GetNameLink(player) << "ÕÁ«øµÿ…˙¥Êœ¬¿¥≤¢ÕÍ≥…¡Àª˜…±ƒø±Í£¨ªÒµ√|cFFFF1717[÷¡∏ﬂ]|rΩ±¿¯£°";
+						oss << "|cFFFF1717[Ê≠ª‰∫°ÂØªÂÆù]|r" << sCF->GetNameLink(player) << "È°ΩÂº∫Âú∞ÁîüÂ≠ò‰∏ãÊù•Âπ∂ÂÆåÊàê‰∫ÜÂáªÊùÄÁõÆÊ†áÔºåËé∑Âæó|cFFFF1717[Ëá≥È´ò]|rÂ•ñÂä±ÔºÅ";
 						sWorld->SendScreenMessage(oss.str().c_str());
 					}	
 					else
 					{
 						rewId = UKBG_L_REWID;
-						oss << "|cFFFF1717[À¿Õˆ—∞±¶]|r" << sCF->GetNameLink(player) << "ª˙÷«µÿ…˙¥Êœ¬¿¥µ´Œ¥ÕÍ≥…ª˜…±ƒø±Í£¨ªÒµ√|cFFFF1717[ª˘¥°]|rΩ±¿¯£°";
+						oss << "|cFFFF1717[Ê≠ª‰∫°ÂØªÂÆù]|r" << sCF->GetNameLink(player) << "Êú∫Êô∫Âú∞ÁîüÂ≠ò‰∏ãÊù•‰ΩÜÊú™ÂÆåÊàêÂáªÊùÄÁõÆÊ†áÔºåËé∑Âæó|cFFFF1717[Âü∫Á°Ä]|rÂ•ñÂä±ÔºÅ";
 						sWorld->SendScreenMessage(oss.str().c_str());
 					}				
 				}
@@ -171,13 +171,13 @@ void UkBG::CheckDone()
 				//	if (itr->killCount > 0)
 				//	{
 				//		rewId = UKBG_M_REWID;
-				//		oss << "|cFFFF1717[À¿Õˆ—∞±¶]|r" << sCF->GetNameLink(player) << "ÕÁ«ø∆¥≤´£¨À‰À¿”Ã»Ÿ£¨ªÒµ√|cFFFF1717[÷–µ»]|rΩ±¿¯£°";
+				//		oss << "|cFFFF1717[Ê≠ª‰∫°ÂØªÂÆù]|r" << sCF->GetNameLink(player) << "È°ΩÂº∫ÊãºÊêèÔºåËôΩÊ≠ªÁäπËç£ÔºåËé∑Âæó|cFFFF1717[‰∏≠Á≠â]|rÂ•ñÂä±ÔºÅ";
 				//		sWorld->SendServerMessage(SERVER_MSG_STRING, oss.str().c_str());
 				//	}	
 				//	else
 				//	{
 				//		rewId = UKBG_L_REWID;
-				//		oss << "|cFFFF1717[À¿Õˆ—∞±¶]|r" << sCF->GetNameLink(player) << "π∂«“Õµ…˙£¨À¿≤ª◊„œß£¨ªÒµ√|cFFFF1717[ª˘¥°]|rΩ±¿¯£°";
+				//		oss << "|cFFFF1717[Ê≠ª‰∫°ÂØªÂÆù]|r" << sCF->GetNameLink(player) << "Ëãü‰∏îÂÅ∑ÁîüÔºåÊ≠ª‰∏çË∂≥ÊÉúÔºåËé∑Âæó|cFFFF1717[Âü∫Á°Ä]|rÂ•ñÂä±ÔºÅ";
 				//		sWorld->SendServerMessage(SERVER_MSG_STRING, oss.str().c_str());
 				//	}			
 				//}
@@ -186,7 +186,7 @@ void UkBG::CheckDone()
 					if (itr->killCount > 0)
 					{
 						rewId = UKBG_L_REWID;
-						ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[À¿Õˆ—∞±¶]|rƒ„‘⁄À¿Õˆ—∞±¶÷–±Ìœ÷∆Ω∆Ω£¨ªÒµ√|cFFFF1717[ª˘¥°]|rΩ±¿¯£°");
+						ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[Ê≠ª‰∫°ÂØªÂÆù]|r‰Ω†Âú®Ê≠ª‰∫°ÂØªÂÆù‰∏≠Ë°®Áé∞Âπ≥Âπ≥ÔºåËé∑Âæó|cFFFF1717[Âü∫Á°Ä]|rÂ•ñÂä±ÔºÅ");
 					}	
 				}
 
@@ -268,31 +268,31 @@ public:
 				float z1 = -59.93f;
 				//me->SummonCreature(28253, x1, y1, z1 - 7, 0, TEMPSUMMON_TIMED_DESPAWN, interval);
 
-				//∂Ú‘À÷Æ¥∏ƒß∑®‰ˆŒ– 179506
+				//ÂéÑËøê‰πãÈî§È≠îÊ≥ïÊº©Ê∂° 179506
 
-				//∂æŒÌ
+				//ÊØíÈõæ
 				//me->SummonGameObject(19587, x1, y1, z1, 0, 0, 0, 0, 0, ceil(interval / 1000));
 
-				//…Ò •…¡µÁ(¥π÷±)
+				//Á•ûÂú£Èó™Áîµ(ÂûÇÁõ¥)
 				//me->SummonGameObject(191302, x1, y1, z1, 0, 0, 0, 0, 0, 2 * ceil(interval / 1000));
 				//
-				////Œ◊—˝Õı÷Æ—€‰ˆŒ–±¶÷È‘∆
+				////Â∑´Â¶ñÁéã‰πãÁúºÊº©Ê∂°ÂÆùÁè†‰∫ë
 				me->SummonGameObject(192862, x1, y1, z1, 0, 0, 0, 0, 0, ceil(interval / 1000));
 				//
-				////—Ã‘∆
+				////ÁÉü‰∫ë
 				//me->SummonGameObject(189330, x1, y1, z1, 0, 0, 0, 0, 0, ceil(interval / 1000));
 				//
-				////≤°ƒæ¡÷≈®—Ã
+				////ÁóÖÊú®ÊûóÊµìÁÉü
 				//me->SummonGameObject(177671, x1, y1, z1, 0, 0, 0, 0, 0, ceil(interval / 1000));
 				//
-				////WotLKπ‚¡¡π‚ª∑
+				////WotLKÂÖâ‰∫ÆÂÖâÁéØ
 				me->SummonGameObject(190745, x1, y1, z1 - 5, 0, 0, 0, 0, 0, ceil(interval / 1000));
 			}
 
 			i_max = i_max - 1;
 
 
-			sWorld->SendZoneText(me->GetZoneId(), "À¿Õˆ÷Æœ¢‘⁄±∆Ω¸..");
+			sWorld->SendZoneText(me->GetZoneId(), "Ê≠ª‰∫°‰πãÊÅØÂú®ÈÄºËøë..");
 		}
 
 		void PlayerPosCheck()
@@ -309,7 +309,7 @@ public:
 							sUkBG->SetKilledSequence(me, (*itr));
 					}else
 					{
-						(*itr)->GetSession()->SendNotification("ƒ„Œ¥º”»Î|cFFFF1717[À¿Õˆ—∞±¶]|r£°");
+						(*itr)->GetSession()->SendNotification("‰Ω†Êú™Âä†ÂÖ•|cFFFF1717[Ê≠ª‰∫°ÂØªÂÆù]|rÔºÅ");
 						(*itr)->TeleportTo((*itr)->m_homebindMapId, (*itr)->m_homebindX, (*itr)->m_homebindY, (*itr)->m_homebindZ, 0);
 					}
 				}
@@ -355,7 +355,7 @@ public:
 			if (!sUkBG->Active)
 				return;
 
-			//ÕÊº“Œª÷√ºÏ≤‚
+			//Áé©ÂÆ∂‰ΩçÁΩÆÊ£ÄÊµã
 			PlayerTimer += diff;
 
 			if (PlayerTimer > 500)
@@ -364,7 +364,7 @@ public:
 				PlayerPosCheck();
 			}
 
-			//’ŸªΩ∫⁄ŒÌ
+			//Âè¨Âî§ÈªëÈõæ
 			SummonTimer += diff;
 
 			if (SummonTimer > interval)
@@ -375,7 +375,7 @@ public:
 					Summon();
 			}
 
-			//À¢–¬ŒÔÃÂ°¢…˙ŒÔ
+			//Âà∑Êñ∞Áâ©‰Ωì„ÄÅÁîüÁâ©
 			SpawnTimer += diff;
 
 			if (SpawnTimer > 180000)

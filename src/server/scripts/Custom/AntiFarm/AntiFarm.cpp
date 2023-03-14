@@ -1,4 +1,3 @@
-﻿#pragma execution_character_set("utf-8")
 #include "AntiFarm.h"
 #include "../GCAddon/GCAddon.h"
 #include "../Reward/Reward.h"

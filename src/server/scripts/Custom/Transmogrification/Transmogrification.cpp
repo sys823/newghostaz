@@ -1,5 +1,4 @@
-﻿#include "Transmogrification.h"
-#pragma execution_character_set("utf-8")
+#include "Transmogrification.h"
 const char * Transmogrification::GetSlotName(uint8 slot, WorldSession* session) const
 {
     switch (slot)

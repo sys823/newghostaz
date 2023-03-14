@@ -1,4 +1,3 @@
-//#pragma execution_character_set("utf-8")
 //#include "FunctionCollection.h"
 //#include "../Custom/HonorRank/HonorRank.h"
 //#include "../Lottery/Lottery.h"
@@ -83,7 +82,7 @@
 //
 //
 //	
-//	sort(GossipVec.begin(), GossipVec.end(), GreaterSort);//ÉıĞòÅÅÁĞ
+//	sort(GossipVec.begin(), GossipVec.end(), GreaterSort);//å‡åºæ’åˆ—
 //
 //}
 //uint32 FunctionCollection::GetOjectType(Object* obj)
@@ -173,12 +172,12 @@
 //		{
 //			if (player->GetMap()->Instanceable())
 //			{
-//				ChatHandler(player->GetSession()).PSendSysMessage("Äã´¦ÔÚ¸±±¾¡¢¾º¼¼³¡»òÕ½³¡ÖĞ£¬Â¯Ê¯µã²»ÄÜ°ó¶¨µ½µ±Ç°Î»ÖÃ£º%s", areaEntry->area_name[4]);
+//				ChatHandler(player->GetSession()).PSendSysMessage("ä½ å¤„åœ¨å‰¯æœ¬ã€ç«æŠ€åœºæˆ–æˆ˜åœºä¸­ï¼Œç‚‰çŸ³ç‚¹ä¸èƒ½ç»‘å®šåˆ°å½“å‰ä½ç½®ï¼š%s", areaEntry->area_name[4]);
 //				return 0;
 //			}
 //
 //			player->SetHomebind(player->GetWorldLocation(), player->GetAreaId());
-//			ChatHandler(player->GetSession()).PSendSysMessage("Â¯Ê¯µãÒÑ¾­°ó¶¨µ½µ±Ç°Î»ÖÃ£º%s", areaEntry->area_name[4]);
+//			ChatHandler(player->GetSession()).PSendSysMessage("ç‚‰çŸ³ç‚¹å·²ç»ç»‘å®šåˆ°å½“å‰ä½ç½®ï¼š%s", areaEntry->area_name[4]);
 //		}	
 //		break;
 //	case FT_HOME_TELE:
@@ -189,7 +188,7 @@
 //		break;
 //	case FT_REPAIR:
 //		player->DurabilityRepairAll(false, 0, false);
-//		player->GetSession()->SendAreaTriggerMessage("ĞŞÀíÍê³É");
+//		player->GetSession()->SendAreaTriggerMessage("ä¿®ç†å®Œæˆ");
 //		break;
 //	case FT_BANK:
 //		player->GetSession()->SendShowBank(player->GetGUID());
@@ -201,7 +200,7 @@
 //			player->AddSpellCooldown(54710, 0, 90 * IN_MILLISECONDS);
 //		}
 //		else
-//			player->GetSession()->SendNotification("ÓÊÏä¹¦ÄÜÀäÈ´Ê£ÓàÊ±¼ä%dÃë", player->GetSpellCooldownDelay(54710) / IN_MILLISECONDS);
+//			player->GetSession()->SendNotification("é‚®ç®±åŠŸèƒ½å†·å´å‰©ä½™æ—¶é—´%dç§’", player->GetSpellCooldownDelay(54710) / IN_MILLISECONDS);
 //		break;
 //	case FT_CUSTOM_SKILL:
 //		sCustomSkill->AddGossip(player, obj);
@@ -235,7 +234,7 @@
 //		break;
 //	default:
 //		if (player->IsInCombat() && !player->IsGameMaster())
-//			player->GetSession()->SendNotification("Õ½¶·×´Ì¬ÎŞ·¨´«ËÍ£¡");
+//			player->GetSession()->SendNotification("æˆ˜æ–—çŠ¶æ€æ— æ³•ä¼ é€ï¼");
 //		else
 //		{
 //			if (telePos.GetMapId() == 0 && telePos.GetPositionX() == 0 && telePos.GetPositionY() == 0 && telePos.GetPositionZ() == 0 && telePos.GetOrientation() == 0)
@@ -374,7 +373,7 @@
 //
 //void FunctionCollection::AddTalentPoints(Player* player,Object* obj)
 //{
-//	player->GetSession()->SendAreaTriggerMessage("»ñµÃ¶îÍâÒ»¸öÌì¸³µã");
+//	player->GetSession()->SendAreaTriggerMessage("è·å¾—é¢å¤–ä¸€ä¸ªå¤©èµ‹ç‚¹");
 //	player->SetFreeTalentPoints(player->GetFreeTalentPoints() + 1);
 //	player->SendTalentsInfoData(false);
 //	CharacterDatabase.DirectPExecute("UPDATE characters SET extraTalentPoints = extraTalentPoints + 1 WHERE guid = '%u'", player->GetGUIDLow());
@@ -388,7 +387,7 @@
 //	player->SetAtLoginFlag(AT_LOGIN_CHANGE_FACTION);
 //	stmt->setUInt32(1, player->GetGUIDLow());
 //	CharacterDatabase.Execute(stmt);
-//	player->GetSession()->SendAreaTriggerMessage("ÖØĞÂÉÏÏßÒÔÍê³É¸ü¸Ä£¡");
+//	player->GetSession()->SendAreaTriggerMessage("é‡æ–°ä¸Šçº¿ä»¥å®Œæˆæ›´æ”¹ï¼");
 //
 //	if (Guild* guild = player->GetGuild())
 //		guild->HandleLeaveMember(player->GetSession());
@@ -402,13 +401,13 @@
 //	player->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);
 //	stmt->setUInt32(1, player->GetGUIDLow());
 //	CharacterDatabase.Execute(stmt);
-//	player->GetSession()->SendAreaTriggerMessage("ÖØĞÂÉÏÏßÒÔÍê³É¸ü¸Ä£¡");
+//	player->GetSession()->SendAreaTriggerMessage("é‡æ–°ä¸Šçº¿ä»¥å®Œæˆæ›´æ”¹ï¼");
 //}
 //
 //void FunctionCollection::ChangeName(Player* player)
 //{
 //	player->SetAtLoginFlag(AT_LOGIN_RENAME);
-//	player->GetSession()->SendAreaTriggerMessage("ÖØĞÂÉÏÏßÒÔÍê³É¸ü¸Ä£¡");
+//	player->GetSession()->SendAreaTriggerMessage("é‡æ–°ä¸Šçº¿ä»¥å®Œæˆæ›´æ”¹ï¼");
 //}
 //
 //void FunctionCollection::ChangeRace(Player* player)
@@ -418,7 +417,7 @@
 //	player->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
 //	stmt->setUInt32(1, player->GetGUIDLow());
 //	CharacterDatabase.Execute(stmt);
-//	player->GetSession()->SendAreaTriggerMessage("ÖØĞÂÉÏÏßÒÔÍê³É¸ü¸Ä£¡");
+//	player->GetSession()->SendAreaTriggerMessage("é‡æ–°ä¸Šçº¿ä»¥å®Œæˆæ›´æ”¹ï¼");
 //
 //	if (Guild* guild = player->GetGuild())
 //		guild->HandleLeaveMember(player->GetSession());
@@ -428,19 +427,19 @@
 //{
 //	player->resetTalents(true);
 //	player->SendTalentsInfoData(false);
-//	player->GetSession()->SendAreaTriggerMessage("ÒÑÖØÖÃ½ÇÉ«Ìì¸³");
+//	player->GetSession()->SendAreaTriggerMessage("å·²é‡ç½®è§’è‰²å¤©èµ‹");
 //}
 //
 //void FunctionCollection::UpgradeWeaponSkills(Player* player)
 //{
 //	player->UpdateSkillsToMaxSkillsForLevel();
-//	player->GetSession()->SendAreaTriggerMessage("ÎäÆ÷¼¼ÄÜÒÑÌáÉıÖÁ×î´óÖµ");
+//	player->GetSession()->SendAreaTriggerMessage("æ­¦å™¨æŠ€èƒ½å·²æå‡è‡³æœ€å¤§å€¼");
 //}
 //
 //void FunctionCollection::QueryToken(Player* player)
 //{
 //	std::ostringstream oss;
-//	oss << "Äãµ±Ç°µÄ" << sString->GetText(CORE_STR_TYPES(STR_TOKEN) << "ÊıÁ¿£º" << sCF->GetTokenAmount(player);
+//	oss << "ä½ å½“å‰çš„" << sString->GetText(CORE_STR_TYPES(STR_TOKEN) << "æ•°é‡ï¼š" << sCF->GetTokenAmount(player);
 //
 //	player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 //	ChatHandler(player->GetSession()).PSendSysMessage(oss.str().c_str());
@@ -452,13 +451,13 @@
 //	{
 //		uint32 cd = player->stopCombatCD / IN_MILLISECONDS;
 //		std::ostringstream oss;
-//		oss << "ÍÑÕ½¹¦ÄÜ½«ÔÚ" << cd << "ÃëºóÀäÈ´£¡";
+//		oss << "è„±æˆ˜åŠŸèƒ½å°†åœ¨" << cd << "ç§’åå†·å´ï¼";
 //		player->GetSession()->SendNotification(oss.str().c_str());
 //		return;
 //	}
 //		
 //	player->ClearInCombat();
-//	player->GetSession()->SendAreaTriggerMessage("ÒÑÇå³ıÕ½¶·×´Ì¬");
+//	player->GetSession()->SendAreaTriggerMessage("å·²æ¸…é™¤æˆ˜æ–—çŠ¶æ€");
 //	player->canStopCombat = false;
 //	player->stopCombatCD = sSwitch->GetValue(ST_STOP_COMBAT_CD) * IN_MILLISECONDS;
 //}
@@ -468,9 +467,9 @@
 //	if (PlayerTimeRewType != 1)
 //	{
 //		if (PlayerTimeRewType != 2)
-//			player->GetSession()->SendNotification("Åİµã½±ÀøÒÑ¹Ø±Õ£¡");
+//			player->GetSession()->SendNotification("æ³¡ç‚¹å¥–åŠ±å·²å…³é—­ï¼");
 //		else
-//			player->GetSession()->SendNotification("ÁìÈ¡ÅİµãÒÑ¹Ø±Õ£¬Çë±£³ÖÔÚÏß£¬µÈ´ıÏµÍ³·¢·Å½±Àø");
+//			player->GetSession()->SendNotification("é¢†å–æ³¡ç‚¹å·²å…³é—­ï¼Œè¯·ä¿æŒåœ¨çº¿ï¼Œç­‰å¾…ç³»ç»Ÿå‘æ”¾å¥–åŠ±");
 //
 //		return;
 //	}
@@ -482,7 +481,7 @@
 //		uint32 minu = player->GetTotalPlayedTime() > 3600 ? uint32(60 - (float(player->GetTotalPlayedTime()) / 3600 - player->GetTotalPlayedTime() / 3600) * 60) : (60 - player->GetTotalPlayedTime() / 60);
 //
 //		std::ostringstream oss;
-//		oss << minu << "·ÖÖÓºó¿ÉÁìÈ¡Åİµã";
+//		oss << minu << "åˆ†é’Ÿåå¯é¢†å–æ³¡ç‚¹";
 //		player->GetSession()->SendNotification(oss.str().c_str());
 //
 //		ChatHandler(player->GetSession()).PSendSysMessage(oss.str().c_str());
@@ -495,7 +494,7 @@
 //	}
 //}
 //
-////»ñÈ¡ÉÌÒµ¼¼ÄÜÊıÁ¿
+////è·å–å•†ä¸šæŠ€èƒ½æ•°é‡
 //
 //void FunctionCollection::BuyLottery(Player* player, uint32 lotteryAmount, uint8 lotteryType)
 //{
@@ -584,7 +583,7 @@
 //	if (!obj)
 //		return;
 //
-//#pragma region ÈÎÎñ´«ËÍ
+//#pragma region ä»»åŠ¡ä¼ é€
 //	if (sender == SENDER_QUEST_TELE)
 //	{
 //		sQuestMod->Tele(player, action);
@@ -592,7 +591,7 @@
 //	}
 //#pragma endregion
 //
-//#pragma region ÖØÖÃ¸±±¾
+//#pragma region é‡ç½®å‰¯æœ¬
 //	if (sender == SENDER_RESET_INS)
 //	{
 //		sResetIns->Action(player, action);
@@ -600,7 +599,7 @@
 //	}
 //#pragma endregion
 //
-//#pragma region ÕĞÄ¼´¦Àí
+//#pragma region æ‹›å‹Ÿå¤„ç†
 //	if (sender == SENDER_RECRUIT)
 //	{
 //		sFC->DoAction(player, FT_RECRUIT, obj);
@@ -608,7 +607,7 @@
 //	}
 //#pragma endregion
 //
-//#pragma region Éı¼¶¾üÏÎ´¦Àí
+//#pragma region å‡çº§å†›è¡”å¤„ç†
 //	if (sender == SENDER_HR_MENU)
 //	{
 //		sFC->DoAction(player, FT_UPGRADE_HR, obj);
@@ -623,7 +622,7 @@
 //	}
 //#pragma endregion
 //
-//#pragma region Éı¼¶VIP´¦Àí
+//#pragma region å‡çº§VIPå¤„ç†
 //	if (sender == SENDER_VIP_CURR)
 //	{
 //		sFC->DoAction(player, FT_UPGRADE_VIP, obj);
@@ -639,7 +638,7 @@
 //#pragma endregion
 //
 //
-//#pragma region ×ªÉú
+//#pragma region è½¬ç”Ÿ
 //	if (sender == SENDER_REINCARNATION)
 //	{
 //		sReincarnation->DoAction(player, obj, action);
@@ -647,7 +646,7 @@
 //	}
 //#pragma endregion
 //
-//#pragma region ÊÂ¼ş
+//#pragma region äº‹ä»¶
 //	if (sender == SENDER_CUSTOM_EVENT)
 //	{
 //		sEvent->AcceptInvitation(player, action + 1000000);
@@ -688,7 +687,7 @@
 //	}
 //#pragma endregion
 //
-//#pragma region ×ªÖ°
+//#pragma region è½¬èŒ
 //	if (sender == SENDER_ALT_CLASS)
 //	{
 //		sCharMod->ModClass(player, action);
@@ -696,7 +695,7 @@
 //	}
 //#pragma endregion
 //
-//#pragma region ·µ»ØÉÏ¼¶²Ëµ¥¡¢Ö÷²Ëµ¥
+//#pragma region è¿”å›ä¸Šçº§èœå•ã€ä¸»èœå•
 //	if (action == uint32(FT_BACK_MENU))
 //	{
 //		AddAboveMenu(player, obj, sender);
@@ -710,7 +709,7 @@
 //	}
 //#pragma endregion
 //
-//#pragma region Ìí¼Ógossip»òÖ±½ÓÖ´ĞĞ¹¦ÄÜ
+//#pragma region æ·»åŠ gossipæˆ–ç›´æ¥æ‰§è¡ŒåŠŸèƒ½
 //
 //	for (size_t i = 0; i < GossipVec.size(); i++)
 //	{
@@ -763,7 +762,7 @@
 //
 //#pragma endregion
 //
-//#pragma region ²Ëµ¥ÖĞ³£ÓÃ¹¦ÄÜ´¦Àí
+//#pragma region èœå•ä¸­å¸¸ç”¨åŠŸèƒ½å¤„ç†
 //
 //	if (action > uint32(FT_START))
 //	{

@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "ResetInstance.h"
 #include "../Requirement/Requirement.h"
 #include "../FunctionCollection/FunctionCollection.h"
@@ -22,7 +21,7 @@ void ResetIns::Load()
 {
 	ResetInsVec.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT µØÍ¼ID,ÄÑ¶È,ÐèÇóÄ£°åID from _¸±±¾_ÖØÖÃÐèÇó" :
+		"SELECT åœ°å›¾ID,éš¾åº¦,éœ€æ±‚æ¨¡æ¿ID from _å‰¯æœ¬_é‡ç½®éœ€æ±‚" :
 		"SELECT mapid,diff,reqId from _instance_reset");
 	if (result)
 	{
@@ -62,7 +61,7 @@ std::string ResetIns::GetGossipText(uint32 mapid, uint8 diff)
 				switch (diff)
 				{
 				case 0:
-					//text += "[ÆÕÍ¨]";
+					//text += "[æ™®é€š]";
 					break;
 				case 1:
 					mapEntry->IsRaid() ? text += "[25]" : text += "[5H]";
@@ -103,7 +102,7 @@ void ResetIns::AddGossip(Player* player, Object* obj)
 					if (count > 25)
 						continue;
 					count++;
-					player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, text, SENDER_RESET_INS, actionValue(i, mapEntry->MapID), sReq->Notice(player, reqId, "ÖØÖÃ", text), sReq->Golds(reqId), false);
+					player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, text, SENDER_RESET_INS, actionValue(i, mapEntry->MapID), sReq->Notice(player, reqId, "é‡ç½®", text), sReq->Golds(reqId), false);
 				}
 			}
 		}
@@ -128,7 +127,7 @@ void ResetIns::Action(Player* player, uint32 action)
 
 	if (player->GetMapId() == mapid)
 	{
-		player->GetSession()->SendNotification("ÇëÏÈÀë¿ª¸±±¾£¡");
+		player->GetSession()->SendNotification("è¯·å…ˆç¦»å¼€å‰¯æœ¬ï¼");
 		return;
 	}
 
@@ -152,7 +151,7 @@ void ResetIns::ResetInstance(Player* player, Difficulty diff, uint32 mapId)
 			if (mapEntry && itr->first != player->GetMapId() && (!mapId || mapId == itr->first) && (diff == -1 || diff == save->GetDifficulty()))
 			{
 				std::ostringstream oss;
-				oss << GetGossipText(mapEntry->MapID, i) << "ÒÑÖØÖÃ";
+				oss << GetGossipText(mapEntry->MapID, i) << "å·²é‡ç½®";
 				ChatHandler(player->GetSession()).PSendSysMessage(oss.str().c_str());
 				sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, diff, true, player);
 				itr = m_boundInstances.begin();

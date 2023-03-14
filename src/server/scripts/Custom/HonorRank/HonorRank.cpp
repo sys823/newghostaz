@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "HonorRank.h"
 #include "../DataLoader/DataLoader.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -14,7 +13,7 @@ void HonorRank::Load()
 	HRUpVec.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0		1				2				3			4						5							6					7						8				
-		"SELECT ¾üÏÎID,Éý¼¶ÐèÇóÄ£°åID,Éý¼¶ºó½±ÀøÄ£°åID,µôÂä±¶ÂÊ,ÎïÆ·Éý¼¶Ä£Ê½0Ôö¼Ó³É¹¦°Ù·Ö±È,ÎïÆ·Éý¼¶Ä£Ê½1Ôö¼Ó³É¹¦°Ù·Ö±È,ÎïÆ·Ç¿»¯Ôö¼Ó³É¹¦°Ù·Ö±È,·ûÓ¡Ç¿»¯Ôö¼Ó³É¹¦°Ù·Ö±È,ÒÆ³ý±¦Ê¯Ôö¼Ó³É¹¦°Ù·Ö±È FROM __¾üÏÎ" :
+		"SELECT å†›è¡”ID,å‡çº§éœ€æ±‚æ¨¡æ¿ID,å‡çº§åŽå¥–åŠ±æ¨¡æ¿ID,æŽ‰è½å€çŽ‡,ç‰©å“å‡çº§æ¨¡å¼0å¢žåŠ æˆåŠŸç™¾åˆ†æ¯”,ç‰©å“å‡çº§æ¨¡å¼1å¢žåŠ æˆåŠŸç™¾åˆ†æ¯”,ç‰©å“å¼ºåŒ–å¢žåŠ æˆåŠŸç™¾åˆ†æ¯”,ç¬¦å°å¼ºåŒ–å¢žåŠ æˆåŠŸç™¾åˆ†æ¯”,ç§»é™¤å®çŸ³å¢žåŠ æˆåŠŸç™¾åˆ†æ¯” FROM __å†›è¡”" :
 		//		0		1	2		3		4				5				6			7				8
 		"SELECT title,reqId,rewId,lootRate,exchangeRate_0,exchangeRate_1,strengthenRate,sigilRate,removeGemRate FROM _hr");
 	if (!result) return;
@@ -99,37 +98,37 @@ void HonorRank::AddCurrHRMenu(Player* player)
 	std::string hr_name = "";
 	if (player->GetTeamId() == TEAM_ALLIANCE)
 	{
-		if (player->HasTitle(14))		hr_name = "|TInterface/ICONS/Achievement_PVP_O_14:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾´óÔªË§¡¿";
-		else if (player->HasTitle(13))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_13:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÔªË§¡¿";
-		else if (player->HasTitle(12))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_12:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾Í³Ë§¡¿";
-		else if (player->HasTitle(11))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_11:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾Ë¾Áî¡¿";
-		else if (player->HasTitle(10))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_10:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÉÙÐ£¡¿";
-		else if (player->HasTitle(9))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_09:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾»¤ÎÀÆïÊ¿¡¿";
-		else if (player->HasTitle(8))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_08:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÆïÊ¿¶Ó³¤¡¿";
-		else if (player->HasTitle(7))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_07:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÆïÊ¿ÖÐÎ¾¡¿";
-		else if (player->HasTitle(6))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_06:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÆïÊ¿¡¿";
-		else if (player->HasTitle(5))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_05:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾Ê¿¹Ù³¤¡¿";
-		else if (player->HasTitle(4))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_04:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾¾üÊ¿³¤¡¿";
-		else if (player->HasTitle(3))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_03:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÖÐÊ¿¡¿";
-		else if (player->HasTitle(2))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_02:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÏÂÊ¿¡¿";
-		else if (player->HasTitle(1))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_01:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÁÐ±ø¡¿";
+		if (player->HasTitle(14))		hr_name = "|TInterface/ICONS/Achievement_PVP_O_14:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å¤§å…ƒå¸…ã€‘";
+		else if (player->HasTitle(13))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_13:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å…ƒå¸…ã€‘";
+		else if (player->HasTitle(12))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_12:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ç»Ÿå¸…ã€‘";
+		else if (player->HasTitle(11))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_11:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å¸ä»¤ã€‘";
+		else if (player->HasTitle(10))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_10:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å°‘æ ¡ã€‘";
+		else if (player->HasTitle(9))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_09:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€æŠ¤å«éª‘å£«ã€‘";
+		else if (player->HasTitle(8))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_08:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€éª‘å£«é˜Ÿé•¿ã€‘";
+		else if (player->HasTitle(7))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_07:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€éª‘å£«ä¸­å°‰ã€‘";
+		else if (player->HasTitle(6))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_06:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€éª‘å£«ã€‘";
+		else if (player->HasTitle(5))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_05:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å£«å®˜é•¿ã€‘";
+		else if (player->HasTitle(4))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_04:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å†›å£«é•¿ã€‘";
+		else if (player->HasTitle(3))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_03:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ä¸­å£«ã€‘";
+		else if (player->HasTitle(2))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_02:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ä¸‹å£«ã€‘";
+		else if (player->HasTitle(1))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_01:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€åˆ—å…µã€‘";
 	}
 	else
 	{
-		if (player->HasTitle(28)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_14:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾¸ß½×¶½¾ü¡¿";
-		else if (player->HasTitle(27)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_13:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾¶½¾ü¡¿";
-		else if (player->HasTitle(26)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_12:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾½«¾ü¡¿";
-		else if (player->HasTitle(25)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_11:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÖÐ½«¡¿";
-		else if (player->HasTitle(24)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_10:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÓÂÊ¿¡¿";
-		else if (player->HasTitle(23)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_09:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾°Ù·ò³¤¡¿";
-		else if (player->HasTitle(22)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_08:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾¾üÍÅÊ¿±ø¡¿";
-		else if (player->HasTitle(21)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_07:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÑªÎÀÊ¿¡¿";
-		else if (player->HasTitle(20)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_06:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾Ê¯Í·ÊØÎÀ¡¿";
-		else if (player->HasTitle(19)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_05:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾Ò»µÈ¾üÊ¿³¤¡¿";
-		else if (player->HasTitle(18)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_04:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾¸ß½×¾üÊ¿¡¿";
-		else if (player->HasTitle(17)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_03:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÖÐÊ¿¡¿";
-		else if (player->HasTitle(16)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_02:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾²½±ø¡¿";
-		else if (player->HasTitle(15)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_01:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾³âºò¡¿";
+		if (player->HasTitle(28)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_14:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€é«˜é˜¶ç£å†›ã€‘";
+		else if (player->HasTitle(27)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_13:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ç£å†›ã€‘";
+		else if (player->HasTitle(26)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_12:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å°†å†›ã€‘";
+		else if (player->HasTitle(25)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_11:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ä¸­å°†ã€‘";
+		else if (player->HasTitle(24)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_10:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å‹‡å£«ã€‘";
+		else if (player->HasTitle(23)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_09:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ç™¾å¤«é•¿ã€‘";
+		else if (player->HasTitle(22)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_08:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å†›å›¢å£«å…µã€‘";
+		else if (player->HasTitle(21)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_07:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€è¡€å«å£«ã€‘";
+		else if (player->HasTitle(20)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_06:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€çŸ³å¤´å®ˆå«ã€‘";
+		else if (player->HasTitle(19)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_05:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ä¸€ç­‰å†›å£«é•¿ã€‘";
+		else if (player->HasTitle(18)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_04:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€é«˜é˜¶å†›å£«ã€‘";
+		else if (player->HasTitle(17)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_03:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ä¸­å£«ã€‘";
+		else if (player->HasTitle(16)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_02:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€æ­¥å…µã€‘";
+		else if (player->HasTitle(15)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_01:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€æ–¥å€™ã€‘";
 	}
 	if (player->HasTitle(1) || player->HasTitle(15))
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, hr_name, SENDER_HR_MENU, 0);
@@ -139,37 +138,37 @@ std::string HonorRank::GetCurrHR(Player* player)
 	std::string hr_name = "";
 	if (player->GetTeamId() == TEAM_ALLIANCE)
 	{
-		if (player->HasTitle(14))		hr_name = "|TInterface/ICONS/Achievement_PVP_O_14:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾´óÔªË§¡¿";
-		else if (player->HasTitle(13))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_13:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÔªË§¡¿";
-		else if (player->HasTitle(12))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_12:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾Í³Ë§¡¿";
-		else if (player->HasTitle(11))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_11:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾Ë¾Áî¡¿";
-		else if (player->HasTitle(10))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_10:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÉÙÐ£¡¿";
-		else if (player->HasTitle(9))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_09:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾»¤ÎÀÆïÊ¿¡¿";
-		else if (player->HasTitle(8))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_08:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÆïÊ¿¶Ó³¤¡¿";
-		else if (player->HasTitle(7))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_07:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÆïÊ¿ÖÐÎ¾¡¿";
-		else if (player->HasTitle(6))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_06:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÆïÊ¿¡¿";
-		else if (player->HasTitle(5))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_05:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾Ê¿¹Ù³¤¡¿";
-		else if (player->HasTitle(4))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_04:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾¾üÊ¿³¤¡¿";
-		else if (player->HasTitle(3))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_03:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÖÐÊ¿¡¿";
-		else if (player->HasTitle(2))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_02:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÏÂÊ¿¡¿";
-		else if (player->HasTitle(1))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_01:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÁÐ±ø¡¿";
+		if (player->HasTitle(14))		hr_name = "|TInterface/ICONS/Achievement_PVP_O_14:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å¤§å…ƒå¸…ã€‘";
+		else if (player->HasTitle(13))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_13:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å…ƒå¸…ã€‘";
+		else if (player->HasTitle(12))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_12:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ç»Ÿå¸…ã€‘";
+		else if (player->HasTitle(11))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_11:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å¸ä»¤ã€‘";
+		else if (player->HasTitle(10))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_10:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å°‘æ ¡ã€‘";
+		else if (player->HasTitle(9))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_09:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€æŠ¤å«éª‘å£«ã€‘";
+		else if (player->HasTitle(8))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_08:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€éª‘å£«é˜Ÿé•¿ã€‘";
+		else if (player->HasTitle(7))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_07:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€éª‘å£«ä¸­å°‰ã€‘";
+		else if (player->HasTitle(6))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_06:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€éª‘å£«ã€‘";
+		else if (player->HasTitle(5))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_05:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å£«å®˜é•¿ã€‘";
+		else if (player->HasTitle(4))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_04:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å†›å£«é•¿ã€‘";
+		else if (player->HasTitle(3))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_03:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ä¸­å£«ã€‘";
+		else if (player->HasTitle(2))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_02:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ä¸‹å£«ã€‘";
+		else if (player->HasTitle(1))	hr_name = "|TInterface/ICONS/Achievement_PVP_O_01:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€åˆ—å…µã€‘";
 	}
 	else
 	{
-		if (player->HasTitle(28)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_14:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾¸ß½×¶½¾ü¡¿";
-		else if (player->HasTitle(27)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_13:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾¶½¾ü¡¿";
-		else if (player->HasTitle(26)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_12:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾½«¾ü¡¿";
-		else if (player->HasTitle(25)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_11:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÖÐ½«¡¿";
-		else if (player->HasTitle(24)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_10:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÓÂÊ¿¡¿";
-		else if (player->HasTitle(23)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_09:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾°Ù·ò³¤¡¿";
-		else if (player->HasTitle(22)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_08:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾¾üÍÅÊ¿±ø¡¿";
-		else if (player->HasTitle(21)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_07:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÑªÎÀÊ¿¡¿";
-		else if (player->HasTitle(20)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_06:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾Ê¯Í·ÊØÎÀ¡¿";
-		else if (player->HasTitle(19)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_05:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾Ò»µÈ¾üÊ¿³¤¡¿";
-		else if (player->HasTitle(18)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_04:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾¸ß½×¾üÊ¿¡¿";
-		else if (player->HasTitle(17)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_03:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾ÖÐÊ¿¡¿";
-		else if (player->HasTitle(16)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_02:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾²½±ø¡¿";
-		else if (player->HasTitle(15)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_01:30:30:0:0|tµ±Ç°µÄ¾ü½×¡¾³âºò¡¿";
+		if (player->HasTitle(28)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_14:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€é«˜é˜¶ç£å†›ã€‘";
+		else if (player->HasTitle(27)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_13:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ç£å†›ã€‘";
+		else if (player->HasTitle(26)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_12:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å°†å†›ã€‘";
+		else if (player->HasTitle(25)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_11:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ä¸­å°†ã€‘";
+		else if (player->HasTitle(24)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_10:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å‹‡å£«ã€‘";
+		else if (player->HasTitle(23)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_09:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ç™¾å¤«é•¿ã€‘";
+		else if (player->HasTitle(22)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_08:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€å†›å›¢å£«å…µã€‘";
+		else if (player->HasTitle(21)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_07:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€è¡€å«å£«ã€‘";
+		else if (player->HasTitle(20)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_06:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€çŸ³å¤´å®ˆå«ã€‘";
+		else if (player->HasTitle(19)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_05:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ä¸€ç­‰å†›å£«é•¿ã€‘";
+		else if (player->HasTitle(18)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_04:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€é«˜é˜¶å†›å£«ã€‘";
+		else if (player->HasTitle(17)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_03:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€ä¸­å£«ã€‘";
+		else if (player->HasTitle(16)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_02:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€æ­¥å…µã€‘";
+		else if (player->HasTitle(15)) hr_name = "|TInterface/ICONS/Achievement_PVP_P_01:30:30:0:0|tå½“å‰çš„å†›é˜¶ã€æ–¥å€™ã€‘";
 	}
 	return hr_name;
 }
@@ -196,61 +195,61 @@ std::string GetGossipText(uint32 title)
 	switch (title)
 	{
 	case 1:
-		return "|TInterface/ICONS/Achievement_PVP_O_01:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÁÐ±ø¡¿";	
+		return "|TInterface/ICONS/Achievement_PVP_O_01:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€åˆ—å…µã€‘";	
 	case 2:
-		return "|TInterface/ICONS/Achievement_PVP_O_02:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÏÂÊ¿¡¿";		
+		return "|TInterface/ICONS/Achievement_PVP_O_02:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€ä¸‹å£«ã€‘";		
 	case 3:
-		return "|TInterface/ICONS/Achievement_PVP_O_03:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÖÐÊ¿¡¿";	
+		return "|TInterface/ICONS/Achievement_PVP_O_03:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€ä¸­å£«ã€‘";	
 	case 4:		
-		return "|TInterface/ICONS/Achievement_PVP_O_04:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾¾üÊ¿³¤¡¿";	
+		return "|TInterface/ICONS/Achievement_PVP_O_04:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€å†›å£«é•¿ã€‘";	
 	case 5:
-		return "|TInterface/ICONS/Achievement_PVP_O_05:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾Ê¿¹Ù³¤¡¿";	
+		return "|TInterface/ICONS/Achievement_PVP_O_05:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€å£«å®˜é•¿ã€‘";	
 	case 6:
-		return "|TInterface/ICONS/Achievement_PVP_O_06:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÆïÊ¿¡¿";	
+		return "|TInterface/ICONS/Achievement_PVP_O_06:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€éª‘å£«ã€‘";	
 	case 7:
-		return "|TInterface/ICONS/Achievement_PVP_O_07:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÆïÊ¿ÖÐÎ¾¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_O_07:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€éª‘å£«ä¸­å°‰ã€‘";
 	case 8:
-		return "|TInterface/ICONS/Achievement_PVP_O_08:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÆïÊ¿¶Ó³¤¡¿";	
+		return "|TInterface/ICONS/Achievement_PVP_O_08:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€éª‘å£«é˜Ÿé•¿ã€‘";	
 	case 9:
-		return "|TInterface/ICONS/Achievement_PVP_O_09:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾»¤ÎÀÆïÊ¿¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_O_09:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€æŠ¤å«éª‘å£«ã€‘";
 	case 10:
-		return "|TInterface/ICONS/Achievement_PVP_O_10:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÉÙÐ£¡¿";	
+		return "|TInterface/ICONS/Achievement_PVP_O_10:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€å°‘æ ¡ã€‘";	
 	case 11:
-		return "|TInterface/ICONS/Achievement_PVP_O_11:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾Ë¾Áî¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_O_11:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€å¸ä»¤ã€‘";
 	case 12:
-		return "|TInterface/ICONS/Achievement_PVP_O_12:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾Í³Ë§¡¿";	
+		return "|TInterface/ICONS/Achievement_PVP_O_12:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€ç»Ÿå¸…ã€‘";	
 	case 13:
-		return "|TInterface/ICONS/Achievement_PVP_O_13:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÔªË§¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_O_13:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€å…ƒå¸…ã€‘";
 	case 14:
-		return "|TInterface/ICONS/Achievement_PVP_O_14:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾´óÔªË§¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_O_14:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€å¤§å…ƒå¸…ã€‘";
 	case 15:
-		return "|TInterface/ICONS/Achievement_PVP_P_01:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾³âºò¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_01:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€æ–¥å€™ã€‘";
 	case 16:
-		return "|TInterface/ICONS/Achievement_PVP_P_02:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾²½±ø¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_02:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€æ­¥å…µã€‘";
 	case 17:
-		return "|TInterface/ICONS/Achievement_PVP_P_03:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÖÐÊ¿¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_03:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€ä¸­å£«ã€‘";
 	case 18:
-		return "|TInterface/ICONS/Achievement_PVP_P_04:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾¸ß½×¾üÊ¿¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_04:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€é«˜é˜¶å†›å£«ã€‘";
 	case 19:
-		return "|TInterface/ICONS/Achievement_PVP_P_05:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾Ò»µÈ¾üÊ¿³¤¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_05:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€ä¸€ç­‰å†›å£«é•¿ã€‘";
 	case 20:
-		return "|TInterface/ICONS/Achievement_PVP_P_06:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾Ê¯Í·ÊØÎÀ¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_06:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€çŸ³å¤´å®ˆå«ã€‘";
 	case 21:
-		return "|TInterface/ICONS/Achievement_PVP_P_07:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÑªÎÀÊ¿¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_07:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€è¡€å«å£«ã€‘";
 	case 22:
-		return "|TInterface/ICONS/Achievement_PVP_P_08:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾¾üÍÅÊ¿±ø¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_08:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€å†›å›¢å£«å…µã€‘";
 	case 23:
-		return "|TInterface/ICONS/Achievement_PVP_P_09:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾°Ù·ò³¤¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_09:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€ç™¾å¤«é•¿ã€‘";
 	case 24:
-		return "|TInterface/ICONS/Achievement_PVP_P_10:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÓÂÊ¿¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_10:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€å‹‡å£«ã€‘";
 	case 25:
-		return "|TInterface/ICONS/Achievement_PVP_P_11:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾ÖÐ½«¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_11:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€ä¸­å°†ã€‘";
 	case 26:
-		return "|TInterface/ICONS/Achievement_PVP_P_12:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾½«¾ü¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_12:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€å°†å†›ã€‘";
 	case 27:
-		return "|TInterface/ICONS/Achievement_PVP_P_13:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾¶½¾ü¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_13:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€ç£å†›ã€‘";
 	case 28:
-		return "|TInterface/ICONS/Achievement_PVP_P_14:30:30:0:0|tÉý¼¶ºó¾ü½×¡¾¸ß½×¶½¾ü¡¿";
+		return "|TInterface/ICONS/Achievement_PVP_P_14:30:30:0:0|tå‡çº§åŽå†›é˜¶ã€é«˜é˜¶ç£å†›ã€‘";
 	default:
 		return "";
 	}
@@ -312,37 +311,37 @@ std::string HonorRank::GetHRTitle(Player* player)
 
 	if (player->GetTeamId() == TEAM_ALLIANCE)
 	{
-		if (player->HasTitle(14)) hr = "´óÔªË§";
-		else if (player->HasTitle(13)) hr = "ÔªË§";
-		else if (player->HasTitle(12)) hr = "Í³Ë§";
-		else if (player->HasTitle(11)) hr = "Ë¾Áî";
-		else if (player->HasTitle(10)) hr = "ÉÙÐ£";
-		else if (player->HasTitle(9)) hr = "»¤ÎÀÆïÊ¿";
-		else if (player->HasTitle(8)) hr = "ÆïÊ¿¶Ó³¤";
-		else if (player->HasTitle(7)) hr = "ÆïÊ¿ÖÐÎ¾";
-		else if (player->HasTitle(6)) hr = "ÆïÊ¿";
-		else if (player->HasTitle(5)) hr = "Ê¿¹Ù³¤";
-		else if (player->HasTitle(4)) hr = "¾üÊ¿³¤";
-		else if (player->HasTitle(3)) hr = "ÖÐÊ¿";
-		else if (player->HasTitle(2)) hr = "ÏÂÊ¿";
-		else hr = "ÁÐ±ø";
+		if (player->HasTitle(14)) hr = "å¤§å…ƒå¸…";
+		else if (player->HasTitle(13)) hr = "å…ƒå¸…";
+		else if (player->HasTitle(12)) hr = "ç»Ÿå¸…";
+		else if (player->HasTitle(11)) hr = "å¸ä»¤";
+		else if (player->HasTitle(10)) hr = "å°‘æ ¡";
+		else if (player->HasTitle(9)) hr = "æŠ¤å«éª‘å£«";
+		else if (player->HasTitle(8)) hr = "éª‘å£«é˜Ÿé•¿";
+		else if (player->HasTitle(7)) hr = "éª‘å£«ä¸­å°‰";
+		else if (player->HasTitle(6)) hr = "éª‘å£«";
+		else if (player->HasTitle(5)) hr = "å£«å®˜é•¿";
+		else if (player->HasTitle(4)) hr = "å†›å£«é•¿";
+		else if (player->HasTitle(3)) hr = "ä¸­å£«";
+		else if (player->HasTitle(2)) hr = "ä¸‹å£«";
+		else hr = "åˆ—å…µ";
 	}
 	else
 	{
-		if (player->HasTitle(28)) hr = "¸ß½×¶½¾ü";
-		else if (player->HasTitle(27)) hr = "¶½¾ü";
-		else if (player->HasTitle(26)) hr = "½«¾ü";
-		else if (player->HasTitle(25)) hr = "ÖÐ½«";
-		else if (player->HasTitle(24)) hr = "ÓÂÊ¿";
-		else if (player->HasTitle(23)) hr = "°Ù·ò³¤";
-		else if (player->HasTitle(22)) hr = "¾üÍÅÊ¿±ø";
-		else if (player->HasTitle(21)) hr = "ÑªÎÀÊ¿";
-		else if (player->HasTitle(20)) hr = "Ê¯Í·ÊØÎÀ";
-		else if (player->HasTitle(19)) hr = "Ò»µÈ¾üÊ¿³¤";
-		else if (player->HasTitle(18)) hr = "¸ß½×¾üÊ¿";
-		else if (player->HasTitle(17)) hr = "ÖÐÊ¿";
-		else if (player->HasTitle(16)) hr = "²½±ø";
-		else hr = "³âºò";
+		if (player->HasTitle(28)) hr = "é«˜é˜¶ç£å†›";
+		else if (player->HasTitle(27)) hr = "ç£å†›";
+		else if (player->HasTitle(26)) hr = "å°†å†›";
+		else if (player->HasTitle(25)) hr = "ä¸­å°†";
+		else if (player->HasTitle(24)) hr = "å‹‡å£«";
+		else if (player->HasTitle(23)) hr = "ç™¾å¤«é•¿";
+		else if (player->HasTitle(22)) hr = "å†›å›¢å£«å…µ";
+		else if (player->HasTitle(21)) hr = "è¡€å«å£«";
+		else if (player->HasTitle(20)) hr = "çŸ³å¤´å®ˆå«";
+		else if (player->HasTitle(19)) hr = "ä¸€ç­‰å†›å£«é•¿";
+		else if (player->HasTitle(18)) hr = "é«˜é˜¶å†›å£«";
+		else if (player->HasTitle(17)) hr = "ä¸­å£«";
+		else if (player->HasTitle(16)) hr = "æ­¥å…µ";
+		else hr = "æ–¥å€™";
 	}
 	return hr;
 }
@@ -352,46 +351,46 @@ std::string HonorRank::GetHRTitle(Player* player, uint32 rank)
 	switch (rank)
 	{
 	case 14:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "´óÔªË§" : hr = "¸ß½×¶½¾ü";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "å¤§å…ƒå¸…" : hr = "é«˜é˜¶ç£å†›";
 		break;
 	case 13:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "ÔªË§" : hr = "¶½¾ü";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "å…ƒå¸…" : hr = "ç£å†›";
 		break;
 	case 12:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "Í³Ë§" : hr = "½«¾ü";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "ç»Ÿå¸…" : hr = "å°†å†›";
 		break;
 	case 11:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "Ë¾Áî" : hr = "ÖÐ½«";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "å¸ä»¤" : hr = "ä¸­å°†";
 		break;
 	case 10:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "ÉÙÐ£" : hr = "ÓÂÊ¿";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "å°‘æ ¡" : hr = "å‹‡å£«";
 		break;
 	case 9:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "»¤ÎÀÆïÊ¿" : hr = "°Ù·ò³¤";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "æŠ¤å«éª‘å£«" : hr = "ç™¾å¤«é•¿";
 		break;
 	case 8:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "ÆïÊ¿¶Ó³¤" : hr = "¾üÍÅÊ¿±ø";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "éª‘å£«é˜Ÿé•¿" : hr = "å†›å›¢å£«å…µ";
 		break;
 	case 7:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "ÆïÊ¿ÖÐÎ¾" : hr = "ÑªÎÀÊ¿";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "éª‘å£«ä¸­å°‰" : hr = "è¡€å«å£«";
 		break;
 	case 6:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "ÆïÊ¿" : hr = "Ê¯Í·ÊØÎÀ";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "éª‘å£«" : hr = "çŸ³å¤´å®ˆå«";
 		break;
 	case 5:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "Ê¿¹Ù³¤" : hr = "Ò»µÈ¾üÊ¿³¤";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "å£«å®˜é•¿" : hr = "ä¸€ç­‰å†›å£«é•¿";
 		break;
 	case 4:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "¾üÊ¿³¤" : hr = "¸ß½×¾üÊ¿";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "å†›å£«é•¿" : hr = "é«˜é˜¶å†›å£«";
 		break;
 	case 3:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "ÖÐÊ¿" : hr = "ÖÐÊ¿";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "ä¸­å£«" : hr = "ä¸­å£«";
 		break;
 	case 2:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "ÏÂÊ¿" : hr = "²½±ø";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "ä¸‹å£«" : hr = "æ­¥å…µ";
 		break;
 	case 1:
-		player->GetTeamId() == TEAM_ALLIANCE ? hr = "ÁÐ±ø" : hr = "³âºò";
+		player->GetTeamId() == TEAM_ALLIANCE ? hr = "åˆ—å…µ" : hr = "æ–¥å€™";
 		break;
 	}
 

@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "FakePlayers.h"
 #include "../String/myString.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -23,7 +22,7 @@ void FakePlayers::Load()
 	FakePlayersVec.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0		1		2	3	4	5	6	7			8
-		"SELECT 名字,公会名称,等级,职业,种族,性别,ID,军衔等级,会员等级 FROM _假人_列表假人" :
+		"SELECT 鍚嶅瓧,鍏細鍚嶇О,绛夌骇,鑱屼笟,绉嶆棌,鎬у埆,ID,鍐涜绛夌骇,浼氬憳绛夌骇 FROM _鍋囦汉_鍒楄〃鍋囦汉" :
 		//		0		1	2	3		4	5	   6 7  8
 		"SELECT name,gname,lvl,class_,race,gender,ID,hr,vip FROM _faker_list");
 	if (!result) return;

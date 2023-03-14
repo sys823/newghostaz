@@ -24,7 +24,7 @@
 #include "VMapFactory.h"
 #include "LFGMgr.h"
 #include "Chat.h"
-#pragma execution_character_set("utf-8")
+
 
 #include "../Custom/Challenge/challenge.h"
 #include "../Custom/Deadline/Deadline.h"

@@ -78,7 +78,7 @@
 #include "ScriptMgr.h"
 #include "GameGraveyard.h"
 #include "Config.h"
-#pragma execution_character_set("utf-8")
+
 #include "../Custom/Transmogrification/Transmogrification.h"
 #include "../Custom/Recruit/Recruit.h"
 #include "../Custom/MountVendor/MountVendor.h"
@@ -21834,7 +21834,7 @@ void Player::RemovePet(Pet* pet, PetSaveMode mode, bool returnreagent)
     }
 }
 
-void Player::StopCastingCharm()
+void Player::StopCastingCharm(Aura* except /*= nullptr*/)
 {
     Unit* charm = GetCharm();
     if (!charm)
@@ -21848,7 +21848,12 @@ void Player::StopCastingCharm()
             ExitVehicle();
     }
     if (GetCharmGUID())
-        charm->RemoveCharmAuras();
+    {
+        charm->RemoveAurasByType(SPELL_AURA_MOD_CHARM, 0, except);
+        charm->RemoveAurasByType(SPELL_AURA_MOD_POSSESS_PET, 0, except);
+        charm->RemoveAurasByType(SPELL_AURA_MOD_POSSESS, 0, except);
+        charm->RemoveAurasByType(SPELL_AURA_AOE_CHARM, 0, except);
+    }
 
     if (GetCharmGUID())
     {
@@ -23203,23 +23208,36 @@ bool Player::BuyItemFromVendorSlot(uint64 vendorguid, uint32 vendorslot, uint32 
     }
 
     uint32 price = 0;
-    if (crItem->IsGoldRequired(pProto) && pProto->BuyPrice > 0) //Assume price cannot be negative (do not know why it is int32)
+    if (pProto->GetJfCost() && !crItem->ExtendedCost)
     {
-        uint32 maxCount = MAX_MONEY_AMOUNT / pProto->BuyPrice;
-        if ((uint32)count > maxCount)
-        {
-            sLog->outError("Player %s tried to buy %u item id %u, causing overflow", GetName().c_str(), (uint32)count, pProto->ItemId);
-            count = (uint8)maxCount;
-        }
-        price = pProto->BuyPrice * count; //it should not exceed MAX_MONEY_AMOUNT
-
-        // reputation discount
-        price = uint32(floor(price * GetReputationPriceDiscount(creature)));
+        price = pProto->GetJfCost() * GOLD * sSwitch->GetValue(ST_CF_GOLD_JF);
 
         if (!HasEnoughMoney(price))
         {
             SendBuyError(BUY_ERR_NOT_ENOUGHT_MONEY, creature, item, 0);
             return false;
+        }
+    }
+    else
+    {
+        if (crItem->IsGoldRequired(pProto) && pProto->BuyPrice > 0) //Assume price cannot be negative (do not know why it is int32)
+        {
+            uint32 maxCount = MAX_MONEY_AMOUNT / pProto->BuyPrice;
+            if ((uint32)count > maxCount)
+            {
+                sLog->outError("Player %s tried to buy %u item id %u, causing overflow", GetName().c_str(), (uint32)count, pProto->ItemId);
+                count = (uint8)maxCount;
+            }
+            price = pProto->BuyPrice * count; //it should not exceed MAX_MONEY_AMOUNT
+
+            // reputation discount
+            price = uint32(floor(price * GetReputationPriceDiscount(creature)));
+
+            if (!HasEnoughMoney(price))
+            {
+                SendBuyError(BUY_ERR_NOT_ENOUGHT_MONEY, creature, item, 0);
+                return false;
+            }
         }
     }
 
@@ -25751,15 +25769,15 @@ bool ItemPosCount::isContainedIn(ItemPosCountVec const& vec) const
     return false;
 }
 
-void Player::StopCastingBindSight()
+void Player::StopCastingBindSight(Aura* except /*= nullptr*/)
 {
     if (WorldObject* target = GetViewpoint())
     {
         if (target->isType(TYPEMASK_UNIT))
         {
-            ((Unit*)target)->RemoveAurasByType(SPELL_AURA_BIND_SIGHT, GetGUID());
-            ((Unit*)target)->RemoveAurasByType(SPELL_AURA_MOD_POSSESS, GetGUID());
-            ((Unit*)target)->RemoveAurasByType(SPELL_AURA_MOD_POSSESS_PET, GetGUID());
+            ((Unit*)target)->RemoveAurasByType(SPELL_AURA_BIND_SIGHT, GetGUID(), except);
+            ((Unit*)target)->RemoveAurasByType(SPELL_AURA_MOD_POSSESS, GetGUID(), except);
+            ((Unit*)target)->RemoveAurasByType(SPELL_AURA_MOD_POSSESS_PET, GetGUID(), except);
         }
     }
 }

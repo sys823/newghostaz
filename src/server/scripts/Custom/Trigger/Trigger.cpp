@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Trigger.h"
 #include "../CustomEvent/Event.h"
 
@@ -8,7 +7,7 @@ void Trigger::Load()
 {
 	TriggerVec.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ÉúÎïGUID,ÀàĞÍ,·¶Î§¾àÀë,ÁªÃË´«ËÍ×ø±êID,²¿Âä´«ËÍ×ø±êID,ÁªÃË¹â»·ID,²¿Âä¹â»·ID,ÌáÊ¾ÄÚÈİ,ÌáÊ¾ÀàĞÍ FROM _×Ô¶¨ÒåAI_´¥·¢Æ÷" :
+		"SELECT ç”Ÿç‰©GUID,ç±»å‹,èŒƒå›´è·ç¦»,è”ç›Ÿä¼ é€åæ ‡ID,éƒ¨è½ä¼ é€åæ ‡ID,è”ç›Ÿå…‰ç¯ID,éƒ¨è½å…‰ç¯ID,æç¤ºå†…å®¹,æç¤ºç±»å‹ FROM _è‡ªå®šä¹‰AI_è§¦å‘å™¨" :
 		"SELECT guid,type,distance,A_PosId,H_PosId,A_AuraId,H_AuraId,notice,noticeType FROM _trigger");
 	if (!result) return;
 	do
@@ -69,7 +68,7 @@ public:
 
 		SummonList Summons;
 
-		uint32 type = 0;//1-´«ËÍ 2-ÏÂÂí 3-aura
+		uint32 type = 0;//1-ä¼ é€ 2-ä¸‹é©¬ 3-aura
 		uint32 distance = 0;
 		uint32 posId = 0;
 		uint32 auraId = 0;

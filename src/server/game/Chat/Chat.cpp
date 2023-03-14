@@ -23,7 +23,7 @@
 #include "SpellMgr.h"
 #include "ScriptMgr.h"
 #include "ChatLink.h"
-#pragma execution_character_set("utf-8")
+
 #include "../Custom/AntiCheat/AntiCheat.h"
 #ifdef ELUNA
 #include "LuaEngine.h"

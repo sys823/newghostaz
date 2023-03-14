@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Faction.h"
 #include "../CommonFunc/CommonFunc.h"
 #include "../Reward/Reward.h"
@@ -11,14 +10,13 @@
 #include "../MainFunc/MainFunc.h"
 
 std::map<uint32, FactionTemplate> FactionDataMap;
-
 void Faction::Load()
 {
 	FactionDataMap.clear();
 
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0				1				2		3					4		5
-		"SELECT ×Ô¶¨ÒåÕóÓªID, ×Ô¶¨ÒåÕóÓªÃû³Æ, ²Ëµ¥ÎÄ±¾, ¼ÓÈëÕóÓª½±ÀøÄ£°åID, Ãû×Öºó×º,ÍË³öÕóÓªÐèÇóÄ£°åID FROM __×Ô¶¨ÒåÕóÓª" :
+		"SELECT è‡ªå®šä¹‰é˜µè¥ID, è‡ªå®šä¹‰é˜µè¥åç§°, èœå•æ–‡æœ¬, åŠ å…¥é˜µè¥å¥–åŠ±æ¨¡æ¿ID, åå­—åŽç¼€,é€€å‡ºé˜µè¥éœ€æ±‚æ¨¡æ¿ID FROM __è‡ªå®šä¹‰é˜µè¥" :
 		//		0			1		2		3		4		5
 		"SELECT faction, name, gossipText, rewId, suffix,quitReqId FROM _faction");
 	
@@ -48,7 +46,7 @@ std::string Faction::GetName(uint32 faction)
 	if (iter != FactionDataMap.end())
 		return iter->second.name;
 
-	return "[ÎÞ]";
+	return "[æ— ]";
 }
 
 std::string Faction::GetGosstipText(uint32 faction)
@@ -95,13 +93,13 @@ void Faction::Join(Player* player, uint32 faction)
 {
 	if (player->InEvent())
 	{
-		ChatHandler(player->GetSession()).PSendSysMessage("ÊÂ¼þÖÐ²»ÄÜ¼ÓÈëÃÅÅÉ£¡");
+		ChatHandler(player->GetSession()).PSendSysMessage("äº‹ä»¶ä¸­ä¸èƒ½åŠ å…¥é—¨æ´¾ï¼");
 		return;
 	}
 	
 	if (faction == 0)
 	{
-		//ÍË³ö
+		//é€€å‡º
 		uint32 reqId = GetReqId(player->faction);
 
 		if (!sReq->Check(player, reqId))
@@ -111,7 +109,7 @@ void Faction::Join(Player* player, uint32 faction)
 	}
 	else
 	{
-		//¼ÓÈë
+		//åŠ å…¥
 		uint32 rewId = GetRewId(faction);
 		sRew->Rew(player, rewId);
 	}
@@ -157,12 +155,12 @@ void Faction::Action(Player*player, uint32 action, Object*obj)
 		if (faction == player->faction)
 		{
 			Join(player, 0);
-			ChatHandler(player->GetSession()).PSendSysMessage("ÍË³ö%s", GetName(faction).c_str());
+			ChatHandler(player->GetSession()).PSendSysMessage("é€€å‡º%s", GetName(faction).c_str());
 		}
 		else
 		{
 			Join(player, faction);
-			ChatHandler(player->GetSession()).PSendSysMessage("¼ÓÈë%s", GetName(faction).c_str());
+			ChatHandler(player->GetSession()).PSendSysMessage("åŠ å…¥%s", GetName(faction).c_str());
 		}
 
 		player->CLOSE_GOSSIP_MENU();
@@ -176,14 +174,14 @@ void Faction::Action(Player*player, uint32 action, Object*obj)
 
 		if (player->faction == faction)
 		{
-			std::string gossipText = ">> ÍË³ö" + name;
-			std::string noticeText = "È·¶¨ÍË³ö" + name + "Âð£¿";
+			std::string gossipText = ">> é€€å‡º" + name;
+			std::string noticeText = "ç¡®å®šé€€å‡º" + name + "å—ï¼Ÿ";
 			player->ADD_GOSSIP_ITEM_EXTENDED(0, gossipText, SENDER_FACTION, 2 * GOSSIP_ACTION_INFO_DEF + player->faction, noticeText, 0, false);
 		}
 		else if (player->faction == 0)
 		{
-			std::string gossipText = ">> ¼ÓÈë" + name;
-			std::string noticeText = "È·¶¨¼ÓÈë" + name + "Âð£¿";
+			std::string gossipText = ">> åŠ å…¥" + name;
+			std::string noticeText = "ç¡®å®šåŠ å…¥" + name + "å—ï¼Ÿ";
 			player->ADD_GOSSIP_ITEM_EXTENDED(0, gossipText, SENDER_FACTION, 2 * GOSSIP_ACTION_INFO_DEF + action - GOSSIP_ACTION_INFO_DEF, noticeText, 0, false);
 		}
 			

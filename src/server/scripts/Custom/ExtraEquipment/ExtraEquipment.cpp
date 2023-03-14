@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "ExtraEquipment.h"
 #include "../Custom/CommonFunc/CommonFunc.h"
 #include "../Custom/ItemMod/ItemMod.h"
@@ -16,7 +15,7 @@ void ExtraEquipment::Load()
 	extra_origin_item_back	= false;
 
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ÊôĞÔ±¶ÂÊ, ¸½Ä§ÊôĞÔ±¶ÂÊ, ÊÇ·ñ¿ÉÒÔÈ¡»Ø from _ÎïÆ·_Ë«¼×" :
+		"SELECT å±æ€§å€ç‡, é™„é­”å±æ€§å€ç‡, æ˜¯å¦å¯ä»¥å–å› from _ç‰©å“_åŒç”²" :
 		"SELECT stat_muil, enchant_muil, originItemEnable from _itemmod_extra_equipments");
 	if (result)
 	{
@@ -29,7 +28,7 @@ void ExtraEquipment::Load()
 
 	ExtraEuipMentEntryVec.clear();
 	QueryResult result1 = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ÎïÆ·ID from _ÎïÆ·_Ë«¼×ÁĞ±í" :
+		"SELECT ç‰©å“ID from _ç‰©å“_åŒç”²åˆ—è¡¨" :
 		"SELECT entry from _itemmod_extra_equipments_enable");
 	if (result1)
 	{
@@ -90,7 +89,7 @@ std::string ExtraEquipment::GetSlotDefaultText(EquipmentSlots slot, uint32 width
 	}
 	ss << ":" << width << ":" << height << ":" << x << ":" << y << "|t";
 
-	ss << "Î´×°±¸";
+	ss << "æœªè£…å¤‡";
 
 	return ss.str();
 }
@@ -114,7 +113,7 @@ std::string ExtraEquipment::GetStatDes(uint32 entry)
 
 	std::ostringstream oss;
 
-	//×°±¸ÊôĞÔ
+	//è£…å¤‡å±æ€§
 	for (uint8 k = 0; k < MAX_ITEM_PROTO_STATS; ++k)
 	{
 		if (k >= proto->StatsCount)
@@ -129,55 +128,55 @@ std::string ExtraEquipment::GetStatDes(uint32 entry)
 		switch (statType)
 		{
 		case ITEM_MOD_MANA:
-			oss << "\n              +" << val << "·¨Á¦Öµ";
+			oss << "\n              +" << val << "æ³•åŠ›å€¼";
 			break;
 		case ITEM_MOD_HEALTH:                           // modify HP
-			oss << "\n              +" << val << "ÉúÃüÖµ";
+			oss << "\n              +" << val << "ç”Ÿå‘½å€¼";
 			break;
 		case ITEM_MOD_AGILITY:                          // modify agility
-			oss << "\n              +" << val << "Ãô½İ";
+			oss << "\n              +" << val << "æ•æ·";
 			break;
 		case ITEM_MOD_STRENGTH:                         //modify strength
-			oss << "\n              +" << val << "Á¦Á¿";
+			oss << "\n              +" << val << "åŠ›é‡";
 			break;
 		case ITEM_MOD_INTELLECT:                        //modify intellect
-			oss << "\n              +" << val << "ÖÇÁ¦";
+			oss << "\n              +" << val << "æ™ºåŠ›";
 			break;
 		case ITEM_MOD_SPIRIT:                           //modify spirit
-			oss << "\n              +" << val << "¾«Éñ";
+			oss << "\n              +" << val << "ç²¾ç¥";
 			break;
 		case ITEM_MOD_STAMINA:                          //modify stamina
-			oss << "\n              +" << val << "ÄÍÁ¦";
+			oss << "\n              +" << val << "è€åŠ›";
 			break;
 		case ITEM_MOD_DEFENSE_SKILL_RATING:
-			oss << "\n              +" << val << "·ÀÓùµÈ¼¶";
+			oss << "\n              +" << val << "é˜²å¾¡ç­‰çº§";
 			break;
 		case ITEM_MOD_DODGE_RATING:
-			oss << "\n              +" << val << "¶ãÉÁµÈ¼¶";
+			oss << "\n              +" << val << "èº²é—ªç­‰çº§";
 			break;
 		case ITEM_MOD_PARRY_RATING:
-			oss << "\n              +" << val << "ÕĞ¼ÜµÈ¼¶";
+			oss << "\n              +" << val << "æ‹›æ¶ç­‰çº§";
 			break;
 		case ITEM_MOD_BLOCK_RATING:
-			oss << "\n              +" << val << "¸ñµ²µÈ¼¶";
+			oss << "\n              +" << val << "æ ¼æŒ¡ç­‰çº§";
 			break;
 		case ITEM_MOD_HIT_MELEE_RATING:
-			oss << "\n              +" << val << "ÃüÖĞµÈ¼¶";
+			oss << "\n              +" << val << "å‘½ä¸­ç­‰çº§";
 			break;
 		case ITEM_MOD_HIT_RANGED_RATING:
-			oss << "\n              +" << val << "Ô¶³ÌÃüÖĞµÈ¼¶";
+			oss << "\n              +" << val << "è¿œç¨‹å‘½ä¸­ç­‰çº§";
 			break;
 		case ITEM_MOD_HIT_SPELL_RATING:
-			oss << "\n              +" << val << "·¨ÊõÃüÖĞµÈ¼¶";
+			oss << "\n              +" << val << "æ³•æœ¯å‘½ä¸­ç­‰çº§";
 			break;
 		case ITEM_MOD_CRIT_MELEE_RATING:
-			oss << "\n              +" << val << "±©»÷µÈ¼¶";
+			oss << "\n              +" << val << "æš´å‡»ç­‰çº§";
 			break;
 		case ITEM_MOD_CRIT_RANGED_RATING:
-			oss << "\n              +" << val << "Ô¶³Ì±©»÷µÈ¼¶";
+			oss << "\n              +" << val << "è¿œç¨‹æš´å‡»ç­‰çº§";
 			break;
 		case ITEM_MOD_CRIT_SPELL_RATING:
-			oss << "\n              +" << val << "·¨Êõ±©»÷µÈ¼¶";
+			oss << "\n              +" << val << "æ³•æœ¯æš´å‡»ç­‰çº§";
 			break;
 		case ITEM_MOD_HIT_TAKEN_MELEE_RATING:
 			oss << "\n              +" << val << "";
@@ -222,13 +221,13 @@ std::string ExtraEquipment::GetStatDes(uint32 entry)
 			oss << "\n              +" << val << "";
 			break;
 		case ITEM_MOD_HASTE_RATING:
-			oss << "\n              +" << val << "¼±ËÙµÈ¼¶";
+			oss << "\n              +" << val << "æ€¥é€Ÿç­‰çº§";
 			break;
 		case ITEM_MOD_EXPERTISE_RATING:
-			oss << "\n              +" << val << "ÈÍĞÔµÈ¼¶";
+			oss << "\n              +" << val << "éŸ§æ€§ç­‰çº§";
 			break;
 		case ITEM_MOD_ATTACK_POWER:
-			oss << "\n              +" << val << "¹¥»÷Ç¿¶È";
+			oss << "\n              +" << val << "æ”»å‡»å¼ºåº¦";
 			break;
 		case ITEM_MOD_RANGED_ATTACK_POWER:
 			oss << "\n              +" << val << "";
@@ -240,7 +239,7 @@ std::string ExtraEquipment::GetStatDes(uint32 entry)
 			oss << "\n              +" << val << "";
 			break;
 		case ITEM_MOD_SPELL_POWER:
-			oss << "\n              +" << val << "·¨ÊõÇ¿¶È";
+			oss << "\n              +" << val << "æ³•æœ¯å¼ºåº¦";
 			break;
 		case ITEM_MOD_HEALTH_REGEN:
 			oss << "\n              +" << val << "";
@@ -393,7 +392,7 @@ void ExtraEquipment::AddNextMenuList(Player* player, Object* obj, uint32 sender,
 
 		player->GossipVec.clear();
 
-		//Ö÷±³°ü
+		//ä¸»èƒŒåŒ…
 		for (uint8 i = INVENTORY_SLOT_ITEM_START; i < INVENTORY_SLOT_ITEM_END; i++)
 			if (Item* item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
               if (IsForSlot(item, EquipmentSlots(player->selectedEquipmentSlot)))
@@ -407,7 +406,7 @@ void ExtraEquipment::AddNextMenuList(Player* player, Object* obj, uint32 sender,
               	player->GossipVec.push_back(temp);
               }
 
-		//¶îÍâÈı¸ö±³°ü
+		//é¢å¤–ä¸‰ä¸ªèƒŒåŒ…
 		for (uint8 i = INVENTORY_SLOT_BAG_START; i < INVENTORY_SLOT_BAG_END; i++)
 			if (Bag* pBag = player->GetBagByPos(i))
               for (uint32 j = 0; j < pBag->GetBagSize(); j++)
@@ -433,9 +432,9 @@ void ExtraEquipment::AddNextMenuList(Player* player, Object* obj, uint32 sender,
 		if (player->rowId >= MAX_EXTRA_EQUIPMENT_ROWS_COUNT)
 		{
 			player->rowId = 0;
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ÏÂÒ³", GOSSIP_SENDER_MAIN, EXTRA_EQUIPMENT_NEXT_PAGE);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ä¸‹é¡µ", GOSSIP_SENDER_MAIN, EXTRA_EQUIPMENT_NEXT_PAGE);
 			if (player->pageId >= 2)
-              player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ÉÏÒ³", GOSSIP_SENDER_MAIN, EXTRA_EQUIPMENT_PREV_PAGE);
+              player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ä¸Šé¡µ", GOSSIP_SENDER_MAIN, EXTRA_EQUIPMENT_PREV_PAGE);
 			break;
 		}
 	}
@@ -445,11 +444,11 @@ void ExtraEquipment::AddNextMenuList(Player* player, Object* obj, uint32 sender,
 	{
 		player->flag_i = player->flag_i + MAX_EXTRA_EQUIPMENT_ROWS_COUNT - player->rowId;
 		player->rowId = 0;
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ÉÏÒ³", GOSSIP_SENDER_MAIN, EXTRA_EQUIPMENT_PREV_PAGE);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ä¸Šé¡µ", GOSSIP_SENDER_MAIN, EXTRA_EQUIPMENT_PREV_PAGE);
 	}
 
 	if (!fordisplay)
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "·µ»Ø", GOSSIP_SENDER_MAIN, EXTRA_EQUIPMENT_BACK);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "è¿”å›", GOSSIP_SENDER_MAIN, EXTRA_EQUIPMENT_BACK);
 
 	player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, obj->GetGUID());
 }
@@ -459,7 +458,7 @@ void ExtraEquipment::Action(Player* player, Object* obj, uint32 sender, bool for
 	
 	if (Item* item = player->GetItemByGuid(MAKE_NEW_GUID(sender, 0, HIGHGUID_ITEM)))
 	{
-		//ÕâÀï´¦Àídisplay mainhand offhand ranged
+		//è¿™é‡Œå¤„ç†display mainhand offhand ranged
 		if (fordisplay)
 		{
 			player->CLOSE_GOSSIP_MENU();
@@ -468,7 +467,7 @@ void ExtraEquipment::Action(Player* player, Object* obj, uint32 sender, bool for
 
 		if (item->GetTemplate()->Stackable > 1 && item->GetCount() > 1)
 		{
-			player->GetSession()->SendNotification("¸üĞÂÊ§°Ü£¬¸ÃÎïÆ·µş¼ÓÊıÁ¿Ó¦Ğ¡ÓÚ2£¬Çë·ÖÀë¸ÃÎïÆ·£¡");
+			player->GetSession()->SendNotification("æ›´æ–°å¤±è´¥ï¼Œè¯¥ç‰©å“å åŠ æ•°é‡åº”å°äº2ï¼Œè¯·åˆ†ç¦»è¯¥ç‰©å“ï¼");
 			player->CLOSE_GOSSIP_MENU();
 			return;
 		}
@@ -476,7 +475,7 @@ void ExtraEquipment::Action(Player* player, Object* obj, uint32 sender, bool for
 		GiveItemBack(player, EquipmentSlots(player->selectedEquipmentSlot));
 		Update(player, item, EquipmentSlots(player->selectedEquipmentSlot));
 		player->DestroyItem(item->GetBagSlot(), item->GetSlot(),true);
-		player->GetSession()->SendAreaTriggerMessage("¸üĞÂÍê³É£¡");
+		player->GetSession()->SendAreaTriggerMessage("æ›´æ–°å®Œæˆï¼");
 	}
 	
 	player->CLOSE_GOSSIP_MENU();
@@ -513,7 +512,7 @@ void ExtraEquipment::Update(Player* player, Item* item, EquipmentSlots slot)
 	for (uint8 i = PERM_ENCHANTMENT_SLOT; i < MAX_ENCHANTMENT_SLOT; ++i)
 		ssEnchants << item->GetEnchantmentId(EnchantmentSlot(i)) << ' ';
 
-	//²åÈëÊı¾İ¿â
+	//æ’å…¥æ•°æ®åº“
 	QueryResult result = CharacterDatabase.PQuery("SELECT * FROM characters_extra_equipments WHERE guid = %d AND equip_slot = %d", guid, slot);
 
 	if (result)
@@ -521,10 +520,10 @@ void ExtraEquipment::Update(Player* player, Item* item, EquipmentSlots slot)
 	else
 		CharacterDatabase.PExecute("INSERT INTO characters_extra_equipments(guid,itemEntry,equip_slot,enchantments) values(%d, %d, %d,'%s')", guid, itemEntry, slot, ssEnchants.str().c_str());
 
-	//³ıÈ¥Ë«¼×Ğ§¹û
+	//é™¤å»åŒç”²æ•ˆæœ
 	Apply(player, false);
 
-	//¸üĞÂvec
+	//æ›´æ–°vec
 	for (std::vector<ExtraEquipments>::iterator itr = player->ExtraEquimentVec.begin(); itr != player->ExtraEquimentVec.end();)
 		if (itr->slot == slot)
 			itr = player->ExtraEquimentVec.erase(itr);
@@ -538,7 +537,7 @@ void ExtraEquipment::Update(Player* player, Item* item, EquipmentSlots slot)
 		temp.enchant[i] = item->GetEnchantmentId(EnchantmentSlot(i));
 	player->ExtraEquimentVec.push_back(temp);
 
-	//ÖØÔØË«¼×Ğ§¹û
+	//é‡è½½åŒç”²æ•ˆæœ
 	Apply(player, true);
 }
 
@@ -546,7 +545,6 @@ void ExtraEquipment::Apply(Player* player, bool apply)
 {
 	if (!player)
 		return;
-
 	uint32 len = player->ExtraEquimentVec.size();
 
 	for (size_t i = 0; i < player->ExtraEquimentVec.size(); i++)
@@ -556,7 +554,7 @@ void ExtraEquipment::Apply(Player* player, bool apply)
 		if (!proto)
 			continue;
 
-		//¸½Ä§²¿·Ö
+		//é™„é­”éƒ¨åˆ†
 		for (size_t j = 0; j < MAX_ENCHANTMENT_SLOT; j++)
 		{		
 			uint32 enchant_id = player->ExtraEquimentVec[i].enchant[j];
@@ -572,7 +570,7 @@ void ExtraEquipment::Apply(Player* player, bool apply)
               uint32 enchant_amount = pEnchant->amount[s] * extra_enchant_stat_muil;
               uint32 enchant_spell_id = pEnchant->spellid[s];
               
-#pragma region ×°±¸¼¼ÄÜ
+#pragma region è£…å¤‡æŠ€èƒ½
               if (enchant_display_type == ITEM_ENCHANTMENT_TYPE_EQUIP_SPELL)
               {
               	if (enchant_spell_id)
@@ -585,7 +583,7 @@ void ExtraEquipment::Apply(Player* player, bool apply)
               }
 #pragma endregion
 
-#pragma region ÊôĞÔ
+#pragma region å±æ€§
               if (enchant_display_type == ITEM_ENCHANTMENT_TYPE_STAT && enchant_amount != 0)
               {
               	switch (enchant_spell_id)
@@ -727,7 +725,7 @@ void ExtraEquipment::Apply(Player* player, bool apply)
 
 		}
 		
-		//×°±¸ÊôĞÔ
+		//è£…å¤‡å±æ€§
 		for (uint8 k = 0; k < MAX_ITEM_PROTO_STATS; ++k)
 		{
 			if (k >= proto->StatsCount)

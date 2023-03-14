@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "ScriptMgr.h"
 
 class hm_Loginscript : PlayerScript

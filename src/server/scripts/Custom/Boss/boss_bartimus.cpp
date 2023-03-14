@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "../PrecompiledHeaders/ScriptPCH.h"
 enum Spells
 {
@@ -60,9 +59,9 @@ public:
 
 			if ((GetHealthPct(0) >= 33 && GetHealthPct(damage) < 33))
 			{
-				me->MonsterYell("ÀíÖÇ..ÀíÖÇ£¿»ìÂÒ£¡·è¿ñ£¡", LANG_UNIVERSAL, NULL);
+				me->MonsterYell("ç†æ™º..ç†æ™ºï¼Ÿæ··ä¹±ï¼ç–¯ç‹‚ï¼", LANG_UNIVERSAL, NULL);
 				me->InterruptNonMeleeSpells(false);
-				me->MonsterYell("°¡..°¡.. ÎÒµÄÍ·..", LANG_UNIVERSAL, NULL);
+				me->MonsterYell("å•Š..å•Š.. æˆ‘çš„å¤´..", LANG_UNIVERSAL, NULL);
 				DoCast(me, SPELL_INSANITY, false);
 			}
 		}
@@ -137,7 +136,7 @@ public:
 		void EnterCombat(Unit* /*who*/)
 		{
 			me->RemoveAurasDueToSpell(SPELL_STEALTH);
-			me->MonsterYell("ÄãºÃ£¬ÕâÎ»ÅóÓÑ£¬ÇëÔÊĞíÎÒ¸øÄãÒ»¸ö¾ªÏ²£¡", LANG_UNIVERSAL, NULL);
+			me->MonsterYell("ä½ å¥½ï¼Œè¿™ä½æœ‹å‹ï¼Œè¯·å…è®¸æˆ‘ç»™ä½ ä¸€ä¸ªæƒŠå–œï¼", LANG_UNIVERSAL, NULL);
 		}
 
 		void JustSummoned(Creature* summon)
@@ -262,7 +261,7 @@ public:
 
 		void JustDied(Unit* /*killer*/)
 		{
-			me->MonsterYell("°²Ï¢...", LANG_UNIVERSAL, NULL);
+			me->MonsterYell("å®‰æ¯...", LANG_UNIVERSAL, NULL);
 			Summons.DespawnAll();
 			ResetPlayersPhaseMask();
 

@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Armory.h"
 #include "../GCAddon/GCAddon.h"
 #include "GuildMgr.h"
@@ -80,7 +79,7 @@ uint32 Armory::QuerySigil(Player* player)
 {
 	uint32 count = 0;
 
-	//Ö÷±³°ü
+	//ä¸»èƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_ITEM_START; i < INVENTORY_SLOT_ITEM_END; i++)
 		if (Item* item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
 		{
@@ -93,7 +92,7 @@ uint32 Armory::QuerySigil(Player* player)
 				}
 		}
 
-	//¶îÍâÈı¸ö±³°ü
+	//é¢å¤–ä¸‰ä¸ªèƒŒåŒ…
 	for (uint8 i = INVENTORY_SLOT_BAG_START; i < INVENTORY_SLOT_BAG_END; i++)
 		if (Bag* pBag = player->GetBagByPos(i))
 			for (uint32 j = 0; j < pBag->GetBagSize(); j++)
@@ -108,7 +107,7 @@ uint32 Armory::QuerySigil(Player* player)
 						}
 				}
 
-	//ÒøĞĞ
+	//é“¶è¡Œ
 	for (uint8 i = BANK_SLOT_ITEM_START; i < BANK_SLOT_BAG_END; ++i)
 		if (Item* item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, i))
 		{
@@ -120,7 +119,7 @@ uint32 Armory::QuerySigil(Player* player)
 					break;
 				}
 		}
-	//ÒøĞĞ±³°ü
+	//é“¶è¡ŒèƒŒåŒ…
 	for (uint8 i = BANK_SLOT_BAG_START; i < BANK_SLOT_BAG_END; ++i)
 		if (Bag* pBag = player->GetBagByPos(i))
 			for (uint32 j = 0; j < pBag->GetBagSize(); j++)
@@ -223,7 +222,7 @@ void Armory::UpdateSigilArmory(Player* player)
 	for (itr = ArmorySigilVec.begin(); itr != ArmorySigilVec.end(); ++itr)
 		if (account == itr->account)
 		{
-			//Èç¹ûµ±Ç°Íæ¼ÒÊ¥ÎïÊıÁ¿Ğ¡ÓÚ°ñÖĞÍ¬Ò»ÕËºÅÏÂµÄÍæ¼ÒÊ¥ÎïÊıÁ¿£¬Ôò·µ»Ø ·ñÔò Ìæ»»°ñÖĞÍ¬Ò»ÕËºÅÏÂµÄÍæ¼ÒÊı¾İ
+			//å¦‚æœå½“å‰ç©å®¶åœ£ç‰©æ•°é‡å°äºæ¦œä¸­åŒä¸€è´¦å·ä¸‹çš„ç©å®¶åœ£ç‰©æ•°é‡ï¼Œåˆ™è¿”å› å¦åˆ™ æ›¿æ¢æ¦œä¸­åŒä¸€è´¦å·ä¸‹çš„ç©å®¶æ•°æ®
 			if (itr->amount > amount)
 				return;
 
@@ -297,7 +296,7 @@ void Armory::UpdatePvpArmory(Player* player)
 	//for (itr = ArmoryPvpVec.begin(); itr != ArmoryPvpVec.end(); ++itr)
 	//	if (account == itr->account)
 	//	{
-	//		//Èç¹ûµ±Ç°Íæ¼Ò»÷É±ÊıÁ¿Ğ¡ÓÚ°ñÖĞÍ¬Ò»ÕËºÅÏÂµÄÍæ¼Ò»÷É±ÊıÁ¿£¬Ôò·µ»Ø ·ñÔò Ìæ»»°ñÖĞÍ¬Ò»ÕËºÅÏÂµÄÍæ¼ÒÊı¾İ
+	//		//å¦‚æœå½“å‰ç©å®¶å‡»æ€æ•°é‡å°äºæ¦œä¸­åŒä¸€è´¦å·ä¸‹çš„ç©å®¶å‡»æ€æ•°é‡ï¼Œåˆ™è¿”å› å¦åˆ™ æ›¿æ¢æ¦œä¸­åŒä¸€è´¦å·ä¸‹çš„ç©å®¶æ•°æ®
 	//		if (itr->amount > amount)
 	//			return;
 	//
@@ -389,7 +388,7 @@ void Armory::SendArmoryTokenMsg(Player* player)
 		std::string guildName = sGuildMgr->GetGuildNameById(playerData->guildId);
 
 		if (guildName.empty())
-			guildName = "ÎŞ";
+			guildName = "æ— ";
 
 		oss << sCharNameMod->GetPureName(playerData->name) << "-" << playerData->name << "-" << GetGender(playerData->gender) << "-" << GetRace(playerData->race) << "-" << GetClass(playerData->playerClass) << "-" << guildName << "-" << itr->amount << ":";
 	}
@@ -412,7 +411,7 @@ void Armory::SendArmorySigilMsg(Player* player)
 		std::string guildName = sGuildMgr->GetGuildNameById(playerData->guildId);
 
 		if (guildName.empty())
-			guildName = "ÎŞ";
+			guildName = "æ— ";
 
 		oss << sCharNameMod->GetPureName(playerData->name) << "-" << playerData->name << "-" << GetGender(playerData->gender) << "-" << GetRace(playerData->race) << "-" << GetClass(playerData->playerClass) << "-" << guildName << "-" << itr->amount << ":";
 	}
@@ -435,7 +434,7 @@ void Armory::SendArmoryPvpMsg(Player* player)
 		std::string guildName = sGuildMgr->GetGuildNameById(playerData->guildId);
 
 		if (guildName.empty())
-			guildName = "ÎŞ";
+			guildName = "æ— ";
 
 		oss << sCharNameMod->GetPureName(playerData->name) << "-" << playerData->name << "-" << GetGender(playerData->gender) << "-" << GetRace(playerData->race) << "-" << GetClass(playerData->playerClass) << "-" << guildName << "-" << itr->amount << ":";
 	}
@@ -503,28 +502,27 @@ std::string Armory::GetClass(uint8 playerClass)
 	switch (playerClass)
 	{
 	case 1:
-		return "Õ½Ê¿";
+		return "æˆ˜å£«";
 	case 2:
-		return "Ê¥ÆïÊ¿";
+		return "åœ£éª‘å£«";
 	case 3:
-		return "ÁÔÈË";
+		return "çŒäºº";
 	case 4:
-		return "µÁÔô";
+		return "ç›—è´¼";
 	case 5:
-		return "ÄÁÊ¦";
+		return "ç‰§å¸ˆ";
 	case 6:
-		return "ËÀÍöÆïÊ¿";
+		return "æ­»äº¡éª‘å£«";
 	case 7:
-		return "ÈøÂú¼ÀË¾";
+		return "è¨æ»¡ç¥­å¸";
 	case 8:
-		return "·¨Ê¦";
+		return "æ³•å¸ˆ";
 	case 9:
-		return "ÊõÊ¿";
+		return "æœ¯å£«";
 	case 11:
-		return "µÂÂ³ÒÁ";
+		return "å¾·é²ä¼Š";
 	default:
 		break;
 	}
-
 	return "";
 }

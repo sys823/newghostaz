@@ -1,10 +1,10 @@
 #include "ItemMod.h"
 #include "../GCAddon/GCAddon.h"
-
 #define AT_ID_START 100001
 #define AT_ID_END	110000
 #define SP_ID_START	110001
 #define SP_ID_END	120000
+
 
 #define AT_ITEM_ENTRY 3
 #define SP_ITEM_ENTRY 38662
@@ -52,6 +52,6 @@ void ItemMod::NeckUp(Player* player, bool isPVP)
 	item->SetEnchantment(PERM_ENCHANTMENT_SLOT, enchantId, 0, 0);
 	player->ApplyEnchantment(item, PERM_ENCHANTMENT_SLOT, true);
 
-	//save to db ÐèÒª²âÊÔÒ»ÏÂ
+	//save to db éœ€è¦æµ‹è¯•ä¸€ä¸‹
 	//player->SaveToDB(false, false);
 }

@@ -1,7 +1,4 @@
-#pragma execution_character_set("utf-8")
 #include "../PrecompiledHeaders/ScriptPCH.h"
-
-
 
 
 /***********************************************,
@@ -352,7 +349,7 @@ public:
 			}
 			if (victim && victim->GetCreatureType() == CREATURE_TYPE_HUMANOID) //GetTypeId() == TYPEID_PLAYER && me->IsValidAttackTarget(victim))
 			{
-				me->MonsterSay("¹ş...ÄãÍêµ°ÁË...", LANG_UNIVERSAL, NULL);
+				me->MonsterSay("å“ˆ...ä½ å®Œè›‹äº†...", LANG_UNIVERSAL, NULL);
 				if (RAND(1, 2) == 1) Talk(RAND(SAY_LK_FROSTMOURNE_KILL, SAY_LK_HARVEST_SOUL, SAY_LK_KILL)); // 50 % Kans dat er een opmerking komt.
 				_chatter_timer = 0;
 			}
@@ -421,9 +418,9 @@ public:
 					// CasterSounds:
 				case EVENT_PLAYSOUND_CAST1A:
 					t = RAND(14803, 14771, 14751);
-					if (t == 14803) { me->MonsterYell("ÓÃÉíÌåÈ¥¸ĞÊÜ£¡", LANG_UNIVERSAL, NULL); }
-					if (t == 14771) { me->MonsterYell("¾ø²»ÁôÇé£¡", LANG_UNIVERSAL, NULL); }
-					if (t == 14751) { me->MonsterYell("ÄãµÄ¶ÓÎéÒ»ÎŞÊÇ´¦£¡", LANG_UNIVERSAL, NULL); }
+					if (t == 14803) { me->MonsterYell("ç”¨èº«ä½“å»æ„Ÿå—ï¼", LANG_UNIVERSAL, NULL); }
+					if (t == 14771) { me->MonsterYell("ç»ä¸ç•™æƒ…ï¼", LANG_UNIVERSAL, NULL); }
+					if (t == 14751) { me->MonsterYell("ä½ çš„é˜Ÿä¼ä¸€æ— æ˜¯å¤„ï¼", LANG_UNIVERSAL, NULL); }
 					events.ScheduleEvent(EVENT_PLAYSOUND_CAST1B, 2500);
 					DoPlaySoundToSet(me, t); // Touchy.. / No Mercy. / Your.. Army..
 					_chatter_timer = 0;
@@ -431,9 +428,9 @@ public:
 				case EVENT_PLAYSOUND_CAST1B:
 					_chatter_timer = 0;
 					t = RAND(14795, 14786, 14787);
-					if (t == 14795) { me->MonsterYell("ÄÇÃ´, ÄãµÄÓÂÆøºÎÔÚ£¿", LANG_UNIVERSAL, NULL); }
-					if (t == 14786) { me->MonsterYell("ÎŞÂÛÊÇÉúÊÇËÀ£¬Äã½«ÓÀÎŞÄşÈÕ£¡", LANG_UNIVERSAL, NULL); }
-					if (t == 14787) { me->MonsterYell("Í´¿à£¬ÕÛÄ¥!", LANG_UNIVERSAL, NULL); }
+					if (t == 14795) { me->MonsterYell("é‚£ä¹ˆ, ä½ çš„å‹‡æ°”ä½•åœ¨ï¼Ÿ", LANG_UNIVERSAL, NULL); }
+					if (t == 14786) { me->MonsterYell("æ— è®ºæ˜¯ç”Ÿæ˜¯æ­»ï¼Œä½ å°†æ°¸æ— å®æ—¥ï¼", LANG_UNIVERSAL, NULL); }
+					if (t == 14787) { me->MonsterYell("ç—›è‹¦ï¼ŒæŠ˜ç£¨!", LANG_UNIVERSAL, NULL); }
 					DoPlaySoundToSet(me, t); // Where is your light now crusaders? / 14786 u will serve me ..
 					_chatter_timer = 0;
 					break;
@@ -500,19 +497,19 @@ public:
 								14802,  // "Lay down your arms, and surrender your souls."
 								14766); // "Be warned.."
 
-							if (t == 14738) { me->MonsterYell("Äã¾ÓÈ»µ¨¸ÒÌôÕ½ÎÒ£¬ÈÃÄãËÀÎŞÔáÉíÖ®µØ£¡", LANG_UNIVERSAL, NULL); }
-							if (t == 14745) { me->MonsterYell("ÏÖÔÚÊÇÊ±ºò¸¶³ö´ú¼ÛÁË£¡", LANG_UNIVERSAL, NULL); }
-							if (t == 14754) { me->MonsterYell("Çë´ò°ÜÎÒ°É£¬ÎŞµĞÊÇ¶àÃ´¼ÅÄ¯...", LANG_UNIVERSAL, NULL); }
-							if (t == 14755) { me->MonsterYell("ÄãµÄÁ¦Á¿½«ÎªÎÒ´øÀ´ÎŞ¾¡Ï²ÔÃ...", LANG_UNIVERSAL, NULL); }
+							if (t == 14738) { me->MonsterYell("ä½ å±…ç„¶èƒ†æ•¢æŒ‘æˆ˜æˆ‘ï¼Œè®©ä½ æ­»æ— è‘¬èº«ä¹‹åœ°ï¼", LANG_UNIVERSAL, NULL); }
+							if (t == 14745) { me->MonsterYell("ç°åœ¨æ˜¯æ—¶å€™ä»˜å‡ºä»£ä»·äº†ï¼", LANG_UNIVERSAL, NULL); }
+							if (t == 14754) { me->MonsterYell("è¯·æ‰“è´¥æˆ‘å§ï¼Œæ— æ•Œæ˜¯å¤šä¹ˆå¯‚å¯...", LANG_UNIVERSAL, NULL); }
+							if (t == 14755) { me->MonsterYell("ä½ çš„åŠ›é‡å°†ä¸ºæˆ‘å¸¦æ¥æ— å°½å–œæ‚¦...", LANG_UNIVERSAL, NULL); }
 
 							if (t == 14760) { me->MonsterYell("LOL...", LANG_UNIVERSAL, NULL); }
 							//if (t==14770) { me->Yell("Very well.. warriors of the frozen wastes, rise up! I command you to fight, kill, and die for your master. Let none survive..",LANG_UNIVERSAL,NULL); }
-							if (t == 14773) { me->MonsterYell("ÈõÈâÇ¿Ê³£¡", LANG_UNIVERSAL, NULL); }
-							if (t == 14792) { me->MonsterYell("ÎÒÀ´´ËÖ»ÊÇÎªÁË±»ÌôÕ½...", LANG_UNIVERSAL, NULL); }
+							if (t == 14773) { me->MonsterYell("å¼±è‚‰å¼ºé£Ÿï¼", LANG_UNIVERSAL, NULL); }
+							if (t == 14792) { me->MonsterYell("æˆ‘æ¥æ­¤åªæ˜¯ä¸ºäº†è¢«æŒ‘æˆ˜...", LANG_UNIVERSAL, NULL); }
 
 							//if (t==14799) { me->Yell("Come to me, crusaders. I will remake you!",LANG_UNIVERSAL,NULL); }
-							if (t == 14802) { me->MonsterYell("¼´Ê¹ÊÇÁé»ê£¬Ò²ÒªÏòÎÒµÍÍ·£¡", LANG_UNIVERSAL, NULL); }
-							if (t == 14766) { me->MonsterYell("ÄãËÀ¶¨ÁË...", LANG_UNIVERSAL, NULL); }
+							if (t == 14802) { me->MonsterYell("å³ä½¿æ˜¯çµé­‚ï¼Œä¹Ÿè¦å‘æˆ‘ä½å¤´ï¼", LANG_UNIVERSAL, NULL); }
+							if (t == 14766) { me->MonsterYell("ä½ æ­»å®šäº†...", LANG_UNIVERSAL, NULL); }
 
 							DoPlaySoundToSet(me, t); // Touchy.. / No Mercy. / Your.. Army..
 							_chatter_timer = 0;
@@ -665,9 +662,9 @@ public:
 					events.ScheduleEvent(EVENT_BLISTERING_COLD, 120000, 0, PHASE_TWO);
 
 					t = RAND(14808, 14800, 14787);
-					if (t == 14808) { me->MonsterYell("ÎÒÒªÄãÖÂÇ¸£¡£¡£¡", LANG_UNIVERSAL, NULL); }
-					if (t == 14800) { me->MonsterYell("²ü¶¶°É£¬·²ÈË£¡", LANG_UNIVERSAL, NULL); }
-					if (t == 14787) { me->MonsterYell("Í´¿à£¬ÕÛÄ¥£¡", LANG_UNIVERSAL, NULL); }
+					if (t == 14808) { me->MonsterYell("æˆ‘è¦ä½ è‡´æ­‰ï¼ï¼ï¼", LANG_UNIVERSAL, NULL); }
+					if (t == 14800) { me->MonsterYell("é¢¤æŠ–å§ï¼Œå‡¡äººï¼", LANG_UNIVERSAL, NULL); }
+					if (t == 14787) { me->MonsterYell("ç—›è‹¦ï¼ŒæŠ˜ç£¨ï¼", LANG_UNIVERSAL, NULL); }
 					DoPlaySoundToSet(me, t);
 					_chatter_timer = 0;
 					DoCast(me, SPELL_FRENZY, true);

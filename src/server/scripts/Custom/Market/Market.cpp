@@ -1,8 +1,8 @@
-#pragma execution_character_set("utf-8")
 #include "Market.h"
 #include "../CommonFunc/CommonFunc.h"
 #include "../GCAddon/GCAddon.h"
 #include "../String/myString.h"
+
 
 void Market::SetSelection(Player* buyer, uint64 guid)
 {
@@ -28,7 +28,7 @@ void Market::ClickItem(Player* player, Item* item)
 		player->MarketVec.push_back(Temp);
 	}
 	else
-		ChatHandler(player->GetSession()).PSendSysMessage("Ã»ÓĞ¶àÓàµÄÀ¸Î»");
+		ChatHandler(player->GetSession()).PSendSysMessage("æ²¡æœ‰å¤šä½™çš„æ ä½");
 
 	UpdateMaket(player);
 }
@@ -112,14 +112,14 @@ void Market::OnSell(Player* seller, Player* buyer, uint32 slot)
 
 	if (!item)
 	{
-		ChatHandler(buyer->GetSession()).PSendSysMessage("¸ÃÉÌÆ·²»´æÔÚ");
+		ChatHandler(buyer->GetSession()).PSendSysMessage("è¯¥å•†å“ä¸å­˜åœ¨");
 		UpdateMaket(buyer, seller);
 		return;
 	}
 		
 	if (buyer->totalTokenAmount < token)
 	{
-		ChatHandler(buyer->GetSession()).PSendSysMessage("%s²»×ãÒÔ¹ºÂò¸ÃÉÌÆ·", sString->GetText(CORE_STR_TYPES(STR_TOKEN)));
+		ChatHandler(buyer->GetSession()).PSendSysMessage("%sä¸è¶³ä»¥è´­ä¹°è¯¥å•†å“", sString->GetText(CORE_STR_TYPES(STR_TOKEN)));
 		return;
 	}
 		
@@ -128,12 +128,12 @@ void Market::OnSell(Player* seller, Player* buyer, uint32 slot)
 
 
 	buyer->AddItem(item->GetBagSlot(), item->GetCount());
-	ChatHandler(buyer->GetSession()).PSendSysMessage("¹ºÂòÉÌÆ·Íê³É");
-	sCF->UpdateTokenAmount(buyer, token, false, "[°ÚÌ¯]¹ºÂòÎïÆ·");
+	ChatHandler(buyer->GetSession()).PSendSysMessage("è´­ä¹°å•†å“å®Œæˆ");
+	sCF->UpdateTokenAmount(buyer, token, false, "[æ‘†æ‘Š]è´­ä¹°ç‰©å“");
 
-	sCF->UpdateTokenAmount(seller, token, true, "[°ÚÌ¯]³öÊÛÎïÆ·");
+	sCF->UpdateTokenAmount(seller, token, true, "[æ‘†æ‘Š]å‡ºå”®ç‰©å“");
 	seller->DestroyItem(item->GetBagSlot(), item->GetSlot(), true);
-	ChatHandler(seller->GetSession()).PSendSysMessage("³öÊÛÉÌÆ·Íê³É");
+	ChatHandler(seller->GetSession()).PSendSysMessage("å‡ºå”®å•†å“å®Œæˆ");
 }
 
 
@@ -157,7 +157,7 @@ public:
 
 			if (item->GetOwner() != player)
 			{
-				ChatHandler(player->GetSession()).PSendSysMessage("Äã²»ÓµÓĞÕâ¼şÎïÆ·£¡");
+				ChatHandler(player->GetSession()).PSendSysMessage("ä½ ä¸æ‹¥æœ‰è¿™ä»¶ç‰©å“ï¼");
 				return;
 			}
 			

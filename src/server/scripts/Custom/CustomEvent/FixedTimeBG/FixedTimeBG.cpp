@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "FixedTimeBG.h"
 #include "BattlegroundMgr.h"
 #include "Battleground.h"
@@ -7,7 +6,6 @@
 #include "../../DataLoader/DataLoader.h"
 #include "../../Reward/Reward.h"
 #include "../../Requirement/Requirement.h"
-
 std::unordered_map<BattlegroundTypeId, FixedTimeBGTemplate> FixedTimeBGMap;
 
 void FixedTimeBG::Load()
@@ -15,9 +13,9 @@ void FixedTimeBG::Load()
 	FixedTimeBGMap.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//			0		1			2				3			4					5				6					7				8			9		10
-		"SELECT Õ½³¡ÀàÐÍ,Ê¤Àû½±ÀøÄ£°åID, Ê§°Ü½±ÀøÄ£°åID,½áÊø»÷É±ÈËÊý,»ñµÃ½±Àø×îÐ¡»÷É±Êý,»ñµÃ½±Àø×îÐ¡±»É±Êý,»ñµÃ½±Àø×îÐ¡ÉËº¦Öµ,»ñµÃ½±Àø×îÐ¡ÖÎÁÆÖµ,×ÊÔ´»òÆìÖÄ,ÊÇ·ñ¿çÕóÓª,×îµÍÑªÁ¿,"
+		"SELECT æˆ˜åœºç±»åž‹,èƒœåˆ©å¥–åŠ±æ¨¡æ¿ID, å¤±è´¥å¥–åŠ±æ¨¡æ¿ID,ç»“æŸå‡»æ€äººæ•°,èŽ·å¾—å¥–åŠ±æœ€å°å‡»æ€æ•°,èŽ·å¾—å¥–åŠ±æœ€å°è¢«æ€æ•°,èŽ·å¾—å¥–åŠ±æœ€å°ä¼¤å®³å€¼,èŽ·å¾—å¥–åŠ±æœ€å°æ²»ç–—å€¼,èµ„æºæˆ–æ——å¸œ,æ˜¯å¦è·¨é˜µè¥,æœ€ä½Žè¡€é‡,"
 		//11				12			13			14			15			16		17
-		"Ëæ»ú¹â»·¼ä¸ôÊ±¼ä, Ëæ»ú¹â»·ID1,Ëæ»ú¹â»·ID2,Ëæ»ú¹â»·ID3,Ëæ»ú¹â»·ID4,Ëæ»ú¹â»·ID5,Õ½³¡Ãû³Æ FROM __Õ½³¡" :
+		"éšæœºå…‰çŽ¯é—´éš”æ—¶é—´, éšæœºå…‰çŽ¯ID1,éšæœºå…‰çŽ¯ID2,éšæœºå…‰çŽ¯ID3,éšæœºå…‰çŽ¯ID4,éšæœºå…‰çŽ¯ID5,æˆ˜åœºåç§° FROM __æˆ˜åœº" :
 		//			0		1			2		3		4		5			6		7		8	9	10
 		"SELECT bgTypeId,winRewId, losRewId,endKills,RewKills,RewdKilleds,RewDmg,RewHeal,maxRes,cf,limitHP,"
 		//11					12			13			14			15			16			17
@@ -208,7 +206,7 @@ void FixedTimeBG::AddRandomBuff(Battleground* bg, uint32 diff)
 			std::ostringstream oss;
 
 			if (const SpellInfo* spell = sSpellMgr->GetSpellInfo(spellId))
-				oss << iter->second.bgName << " ËùÓÐÍæ¼Ò»ñµÃËæ»úÐ§¹û " << spell->SpellName[4];
+				oss << iter->second.bgName << " æ‰€æœ‰çŽ©å®¶èŽ·å¾—éšæœºæ•ˆæžœ " << spell->SpellName[4];
 
 			Battleground::BattlegroundPlayerMap const& pl = bg->GetPlayers();
 			for (Battleground::BattlegroundPlayerMap::const_iterator itr = pl.begin(); itr != pl.end(); ++itr)

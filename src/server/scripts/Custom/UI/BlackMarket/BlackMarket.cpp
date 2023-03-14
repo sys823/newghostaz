@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "BlackMarket.h"
 #include "../../GCAddon/GCAddon.h"
 #include "../../Requirement/Requirement.h"
@@ -35,7 +34,7 @@ void BlackMarket::Start()
 		if (Player* pl = itr->second->GetPlayer())
 			SendData(pl);
 
-	sWorld->SendScreenMessage("[ºÚÊĞ]ÒÑ¾­¿ª·Å£¡");
+	sWorld->SendScreenMessage("[é»‘å¸‚]å·²ç»å¼€æ”¾ï¼");
 }
 
 void BlackMarket::Stop()
@@ -48,7 +47,7 @@ void BlackMarket::Stop()
 		if (Player* pl = itr->second->GetPlayer())
 			SendData(pl);
 
-	sWorld->SendScreenMessage("[ºÚÊĞ]ÒÑ¾­¹Ø±Õ£¡");
+	sWorld->SendScreenMessage("[é»‘å¸‚]å·²ç»å…³é—­ï¼");
 }
 
 void BlackMarket::SendData(Player* player)
@@ -87,7 +86,7 @@ void BlackMarket::Update(Player* player, uint32 id)
 
 			if (!iter->enable)
 			{
-				ChatHandler(player->GetSession()).PSendSysMessage("Äã²»ÄÜ¹ºÂò´ËÎïÆ·£¡");
+				ChatHandler(player->GetSession()).PSendSysMessage("ä½ ä¸èƒ½è´­ä¹°æ­¤ç‰©å“ï¼");
 				return;
 			}
 

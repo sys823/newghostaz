@@ -15,7 +15,7 @@
 #include "UpdateData.h"
 #include "ObjectAccessor.h"
 #include "SpellInfo.h"
-#pragma execution_character_set("utf-8")
+
 #include "../../scripts/Custom/CommonFunc/CommonFunc.h"
 #include "../../scripts/Custom/SellReward/SellReward.h"
 #include "../../scripts/Custom/DataLoader/DataLoader.h"
@@ -1110,6 +1110,12 @@ void WorldSession::SendListInventory(uint64 vendorGuid, uint32 vendorEntry)
 
                 // reputation discount
                 int32 price = item->IsGoldRequired(itemTemplate) ? uint32(floor(itemTemplate->BuyPrice * discountMod)) : 0;
+
+                if (!item->ExtendedCost && itemTemplate->GetJfCost())
+                {
+                    price = itemTemplate->GetJfCost() * GOLD * sSwitch->GetValue(ST_CF_GOLD_JF);
+                }
+
 
                 data << uint32(slot + 1);       // client expects counting to start at 1
                 data << uint32(item->item);

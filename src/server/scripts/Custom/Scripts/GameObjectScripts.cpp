@@ -1,14 +1,12 @@
-#pragma execution_character_set("utf-8")
 #include "CustomScripts.h"
 #include "../CustomEvent/Event.h"
-
 std::vector<GobScriptTemplate> GobScriptVec;
 
 void CustomScript::LoadGobScripts()
 {
 	GobScriptVec.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ÎïÌåID,¶¯×÷ÀàĞÍ,¶¯×÷²ÎÊı1,¶¯×÷²ÎÊı2 FROM _×Ô¶¨ÒåAI_ÎïÌå" :
+		"SELECT ç‰©ä½“ID,åŠ¨ä½œç±»å‹,åŠ¨ä½œå‚æ•°1,åŠ¨ä½œå‚æ•°2 FROM _è‡ªå®šä¹‰AI_ç‰©ä½“" :
 		"SELECT ID,actionType,param1,param2 FROM _ai_gameobject");
 	if (!result) return;
 	do
@@ -19,15 +17,15 @@ void CustomScript::LoadGobScripts()
 
 		const char* str2 = fields[1].GetCString();
 
-		if (strcmp("´«ËÍÍæ¼Ò", str2) == 0)
+		if (strcmp("ä¼ é€ç©å®¶", str2) == 0)
 			Temp.gobActionType = gob_ACTION_TYPE_TELE;
-		else if (strcmp("¼¤»î»òÊ¹Ê§»î", str2) == 0)
+		else if (strcmp("æ¿€æ´»æˆ–ä½¿å¤±æ´»", str2) == 0)
 			Temp.gobActionType = gob_ACTION_TYPE_ACTIVE_OR_DEACTIVE_OBJECT;
-		else if (strcmp("ÊÍ·Å¼¼ÄÜ", str2) == 0)
+		else if (strcmp("é‡Šæ”¾æŠ€èƒ½", str2) == 0)
 			Temp.gobActionType = gob_ACTION_TYPE_AURA;
-		else if (strcmp("Ëµ»°", str2) == 0)
+		else if (strcmp("è¯´è¯", str2) == 0)
 			Temp.gobActionType = gob_ACTION_TALK;
-		else if (strcmp("ÕÙ»½", str2) == 0)
+		else if (strcmp("å¬å”¤", str2) == 0)
 			Temp.gobActionType = gob_ACTION_SUMMON;
 		else
 			Temp.gobActionType = gob_ACTION_TYPE_NONE;
@@ -77,7 +75,7 @@ public:
 				else
 				{
 					std::ostringstream oss;
-					oss << "|cFFFF1717[" << gob->GetName() << "]|rÕı´¦ÓÚÀäÈ´ÖĞ£¬´«ËÍÊ§°Ü...";
+					oss << "|cFFFF1717[" << gob->GetName() << "]|ræ­£å¤„äºå†·å´ä¸­ï¼Œä¼ é€å¤±è´¥...";
 					player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 				}
 				break;
@@ -105,7 +103,7 @@ public:
 
 				switch (i_actionParam2)
 				{
-					// 1zone text 2 ÖĞ¼äË¢ÆÁ 3 Á½Õß¶¼ÓĞ
+					// 1zone text 2 ä¸­é—´åˆ·å± 3 ä¸¤è€…éƒ½æœ‰
 				case 1:
 					sWorld->SendZoneText(player->GetZoneId(),s_actionParam1.c_str());
 					break;

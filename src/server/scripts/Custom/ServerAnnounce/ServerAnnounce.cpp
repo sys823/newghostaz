@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "../CommonFunc/CommonFunc.h"
 #include "ServerAnnounce.h"
 #include "../String/myString.h"
@@ -11,7 +10,7 @@ void ServerAnnounce::Load()
 	ServerAnnounceVec.clear();
 
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ÎïÆ·»òÎïÌåID,¶¯×÷ÀàĞÍ,ÌáÊ¾Î»ÖÃ,ÌáÊ¾ÎÄ±¾ FROM __È«·şÌáÊ¾" :
+		"SELECT ç‰©å“æˆ–ç‰©ä½“ID,åŠ¨ä½œç±»å‹,æç¤ºä½ç½®,æç¤ºæ–‡æœ¬ FROM __å…¨æœæç¤º" :
 		"SELECT entry,flag,announceType,text FROM _server_announce");
 	if (!result)
 		return;
@@ -68,7 +67,7 @@ void ServerAnnounce::Announce(Player* announcer, uint32 entry, uint8 flag)
 			uint8 announceType = ServerAnnounceVec[i].announceType;
 			std::string name; 
 
-			//0 ´ò¿ªgameobject 1 ´ò¿ªÎïÆ· 2»ñµÃÎïÆ· 3ÉúÎïË¢ĞÂ
+			//0 æ‰“å¼€gameobject 1 æ‰“å¼€ç‰©å“ 2è·å¾—ç‰©å“ 3ç”Ÿç‰©åˆ·æ–°
 			switch (flag)
 			{
 			case 0:
@@ -82,7 +81,7 @@ void ServerAnnounce::Announce(Player* announcer, uint32 entry, uint8 flag)
 				break;
 			}
 
-			//0 ×óÏÂ½ÇÌáÊ¾ 1 ×óÏÂºÍÖĞ¼ä
+			//0 å·¦ä¸‹è§’æç¤º 1 å·¦ä¸‹å’Œä¸­é—´
 			switch (announceType)
 			{
 			case 0:

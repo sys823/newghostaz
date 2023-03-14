@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Reincarnation.h"
 #include "../FunctionCollection/FunctionCollection.h"
 #include "../Reward/Reward.h"
@@ -12,7 +11,7 @@ void Reincarnation::Load()
 {
 	ReincarnationMap.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT 转生等级,需求模板ID,奖励模板ID,菜单文本 from __转生" :
+		"SELECT 杞敓绛夌骇,闇�姹傛ā鏉縄D,濂栧姳妯℃澘ID,鑿滃崟鏂囨湰 from __杞敓" :
 		"SELECT level,reqId,rewId,gossipText from _reincarnation");
 	if (result)
 	{

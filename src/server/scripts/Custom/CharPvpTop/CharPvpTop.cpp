@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "CharPvpTop.h"
 #include "MapManager.h"
 #include "../Switch/Switch.h"
@@ -25,7 +24,7 @@ void CharPvpTop::LoadTopSys()
 	VCTopSys.clear();
 	topbufflists.clear();
 
-	QueryResult areaidcustom = WorldDatabase.PQuery("SELECT entry,name,itemid,buff from _»î¶¯_±ÈÎä´ó»á");
+	QueryResult areaidcustom = WorldDatabase.PQuery("SELECT entry,name,itemid,buff from _æ´»åŠ¨_æ¯”æ­¦å¤§ä¼š");
 	if (areaidcustom)
 	{
 		int nCount = 1;
@@ -45,10 +44,10 @@ void CharPvpTop::LoadTopSys()
 			nCount++;
 
 		} while (areaidcustom->NextRow());
-		sLog->outString(">> ¶ÁÈ¡×Ô¶¨Òå¹¦ÄÜÊı¾İ±í1_topsys,¹²%uÌõÊı¾İ¶ÁÈ¡¼ÓÔØ...", nCount);
+		sLog->outString(">> è¯»å–è‡ªå®šä¹‰åŠŸèƒ½æ•°æ®è¡¨1_topsys,å…±%uæ¡æ•°æ®è¯»å–åŠ è½½...", nCount);
 	}
 	else
-		sLog->outString(">> ¶ÁÈ¡×Ô¶¨Òå¹¦ÄÜÊı¾İ±í1_topsys,¹²0ÌõÊı¾İ¶ÁÈ¡¼ÓÔØ...");
+		sLog->outString(">> è¯»å–è‡ªå®šä¹‰åŠŸèƒ½æ•°æ®è¡¨1_topsys,å…±0æ¡æ•°æ®è¯»å–åŠ è½½...");
 }
 
 GameObject* CharPvpTop::SpawnGob(uint32 guid, bool created)
@@ -151,14 +150,14 @@ void CharPvpTop::UpdateCharTopData()
 	{
 		if (itr1->second && itr1->second->GetPlayer() && itr1->second->GetPlayer()->IsInWorld())
 		{
-			if (itr1->second->GetPlayer()->GetAreaId() != sSwitch->GetValue(TOP_94) && itr1->second->GetPlayer()->m_topmc == 999) //²»ÔÚÇøÓò²¢ÇÒ ²Å±¨Ãû)
+			if (itr1->second->GetPlayer()->GetAreaId() != sSwitch->GetValue(TOP_94) && itr1->second->GetPlayer()->m_topmc == 999) //ä¸åœ¨åŒºåŸŸå¹¶ä¸” æ‰æŠ¥å)
 			{
-				itr1->second->GetPlayer()->m_topmc = 0; //ÎŞÃû´Î
-				itr1->second->GetPlayer()->m_lasttopmc = 0; //ÎŞÃû´Î
+				itr1->second->GetPlayer()->m_topmc = 0; //æ— åæ¬¡
+				itr1->second->GetPlayer()->m_lasttopmc = 0; //æ— åæ¬¡
 				continue;
 			}
 
-			if (itr1->second->GetPlayer()->m_topmc != 999) //Ã»ÓĞ¾ö¶·³öÃû´Î
+			if (itr1->second->GetPlayer()->m_topmc != 999) //æ²¡æœ‰å†³æ–—å‡ºåæ¬¡
 				continue;
 
 			uint32 guid = itr1->second->GetPlayer()->GetGUIDLow();
@@ -219,7 +218,7 @@ void CharPvpTop::SengPVPgo(uint32 teamid)
 void CharPvpTop::PVPupdate()
 {
 	time_t now = time(NULL);
-	if (topevent) //±ÈÎä¿ªÊ¼
+	if (topevent) //æ¯”æ­¦å¼€å§‹
 	{
 		if (now >= pvptime + sSwitch->GetValue(TOP_95))
 		{
@@ -381,17 +380,17 @@ public:
 	{
 		player->PlayerTalkClass->ClearMenus();
 
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "±ÈÎä´ó»áÅÅĞĞ°ñ", 1, 4);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æ¯”æ­¦å¤§ä¼šæ’è¡Œæ¦œ", 1, 4);
 
 		if (player->m_topmc == 999)
 		{
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ÄãÒÑ±¨Ãû", 1, 1);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ä½ å·²æŠ¥å", 1, 1);
 		}
 		else if (player->m_topmc > 0 && player->m_topmc < 999)
 		{
 			if (IsEventActive(sSwitch->GetValue(TOP_93)))
 			{
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "±ÈÎä´ó»áÒÑ¾­¿ªÊ¼", 1, 1);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æ¯”æ­¦å¤§ä¼šå·²ç»å¼€å§‹", 1, 1);
 			}
 			else
 			{
@@ -400,25 +399,25 @@ public:
 				{
 					if (ItemTemplate const* pProto = sObjectMgr->GetItemTemplate(cccc->itemid))
 					{
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ÁìÈ¡±ÈÎä´ó»á½±Àø", 1, 2);
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "é¢†å–æ¯”æ­¦å¤§ä¼šå¥–åŠ±", 1, 2);
 					}
 					else
 					{
-						creature->MonsterSay("½±ÀøÎïÆ·IDÉèÖÃ³ö´í...", LANG_UNIVERSAL, 0);
+						creature->MonsterSay("å¥–åŠ±ç‰©å“IDè®¾ç½®å‡ºé”™...", LANG_UNIVERSAL, 0);
 						return false;
 					}
 				}
 				else
-					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "±ÈÎä´ó»á±¨Ãû", 1, 3);
+					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æ¯”æ­¦å¤§ä¼šæŠ¥å", 1, 3);
 			}
 
 		}
 		else if (!player->m_topmc)
 		{
 			if (!IsEventActive(sSwitch->GetValue(TOP_93)))
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "±ÈÎä´ó»á±¨Ãû", 1, 3);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æ¯”æ­¦å¤§ä¼šæŠ¥å", 1, 3);
 			else
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "±ÈÎä´ó»áÒÑ¾­¿ªÊ¼", 1, 1);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æ¯”æ­¦å¤§ä¼šå·²ç»å¼€å§‹", 1, 1);
 		}
 
 
@@ -441,7 +440,7 @@ public:
 
 			player->m_topmc = 0;
 			CharacterDatabase.PExecute("update _xlchar set top = %u where guid = %u", player->m_topmc, player->GetGUIDLow());
-			creature->MonsterWhisper("±ÈÎä´ó»á½±ÀøÁìÈ¡³É¹¦...", player);
+			creature->MonsterWhisper("æ¯”æ­¦å¤§ä¼šå¥–åŠ±é¢†å–æˆåŠŸ...", player);
 			OnGossipHello(player, creature);
 			return false;
 		}
@@ -449,7 +448,7 @@ public:
 		{
 			player->m_topmc = 999;
 			CharacterDatabase.PExecute("update _xlchar set top = %u where guid = %u", player->m_topmc, player->GetGUIDLow());
-			creature->MonsterWhisper("±ÈÎä´ó»á±¨Ãû³É¹¦...", player);
+			creature->MonsterWhisper("æ¯”æ­¦å¤§ä¼šæŠ¥åæˆåŠŸ...", player);
 			OnGossipHello(player, creature);
 			return false;
 		}
@@ -479,7 +478,7 @@ public:
 							if (hastouxian)
 								hsfdata << cccc->text << ";" << playerData->name.c_str();
 							else
-								hsfdata << "µÚ" << i << "Ãû;" << playerData->name.c_str();
+								hsfdata << "ç¬¬" << i << "å;" << playerData->name.c_str();
 
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, hsfdata.str().c_str(), 1, 5);
 						}
@@ -488,7 +487,7 @@ public:
 				}
 			}
 			else
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ÔİÎŞÅÅĞĞ°ñ", 1, 5);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æš‚æ— æ’è¡Œæ¦œ", 1, 5);
 
 			player->SEND_GOSSIP_MENU(20000, creature->GetGUID());
 		}

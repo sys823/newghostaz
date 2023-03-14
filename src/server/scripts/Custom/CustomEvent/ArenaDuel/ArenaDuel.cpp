@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "ArenaDuel.h"
 #include "../Custom/Reward/Reward.h"
 #include "../Custom/Requirement/Requirement.h"
@@ -255,9 +254,9 @@ void ArenaDuel::EndDuel(Player* winner, Player* loser)
 
 
 	std::ostringstream oss;
-	oss << "æˆ∂∑Ω· ¯£¨";
-	oss << sCF->GetNameLink(winner) << " §¿˚£¨";
-	oss << sCF->GetNameLink(loser) << " ß∞‹£°";
+	oss << "ÂÜ≥ÊñóÁªìÊùüÔºå";
+	oss << sCF->GetNameLink(winner) << "ËÉúÂà©Ôºå";
+	oss << sCF->GetNameLink(loser) << "Â§±Ë¥•ÔºÅ";
 	sWorld->SendScreenMessage(oss.str().c_str());
 
 	if (!HasDueler())
@@ -284,12 +283,12 @@ void ArenaDuel::SetState(ArenaDuelStates state)
 	case ARENA_DUEL_STATE_SELECT:
 		break;
 	case ARENA_DUEL_STATE_GAMBLE:
-		sWorld->SendScreenMessage("≤˙…˙æˆ∂∑À´∑Ω£°æˆ∂∑º¥Ω´ø™ º£°œ÷‘⁄ø™ ºœ¬◊¢£°");
+		sWorld->SendScreenMessage("‰∫ßÁîüÂÜ≥ÊñóÂèåÊñπÔºÅÂÜ≥ÊñóÂç≥Â∞ÜÂºÄÂßãÔºÅÁé∞Âú®ÂºÄÂßã‰∏ãÊ≥®ÔºÅ");
 		_DUELER_1->AddAura(ARENA_DUEL_FLAG_1, _DUELER_1);
 		_DUELER_2->AddAura(ARENA_DUEL_FLAG_2, _DUELER_2);
 		_DUELER_1->AddAura(ARENA_DUEL_FREEZE_DEBUFF, _DUELER_1);
 		_DUELER_2->AddAura(ARENA_DUEL_FREEZE_DEBUFF, _DUELER_2);
-		//µØ¥∞œ¬◊¢
+		//ÂºπÁ™ó‰∏ãÊ≥®
 		PopGamble();
 		break;
 	case ARENA_DUEL_STATE_DUEL:
@@ -336,11 +335,11 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 	if (!map || map->GetId() != ARENA_DUEL_MAP)
 		return;
 
-	//±®√˚Ω◊∂Œ
+	//Êä•ÂêçÈò∂ÊÆµ
 	if (GetState() == ARENA_DUEL_STATE_SIGNUP)
 		return;
 
-	//ªÓ∂Øø™ º
+	//Ê¥ªÂä®ÂºÄÂßã
 	if (GetState() == ARENA_DUEL_STATE_START)
 	{
 		sGameEventMgr->StopEvent(ARENA_DUEL_SIGNUP_EVENT_ID, false, true);
@@ -354,7 +353,7 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 		TelePortAll();
 		SetState(ARENA_DUEL_STATE_WAIT);
 
-		//÷˘◊”
+		//Êü±Â≠ê
 		for (size_t i = 0; i < 4; i++)
 		{
 			if (GameObject* go = map->SummonGameObject(ARENA_DUEL_PILLAR_ENTRY, ARENA_DUEL_PILLAR_LOCATIONS[i].GetPositionX(), ARENA_DUEL_PILLAR_LOCATIONS[i].GetPositionY(), ARENA_DUEL_PILLAR_LOCATIONS[i].GetPositionZ(), ARENA_DUEL_PILLAR_LOCATIONS[i].GetOrientation(), 0, 0, 0, 0, 0))
@@ -365,7 +364,7 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 		}
 	}
 
-	//æˆ∂∑µ»¥˝
+	//ÂÜ≥ÊñóÁ≠âÂæÖ
 	if (GetState() == ARENA_DUEL_STATE_WAIT)
 	{
 		_WaitTimer += diff;
@@ -377,7 +376,7 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 			if (_WaitSecs > 0)
 			{
 				std::ostringstream oss;
-				oss << "æ‡¿Î≤˙…˙æˆ∂∑’ﬂ £”‡ ±º‰£∫" << _WaitSecs << "√Î";
+				oss << "Ë∑ùÁ¶ª‰∫ßÁîüÂÜ≥ÊñóËÄÖÂâ©‰ΩôÊó∂Èó¥Ôºö" << _WaitSecs << "Áßí";
 				sWorld->SendScreenMessage(oss.str().c_str());
 
 				if (_WaitSecs == 8 || _WaitSecs == 5)
@@ -386,13 +385,13 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 						_DUELER_1 = GenerateDueler();
 
 					if (CheckDueler(_DUELER_1))
-						_DUELER_1->GetSession()->SendNotification("ƒ„ «œ¬“ªŒªæˆ∂∑’ﬂ£¨«ÎÃ·«∞◊ˆ∫√◊º±∏£°");
+						_DUELER_1->GetSession()->SendNotification("‰Ω†ÊòØ‰∏ã‰∏Ä‰ΩçÂÜ≥ÊñóËÄÖÔºåËØ∑ÊèêÂâçÂÅöÂ•ΩÂáÜÂ§áÔºÅ");
 
 					if (!CheckDueler(_DUELER_2))
 						_DUELER_2 = GenerateDueler();
 
 					if (CheckDueler(_DUELER_2))
-						_DUELER_2->GetSession()->SendNotification("ƒ„ «œ¬“ªŒªæˆ∂∑’ﬂ£¨«ÎÃ·«∞◊ˆ∫√◊º±∏£°");
+						_DUELER_2->GetSession()->SendNotification("‰Ω†ÊòØ‰∏ã‰∏Ä‰ΩçÂÜ≥ÊñóËÄÖÔºåËØ∑ÊèêÂâçÂÅöÂ•ΩÂáÜÂ§áÔºÅ");
 				}
 			}
 			else if (_WaitSecs == 0)
@@ -400,7 +399,7 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 		}
 	}
 
-	//≤˙…˙æˆ∂∑À´∑Ω
+	//‰∫ßÁîüÂÜ≥ÊñóÂèåÊñπ
 	if (GetState() == ARENA_DUEL_STATE_SELECT)
 	{
 		if (!CheckDueler(_DUELER_1))
@@ -428,21 +427,21 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 				go->SetGoState(GO_STATE_READY);
 	}
 
-	//—π◊¢Ω◊∂Œ
+	//ÂéãÊ≥®Èò∂ÊÆµ
 	if (GetState() == ARENA_DUEL_STATE_GAMBLE)
 	{
 		_GambleTimer += diff;
 
 		if (_GambleTimer > ARENA_DUEL_GAMBLE_TIME)
 		{
-			//œ¬◊¢Ω· ¯
-			sWorld->SendScreenMessage("Ω· ¯œ¬◊¢£¨æˆ∂∑œ÷‘⁄’˝ Ωø™ º£°");
+			//‰∏ãÊ≥®ÁªìÊùü
+			sWorld->SendScreenMessage("ÁªìÊùü‰∏ãÊ≥®ÔºåÂÜ≥ÊñóÁé∞Âú®Ê≠£ÂºèÂºÄÂßãÔºÅ");
 			SetState(ARENA_DUEL_STATE_DUEL);
 			CloseGamble();
 		}
 	}
 
-	//ø™ ºæˆ∂∑
+	//ÂºÄÂßãÂÜ≥Êñó
 	if (GetState() == ARENA_DUEL_STATE_DUEL)
 	{
 		_DuelTimer += diff;
@@ -461,7 +460,7 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 			switch (_DuelSedcs)
 			{
 			case 0:
-				sWorld->SendScreenMessage("æ‡¿Î—€æ¶À¢–¬ªπ”–10√Î£°");
+				sWorld->SendScreenMessage("Ë∑ùÁ¶ªÁúºÁùõÂà∑Êñ∞ËøòÊúâ10ÁßíÔºÅ");
 				break;
 			case 5:
 				TogglePillar(map);
@@ -469,7 +468,7 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 			case 10:
 			{
 				TogglePillar(map);
-				sWorld->SendScreenMessage("—€æ¶À¢–¬¡À£°");
+				sWorld->SendScreenMessage("ÁúºÁùõÂà∑Êñ∞‰∫ÜÔºÅ");
 				uint32 i = urand(0, 3);
 				map->SummonGameObject(ARENA_DUEL_EYE_ENTRY, ARENA_DUEL_EYE_LOCATIONS[i].GetPositionX(), ARENA_DUEL_EYE_LOCATIONS[i].GetPositionY(), ARENA_DUEL_EYE_LOCATIONS[i].GetPositionZ(), ARENA_DUEL_EYE_LOCATIONS[i].GetOrientation(), 0, 0, 0, 0, 10);
 			}
@@ -484,16 +483,16 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 		}
 	}
 
-	//ªÓ∂ØΩ· ¯
+	//Ê¥ªÂä®ÁªìÊùü
 	if (GetState() == ARENA_DUEL_STATE_END)
 	{
-		sWorld->SendScreenMessage("ªÓ∂ØΩ· ¯£°");
+		sWorld->SendScreenMessage("Ê¥ªÂä®ÁªìÊùüÔºÅ");
 
 		if (CheckDueler(_DUELER_1))
 		{
 			_DUELER_1->CastSpell(_DUELER_1, ARENA_DUEL_CHAMPION_SPELL);
 			sRew->Rew(_DUELER_1, ARENA_DUEL_CHAMPION_REW_ID);
-			std::string str = sCF->GetNameLink(_DUELER_1) + "ªÒµ√¡À◊Ó÷’ §¿˚£°";
+			std::string str = sCF->GetNameLink(_DUELER_1) + "Ëé∑Âæó‰∫ÜÊúÄÁªàËÉúÂà©ÔºÅ";
 			sWorld->SendScreenMessage(str.c_str());
 		}
 
@@ -521,7 +520,7 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 		sGameEventMgr->StopEvent(ARENA_DUEL_START_EVENT_ID, false, true);
 	}
 
-	//ªÓ∂ØΩ¯––π˝≥Ã÷–
+	//Ê¥ªÂä®ËøõË°åËøáÁ®ã‰∏≠
 	if (GetState() == ARENA_DUEL_STATE_DUEL || GetState() == ARENA_DUEL_STATE_WAIT)
 	{
 		_RewTimer += diff;
@@ -529,7 +528,7 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 		{
 			_RewTimer = 0;
 
-			sWorld->SendScreenMessage("Œßπ€Ω±¿¯∑¢∑≈£°");
+			sWorld->SendScreenMessage("Âõ¥ËßÇÂ•ñÂä±ÂèëÊîæÔºÅ");
 
 			if (!map->GetPlayers().isEmpty())
 				for (Map::PlayerList::const_iterator itr = map->GetPlayers().begin(); itr != map->GetPlayers().end(); ++itr)
@@ -539,7 +538,7 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 		}
 	}
 
-	//¥´ÀÕ≤ª‘⁄æˆ∂∑÷–µƒÕÊº“
+	//‰º†ÈÄÅ‰∏çÂú®ÂÜ≥Êñó‰∏≠ÁöÑÁé©ÂÆ∂
 	_AreaCheckTimer += diff;
 	if (_AreaCheckTimer > 1000)
 	{
@@ -551,7 +550,7 @@ void ArenaDuel::Update(Map* map, uint32 diff)
 					if (pl->GetAreaId() == ARENA_DUEL_AREA_IN && !IsDueler(pl))
 					{
 						TelePort(pl);
-						pl->GetSession()->SendNotification("æˆ∂∑π˝≥Ã÷–Ω˚÷πŒﬁπÿÕÊº“Ω¯»Îæ∫ºº≥°«¯”Ú£°");
+						pl->GetSession()->SendNotification("ÂÜ≥ÊñóËøáÁ®ã‰∏≠Á¶ÅÊ≠¢Êó†ÂÖ≥Áé©ÂÆ∂ËøõÂÖ•Á´ûÊäÄÂú∫Âå∫ÂüüÔºÅ");
 					}
 
 	}
@@ -577,8 +576,8 @@ void ArenaDuel::PopGamble()
 					continue;
 
 				pl->PlayerTalkClass->ClearMenus();
-				pl->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/INV_BannerPVP_01:30:30:0:0|tœ¬◊¢[∫Ï∂”]ªÒ § --> " + sCF->GetNameLink(_DUELER_1), GOSSIP_SENDER_MAIN, 1, "", 0, true);
-				pl->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/INV_BannerPVP_02:30:30:0:0|tœ¬◊¢[¿∂∂”]ªÒ § --> " + sCF->GetNameLink(_DUELER_2), GOSSIP_SENDER_MAIN, 2, "", 0, true);
+				pl->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/INV_BannerPVP_01:30:30:0:0|t‰∏ãÊ≥®[Á∫¢Èòü]Ëé∑ËÉú --> " + sCF->GetNameLink(_DUELER_1), GOSSIP_SENDER_MAIN, 1, "", 0, true);
+				pl->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/INV_BannerPVP_02:30:30:0:0|t‰∏ãÊ≥®[ËìùÈòü]Ëé∑ËÉú --> " + sCF->GetNameLink(_DUELER_2), GOSSIP_SENDER_MAIN, 2, "", 0, true);
 				pl->PlayerTalkClass->GetGossipMenu().SetMenuId(ARENA_DUEL_GAMBLE_MENU_ID);
 				pl->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pl->GetGUID());
 			}
@@ -631,12 +630,12 @@ void ArenaDuel::EndGamble(bool redwin)
 				if (red > 0)
 				{
 					uint32 x = itr->second * total / red;
-					sCF->UpdateTokenAmount(pl, x, true, "æ∫ºº≥°æˆ∂∑∂ƒ≤©ªÒ §");
-					pl->GetSession()->SendAreaTriggerMessage("—π◊¢[∫Ï∂”]≥…π¶£¨ªÒµ√%u[ª˝∑÷]", x);
+					sCF->UpdateTokenAmount(pl, x, true, "Á´ûÊäÄÂú∫ÂÜ≥ÊñóËµåÂçöËé∑ËÉú");
+					pl->GetSession()->SendAreaTriggerMessage("ÂéãÊ≥®[Á∫¢Èòü]ÊàêÂäüÔºåËé∑Âæó%u[ÁßØÂàÜ]", x);
 				}
 			}
 			else
-				pl->GetSession()->SendAreaTriggerMessage("—π◊¢[¿∂∂”] ß∞‹");
+				pl->GetSession()->SendAreaTriggerMessage("ÂéãÊ≥®[ËìùÈòü]Â§±Ë¥•");
 		}
 		else
 		{
@@ -645,12 +644,12 @@ void ArenaDuel::EndGamble(bool redwin)
 				if (blue > 0)
 				{
 					uint32 x = abs(itr->second) * total / blue;
-					sCF->UpdateTokenAmount(pl, x, true, "æ∫ºº≥°æˆ∂∑∂ƒ≤©ªÒ §");
-					pl->GetSession()->SendAreaTriggerMessage("—π◊¢[¿∂∂”]≥…π¶£¨ªÒµ√%u[ª˝∑÷]", x);
+					sCF->UpdateTokenAmount(pl, x, true, "Á´ûÊäÄÂú∫ÂÜ≥ÊñóËµåÂçöËé∑ËÉú");
+					pl->GetSession()->SendAreaTriggerMessage("ÂéãÊ≥®[ËìùÈòü]ÊàêÂäüÔºåËé∑Âæó%u[ÁßØÂàÜ]", x);
 				}
 			}
 			else
-				pl->GetSession()->SendAreaTriggerMessage("—π◊¢[∫Ï∂”] ß∞‹");
+				pl->GetSession()->SendAreaTriggerMessage("ÂéãÊ≥®[Á∫¢Èòü]Â§±Ë¥•");
 		}
 	}
 }
@@ -682,20 +681,19 @@ public:
 
 		if (sCF->GetTokenAmount(pl) < count)
 		{
-			pl->GetSession()->SendNotification("[ª˝∑÷]≤ª◊„");
+			pl->GetSession()->SendNotification("[ÁßØÂàÜ]‰∏çË∂≥");
 			return;
 		}
 
-		sCF->UpdateTokenAmount(pl, count, false, "æ∫ºº≥°æˆ∂∑∂ƒ≤©—π◊¢");
+		sCF->UpdateTokenAmount(pl, count, false, "Á´ûÊäÄÂú∫ÂÜ≥ÊñóËµåÂçöÂéãÊ≥®");
 
 		if (action == 1)
-			pl->GetSession()->SendAreaTriggerMessage("ƒ„œ¬◊¢%u[ª˝∑÷][%s]ªÒ §", count, "∫Ï∂”");
+			pl->GetSession()->SendAreaTriggerMessage("‰Ω†‰∏ãÊ≥®%u[ÁßØÂàÜ][%s]Ëé∑ËÉú", count, "Á∫¢Èòü");
 		else if (action == 2)
 		{
-			pl->GetSession()->SendAreaTriggerMessage("ƒ„œ¬◊¢%u[ª˝∑÷][%s]ªÒ §", count, "¿∂∂”");
+			pl->GetSession()->SendAreaTriggerMessage("‰Ω†‰∏ãÊ≥®%u[ÁßØÂàÜ][%s]Ëé∑ËÉú", count, "ËìùÈòü");
 			count = -count;
 		}
-
 		AreaDuelGambleMap.insert(std::make_pair(pl->GetGUID(), count));
 	}
 };
@@ -715,18 +713,18 @@ public:
 			auto itr = ArenaDuelMap.find(pl->GetGUIDLow());
 			if (itr != ArenaDuelMap.end())
 			{
-				pl->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ƒ„“—æ≠±®π˝√˚¡À£°", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+				pl->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "‰Ω†Â∑≤ÁªèÊä•ËøáÂêç‰∫ÜÔºÅ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
 			}
 			else
 			{
 				if (sMF->Pop(ARENA_DUEL_SIGNUP_REQ_ID))
-					pl->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Œ““™±®√˚", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF, sReq->Notice(pl, ARENA_DUEL_SIGNUP_REQ_ID, "æ∫ºº≥°æˆ∂∑±®√˚", ""), sReq->Golds(ARENA_DUEL_SIGNUP_REQ_ID), false);
+					pl->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "ÊàëË¶ÅÊä•Âêç", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF, sReq->Notice(pl, ARENA_DUEL_SIGNUP_REQ_ID, "Á´ûÊäÄÂú∫ÂÜ≥ÊñóÊä•Âêç", ""), sReq->Golds(ARENA_DUEL_SIGNUP_REQ_ID), false);
 				else
-					pl->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Œ““™±®√˚", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
+					pl->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ÊàëË¶ÅÊä•Âêç", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
 			}
 		}
 		else
-			pl->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æ∫ºº≥°±®√˚“—æ≠Ω· ¯£¨π˝»•Œßπ€", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+			pl->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Á´ûÊäÄÂú∫Êä•ÂêçÂ∑≤ÁªèÁªìÊùüÔºåËøáÂéªÂõ¥ËßÇ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
 
 		pl->SEND_GOSSIP_MENU(c->GetEntry(), c->GetGUID());
 
@@ -738,7 +736,7 @@ public:
 		if (action == GOSSIP_ACTION_INFO_DEF)
 		{
 			sArenaDuel->Signup(pl);
-			pl->GetSession()->SendAreaTriggerMessage("±®√˚≥…π¶£°");
+			pl->GetSession()->SendAreaTriggerMessage("Êä•ÂêçÊàêÂäüÔºÅ");
 		}
 		else if (action == GOSSIP_ACTION_INFO_DEF + 1)
 			sArenaDuel->TelePort(pl);

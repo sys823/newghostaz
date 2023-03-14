@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "../Custom/CommonFunc/CommonFunc.h"
 /*
 DELETE FROM creature WHERE id = 37552;
@@ -6,7 +5,7 @@ INSERT INTO creature (guid, id, map, spawnMask, phaseMask, modelid, equipment_id
 
 DELETE FROM creature WHERE id = 37205;
 DELETE FROM creature_template WHERE entry = 37205;
-insert into creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) values('37205','0','0','0','0','0','30570','0','0','0','ÈøÂåÈğ°²¡¤Ñ°³¿Õß','','','0','80','80','2','250','0','1','1.14286','1','1','500','700','0','300','5','2000','2000','2','0','2048','0','0','0','0','0','0','0','0','0','7','4096','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','SmartAI','0','3','1','3.5','3','1','0','0','0','0','0','0','0','0','1','0','0','','12340');
+insert into creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) values('37205','0','0','0','0','0','30570','0','0','0','è¨æ´›ç‘å®‰Â·å¯»æ™¨è€…','','','0','80','80','2','250','0','1','1.14286','1','1','500','700','0','300','5','2000','2000','2','0','2048','0','0','0','0','0','0','0','0','0','7','4096','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','SmartAI','0','3','1','3.5','3','1','0','0','0','0','0','0','0','0','1','0','0','','12340');
 
 
 -- Thalorien Dawnseeker's Remains
@@ -66,7 +65,6 @@ INSERT INTO smart_scripts (entryorguid,source_type,id,link,event_type,event_phas
 
 */
 
-
 enum ThalorienNPCs
 {
 	THALORIEN_NPC_THALORIEN = 37205,
@@ -79,9 +77,9 @@ enum ThalorienNPCs
 
 Position const ThalorienNPCPos[16] =
 {
-	//[0]			Ñ°³¿Õß1
+	//[0]			å¯»æ™¨è€…1
 	{ 11787.2,	-7070.56,	25.8603,	6.0444},
-	//[1 - 10]		ÎÀ±ø
+	//[1 - 10]		å«å…µ
 	{ 11791.2,	-7070.76,	26.129,		2.31049 },
 	{ 11789.4,	-7072.64,	26.0378,	2.63958 },
 	{ 11787,	-7074.43,	25.8398,	2.51784 },
@@ -118,7 +116,7 @@ public:
 			}
 
 		if (player->GetQuestStatus(24563) == QUEST_STATUS_INCOMPLETE || player->GetQuestStatus(24535) == QUEST_STATUS_INCOMPLETE)
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "¼ì²éÒÅº¡", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æ£€æŸ¥é—éª¸", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
 
 		player->SEND_GOSSIP_MENU(creature->GetEntry(), creature->GetGUID());
 		return true;
@@ -259,7 +257,7 @@ public:
 				{
 					switch (_Phase)
 					{
-					//ÕÙ»½ Ñ°³¿Õß ÎÀ±ø BOSS
+					//å¬å”¤ å¯»æ™¨è€… å«å…µ BOSS
 					case 1:
 						me->SummonCreature(THALORIEN_NPC_THALORIEN, ThalorienNPCPos[0]);
 						for (size_t i = 1; i < 11; i++)
@@ -268,64 +266,64 @@ public:
 						_Timer = 1000;
 						_Phase++;
 						break;
-					//Ñ°³¿Õß¶ÔÎÀ±øËµ»°1
+					//å¯»æ™¨è€…å¯¹å«å…µè¯´è¯1
 					case 2:
 						if (Creature* thalorien = me->GetMap()->GetCreature(_thalorien))
 						{
-							thalorien->MonsterSay("ÎÒÃÇ±ØĞë²»Ï§Ò»ÇĞ´ú¼Û±£ÎÀÌ«ÑôÖ®¾®¡£", LANG_UNIVERSAL, NULL);
+							thalorien->MonsterSay("æˆ‘ä»¬å¿…é¡»ä¸æƒœä¸€åˆ‡ä»£ä»·ä¿å«å¤ªé˜³ä¹‹äº•ã€‚", LANG_UNIVERSAL, NULL);
 							thalorien->HandleEmoteCommand(EMOTE_ONESHOT_TALK);
 						}
 							
 						_Timer = 3000;
 						_Phase++;
 						break;
-					//Ñ°³¿Õß¶ÔÎÀ±øËµ»°2
+					//å¯»æ™¨è€…å¯¹å«å…µè¯´è¯2
 					case 3:
 						if (Creature* thalorien = me->GetMap()->GetCreature(_thalorien))
 						{
-							thalorien->MonsterSay("ÎÒÃüÁîÄãÃÇÁ¢¼´»Ø·ÀÌ«ÑôÖ®¾®£¬ÈÙÒ«ÓëÎÒÃÇÍ¬ÔÚ¡£", LANG_UNIVERSAL, NULL);
+							thalorien->MonsterSay("æˆ‘å‘½ä»¤ä½ ä»¬ç«‹å³å›é˜²å¤ªé˜³ä¹‹äº•ï¼Œè£è€€ä¸æˆ‘ä»¬åŒåœ¨ã€‚", LANG_UNIVERSAL, NULL);
 							thalorien->HandleEmoteCommand(EMOTE_ONESHOT_SALUTE);
 						}
 							
 						_Timer = 3000;
 						_Phase++;
 						break;
-					//Ñ°³¿Õß¶ÔÎÀ±øËµ»°3
+					//å¯»æ™¨è€…å¯¹å«å…µè¯´è¯3
 					case 4:
 						if (Creature* thalorien = me->GetMap()->GetCreature(_thalorien))
 						{
-							thalorien->MonsterSay("ÎÒ»áÁôÔÚÕâÀïÎªÄãÃÇÕùÈ¡¾¡¿ÉÄÜ¶àµÄÊ±¼ä¡£", LANG_UNIVERSAL, NULL);
+							thalorien->MonsterSay("æˆ‘ä¼šç•™åœ¨è¿™é‡Œä¸ºä½ ä»¬äº‰å–å°½å¯èƒ½å¤šçš„æ—¶é—´ã€‚", LANG_UNIVERSAL, NULL);
 							thalorien->HandleEmoteCommand(EMOTE_ONESHOT_TALK);
 						}
 							
 						_Timer = 3000;
 						_Phase++;
 						break;
-					//Ñ°³¿Õß¶ÔÎÀ±øËµ»°4
+					//å¯»æ™¨è€…å¯¹å«å…µè¯´è¯4
 					case 5:
 						if (Creature* thalorien = me->GetMap()->GetCreature(_thalorien))
 						{
-							thalorien->MonsterSay("ÓëÄãÃÇ²¢¼çÕ½¶·£¬ÊØÎÀÎÒÃÇµÄÁìÍÁºÍÈËÃñ£¬ÊÇÎÒ×î´óµÄÈÙÒ«¡£", LANG_UNIVERSAL, NULL);
+							thalorien->MonsterSay("ä¸ä½ ä»¬å¹¶è‚©æˆ˜æ–—ï¼Œå®ˆå«æˆ‘ä»¬çš„é¢†åœŸå’Œäººæ°‘ï¼Œæ˜¯æˆ‘æœ€å¤§çš„è£è€€ã€‚", LANG_UNIVERSAL, NULL);
 							thalorien->HandleEmoteCommand(EMOTE_ONESHOT_SALUTE);
 						}
 							
 						_Timer = 3000;
 						_Phase++;
 						break;
-					//ÎÀ±øËµ»°
+					//å«å…µè¯´è¯
 					case 6:
 						for (auto itr = _gurads.begin(); itr != _gurads.end(); itr++)
 						{
 							if (Creature* guard = *itr)
 							{
-								guard->MonsterSay("×ñÃü£¬³¤¹Ù£¡", LANG_UNIVERSAL, NULL);
+								guard->MonsterSay("éµå‘½ï¼Œé•¿å®˜ï¼", LANG_UNIVERSAL, NULL);
 								guard->HandleEmoteCommand(EMOTE_ONESHOT_SALUTE);
 							}
 						}				
 						_Timer = 1000;
 						_Phase++;
 						break;
-					//ÎÀ±øÀë¿ª
+					//å«å…µç¦»å¼€
 					case 7:
 						for (auto itr = _gurads.begin(); itr != _gurads.end();)
 						{
@@ -342,11 +340,11 @@ public:
 						_Timer = 1000;
 						_Phase++;
 						break;
-					//Ñ°³¿ÕßÒÆ¶¯µ½BOSSÇ°£¬ÒÆ¶¯¹ı³ÌÖĞÒª½²»°
+					//å¯»æ™¨è€…ç§»åŠ¨åˆ°BOSSå‰ï¼Œç§»åŠ¨è¿‡ç¨‹ä¸­è¦è®²è¯
 					case 8:
 						if (Creature* thalorien = me->GetMap()->GetCreature(_thalorien))
 						{
-							thalorien->MonsterSay("Ä°ÉúÈË...Äã²»ÊÇÎÒµÄÊ¿±ø¡£Äã½«»áºÍÎÒÒ»ÆğÃæ¶ÔÇ¿´óµÄµĞÈËÂğ£¿", LANG_UNIVERSAL, NULL);
+							thalorien->MonsterSay("é™Œç”Ÿäºº...ä½ ä¸æ˜¯æˆ‘çš„å£«å…µã€‚ä½ å°†ä¼šå’Œæˆ‘ä¸€èµ·é¢å¯¹å¼ºå¤§çš„æ•Œäººå—ï¼Ÿ", LANG_UNIVERSAL, NULL);
 							thalorien->HandleEmoteCommand(EMOTE_ONESHOT_TALK);
 							thalorien->SetWalk(true);
 							thalorien->GetMotionMaster()->MovePoint(0, 11777.6, -7063.79, 24.7945);
@@ -356,12 +354,12 @@ public:
 						_Timer = 5000;
 						_Phase++;
 						break;
-					//Ñ°³¿Õß¶ÔBOSS´óº°1
+					//å¯»æ™¨è€…å¯¹BOSSå¤§å–Š1
 					case 9:
 						if (Creature* thalorien = me->GetMap()->GetCreature(_thalorien))
 						{
 							thalorien->SetWalk(false);
-							thalorien->MonsterYell("ÌıºÃÁË£¬ÌìÔÖ¾üÍÅµÄÔü×ÓÃÇ¡£Ö»ÒªÎÒ»¹»î×Å£¬ÄãÃÇĞİÏë½øÈëÌ«ÑôÖ®¾®£¡", LANG_UNIVERSAL, NULL);
+							thalorien->MonsterYell("å¬å¥½äº†ï¼Œå¤©ç¾å†›å›¢çš„æ¸£å­ä»¬ã€‚åªè¦æˆ‘è¿˜æ´»ç€ï¼Œä½ ä»¬ä¼‘æƒ³è¿›å…¥å¤ªé˜³ä¹‹äº•ï¼", LANG_UNIVERSAL, NULL);
 							thalorien->HandleEmoteCommand(EMOTE_ONESHOT_ROAR);
 							thalorien->SetHomePosition(thalorien->GetPositionX(), thalorien->GetPositionY(), thalorien->GetPositionZ(), thalorien->GetOrientation());
 						}					
@@ -370,16 +368,16 @@ public:
 						break;
 					case 10:
 						if (Creature* boss = me->GetMap()->GetCreature(_boss))
-							boss->MonsterYell("Äã½«ºÍÄãµÄ³ÇÊĞÒ»Æğ»ÙÃğ¡£Î×ÑıÍõ½«»á»ñµÃÎ°´óµÄÊ¤Àû£¬È»¶øÈ´Ã»ÓĞÈË»á¼ÇµÃÄã£¡", LANG_UNIVERSAL, NULL);
+							boss->MonsterYell("ä½ å°†å’Œä½ çš„åŸå¸‚ä¸€èµ·æ¯ç­ã€‚å·«å¦–ç‹å°†ä¼šè·å¾—ä¼Ÿå¤§çš„èƒœåˆ©ï¼Œç„¶è€Œå´æ²¡æœ‰äººä¼šè®°å¾—ä½ ï¼", LANG_UNIVERSAL, NULL);
 						_Timer = 1000;
 						_Phase++;
 						break;
-					//BOSS´óº°1£¬ÕÙ»½µÚÒ»²¨Ğ¡¹Ö
+					//BOSSå¤§å–Š1ï¼Œå¬å”¤ç¬¬ä¸€æ³¢å°æ€ª
 					case 11:
 						if (Creature* boss = me->GetMap()->GetCreature(_boss))
 						{
 							boss->HandleEmoteCommand(EMOTE_ONESHOT_POINT);
-							boss->MonsterYell("½ø¹¥£¡", LANG_UNIVERSAL, NULL);
+							boss->MonsterYell("è¿›æ”»ï¼", LANG_UNIVERSAL, NULL);
 						}
 
 						for (size_t i = 12; i < 16; i++)
@@ -391,11 +389,11 @@ public:
 						_Timer = 0;
 						_Phase++;
 						break;
-					//ÕÙ»½µÚ¶ş²¨Ğ¡¹Ö
+					//å¬å”¤ç¬¬äºŒæ³¢å°æ€ª
 					case 12:
 						if (Creature* boss = me->GetMap()->GetCreature(_boss))
 						{
-							boss->MonsterYell("Ê³Ê¬¹í£¬¸ÉµôÄÇ¸ö¾«Áé£¡", LANG_UNIVERSAL, NULL);
+							boss->MonsterYell("é£Ÿå°¸é¬¼ï¼Œå¹²æ‰é‚£ä¸ªç²¾çµï¼", LANG_UNIVERSAL, NULL);
 							boss->HandleEmoteCommand(EMOTE_ONESHOT_POINT);
 						}
 							
@@ -407,11 +405,11 @@ public:
 						_Timer = 0;
 						_Phase++;
 						break;
-					//ÕÙ»½µÚÈı²¨Ğ¡¹Ö
+					//å¬å”¤ç¬¬ä¸‰æ³¢å°æ€ª
 					case 13:
 						if (Creature* boss = me->GetMap()->GetCreature(_boss))
 						{
-							boss->MonsterYell("ÌìÔÖ¾üÍÅÕ½ÎŞ²»Ê¤£¡Ö©ÖëÃÇ£¬ÏÖÔÚ½ø¹¥£¡", LANG_UNIVERSAL, NULL);
+							boss->MonsterYell("å¤©ç¾å†›å›¢æˆ˜æ— ä¸èƒœï¼èœ˜è››ä»¬ï¼Œç°åœ¨è¿›æ”»ï¼", LANG_UNIVERSAL, NULL);
 							boss->HandleEmoteCommand(EMOTE_ONESHOT_POINT);
 						}
 
@@ -423,11 +421,11 @@ public:
 						_Timer = 0;
 						_Phase++;
 						break;
-					//BOSS¼¤»î
+					//BOSSæ¿€æ´»
 					case 14:
 						if (Creature* boss = me->GetMap()->GetCreature(_boss))
 						{
-							boss->MonsterYell("ÎÒÒªÇ××ÔÉ±ÁËÄã£¡", LANG_UNIVERSAL, NULL);
+							boss->MonsterYell("æˆ‘è¦äº²è‡ªæ€äº†ä½ ï¼", LANG_UNIVERSAL, NULL);
 							boss->HandleEmoteCommand(EMOTE_ONESHOT_ROAR);
 						}			
 
@@ -439,12 +437,12 @@ public:
 						_Timer = 0;
 						_Phase++;
 						break;
-					//ÓëÍæ¼Ò¶Ô»°
+					//ä¸ç©å®¶å¯¹è¯
 					case 15:
 						if (Creature* thalorien = me->GetMap()->GetCreature(_thalorien))
 						{
 							thalorien->HandleEmoteCommand(EMOTE_ONESHOT_TALK);
-							thalorien->MonsterSay("ÎÒ...´ÓÎ´Ïë¹ıÄÜ´ÓÕâ³¡Õ½¶·ÖĞÉú´æÏÂÀ´¡£", LANG_UNIVERSAL, NULL);
+							thalorien->MonsterSay("æˆ‘...ä»æœªæƒ³è¿‡èƒ½ä»è¿™åœºæˆ˜æ–—ä¸­ç”Ÿå­˜ä¸‹æ¥ã€‚", LANG_UNIVERSAL, NULL);
 						}					
 						_Timer = 5000;
 						_Phase++;
@@ -453,7 +451,7 @@ public:
 						if (Creature* thalorien = me->GetMap()->GetCreature(_thalorien))
 						{
 							thalorien->HandleEmoteCommand(EMOTE_ONESHOT_TALK);
-							thalorien->MonsterSay("·¢ÉúÁËÊ²Ã´£¿ÎÒÔõÃ´ÔÚÕâÀï£¿", LANG_UNIVERSAL, NULL);
+							thalorien->MonsterSay("å‘ç”Ÿäº†ä»€ä¹ˆï¼Ÿæˆ‘æ€ä¹ˆåœ¨è¿™é‡Œï¼Ÿ", LANG_UNIVERSAL, NULL);
 						}
 							
 						_Timer = 5000;
@@ -463,7 +461,7 @@ public:
 						if (Creature* thalorien = me->GetMap()->GetCreature(_thalorien))
 						{
 							thalorien->HandleEmoteCommand(EMOTE_ONESHOT_TALK);
-							thalorien->MonsterSay("ÕâÊÇ...¿ü¶ûµÂÀ­£¡ÄãµÃµ½ÁËÕâ°Ñ½££¡", LANG_UNIVERSAL, NULL);
+							thalorien->MonsterSay("è¿™æ˜¯...å¥å°”å¾·æ‹‰ï¼ä½ å¾—åˆ°äº†è¿™æŠŠå‰‘ï¼", LANG_UNIVERSAL, NULL);
 						}
 							
 						_Timer = 5000;
@@ -471,7 +469,7 @@ public:
 						break;
 					case 18:
 						if (Creature* thalorien = me->GetMap()->GetCreature(_thalorien))
-							thalorien->MonsterSay("Õâ°Ñ½£Ñ¡ÔñÁËÄã³ÉÎªĞÂµÄÖ÷ÈË£¬ÕâÊÇÎÒµÄ×£¸££¬ÇëÏñÎÒÒ»ÑùÓëÌìÔÖ¾üÍÅÕ½¶·£¡", LANG_UNIVERSAL, NULL);
+							thalorien->MonsterSay("è¿™æŠŠå‰‘é€‰æ‹©äº†ä½ æˆä¸ºæ–°çš„ä¸»äººï¼Œè¿™æ˜¯æˆ‘çš„ç¥ç¦ï¼Œè¯·åƒæˆ‘ä¸€æ ·ä¸å¤©ç¾å†›å›¢æˆ˜æ–—ï¼", LANG_UNIVERSAL, NULL);
 							
 						_Timer = 5000;
 						_Phase++;
@@ -497,19 +495,19 @@ public:
 };
 
 
-//¾»»¯¿ü¶ûµÂÀ­
+//å‡€åŒ–å¥å°”å¾·æ‹‰
 /*
 -- creature
 DELETE FROM creature_template WHERE entry IN (37781,36991,38047,37746,37763,37764,37765,38056);
 
-INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('36991','0','0','0','0','0','21460','0','0','0','Ì«ÑôÖ®¾®ÊØ»¤Õß','','','0','80','80','1','1960','0','1','1.14286','1','0','0','0','0','0','1','2000','2000','1','0','2048','0','0','0','0','0','0','0','0','0','9','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','2','1','1','0','0','0','0','0','0','0','144','1','0','0','','12340');
-INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('37746','0','0','0','0','0','11686','0','0','0','Ì«ÑôÖ®¾®Ê©·¨¼ÙÈË','','','0','80','80','2','114','0','1','1.14286','1','0','0','0','0','0','1','2000','2000','1','33554432','2048','0','0','0','0','0','0','0','0','0','10','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','4','1','1','1','1','0','0','0','0','0','0','0','0','1','0','0','','12340');
-INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('37763','0','0','0','0','0','19706','0','0','0','´ó²©Ñ§ÕßÂåÄ¦Ë¹','','','0','80','80','1','35','0','1','1.14286','1','3','0','0','0','0','1','2000','2000','2','0','2048','0','0','0','0','0','0','0','0','0','7','4','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','','0','3','1','200','20','1','0','0','0','0','0','0','0','0','1','0','0','','12340');
-INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('37764','0','0','0','0','0','17122','0','0','0','ÂåË÷Âê¡¤ÈûÂ¡','¿ü¶ûÈøÀ­Ë¹ÉãÕşÍõ','','0','80','80','2','35','0','1','1.14286','1','3','0','0','0','0','1','2000','2000','2','0','2048','0','0','0','0','0','0','0','0','0','7','76','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','400','30','1','1','0','0','0','0','0','0','0','1','0','0','','12340');
-INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('37765','0','0','0','0','0','18146','0','0','0','°¢Èğ¿Ë¡¤×·ÈÕÕßÉÏÎ¾','¸ßµÈ¾«Áé´ú±í','','0','80','80','1','534','0','1','1.14286','1','0','0','0','0','0','1','2000','2000','1','0','2048','0','0','0','0','0','0','0','0','0','7','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','1','1','1','0','0','0','0','0','0','0','0','1','0','0','','12340');
-INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('37781','0','0','0','0','0','15511','0','0','0','Ì«ÑôÖ®¾®ÈÙÓşÊØÎÀ','','','0','80','80','2','35','0','1','1.14286','1','1','0','0','0','0','1','2000','2000','1','0','2048','0','0','0','0','0','0','0','0','0','7','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','3','1','1','0','0','0','0','0','0','0','144','1','0','0','','12340');
-INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('38047','0','0','0','0','0','30894','30896','30895','30897','Ñª¾«Áé³¯Ê¥Õß','','','0','80','80','2','35','0','1','1.14286','1','0','0','0','0','0','1','2000','2000','2','0','2048','0','0','0','0','0','0','0','0','0','7','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','1','1','1','0','0','0','0','0','0','0','0','1','0','0','','12340');
-INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('38056','0','0','0','0','0','21008','0','0','0','Ë¾¿â¼ÎÁ¢ÂåË¹','','','0','80','80','2','35','0','1','1.14286','1','0','0','0','0','0','1','2000','2000','2','0','2048','0','0','0','0','0','0','0','0','0','7','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','1','1','1','0','0','0','0','0','0','0','0','1','0','0','npc_queldelar_sunwell_plateau','12340');
+INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('36991','0','0','0','0','0','21460','0','0','0','å¤ªé˜³ä¹‹äº•å®ˆæŠ¤è€…','','','0','80','80','1','1960','0','1','1.14286','1','0','0','0','0','0','1','2000','2000','1','0','2048','0','0','0','0','0','0','0','0','0','9','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','2','1','1','0','0','0','0','0','0','0','144','1','0','0','','12340');
+INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('37746','0','0','0','0','0','11686','0','0','0','å¤ªé˜³ä¹‹äº•æ–½æ³•å‡äºº','','','0','80','80','2','114','0','1','1.14286','1','0','0','0','0','0','1','2000','2000','1','33554432','2048','0','0','0','0','0','0','0','0','0','10','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','4','1','1','1','1','0','0','0','0','0','0','0','0','1','0','0','','12340');
+INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('37763','0','0','0','0','0','19706','0','0','0','å¤§åšå­¦è€…æ´›æ‘©æ–¯','','','0','80','80','1','35','0','1','1.14286','1','3','0','0','0','0','1','2000','2000','2','0','2048','0','0','0','0','0','0','0','0','0','7','4','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','','0','3','1','200','20','1','0','0','0','0','0','0','0','0','1','0','0','','12340');
+INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('37764','0','0','0','0','0','17122','0','0','0','æ´›ç´¢ç›Â·å¡éš†','å¥å°”è¨æ‹‰æ–¯æ‘„æ”¿ç‹','','0','80','80','2','35','0','1','1.14286','1','3','0','0','0','0','1','2000','2000','2','0','2048','0','0','0','0','0','0','0','0','0','7','76','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','400','30','1','1','0','0','0','0','0','0','0','1','0','0','','12340');
+INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('37765','0','0','0','0','0','18146','0','0','0','é˜¿ç‘å…‹Â·è¿½æ—¥è€…ä¸Šå°‰','é«˜ç­‰ç²¾çµä»£è¡¨','','0','80','80','1','534','0','1','1.14286','1','0','0','0','0','0','1','2000','2000','1','0','2048','0','0','0','0','0','0','0','0','0','7','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','1','1','1','0','0','0','0','0','0','0','0','1','0','0','','12340');
+INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('37781','0','0','0','0','0','15511','0','0','0','å¤ªé˜³ä¹‹äº•è£èª‰å®ˆå«','','','0','80','80','2','35','0','1','1.14286','1','1','0','0','0','0','1','2000','2000','1','0','2048','0','0','0','0','0','0','0','0','0','7','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','3','1','1','0','0','0','0','0','0','0','144','1','0','0','','12340');
+INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('38047','0','0','0','0','0','30894','30896','30895','30897','è¡€ç²¾çµæœåœ£è€…','','','0','80','80','2','35','0','1','1.14286','1','0','0','0','0','0','1','2000','2000','2','0','2048','0','0','0','0','0','0','0','0','0','7','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','1','1','1','0','0','0','0','0','0','0','0','1','0','0','','12340');
+INSERT INTO creature_template (entry, difficulty_entry_1, difficulty_entry_2, difficulty_entry_3, KillCredit1, KillCredit2, modelid1, modelid2, modelid3, modelid4, name, subname, IconName, gossip_menu_id, minlevel, maxlevel, exp, faction, npcflag, speed_walk, speed_run, scale, rank, mindmg, maxdmg, dmgschool, attackpower, dmg_multiplier, baseattacktime, rangeattacktime, unit_class, unit_flags, unit_flags2, dynamicflags, family, trainer_type, trainer_spell, trainer_class, trainer_race, minrangedmg, maxrangedmg, rangedattackpower, type, type_flags, lootid, pickpocketloot, skinloot, resistance1, resistance2, resistance3, resistance4, resistance5, resistance6, spell1, spell2, spell3, spell4, spell5, spell6, spell7, spell8, PetSpellDataId, VehicleId, mingold, maxgold, AIName, MovementType, InhabitType, HoverHeight, Health_mod, Mana_mod, Armor_mod, RacialLeader, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, movementId, RegenHealth, mechanic_immune_mask, flags_extra, ScriptName, VerifiedBuild) VALUES('38056','0','0','0','0','0','21008','0','0','0','å¸åº“å˜‰ç«‹æ´›æ–¯','','','0','80','80','2','35','0','1','1.14286','1','0','0','0','0','0','1','2000','2000','2','0','2048','0','0','0','0','0','0','0','0','0','7','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','NullCreatureAI','0','3','1','1','1','1','0','0','0','0','0','0','0','0','1','0','0','npc_queldelar_sunwell_plateau','12340');
 DELETE FROM creature WHERE map = 580 AND id IN (37781,36991,38047,37746,37763,37764,37765,38056);
 DELETE FROM creature WHERE guid = 1976653;
 INSERT INTO creature (guid, id, map, spawnMask, phaseMask, modelid, equipment_id, position_x, position_y, position_z, orientation, spawntimesecs, spawndist, currentwaypoint, curhealth, curmana, MovementType, npcflag, unit_flags, dynamicflags) VALUES('1976653','38056','580','1','2048','0','0','1671.49','606.427','28.0503','3.79407','300','0','0','41','60','0','0','0','0');
@@ -521,7 +519,7 @@ INSERT INTO spell_script_names (spell_id, ScriptName) VALUES('70548','spell_bh_c
 
 -- gob
 delete from gameobject_template where entry =195682;
-insert into gameobject_template (entry, type, displayId, name, IconName, castBarCaption, unk1, faction, flags, size, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, data0, data1, data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14, data15, data16, data17, data18, data19, data20, data21, data22, data23, AIName, ScriptName, VerifiedBuild) values('195682','22','8111','´ïÀ­È»´«ËÍÃÅ','','','','94','0','1','0','0','0','0','0','0','68328','0','0','1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','','','12340');
+insert into gameobject_template (entry, type, displayId, name, IconName, castBarCaption, unk1, faction, flags, size, questItem1, questItem2, questItem3, questItem4, questItem5, questItem6, data0, data1, data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14, data15, data16, data17, data18, data19, data20, data21, data22, data23, AIName, ScriptName, VerifiedBuild) values('195682','22','8111','è¾¾æ‹‰ç„¶ä¼ é€é—¨','','','','94','0','1','0','0','0','0','0','0','68328','0','0','1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','','','12340');
 DELETE FROM gameobject WHERE map = 580 AND id = 195682;
 */
 
@@ -556,7 +554,7 @@ public:
 		player->PlayerTalkClass->ClearMenus();
 
 		if (player->HasItemCount(ITEM_TAINTED_QUELDANAR_1, 1) || player->HasItemCount(ITEM_TAINTED_QUELDANAR_2, 1))
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "´øÎÒÈ¥Ì«ÑôÖ®¾®", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "å¸¦æˆ‘å»å¤ªé˜³ä¹‹äº•", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
 
 		player->SEND_GOSSIP_MENU(creature->GetEntry(), creature->GetGUID());
 		return true;
@@ -614,7 +612,7 @@ public:
 				return;
 
 			std::ostringstream oss;
-			oss << "ÏÈÉúÃÇ£¬Å®Ê¿ÃÇ£¬ÓĞÇë¿ü¶ûµÂÀ­µÄĞÂÖ÷ÈË£¬" << who->GetName() << "¡£";
+			oss << "å…ˆç”Ÿä»¬ï¼Œå¥³å£«ä»¬ï¼Œæœ‰è¯·å¥å°”å¾·æ‹‰çš„æ–°ä¸»äººï¼Œ" << who->GetName() << "ã€‚";
 			me->MonsterYell(oss.str().c_str(), LANG_UNIVERSAL, NULL);
 
 			if (who->GetTypeId() == TYPEID_PLAYER)
@@ -733,7 +731,7 @@ public:
 					if (Creature* guard = pl->FindNearestCreature(NPC_QUEL_GUARD, 500.0f))
 					{
 						guard->GetMotionMaster()->MoveChase(pl, 1.0f);
-						guard->MonsterSay("·ÅÏÂÎäÆ÷Í¶½µ£¬ÄãÕâ¸öÅÑÍ½£¡", LANG_UNIVERSAL, NULL);
+						guard->MonsterSay("æ”¾ä¸‹æ­¦å™¨æŠ•é™ï¼Œä½ è¿™ä¸ªå›å¾’ï¼", LANG_UNIVERSAL, NULL);
 						guard->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_READY1H);
 						guard->CastSpell(pl, SPELL_ICY_PRISON);
 						guard->SetTarget(_player);
@@ -744,7 +742,7 @@ public:
 					{
 						_summonmap.insert(std::make_pair(guard->GetGUID(), guard->GetOrientation()));
 						guard->GetMotionMaster()->MoveChase(auric, 1.0f);
-						guard->MonsterSay("·ÅÏÂÎäÆ÷Í¶½µ£¬ÄãÕâ¸öÅÑÍ½£¡", LANG_UNIVERSAL, NULL);
+						guard->MonsterSay("æ”¾ä¸‹æ­¦å™¨æŠ•é™ï¼Œä½ è¿™ä¸ªå›å¾’ï¼", LANG_UNIVERSAL, NULL);
 						guard->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_STATE_READY1H);
 						guard->SetTarget(_auric);
 					}
@@ -821,14 +819,14 @@ public:
 						break;
 					case 2:
 						if (Creature* guard = me->FindNearestCreature(NPC_QUEL_GUARD, 100.0f, true))
-							guard->MonsterSay("ÕæµÄÊÇ¿ü¶ûµÂÀ­Âğ£¿", LANG_UNIVERSAL, NULL);
+							guard->MonsterSay("çœŸçš„æ˜¯å¥å°”å¾·æ‹‰å—ï¼Ÿ", LANG_UNIVERSAL, NULL);
 						_Timer = 4000;
 						_Phase++;
 						break;
 					
 					case 3:
 						if (Creature* theron = ObjectAccessor::GetCreature(*me, _theron))
-							theron->MonsterSay("ÈÃÎÒÃÇ¿´Ò»¿´...", LANG_UNIVERSAL, NULL);
+							theron->MonsterSay("è®©æˆ‘ä»¬çœ‹ä¸€çœ‹...", LANG_UNIVERSAL, NULL);
 						
 						if (Creature* rommath = ObjectAccessor::GetCreature(*me, _rommath))
 							rommath->GetMotionMaster()->MovePoint(0, 1675.8f, 617.19f, 28.0504f);
@@ -844,7 +842,7 @@ public:
 						break;
 					case 4:
 						if (Creature* rommath = ObjectAccessor::GetCreature(*me, _rommath))
-							rommath->MonsterSay("ÂåÈûÂê£¬¿´£¬ºÁÎŞÒÉÎÊ£¬ÕâÊÇ¿ü¶ûµÂÀ­¡£", LANG_UNIVERSAL, NULL);
+							rommath->MonsterSay("æ´›å¡ç›ï¼Œçœ‹ï¼Œæ¯«æ— ç–‘é—®ï¼Œè¿™æ˜¯å¥å°”å¾·æ‹‰ã€‚", LANG_UNIVERSAL, NULL);
 
 						_Timer = 10000;
 						_Phase++;
@@ -854,7 +852,7 @@ public:
 						{
 							std::ostringstream oss;
 							if (Player* pl = ObjectAccessor::GetPlayer(*me, _player))
-								oss << "ºÃ¼«ÁË£¬·Ç³£¸ĞĞ»Äã½«¿ü¶ûµÂÀ­´ø¸øËüÕæÕıµÄÖ÷ÈË£¬" << pl->GetName() << "¡£";
+								oss << "å¥½æäº†ï¼Œéå¸¸æ„Ÿè°¢ä½ å°†å¥å°”å¾·æ‹‰å¸¦ç»™å®ƒçœŸæ­£çš„ä¸»äººï¼Œ" << pl->GetName() << "ã€‚";
 							theron->MonsterSay(oss.str().c_str(), LANG_UNIVERSAL, NULL);
 							theron->GetMotionMaster()->MovePoint(0, 1681.9f, 619.13f, 27.95f);
 						}
@@ -887,7 +885,7 @@ public:
 							if (Player* player = me->SelectNearestPlayer(200.0f))
 								rommath->AddAura(SPELL_ICY_PRISON, player);
 	
-							rommath->MonsterSay("±³ÅÑ£¿", LANG_UNIVERSAL, NULL);
+							rommath->MonsterSay("èƒŒå›ï¼Ÿ", LANG_UNIVERSAL, NULL);
 						}
 
 						GuardAction(0);
@@ -900,20 +898,20 @@ public:
 						break;
 					case 10:
 						if (Creature* auric = ObjectAccessor::GetCreature(*me, _auric))
-							auric->MonsterSay("Õâ²»ÊÇÎÒµÄ´í£¬ÂåÈûÂê¡£Õâ²»ÊÇÒ»¸öÅÑÍ½¡£", LANG_UNIVERSAL, NULL);
+							auric->MonsterSay("è¿™ä¸æ˜¯æˆ‘çš„é”™ï¼Œæ´›å¡ç›ã€‚è¿™ä¸æ˜¯ä¸€ä¸ªå›å¾’ã€‚", LANG_UNIVERSAL, NULL);
 						_Timer = 5000;
 						_Phase++;
 						break;
 					case 11:
 						if (Creature* auric = ObjectAccessor::GetCreature(*me, _auric))
-							auric->MonsterSay("ÈÃÄãµÄÈËÍËÏÂ£¬ÊÇÂåÈûÂêµÄÓŞ´Àµ¼ÖÂËûÊÜÁËÉË¡£ÈËÃÇ²»¿ÉÒÔÑ¡Ôñ¿ü¶ûµÂÀ­£¬¿ü¶ûµÂÀ­×Ô¼ºÑ¡ÔñÖ÷ÈË¡£", LANG_UNIVERSAL, NULL);
+							auric->MonsterSay("è®©ä½ çš„äººé€€ä¸‹ï¼Œæ˜¯æ´›å¡ç›çš„æ„šè ¢å¯¼è‡´ä»–å—äº†ä¼¤ã€‚äººä»¬ä¸å¯ä»¥é€‰æ‹©å¥å°”å¾·æ‹‰ï¼Œå¥å°”å¾·æ‹‰è‡ªå·±é€‰æ‹©ä¸»äººã€‚", LANG_UNIVERSAL, NULL);
 
 						_Timer = 5000;
 						_Phase++;
 						break;
 					case 12:
 						if (Creature* rommath = ObjectAccessor::GetCreature(*me, _rommath))
-							rommath->MonsterSay("ÎÀ±ø£¬ÍËÏÂ¡£", LANG_UNIVERSAL, NULL);
+							rommath->MonsterSay("å«å…µï¼Œé€€ä¸‹ã€‚", LANG_UNIVERSAL, NULL);
 						_Timer = 5000;
 						_Phase++;
 						break;
@@ -924,7 +922,7 @@ public:
 							rommath->HandleEmoteCommand(EMOTE_ONESHOT_POINT);
 							std::ostringstream oss;
 							if (Player* pl = ObjectAccessor::GetPlayer(*me, _player))
-								oss << "ÄãµÃµ½ÁËÒ»Ö±Ñ°ÕÒµÄÁ¦Á¿£¬" << pl->GetName() << "¡£ÄÃÉÏÕâ°Ñ½££¬Àë¿ª°É¡£ÖÁÓÚÄã£¬°¢Èğ¿Ë£¬ÔÚÕâÉñÊ¥Ö®µØ£¬Çë¼Ç×¡Äã×Ô¼ºËµ¹ıµÄ»°¡£";
+								oss << "ä½ å¾—åˆ°äº†ä¸€ç›´å¯»æ‰¾çš„åŠ›é‡ï¼Œ" << pl->GetName() << "ã€‚æ‹¿ä¸Šè¿™æŠŠå‰‘ï¼Œç¦»å¼€å§ã€‚è‡³äºä½ ï¼Œé˜¿ç‘å…‹ï¼Œåœ¨è¿™ç¥åœ£ä¹‹åœ°ï¼Œè¯·è®°ä½ä½ è‡ªå·±è¯´è¿‡çš„è¯ã€‚";
 
 							rommath->MonsterSay(oss.str().c_str(), LANG_UNIVERSAL, NULL);
 						}
@@ -935,14 +933,14 @@ public:
 						if (Creature* auric = ObjectAccessor::GetCreature(*me, _auric))
 						{
 							auric->HandleEmoteCommand(EMOTE_ONESHOT_POINT);
-							auric->MonsterSay("ÄÃ×ÅÕâ°Ñ½££¬´©¹ıÈ¥´ïÀ­È»µÄ´«ËÍÃÅ¡£ÄãÍê³ÉÁËºÜ¶àÈËÃÎÃÂÒÔÇó¶àÄêµÄÊÂ£¬ÄãÖØÖıÁË¿ü¶ûµÂÀ­¡£", LANG_UNIVERSAL, NULL);
+							auric->MonsterSay("æ‹¿ç€è¿™æŠŠå‰‘ï¼Œç©¿è¿‡å»è¾¾æ‹‰ç„¶çš„ä¼ é€é—¨ã€‚ä½ å®Œæˆäº†å¾ˆå¤šäººæ¢¦å¯ä»¥æ±‚å¤šå¹´çš„äº‹ï¼Œä½ é‡é“¸äº†å¥å°”å¾·æ‹‰ã€‚", LANG_UNIVERSAL, NULL);
 						}
 
 						if (GameObject* quelDelar = ObjectAccessor::GetGameObject(*me, _QuelDelar))
 						{
 							quelDelar->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_NOT_SELECTABLE);
 							if (Player* pl = ObjectAccessor::GetPlayer(*me, _player))
-								pl->GetSession()->SendAreaTriggerMessage("¿ü¶ûµÂÀ­ÏÖÔÚ¿ÉÒÔÊ°È¡ÁË");
+								pl->GetSession()->SendAreaTriggerMessage("å¥å°”å¾·æ‹‰ç°åœ¨å¯ä»¥æ‹¾å–äº†");
 						}
 							
 

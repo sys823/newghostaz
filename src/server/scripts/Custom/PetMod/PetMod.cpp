@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "PetMod.h"
 #include "../MapMod/MapMod.h"
 
@@ -9,7 +8,7 @@ void PetMod::Load()
 	PetModMap.clear();
 
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT Ö°ÒµË÷Òý, ¸ù¾ÝÍæ¼ÒÉËº¦Ôö¼ÓÎïÀíÉËº¦°Ù·Ö±È, ¸ù¾ÝÍæ¼ÒÉËº¦Ôö¼Ó·¨ÊõÉËº¦°Ù·Ö±È, ¸ù¾ÝÍæ¼ÒÑªÁ¿Ôö¼ÓÑªÁ¿°Ù·Ö±È, »¤¼×ÖµÉÏÏÞ FROM _ÊôÐÔµ÷Õû_³èÎï" :
+		"SELECT èŒä¸šç´¢å¼•, æ ¹æ®çŽ©å®¶ä¼¤å®³å¢žåŠ ç‰©ç†ä¼¤å®³ç™¾åˆ†æ¯”, æ ¹æ®çŽ©å®¶ä¼¤å®³å¢žåŠ æ³•æœ¯ä¼¤å®³ç™¾åˆ†æ¯”, æ ¹æ®çŽ©å®¶è¡€é‡å¢žåŠ è¡€é‡ç™¾åˆ†æ¯”, æŠ¤ç”²å€¼ä¸Šé™ FROM _å±žæ€§è°ƒæ•´_å® ç‰©" :
 		"SELECT classIndex, DmgAddPct, SpAddPct, HpAddPct, ArmorLimit FROM _pet");
 
 	if (result)
@@ -73,7 +72,7 @@ void PetMod::GetMinDmgMod(Guardian* guardian, float &mindamage, float &maxdamage
 		break;
 	}
 
-	if (guardian->GetEntry() == 24207)//Ñª³æ
+	if (guardian->GetEntry() == 24207)//è¡€è™«
 		DmgAddPct = 5;
 
 	mindamage = mindamage + CalculatePct(base, DmgAddPct);
@@ -125,7 +124,7 @@ void PetMod::GetHpMod(Guardian* guardian, float &value)
 
 	uint32 base = owner->GetMaxHealth();
 
-	if (guardian->GetEntry() == 24207)//Ñª³æ
+	if (guardian->GetEntry() == 24207)//è¡€è™«
 		HpAddPct = 20;
 
 	value += CalculatePct(base, HpAddPct);

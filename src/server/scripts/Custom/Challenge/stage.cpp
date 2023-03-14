@@ -1,7 +1,5 @@
-#pragma execution_character_set("utf-8")
 #include "../Switch/Switch.h"
 #include "stage.h"
-
 std::vector<StageTemplate> StageVec;
 
 void Stage::Load()
@@ -9,7 +7,7 @@ void Stage::Load()
 	StageVec.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//		0			1		2				3
-		"SELECT ¹Ø¿¨ID,ÕÙ»½ÉúÎï×éID,Í¨¹ØÕÙ»½ÎïÌåID,²Ëµ¥ÎÄ±¾ FROM _¸±±¾_´³¹ØÄ£Ê½" :
+		"SELECT å…³å¡ID,å¬å”¤ç”Ÿç‰©ç»„ID,é€šå…³å¬å”¤ç‰©ä½“ID,èœå•æ–‡æœ¬ FROM _å‰¯æœ¬_é—¯å…³æ¨¡å¼" :
 		//			0		1				2		3
 		"SELECT stageRank,summonsGroupId,rewGobId,description FROM _stage");
 
@@ -78,14 +76,14 @@ public:
 
 		if (eventid != 0 && !sGameEventMgr->IsActiveEvent(eventid))
 		{
-			ChatHandler(player->GetSession()).PSendSysMessage("µ±Ç°Ê±¼ä²»ÔÊÐíÌôÕ½£¡");
+			ChatHandler(player->GetSession()).PSendSysMessage("å½“å‰æ—¶é—´ä¸å…è®¸æŒ‘æˆ˜ï¼");
 			return false;
 		}
 
 		if (creature->summonsClear && creature->stage <= StageVec.size())
 		{
 			std::ostringstream oss;
-			oss << "ÌôÕ½µÈ¼¶:" << creature->stage;
+			oss << "æŒ‘æˆ˜ç­‰çº§:" << creature->stage;
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, oss.str(), creature->stage, GOSSIP_ACTION_INFO_DEF + 1);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, sStage->GetDescription(creature->stage), creature->stage, GOSSIP_ACTION_INFO_DEF);
 		}
@@ -132,7 +130,7 @@ public:
 		void SummonedCreatureDies(Creature* summon, Unit* killer)  override
 		{
 			std::ostringstream oss;
-			oss << "ÌôÕ½µÈ¼¶£º" << me->stage;
+			oss << "æŒ‘æˆ˜ç­‰çº§ï¼š" << me->stage;
 			me->MonsterSay(oss.str().c_str(), LANG_UNIVERSAL, 0);
 
 			Summons.Despawn(summon);

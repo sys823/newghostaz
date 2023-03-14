@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "NoPatchItem.h"
 #include "ItemMod.h"
 #include "../GCAddon/GCAddon.h"
@@ -143,7 +142,7 @@ void NoPatchItem::Load()
 			Temp.AddStatCount		= f[6].GetUInt32();
 			Temp.LevelStatModIndex	= f[7].GetUInt8();
 
-			if (strcmp("¼ÓÖµ", f[8].GetCString()) == 0)
+			if (strcmp("åŠ å€¼", f[8].GetCString()) == 0)
 				Temp.DamageLevelType = TYPE_ADD_VALUE;
 			else
 				Temp.DamageLevelType = TYPE_MUI_VALUE;
@@ -168,7 +167,7 @@ void NoPatchItem::Load()
 			Temp.StatType = fields[1].GetUInt32();
 
 
-			if (strcmp("¼ÓÖµ", fields[2].GetCString()) == 0)
+			if (strcmp("åŠ å€¼", fields[2].GetCString()) == 0)
 				Temp.ModType = TYPE_ADD_VALUE;
 			else
 				Temp.ModType = TYPE_MUI_VALUE;
@@ -775,11 +774,11 @@ bool NoPatchItem::Create(Player* owner, Item* item)
 
 	if (Quality < 0)
 	{
-		//ÉèÖÃĞÂÎïÆ·
+		//è®¾ç½®æ–°ç‰©å“
 		pItem->Name = srcTemp->Name1 + Suffix;
 		pItem->LevelData = GetLevelData(entry, 1, srcTemp->Quality, ItemLevel);
 
-		//²úÉú¼¼ÄÜ
+		//äº§ç”ŸæŠ€èƒ½
 		_Spell NewSpells[MAX_ITEM_PROTO_SPELLS];
 
 		for (size_t i = 0; i < MAX_ITEM_PROTO_SPELLS; i++)
@@ -802,7 +801,7 @@ bool NoPatchItem::Create(Player* owner, Item* item)
 		for (size_t i = 0; i < MAX_ITEM_PROTO_SPELLS; i++)
 			pItem->Spells[i] = NewSpells[i];
 
-		//²úÉúÊôĞÔ
+		//äº§ç”Ÿå±æ€§
 		for (size_t i = 0; i < MAX_ITEM_PROTO_STATS; i++)
 		{
 			pItem->Stats[i] = srcTemp->ItemStat[i];
@@ -810,7 +809,7 @@ bool NoPatchItem::Create(Player* owner, Item* item)
 		}
 		
 
-		//²úÉúÊôĞÔ
+		//äº§ç”Ÿå±æ€§
 		_ItemStat NewStats[MAX_ITEM_PROTO_STATS];
 
 		for (size_t i = 0; i < MAX_ITEM_PROTO_STATS; i++)
@@ -844,22 +843,22 @@ bool NoPatchItem::Create(Player* owner, Item* item)
 	}
 	else
 	{
-		//ÉèÖÃĞÂÎïÆ·
+		//è®¾ç½®æ–°ç‰©å“
 		pItem->Name = srcTemp->Name1 + Suffix;
 		pItem->LevelData = GetLevelData(entry, 1, Quality, ItemLevel);
 
-		//²úÉú¼¼ÄÜ
+		//äº§ç”ŸæŠ€èƒ½
 		for (size_t i = 0; i < SpellCount; i++)
 			pItem->Spells[i] = GetRandomSpell(pItem->Spells,SpellIndex);
 
-		//²úÉúÊôĞÔ
+		//äº§ç”Ÿå±æ€§
 		for (size_t i = 0; i < StatCount; i++)
 			pItem->Stats[i] = GetRandomStat(StatIndex);
 
-		//ºÏ²¢ÊôĞÔ
+		//åˆå¹¶å±æ€§
 		MergeStat(pItem->Stats);
 
-		//²úÉúÇ°×º
+		//äº§ç”Ÿå‰ç¼€
 		pItem->Name = GetPrefix(pItem) + pItem->Name;
 
 		pItem->Damages[0].DamageMin = MinDamage;
@@ -867,13 +866,13 @@ bool NoPatchItem::Create(Player* owner, Item* item)
 		pItem->NpDelay = Delay;
 	}
 	
-	//ÉèÖÃflag query data
+	//è®¾ç½®flag query data
 	pItem->SetUInt32Value(ITEM_FIELD_PROPERTY_SEED, GetQueryId(pItem));
 	//SetItemFlag(pItem);
 	pItem->SetState(ITEM_CHANGED, owner);
 	ItemQueryMap[pItem->GetGUIDLow()] = pItem;
 
-	//´İ»ÙÔ­ÎïÆ·
+	//æ‘§æ¯åŸç‰©å“
 	owner->DestroyItem(item->GetBagSlot(), item->GetSlot(), true);
 
 	return true;
@@ -936,7 +935,7 @@ bool NoPatchItem::Compound(Player* owner, Item* item1)
 {
 	if (!item1->IsNoPatch())
 	{
-		owner->GetSession()->SendNotification("²»ÊÇNoPathItem");
+		owner->GetSession()->SendNotification("ä¸æ˜¯NoPathItem");
 		return false;
 	}
 	
@@ -956,7 +955,7 @@ bool NoPatchItem::Compound(Player* owner, Item* item1)
 
 	if (!item2)
 	{
-		owner->GetSession()->SendNotification("Î´ÕÒµ½ÍêÈ«ÏàÍ¬µÄÁ½¼şÎïÆ·");
+		owner->GetSession()->SendNotification("æœªæ‰¾åˆ°å®Œå…¨ç›¸åŒçš„ä¸¤ä»¶ç‰©å“");
 		return false;
 	}
 
@@ -978,8 +977,8 @@ bool NoPatchItem::Compound(Player* owner, Item* item1)
 
 		item->MapData = GetMapData(1, 1, 0, 0);
 
-		//²úÉú¼¼ÄÜ
-		//¸½¼Ó¶îÍâ¼¼ÄÜ
+		//äº§ç”ŸæŠ€èƒ½
+		//é™„åŠ é¢å¤–æŠ€èƒ½
 		if (itr->second.SpellIndex > 0)
 		{
 			_Spell NewSpells[MAX_ITEM_PROTO_SPELLS];
@@ -1004,10 +1003,10 @@ bool NoPatchItem::Compound(Player* owner, Item* item1)
 			for (size_t i = 0; i < MAX_ITEM_PROTO_SPELLS; i++)
 				item->Spells[i] = NewSpells[i];
 		}
-		//¶îÍâ¼¼ÄÜ
+		//é¢å¤–æŠ€èƒ½
 		else if (itr->second.SpellIndex < 0)
 		{
-			//²úÉú¼¼ÄÜ
+			//äº§ç”ŸæŠ€èƒ½
 			for (size_t i = 0; i < itr->second.SpellCount; i++)
 				item->Spells[i] = GetRandomSpell(item->Spells, abs(itr->second.SpellIndex));
 		}
@@ -1017,7 +1016,7 @@ bool NoPatchItem::Compound(Player* owner, Item* item1)
 				item->Spells[i] = proto->Spells[i];
 		}
 
-		//Ô­ÊôĞÔ·­±¶
+		//åŸå±æ€§ç¿»å€
 		for (size_t i = 0; i < MAX_ITEM_PROTO_STATS; i++)
 			item->Stats[i] = proto->ItemStat[i];
 
@@ -1036,7 +1035,7 @@ bool NoPatchItem::Compound(Player* owner, Item* item1)
 			}
 		}
 
-		//¸½¼Ó¶îÍâÊôĞÔ
+		//é™„åŠ é¢å¤–å±æ€§
 		if (itr->second.StatOverMap.empty())
 		{
 			_ItemStat NewStats[MAX_ITEM_PROTO_STATS];
@@ -1116,7 +1115,7 @@ bool NoPatchItem::Compound(Player* owner, Item* item1)
 				item->Stats[i] = NewStats[i];
 		}
 
-		//²úÉúËæ»úFM
+		//äº§ç”ŸéšæœºFM
 		for (uint8 slot = PROP_ENCHANTMENT_SLOT_0; slot < MAX_ENCHANTMENT_SLOT; slot++)
 		{
 			uint32 enchant_id = GetCreateEnchantId(itr->second.EnchantIndex, slot - 6);
@@ -1166,7 +1165,7 @@ bool NoPatchItem::Compound(Player* owner, Item* item1)
 		}
 
 		item->TempIndex = TempIndex;
-		//ÉèÖÃflag query data
+		//è®¾ç½®flag query data
 		item->SetUInt32Value(ITEM_FIELD_PROPERTY_SEED, GetQueryId(item));
 		//SetItemFlag(item);
 		ItemQueryMap[item->GetGUIDLow()] = item;
@@ -1213,8 +1212,8 @@ bool NoPatchItem::Create(Map* map, Item* item)
 
 		item->MapData = GetMapData(map->GetId(), 1, map->GetDifficulty(), map->challengeLv);
 
-		//²úÉú¼¼ÄÜ
-		//¸½¼Ó¶îÍâ¼¼ÄÜ
+		//äº§ç”ŸæŠ€èƒ½
+		//é™„åŠ é¢å¤–æŠ€èƒ½
 		if (itr->second.SpellIndex > 0)
 		{
 			_Spell NewSpells[MAX_ITEM_PROTO_SPELLS];
@@ -1239,10 +1238,10 @@ bool NoPatchItem::Create(Map* map, Item* item)
 			for (size_t i = 0; i < MAX_ITEM_PROTO_SPELLS; i++)
 				item->Spells[i] = NewSpells[i];
 		}
-		//¶îÍâ¼¼ÄÜ
+		//é¢å¤–æŠ€èƒ½
 		else if (itr->second.SpellIndex < 0)
 		{
-			//²úÉú¼¼ÄÜ
+			//äº§ç”ŸæŠ€èƒ½
 			for (size_t i = 0; i < itr->second.SpellCount; i++)
 				item->Spells[i] = GetRandomSpell(item->Spells, abs(itr->second.SpellIndex));
 		}
@@ -1252,7 +1251,7 @@ bool NoPatchItem::Create(Map* map, Item* item)
 				item->Spells[i] = proto->Spells[i];
 		}
 
-		//Ô­ÊôĞÔ·­±¶
+		//åŸå±æ€§ç¿»å€
 		for (size_t i = 0; i < MAX_ITEM_PROTO_STATS; i++)
 			item->Stats[i] = proto->ItemStat[i];
 
@@ -1271,7 +1270,7 @@ bool NoPatchItem::Create(Map* map, Item* item)
 			}
 		}
 
-		//¸½¼Ó¶îÍâÊôĞÔ
+		//é™„åŠ é¢å¤–å±æ€§
 		if (itr->second.StatOverMap.empty())
 		{
 			_ItemStat NewStats[MAX_ITEM_PROTO_STATS];
@@ -1351,7 +1350,7 @@ bool NoPatchItem::Create(Map* map, Item* item)
 				item->Stats[i] = NewStats[i];				
 		}
 
-		//²úÉúËæ»úFM
+		//äº§ç”ŸéšæœºFM
 		for (uint8 slot = PROP_ENCHANTMENT_SLOT_0; slot < MAX_ENCHANTMENT_SLOT; slot++)
 		{
 			uint32 enchant_id = GetCreateEnchantId(itr->second.EnchantIndex, slot - 6);
@@ -1401,7 +1400,7 @@ bool NoPatchItem::Create(Map* map, Item* item)
 		}
 
 		item->TempIndex = TempIndex;
-		//ÉèÖÃflag query data
+		//è®¾ç½®flag query data
 		item->SetUInt32Value(ITEM_FIELD_PROPERTY_SEED, GetQueryId(item));
 		//SetItemFlag(item);
 		ItemQueryMap[item->GetGUIDLow()] = item;
@@ -1513,7 +1512,7 @@ bool NoPatchItem::LevelUp(Player* owner, Item* item)
 	if (frand(0, 100.0f) > L_Chance)
 	{
 		sReq->Des(owner, L_ReqId);
-		owner->GetSession()->SendNotification("Éı¼¶Ê§°Ü");
+		owner->GetSession()->SendNotification("å‡çº§å¤±è´¥");
 		return false;
 	}
 
@@ -1522,7 +1521,7 @@ bool NoPatchItem::LevelUp(Player* owner, Item* item)
 	if (!pItem)
 		return false;
 
-	//ÉèÖÃĞÂÎïÆ·
+	//è®¾ç½®æ–°ç‰©å“
 	std::string prefix = "";
 	std::string suffix = "";
 	GetMapPrefixSuffix(item, prefix, suffix);
@@ -1539,7 +1538,7 @@ bool NoPatchItem::LevelUp(Player* owner, Item* item)
 	if (item->MapData > 0)
 		pItem->MapData = GetMapData(GetMapId(item->MapData), GetMapLevelNow(item->MapData) + 1, GetDifficulty(item->MapData), GetChallegeLv(item->MapData));
 
-	//²úÉú¼¼ÄÜ
+	//äº§ç”ŸæŠ€èƒ½
 	_Spell NewSpells[MAX_ITEM_PROTO_SPELLS];
 
 	for (size_t i = 0; i < MAX_ITEM_PROTO_SPELLS; i++)
@@ -1562,7 +1561,7 @@ bool NoPatchItem::LevelUp(Player* owner, Item* item)
 	for (size_t i = 0; i < MAX_ITEM_PROTO_SPELLS; i++)
 		pItem->Spells[i] = NewSpells[i];
 
-	//²úÉúÊôĞÔ
+	//äº§ç”Ÿå±æ€§
 	_ItemStat NewStats[MAX_ITEM_PROTO_STATS];
 
 	for (size_t i = 0; i < MAX_ITEM_PROTO_STATS; i++)
@@ -1597,7 +1596,7 @@ bool NoPatchItem::LevelUp(Player* owner, Item* item)
 	for (size_t i = 0; i < MAX_ITEM_PROTO_STATS; i++)
 		pItem->Stats[i] = NewStats[i];
 
-	//²úÉúÇ°×º
+	//äº§ç”Ÿå‰ç¼€
 	pItem->Name = GetPrefix(pItem) + pItem->Name;
 
 	pItem->Damages[0].DamageMin = L_DamageLevelType == TYPE_ADD_VALUE ? item->Damages[0].DamageMin + L_DamageValue : item->Damages[0].DamageMin * L_DamageValue;
@@ -1605,7 +1604,7 @@ bool NoPatchItem::LevelUp(Player* owner, Item* item)
 
 	pItem->NpDelay = item->NpDelay;
 
-	//±£ÁôFMĞ§¹û
+	//ä¿ç•™FMæ•ˆæœ
 	for (uint8 slot = PERM_ENCHANTMENT_SLOT; slot < MAX_ENCHANTMENT_SLOT; slot++)
 	{
 		uint32 x = GetCreateEnchantId(L_EnchantIndex, slot - 6);
@@ -1620,13 +1619,13 @@ bool NoPatchItem::LevelUp(Player* owner, Item* item)
 		}
 	}
 
-	//ÉèÖÃflag query data
+	//è®¾ç½®flag query data
 	pItem->SetUInt32Value(ITEM_FIELD_PROPERTY_SEED, GetQueryId(pItem));
 	//SetItemFlag(pItem);
 	pItem->SetState(ITEM_CHANGED, owner);
 	ItemQueryMap[pItem->GetGUIDLow()] = pItem;
 
-	//¿Û¼õÏûºÄ´İ»ÙÔ­ÎïÆ·
+	//æ‰£å‡æ¶ˆè€—æ‘§æ¯åŸç‰©å“
 	sReq->Des(owner, L_ReqId);
 	owner->DestroyItem(item->GetBagSlot(), item->GetSlot(), true);
 
@@ -1648,37 +1647,37 @@ bool NoPatchItem::LevelUp(Player* owner, Item* item)
 uint8 NoPatchItem::GetInsert(ItemTemplate temp)
 {
 	uint8 insert = 0;
-	//Ãû×Ö
+	//åå­—
 	insert++;
 
-	sLog->outString("-->%d->>>>Ãû×Ö", insert);
+	sLog->outString("-->%d->>>>åå­—", insert);
 
-	//Ó¢ĞÛÄ£Ê½
+	//è‹±é›„æ¨¡å¼
 	if ((temp.Flags & ITEM_FLAG_HEROIC_TOOLTIP) != 0)
 	{
 		insert++;
-		sLog->outString("-->%d->>>>Ó¢ĞÛÄ£Ê½", insert);
+		sLog->outString("-->%d->>>>è‹±é›„æ¨¡å¼", insert);
 	}
 
-	//°ó¶¨ ÕËºÅ°ó¶¨ ×°±¸°ó¶¨...
+	//ç»‘å®š è´¦å·ç»‘å®š è£…å¤‡ç»‘å®š...
 	if (temp.Bonding != NO_BIND || (temp.Flags & ITEM_FLAG_IS_BOUND_TO_ACCOUNT) != 0 || temp.Quality == 7)
 	{
 		insert++;
-		sLog->outString("-->%d->>>>°ó¶¨", insert);
+		sLog->outString("-->%d->>>>ç»‘å®š", insert);
 	}
 
-	//Ä§·¨ÖÆ×÷µÄÎïÆ·
+	//é­”æ³•åˆ¶ä½œçš„ç‰©å“
 	if ((temp.Flags & ITEM_FLAG_CONJURED) != 0)
 		insert++;
 
-	//Î¨Ò» ×î´óÊıÁ¿ ×°±¸Î¨Ò»...
+	//å”¯ä¸€ æœ€å¤§æ•°é‡ è£…å¤‡å”¯ä¸€...
 	if (temp.MaxCount != 0 || (temp.Flags & ITEM_FLAG_UNIQUE_EQUIPPABLE) != 0)
 	{
 		insert++;
-		sLog->outString("-->%d->>>>×î´óÊıÁ¿", insert);
+		sLog->outString("-->%d->>>>æœ€å¤§æ•°é‡", insert);
 	}
 
-	//¿¹ĞÔ
+	//æŠ—æ€§
 	if (temp.HolyRes != 0)
 		insert++;
 	if (temp.FireRes != 0)
@@ -1692,41 +1691,41 @@ uint8 NoPatchItem::GetInsert(ItemTemplate temp)
 	if (temp.ArcaneRes != 0)
 		insert++;
 
-	//»¤¼×
+	//æŠ¤ç”²
 	if (temp.Armor > 0)
 	{
 		insert++;
-		sLog->outString("-->%d->>>>»¤¼×", insert);
+		sLog->outString("-->%d->>>>æŠ¤ç”²", insert);
 	}
 
-	//Ë«ÊÖ »¤¼×...
+	//åŒæ‰‹ æŠ¤ç”²...
 	if (temp.InventoryType != 0 && (temp.Class == ITEM_CLASS_WEAPON || temp.Class == ITEM_CLASS_ARMOR))
 	{
 		insert++;
-		sLog->outString("-->%d->>>>Î»ÖÃ", insert);
+		sLog->outString("-->%d->>>>ä½ç½®", insert);
 	}
 
-	//ÉËº¦
+	//ä¼¤å®³
 	if (temp.Damage[0].DamageMin > 0 || temp.Damage[0].DamageMax > 0)
 	{
 		insert++;
-		sLog->outString("-->%d->>>>ÉËº¦", insert);
+		sLog->outString("-->%d->>>>ä¼¤å®³", insert);
 	}
 	if (temp.Damage[1].DamageMin > 0 || temp.Damage[1].DamageMax > 0)
 	{
 		insert++;
-		sLog->outString("-->%d->>>>ÉËº¦", insert);
+		sLog->outString("-->%d->>>>ä¼¤å®³", insert);
 	}
 
 
-	//ÃëÉË
+	//ç§’ä¼¤
 	if (temp.Damage[0].DamageMin > 0 && temp.Damage[0].DamageMax > 0 && temp.Delay > 0)
 	{
 		insert++;
-		sLog->outString("-->%d->>>>ÃëÉË", insert);
+		sLog->outString("-->%d->>>>ç§’ä¼¤", insert);
 	}
 
-	//ÊôĞÔ
+	//å±æ€§
 	for (uint8 i = 0; i < temp.StatsCount; ++i)
 		if ((temp.ItemStat[i].ItemStatType == 0
 			|| temp.ItemStat[i].ItemStatType == 1
@@ -1742,15 +1741,15 @@ uint8 NoPatchItem::GetInsert(ItemTemplate temp)
 		}
 
 
-	//±¦Ê¯
+	//å®çŸ³
 	for (size_t i = 0; i < MAX_ITEM_PROTO_SOCKETS; i++)
 		if (temp.Socket[i].Color != 0)
 		{
 			insert++;
-			sLog->outString("-->%d->>>>±¦Ê¯", insert);
+			sLog->outString("-->%d->>>>å®çŸ³", insert);
 		}
 
-	//Ê¹ÓÃÇøÓò
+	//ä½¿ç”¨åŒºåŸŸ
 	if (temp.Area != 0)
 		insert++;
 

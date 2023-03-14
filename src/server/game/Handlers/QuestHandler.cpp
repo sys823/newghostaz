@@ -21,7 +21,7 @@
 #include "ScriptMgr.h"
 #include "GameObjectAI.h"
 #include "Language.h"
-#pragma execution_character_set("utf-8")
+
 #include "../Custom/DataLoader/DataLoader.h"
 #include "../Custom/CommonFunc/CommonFunc.h"
 #include "../Custom/Requirement/Requirement.h"

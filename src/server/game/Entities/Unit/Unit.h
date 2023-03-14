@@ -2448,7 +2448,7 @@ class Unit : public WorldObject
 
         // Movement info
         Movement::MoveSpline * movespline;
-
+        [[nodiscard]] uint32 GetOldFactionId() const { return _oldFactionId; }
     protected:
         explicit Unit (bool isWorldObject);
 

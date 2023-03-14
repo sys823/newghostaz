@@ -1,11 +1,10 @@
-#pragma execution_character_set("utf-8")
 #include "myString.h"
 
 void CoreString::Load()
 {
 	StringVec.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
-		"SELECT ID,文本 FROM __提示文本" :
+		"SELECT ID,鏂囨湰 FROM __鎻愮ず鏂囨湰" :
 		"SELECT ID,TEXT FROM _string");
 	if (!result) return;
 	do

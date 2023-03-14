@@ -22,7 +22,7 @@
 #include "GameObjectAI.h"
 #include "SpellAuraEffects.h"
 #include "Player.h"
-#pragma execution_character_set("utf-8")
+
 #include "../Custom/CommonFunc/CommonFunc.h"
 #include "../Custom//DataLoader/DataLoader.h"
 #include "../Custom/ItemMod/ItemMod.h"

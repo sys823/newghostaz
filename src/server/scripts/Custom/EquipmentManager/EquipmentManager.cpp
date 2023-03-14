@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "EquipmentManager.h"
 #include "Item.h"
 #include "../Custom/ItemMod/NoPatchItem.h"
@@ -33,7 +32,7 @@ void Player::InitMapTempItems(uint32 Map)
             if (ItemTemplate const* proto = sObjectMgr->GetItemTemplate(itr->items[i]))
             {
                 _MapTempItems[i] = Item::CreateItem(itr->items[i], 1, this);
-                ChatHandler(GetSession()).PSendSysMessage("¼ÓÔØµØÍ¼×°±¸%s..", sCF->GetItemLink(itr->items[i]).c_str());
+                ChatHandler(GetSession()).PSendSysMessage("åŠ è½½åœ°å›¾è£…å¤‡%s..", sCF->GetItemLink(itr->items[i]).c_str());
             }
 
         CanSawpOnMapTempItems = false;
@@ -85,7 +84,7 @@ void Player::InitAreaTempItems(uint32 Area)
             if (ItemTemplate const* proto = sObjectMgr->GetItemTemplate(itr->items[i]))
             {
                 _AreaTempItems[i] = Item::CreateItem(itr->items[i], 1, this);
-                ChatHandler(GetSession()).PSendSysMessage("¼ÓÔØµØÓò×°±¸%s..", sCF->GetItemLink(itr->items[i]).c_str());
+                ChatHandler(GetSession()).PSendSysMessage("åŠ è½½åœ°åŸŸè£…å¤‡%s..", sCF->GetItemLink(itr->items[i]).c_str());
             }
 
         CanSawpOnAreaTempItems = false;
@@ -109,7 +108,7 @@ void Player::ApplyMapTempItems(bool apply)
                     _ApplyItemMods(dscItem, i, false);
 
                 _ApplyItemMods(_MapTempItems[i], i, true);
-                ChatHandler(GetSession()).PSendSysMessage("¼ÓÔØÇøÓò×°±¸%s..", sCF->GetItemLink(_MapTempItems[i]->GetEntry()).c_str());
+                ChatHandler(GetSession()).PSendSysMessage("åŠ è½½åŒºåŸŸè£…å¤‡%s..", sCF->GetItemLink(_MapTempItems[i]->GetEntry()).c_str());
             }
         }
     }
@@ -121,7 +120,7 @@ void Player::ApplyMapTempItems(bool apply)
             {
                 SetVisibleItemSlot(i, NULL);
                 _ApplyItemMods(_MapTempItems[i], i, false);
-                ChatHandler(GetSession()).PSendSysMessage("Ð¶ÔØÇøÓò×°±¸%s..", sCF->GetItemLink(_MapTempItems[i]->GetEntry()).c_str());
+                ChatHandler(GetSession()).PSendSysMessage("å¸è½½åŒºåŸŸè£…å¤‡%s..", sCF->GetItemLink(_MapTempItems[i]->GetEntry()).c_str());
 
                 if (Item* dscItem = GetItemByPos(INVENTORY_SLOT_BAG_0, i))
                 {
@@ -147,7 +146,7 @@ void Player::ApplyAreaTempItems(bool apply)
                     _ApplyItemMods(dscItem, i, false);
 
                 _ApplyItemMods(_AreaTempItems[i], i, true);
-                ChatHandler(GetSession()).PSendSysMessage("¼ÓÔØÇøÓò×°±¸%s..", sCF->GetItemLink(_AreaTempItems[i]->GetEntry()).c_str());
+                ChatHandler(GetSession()).PSendSysMessage("åŠ è½½åŒºåŸŸè£…å¤‡%s..", sCF->GetItemLink(_AreaTempItems[i]->GetEntry()).c_str());
             }
         }
     }
@@ -159,7 +158,7 @@ void Player::ApplyAreaTempItems(bool apply)
             {
                 SetVisibleItemSlot(i, NULL);
                 _ApplyItemMods(_AreaTempItems[i], i, false);
-                ChatHandler(GetSession()).PSendSysMessage("Ð¶ÔØÇøÓò×°±¸%s..", sCF->GetItemLink(_AreaTempItems[i]->GetEntry()).c_str());
+                ChatHandler(GetSession()).PSendSysMessage("å¸è½½åŒºåŸŸè£…å¤‡%s..", sCF->GetItemLink(_AreaTempItems[i]->GetEntry()).c_str());
 
                 if (Item* dscItem = GetItemByPos(INVENTORY_SLOT_BAG_0, i))
                 {

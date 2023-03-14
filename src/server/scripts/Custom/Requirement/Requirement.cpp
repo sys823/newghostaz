@@ -1,4 +1,3 @@
-﻿#pragma execution_character_set("utf-8")
 #include "../CommonFunc/CommonFunc.h"
 #include "../HonorRank/HonorRank.h"
 #include "../Requirement/Requirement.h"

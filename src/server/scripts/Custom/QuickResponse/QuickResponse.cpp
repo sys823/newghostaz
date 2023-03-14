@@ -1,10 +1,8 @@
-#pragma execution_character_set("utf-8")
 #include "QuickResponse.h"
 #include "../CommonFunc/CommonFunc.h"
 #include "../Reward/Reward.h"
 #include "../Switch/Switch.h"
 #include "../CustomEvent/Event.h"
-
 std::vector<QuickResponseTemplate> QuickResponseVec;
 std::vector<uint32/*guid*/> QuickResponsePlayerVec;
 std::vector<uint32 /*guid*/> CorrectResponsePlayerVec;
@@ -14,7 +12,7 @@ void QuickResponse::Load()
 {
 	QuickResponseVec.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT Ω±¿¯ƒ£∞ÂID,Œ Ã‚Œƒ±æ,’˝»∑—°œÓ,—°œÓA,—°œÓB,—°œÓC,—°œÓD FROM __«¿¥" :
+		"SELECT Â•ñÂä±Ê®°ÊùøID,ÈóÆÈ¢òÊñáÊú¨,Ê≠£Á°ÆÈÄâÈ°π,ÈÄâÈ°πA,ÈÄâÈ°πB,ÈÄâÈ°πC,ÈÄâÈ°πD FROM __Êä¢Á≠î" :
 		"SELECT rewId,question,correctAnswer,answerA,answerB,answerC,answerD FROM _quick_response");
 	if (!result) return;
 	do
@@ -31,7 +29,7 @@ void QuickResponse::Load()
 		QuickResponseVec.push_back(Temp);
 	} while (result->NextRow());
 
-	//≥ı ºªØ
+	//ÂàùÂßãÂåñ
 	SetAnswerFlag(true);
 	SetAnswer("A");
 	SetRewId(0);
@@ -54,34 +52,34 @@ void QuickResponse::Anounce()
 			SetRewId(QuickResponseVec[i].rewId);
 
 			std::ostringstream ossQuestion;
-			ossQuestion << "|cFFFF1717[«¿¥]|r " << QuickResponseVec[i].question;
+			ossQuestion << "|cFFFF1717[Êä¢Á≠î]|r " << QuickResponseVec[i].question;
 			sWorld->SendServerMessage(SERVER_MSG_STRING, ossQuestion.str().c_str());
 
 			if (!QuickResponseVec[i].answerA.empty())
 			{
 				std::ostringstream oss;
-				oss << "|cFFFF1717[«¿¥]|r " << "[ A ] " << QuickResponseVec[i].answerA;
+				oss << "|cFFFF1717[Êä¢Á≠î]|r " << "[ A ] " << QuickResponseVec[i].answerA;
 				sWorld->SendServerMessage(SERVER_MSG_STRING, oss.str().c_str());
 			}
 
 			if (!QuickResponseVec[i].answerB.empty())
 			{
 				std::ostringstream oss;
-				oss << "|cFFFF1717[«¿¥]|r " << "[ B ] " << QuickResponseVec[i].answerB;
+				oss << "|cFFFF1717[Êä¢Á≠î]|r " << "[ B ] " << QuickResponseVec[i].answerB;
 				sWorld->SendServerMessage(SERVER_MSG_STRING, oss.str().c_str());
 			}
 
 			if (!QuickResponseVec[i].answerC.empty())
 			{
 				std::ostringstream oss;
-				oss << "|cFFFF1717[«¿¥]|r " << "[ C ] " << QuickResponseVec[i].answerC;
+				oss << "|cFFFF1717[Êä¢Á≠î]|r " << "[ C ] " << QuickResponseVec[i].answerC;
 				sWorld->SendServerMessage(SERVER_MSG_STRING, oss.str().c_str());
 			}
 
 			if (!QuickResponseVec[i].answerD.empty())
 			{
 				std::ostringstream oss;
-				oss << "|cFFFF1717[«¿¥]|r " << "[ D ] " << QuickResponseVec[i].answerD;
+				oss << "|cFFFF1717[Êä¢Á≠î]|r " << "[ D ] " << QuickResponseVec[i].answerD;
 				sWorld->SendServerMessage(SERVER_MSG_STRING, oss.str().c_str());
 			}
 			break;
@@ -106,7 +104,7 @@ void QuickResponse::Reward()
 			std::ostringstream oss;
 			std::string nameLink, nameLinkWithColor;
 			sCF->GetNameLink(pl, nameLink, nameLinkWithColor);
-			oss << "|cFFFF1717[«¿¥]|r " << nameLinkWithColor << "«¿¥’˝»∑,’Ê «≤≈∏ﬂ∞À∂∑£°";
+			oss << "|cFFFF1717[Êä¢Á≠î]|r " << nameLinkWithColor << "Êä¢Á≠îÊ≠£Á°Æ,ÁúüÊòØÊâçÈ´òÂÖ´ÊñóÔºÅ";
 			sWorld->SendServerMessage(SERVER_MSG_STRING, oss.str().c_str());
 		}
 
@@ -132,13 +130,13 @@ public:
 		
 		if (!sGameEventMgr->IsActiveEvent(EVENT_ID_QUICK_RESPONSE) || sQuickResponse->GetAnswerFlag())
 		{
-			player->GetSession()->SendAreaTriggerMessage("|cFFFF1717[«¿¥]|r “—Ω· ¯£°");
+			player->GetSession()->SendAreaTriggerMessage("|cFFFF1717[Êä¢Á≠î]|r Â∑≤ÁªìÊùüÔºÅ");
 			return true;
 		}
 
 		if (std::find(QuickResponsePlayerVec.begin(), QuickResponsePlayerVec.end(), player->GetGUIDLow()) != QuickResponsePlayerVec.end())
 		{
-			player->GetSession()->SendAreaTriggerMessage("|cFFFF1717[«¿¥]|r Ω˚÷π÷ÿ∏¥¥Ã‚£°");
+			player->GetSession()->SendAreaTriggerMessage("|cFFFF1717[Êä¢Á≠î]|r Á¶ÅÊ≠¢ÈáçÂ§çÁ≠îÈ¢òÔºÅ");
 			return true;
 		}
 		
@@ -148,7 +146,7 @@ public:
 
 		if (strcmp(answer.c_str(), "A") != 0 && strcmp(answer.c_str(), "B") != 0 && strcmp(answer.c_str(), "C") != 0 && strcmp(answer.c_str(), "D") != 0)
 		{
-			ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[«¿¥]|r ’˝»∑¥Ã‚∏Ò ΩŒ™£∫.qd A ªÚ .qd a");
+			ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[Êä¢Á≠î]|r Ê≠£Á°ÆÁ≠îÈ¢òÊ†ºÂºè‰∏∫Ôºö.qd A Êàñ .qd a");
 			return true;
 		}
 

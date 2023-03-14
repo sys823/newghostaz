@@ -1,10 +1,9 @@
 /*
 
-ALTER TABLE _ai_creature CHANGE actionType actionType ENUM('¼¤»î»òÊ¹Ê§»î','Éè¶¨½×¶Î','ÊÍ·Å¼¼ÄÜ','ÒÆ¶¯·¶Î§','ÕÙ»½','Ëµ»°','ÒÆ³ý') CHARSET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE _ai_creature CHANGE actionType actionType ENUM('æ¿€æ´»æˆ–ä½¿å¤±æ´»','è®¾å®šé˜¶æ®µ','é‡Šæ”¾æŠ€èƒ½','ç§»åŠ¨èŒƒå›´','å¬å”¤','è¯´è¯','ç§»é™¤') CHARSET utf8 COLLATE utf8_general_ci NOT NULL;
 ALTER TABLE _ai_creature ADD COLUMN actionParam3 INT(11) DEFAULT 0 NOT NULL AFTER actionParam2, DROP PRIMARY KEY, ADD PRIMARY KEY (entry, eventType, eventPhase, delayTime, repeatMinTime, repeatMaxTime, actionType, actionParam1, actionParam2, actionParam3);
 */
 
-#pragma execution_character_set("utf-8")
 #include "CustomScripts.h"
 #include "ObjectMgr.h"
 #include "../CustomEvent/Event.h"
@@ -21,7 +20,7 @@ void CustomScript::LoadCreautreScripts()
 	CreatureScriptVec.clear();
 	
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
-		"SELECT ÉúÎïID,ÊÂ¼þÀàÐÍ,ÊÂ¼þ½×¶ÎID,×îÐ¡ÖØ¸´Ê±¼ä,×î´óÖØ¸´Ê±¼ä,¶¯×÷ÀàÐÍ,¶¯×÷²ÎÊý1,¶¯×÷²ÎÊý2,ÑÓ³ÙÊ±¼ä,¶¯×÷²ÎÊý3 FROM _×Ô¶¨ÒåAI_ÉúÎï" :
+		"SELECT ç”Ÿç‰©ID,äº‹ä»¶ç±»åž‹,äº‹ä»¶é˜¶æ®µID,æœ€å°é‡å¤æ—¶é—´,æœ€å¤§é‡å¤æ—¶é—´,åŠ¨ä½œç±»åž‹,åŠ¨ä½œå‚æ•°1,åŠ¨ä½œå‚æ•°2,å»¶è¿Ÿæ—¶é—´,åŠ¨ä½œå‚æ•°3 FROM _è‡ªå®šä¹‰AI_ç”Ÿç‰©" :
 		"SELECT entry,eventType,eventPhase,repeatMinTime,repeatMaxTime,actionType,actionParam1,actionParam2,delayTime,actionParam3 FROM _ai_creature"))
 	{
 		do
@@ -33,23 +32,23 @@ void CustomScript::LoadCreautreScripts()
 
 			const char*  str1 = fields[1].GetCString();
 
-			if (strcmp("½øÈëÕ½¶·", str1) == 0)
+			if (strcmp("è¿›å…¥æˆ˜æ–—", str1) == 0)
 				Temp.eventType = EVENT_TYPE_COMBAT;
-			else if (strcmp("É±ËÀÍæ¼Ò", str1) == 0)
+			else if (strcmp("æ€æ­»çŽ©å®¶", str1) == 0)
 				Temp.eventType = EVENT_TYPE_KILL;
-			else if (strcmp("¹ÖÎïËÀÍö", str1) == 0)
+			else if (strcmp("æ€ªç‰©æ­»äº¡", str1) == 0)
 				Temp.eventType = EVENT_TYPE_DIED;
-			else if (strcmp("ÑªÁ¿µÍÓÚ90%", str1) == 0)
+			else if (strcmp("è¡€é‡ä½ŽäºŽ90%", str1) == 0)
 				Temp.eventType = EVENT_TYPE_HP_90;
-			else if (strcmp("ÑªÁ¿µÍÓÚ75%", str1) == 0)
+			else if (strcmp("è¡€é‡ä½ŽäºŽ75%", str1) == 0)
 				Temp.eventType = EVENT_TYPE_HP_75;
-			else if (strcmp("ÑªÁ¿µÍÓÚ50%", str1) == 0)
+			else if (strcmp("è¡€é‡ä½ŽäºŽ50%", str1) == 0)
 				Temp.eventType = EVENT_TYPE_HP_50;
-			else if (strcmp("ÑªÁ¿µÍÓÚ25%", str1) == 0)
+			else if (strcmp("è¡€é‡ä½ŽäºŽ25%", str1) == 0)
 				Temp.eventType = EVENT_TYPE_HP_25;
-			else if (strcmp("ÑªÁ¿µÍÓÚ10%", str1) == 0)
+			else if (strcmp("è¡€é‡ä½ŽäºŽ10%", str1) == 0)
 				Temp.eventType = EVENT_TYPE_HP_10;
-			else if (strcmp("ÖØÖÃAI", str1) == 0)
+			else if (strcmp("é‡ç½®AI", str1) == 0)
 				Temp.eventType = EVENT_TYPE_RESET;
 			else
 				Temp.eventType = EVENT_TYPE_NONE;
@@ -61,19 +60,20 @@ void CustomScript::LoadCreautreScripts()
 
 			const char* str2 = fields[5].GetCString();
 
-			if (strcmp("ÊÍ·Å¼¼ÄÜ", str2) == 0)
+
+			if (strcmp("é‡Šæ”¾æŠ€èƒ½", str2) == 0)
 				Temp.actionType = ACTION_TYPE_CAST_SPELL;
-			else if (strcmp("¼¤»î»òÊ¹Ê§»î", str2) == 0)
+			else if (strcmp("æ¿€æ´»æˆ–ä½¿å¤±æ´»", str2) == 0)
 				Temp.actionType = ACTION_TYPE_ACTIVE_OR_DEACTIVE_OBJECT;
-			else if (strcmp("Éè¶¨½×¶Î", str2) == 0)
+			else if (strcmp("è®¾å®šé˜¶æ®µ", str2) == 0)
 				Temp.actionType = ACTION_TYPE_ALT_PHASE;
-			else if (strcmp("Ëµ»°", str2) == 0)
+			else if (strcmp("è¯´è¯", str2) == 0)
 				Temp.actionType = ACTION_TYPE_TALK;
-			else if (strcmp("ÕÙ»½", str2) == 0)
+			else if (strcmp("å¬å”¤", str2) == 0)
 				Temp.actionType = ACTION_TYPE_SUMMON;
-			else if (strcmp("×ª»»", str2) == 0)
+			else if (strcmp("è½¬æ¢", str2) == 0)
 				Temp.actionType = ACTION_TYPE_ALT_GOB;
-			else if (strcmp("ÒÆ¶¯·¶Î§", str2) == 0)
+			else if (strcmp("ç§»åŠ¨èŒƒå›´", str2) == 0)
 				Temp.actionType = ACTION_TYPE_MOVE_RANDOM;
 			else
 				Temp.actionType = ACTION_TYPE_NONE;
@@ -108,7 +108,7 @@ void CustomScript::LoadCreautreScripts()
 	AIRandSpellVec.clear();
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT Ëæ»ú¼¼ÄÜ×éID,¼¼ÄÜID,ÊÍ·ÅÏÂÒ»¼¼ÄÜ×îÐ¡ÑÓ³Ù,ÊÍ·ÅÏÂÒ»¼¼ÄÜ×î´óÑÓ³Ù FROM _Ä£°å_Ëæ»ú¼¼ÄÜ×é" :
+		"SELECT éšæœºæŠ€èƒ½ç»„ID,æŠ€èƒ½ID,é‡Šæ”¾ä¸‹ä¸€æŠ€èƒ½æœ€å°å»¶è¿Ÿ,é‡Šæ”¾ä¸‹ä¸€æŠ€èƒ½æœ€å¤§å»¶è¿Ÿ FROM _æ¨¡æ¿_éšæœºæŠ€èƒ½ç»„" :
 		"SELECT GroupId,SpellId,MinDelayTime,MaxDelayTime FROM _ai_random_spell_group"))
 	{
 		do

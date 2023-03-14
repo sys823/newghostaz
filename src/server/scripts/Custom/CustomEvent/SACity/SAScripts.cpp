@@ -1,8 +1,6 @@
-#pragma execution_character_set("utf-8")
 #include "BattlegroundSA.h"
 #include "SA.h"
 #include "../Event.h"
-
 #define GATE_1_R	450011
 #define GATE_1_L	450013
 #define GATE_2_R	450012
@@ -124,7 +122,7 @@ public:
 			case EVENT_NOTICE:
 			{
 				std::ostringstream oss;
-				oss <<  "[½©Ê¬Î§³Ç]½©Ê¬Á½·ÖÖÓºó³öÏÖ£¬Çë×öºÃ×¼±¸£¡";
+				oss <<  "[åƒµå°¸å›´åŸŽ]åƒµå°¸ä¸¤åˆ†é’ŸåŽå‡ºçŽ°ï¼Œè¯·åšå¥½å‡†å¤‡ï¼";
 				sWorld->SendScreenMessage(oss.str().c_str());
 			}
 			break;

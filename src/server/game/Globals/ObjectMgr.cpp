@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -2412,7 +2412,7 @@ void ObjectMgr::LoadItemTemplates()
         itemTemplate.MinMoneyLoot            = fields[135].GetUInt32();
         itemTemplate.MaxMoneyLoot            = fields[136].GetUInt32();
         itemTemplate.FlagsCu                 = fields[137].GetUInt32();
-
+        itemTemplate.jfcost = 0;
         // Checks
         if (itemTemplate.Class >= MAX_ITEM_CLASS)
         {
@@ -2843,6 +2843,11 @@ void ObjectMgr::LoadItemTemplates()
 }
 
 ItemTemplate const* ObjectMgr::GetItemTemplate(uint32 entry)
+{
+    return entry < _itemTemplateStoreFast.size() ? _itemTemplateStoreFast[entry] : nullptr;
+}
+
+ItemTemplate * ObjectMgr::GetItemTemplateS(uint32 entry)
 {
     return entry < _itemTemplateStoreFast.size() ? _itemTemplateStoreFast[entry] : nullptr;
 }
@@ -8350,6 +8355,26 @@ void ObjectMgr::LoadVendors()
             VendorItemData& vList = _cacheVendorItemStore[entry];
 
             vList.AddItem(item_id, maxcount, incrtime, ExtendedCost);
+            if (ExtendedCost)
+            {
+                ItemTemplate * pItemProto = sObjectMgr->GetItemTemplateS(item_id);
+                if (pItemProto)
+                {
+                    ItemExtendedCostEntry const* iece = sItemExtendedCostStore.LookupEntry(ExtendedCost);
+                    if (iece)
+                    {
+                        for (uint8 i = 0; i < MAX_ITEM_EXTENDED_COST_REQUIREMENTS; ++i)
+                        {
+                            if (iece->reqitem[i] == 55005)
+                            {
+                                pItemProto->SetJfCost(iece->reqitemcount[i]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
             ++count;
         }
     }

@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "../PrecompiledHeaders/ScriptPCH.h"
 #include "../DataLoader/DataLoader.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -55,16 +54,16 @@ void ItemMod::AddWeaponPermList(Player* player, Item* item)
 	std::ostringstream ossCurrEnchant;
 	
 	if (currEnchantId)
-		ossCurrEnchant << "[µ±Ç°£º" << GetItemEnchantDescription(player, currEnchantId) << "]";
+		ossCurrEnchant << "[å½“å‰ï¼š" << GetItemEnchantDescription(player, currEnchantId) << "]";
 		
 	if (undefineEnchant && currEnchantId)
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, ossCurrEnchant.str(), senderValue(PERM_ENCHANTMENT_SLOT, currEnchantId), ACTION_REMOVE_ENCHANT_UNDEFINE, "ÒÆ³ı¹âĞ§", DEFAULT_REMOVE_ENCHANT_GOLDS * GOLD, 0);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, ossCurrEnchant.str(), senderValue(PERM_ENCHANTMENT_SLOT, currEnchantId), ACTION_REMOVE_ENCHANT_UNDEFINE, "ç§»é™¤å…‰æ•ˆ", DEFAULT_REMOVE_ENCHANT_GOLDS * GOLD, 0);
 
 	if (!undefineEnchant && currEnchantId)
 		for (uint32 i = 0; i < len; i++)
 			if (currEnchantId == FilterVec[i].enchantId)
 			{
-				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, ossCurrEnchant.str(), senderValue(PERM_ENCHANTMENT_SLOT, currEnchantId), ACTION_ITEM_REMOVE_ENCHANT, "ÒÆ³ı¹âĞ§" + sCF->GetItemLink(item->GetEntry()), 0, 0);
+				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, ossCurrEnchant.str(), senderValue(PERM_ENCHANTMENT_SLOT, currEnchantId), ACTION_ITEM_REMOVE_ENCHANT, "ç§»é™¤å…‰æ•ˆ" + sCF->GetItemLink(item->GetEntry()), 0, 0);
 				break;
 			}
 
@@ -77,9 +76,9 @@ void ItemMod::AddWeaponPermList(Player* player, Item* item)
 		if (player->rowId >= MAX_ROWS_COUNT)
 		{
 			player->rowId = 0;
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ÏÂÒ³", GOSSIP_SENDER_MAIN, ACTION_WEAPON_PERMENCHANT_NEXT_MENU_SHOW);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ä¸‹é¡µ", GOSSIP_SENDER_MAIN, ACTION_WEAPON_PERMENCHANT_NEXT_MENU_SHOW);
 			if (player->pageId >= 2)
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ÉÏÒ³", GOSSIP_SENDER_MAIN, ACTION_PREV_PAGE);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ä¸Šé¡µ", GOSSIP_SENDER_MAIN, ACTION_PREV_PAGE);
 			break;
 		}
 	}
@@ -88,10 +87,10 @@ void ItemMod::AddWeaponPermList(Player* player, Item* item)
 	{
 		player->flag_i = player->flag_i + MAX_ROWS_COUNT - player->rowId;
 		player->rowId = 0;
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ÉÏÒ³", GOSSIP_SENDER_MAIN, ACTION_PREV_PAGE);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "ä¸Šé¡µ", GOSSIP_SENDER_MAIN, ACTION_PREV_PAGE);
 	}
 
-	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "·µ»Ø", GOSSIP_SENDER_MAIN, ACTION_MAINMENU_BACK);
+	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "è¿”å›", GOSSIP_SENDER_MAIN, ACTION_MAINMENU_BACK);
 	player->PlayerTalkClass->GetGossipMenu().SetMenuId(MENU_ID);
 	player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, player->GetGUID());
 }
@@ -109,10 +108,10 @@ void ItemMod::LookupOrBuyWeaponPermEnchant(Player* player, Item* item, uint32 se
 			break;
 		}
 
-	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "¹ºÂò", sender, ACTION_WEAPONPERM_BUY, sReq->Notice(player, reqId, sCF->GetItemLink(item->GetEntry()), "¸½¼Ó¹âĞ§"), sReq->Golds(reqId), 0);
-	//HasPermEchant(item) ? player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "²é¿´", sender, ACTION_WEAPONPERM_LOOKUP, "½«»áÒÆ³ıµ±Ç°ÎäÆ÷¹âĞ§£¬È·¶¨Âğ£¿", 0, 0) : 
-	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "²é¿´", sender, ACTION_WEAPONPERM_LOOKUP);
-	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "·µ»Ø", GOSSIP_SENDER_MAIN, ACTION_WEAPON_PERMENCHANT_CURR_MENU_SHOW);
+	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "è´­ä¹°", sender, ACTION_WEAPONPERM_BUY, sReq->Notice(player, reqId, sCF->GetItemLink(item->GetEntry()), "é™„åŠ å…‰æ•ˆ"), sReq->Golds(reqId), 0);
+	//HasPermEchant(item) ? player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "æŸ¥çœ‹", sender, ACTION_WEAPONPERM_LOOKUP, "å°†ä¼šç§»é™¤å½“å‰æ­¦å™¨å…‰æ•ˆï¼Œç¡®å®šå—ï¼Ÿ", 0, 0) : 
+	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æŸ¥çœ‹", sender, ACTION_WEAPONPERM_LOOKUP);
+	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "è¿”å›", GOSSIP_SENDER_MAIN, ACTION_WEAPON_PERMENCHANT_CURR_MENU_SHOW);
 	player->PlayerTalkClass->GetGossipMenu().SetMenuId(MENU_ID);
 	player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, player->GetGUID());
 }
@@ -123,7 +122,7 @@ void ItemMod::LookupWeaponPermEnchant(Player* player, Item* item, uint32 enchant
 {
 	if (!item->IsEquipped())
 	{
-		ChatHandler(player->GetSession()).PSendSysMessage("ÇëÏÈ×°±¸Õâ¼şÎäÆ÷!");
+		ChatHandler(player->GetSession()).PSendSysMessage("è¯·å…ˆè£…å¤‡è¿™ä»¶æ­¦å™¨!");
 		return;
 	}
 
@@ -136,10 +135,11 @@ void ItemMod::LookupWeaponPermEnchant(Player* player, Item* item, uint32 enchant
 			reqId = FilterVec[i].enchantReqId;
 			break;
 		}
-	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "¹ºÂò", enchantId, ACTION_WEAPONPERM_BUY, sReq->Notice(player, reqId, sCF->GetItemLink(item->GetEntry()), "¸½¼Ó¹âĞ§"), sReq->Golds(reqId), 0);
-	//HasPermEchant(item) ? player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "²é¿´", enchantId, ACTION_WEAPONPERM_LOOKUP, "½«»áÒÆ³ıµ±Ç°ÎäÆ÷¹âĞ§£¬È·¶¨Âğ£¿", 0, 0) : 
-	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "²é¿´", enchantId, ACTION_WEAPONPERM_LOOKUP);
-	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "·µ»Ø", GOSSIP_SENDER_MAIN, ACTION_WEAPON_PERMENCHANT_CURR_MENU_SHOW);
+
+	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "è´­ä¹°", enchantId, ACTION_WEAPONPERM_BUY, sReq->Notice(player, reqId, sCF->GetItemLink(item->GetEntry()), "é™„åŠ å…‰æ•ˆ"), sReq->Golds(reqId), 0);
+	//HasPermEchant(item) ? player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "æŸ¥çœ‹", enchantId, ACTION_WEAPONPERM_LOOKUP, "å°†ä¼šç§»é™¤å½“å‰æ­¦å™¨å…‰æ•ˆï¼Œç¡®å®šå—ï¼Ÿ", 0, 0) : 
+	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æŸ¥çœ‹", enchantId, ACTION_WEAPONPERM_LOOKUP);
+	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "è¿”å›", GOSSIP_SENDER_MAIN, ACTION_WEAPON_PERMENCHANT_CURR_MENU_SHOW);
 	player->PlayerTalkClass->GetGossipMenu().SetMenuId(MENU_ID);
 	player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, player->GetGUID());
 
@@ -162,7 +162,7 @@ void ItemMod::LookupWeaponPermEnchant(Player* player, Item* item, uint32 enchant
 	player->ApplyEnchantment(item, PERM_ENCHANTMENT_SLOT, false);
 	item->SetEnchantment(PERM_ENCHANTMENT_SLOT, enchantId, LOOKUP_WEAPON_PERM_SECONDS * IN_MILLISECONDS, 0);
 	player->ApplyEnchantment(item, PERM_ENCHANTMENT_SLOT, true);
-	ChatHandler(player->GetSession()).PSendSysMessage("¹âĞ§½«ÔÚ%dºó»òÖØĞÂ´ò¿ª²Ëµ¥Ê±ÏûÊ§£¡", LOOKUP_WEAPON_PERM_SECONDS);
+	ChatHandler(player->GetSession()).PSendSysMessage("å…‰æ•ˆå°†åœ¨%dåæˆ–é‡æ–°æ‰“å¼€èœå•æ—¶æ¶ˆå¤±ï¼", LOOKUP_WEAPON_PERM_SECONDS);
 
 	player->isInLookupPermEnchant = true;
 	player->lookupPermEnchantTimer = 0;
@@ -190,7 +190,7 @@ void ItemMod::BuyWeaponPermEnchant(Player* player, Item* item, uint32 enchantId)
 		sReq->Des(player, reqId);
 		player->CLOSE_GOSSIP_MENU();
 		
-		//¹ºÂò¹ıFMµÄ item ½«´ÓvecÖĞÉ¾³ı£¬ÕâÑùµÈ²é¿´½áÊøºó½«²»»áÉ¾³ıFMĞ§¹û
+		//è´­ä¹°è¿‡FMçš„ item å°†ä»vecä¸­åˆ é™¤ï¼Œè¿™æ ·ç­‰æŸ¥çœ‹ç»“æŸåå°†ä¸ä¼šåˆ é™¤FMæ•ˆæœ
 		for (std::vector<weapontemplate>::iterator itr = player->WeaponVec.begin(); itr != player->WeaponVec.end();)
 		{
 			if (itr->item == item)

@@ -1,18 +1,14 @@
-
 #include "SoulStone.h"
 #include "Object.h"
 #include "../GCAddon/GCAddon.h"
 #include "../CommonFunc/CommonFunc.h"
 
 
-#pragma execution_character_set("UTF-8")
-
-
 void SoulStone::Load()
 {
     _SoulStonePlayerDataMap.clear();
 
-    QueryResult result = WorldDatabase.PQuery("SELECT Íæ¼ÒGUID,Ò³Ãæ,²å²Û1ÎïÆ·ID,²å²Û2ÎïÆ·ID,²å²Û3ÎïÆ·ID,²å²Û4ÎïÆ·ID,²å²Û5ÎïÆ·ID,²å²Û6ÎïÆ·ID,ÊÇ·ñ¼¤»îÒ³ÃæÊôĞÔ FROM Íæ¼Ò»êÓñ¼ÇÂ¼±í");
+    QueryResult result = WorldDatabase.PQuery("SELECT ç©å®¶GUID,é¡µé¢,æ’æ§½1ç‰©å“ID,æ’æ§½2ç‰©å“ID,æ’æ§½3ç‰©å“ID,æ’æ§½4ç‰©å“ID,æ’æ§½5ç‰©å“ID,æ’æ§½6ç‰©å“ID,æ˜¯å¦æ¿€æ´»é¡µé¢å±æ€§ FROM ç©å®¶é­‚ç‰è®°å½•è¡¨");
 
     if (result)
     {
@@ -37,12 +33,12 @@ void SoulStone::Load()
             ++count;
 
         } while (result->NextRow());
-        sLog->outString("======¼ÓÔØÍæ¼Ò»êÓñ¼ÇÂ¼±í %u ÌõÊı¾İ======", count);
+        sLog->outString("======åŠ è½½ç©å®¶é­‚ç‰è®°å½•è¡¨ %u æ¡æ•°æ®======", count);
     }
 
     _SoulStoneBuyReqDataMap.clear();
 
-    QueryResult results = WorldDatabase.PQuery("SELECT Ò³Ãæ,ĞèÇóÎïÆ·1,ÊıÁ¿1,ĞèÇóÎïÆ·2,ÊıÁ¿2,ĞèÇóÎïÆ·3,ÊıÁ¿3,ĞèÇóÎïÆ·4,ÊıÁ¿4,ĞèÇóÎïÆ·5,ÊıÁ¿5,VIP,¾üÏÎ,×ªÉú,¶·ÆøÖµ,½ğ±Ò,¼¤»î¸øÓèBUFFµÄÎïÆ·ID FROM »êÓñÒ³Ãæ¹ºÂòĞèÇó¼¤»î±í");
+    QueryResult results = WorldDatabase.PQuery("SELECT é¡µé¢,éœ€æ±‚ç‰©å“1,æ•°é‡1,éœ€æ±‚ç‰©å“2,æ•°é‡2,éœ€æ±‚ç‰©å“3,æ•°é‡3,éœ€æ±‚ç‰©å“4,æ•°é‡4,éœ€æ±‚ç‰©å“5,æ•°é‡5,VIP,å†›è¡”,è½¬ç”Ÿ,æ–—æ°”å€¼,é‡‘å¸,æ¿€æ´»ç»™äºˆBUFFçš„ç‰©å“ID FROM é­‚ç‰é¡µé¢è´­ä¹°éœ€æ±‚æ¿€æ´»è¡¨");
 
     if (results)
     {
@@ -76,12 +72,12 @@ void SoulStone::Load()
             ++count;
 
         } while (results->NextRow());
-        sLog->outString("======¼ÓÔØ»êÓñÒ³Ãæ¹ºÂòĞèÇó¼¤»î±í %u ÌõÊı¾İ======", count);
+        sLog->outString("======åŠ è½½é­‚ç‰é¡µé¢è´­ä¹°éœ€æ±‚æ¿€æ´»è¡¨ %u æ¡æ•°æ®======", count);
     }
 
     _SoulStoneItemTypeMap.clear();
 
-	QueryResult resultss = WorldDatabase.PQuery("SELECT ÎïÆ·ID,ÎïÆ·ÀàĞÍID,Ò³Êı FROM »êÓñÀàĞÍ±í");
+	QueryResult resultss = WorldDatabase.PQuery("SELECT ç‰©å“ID,ç‰©å“ç±»å‹ID,é¡µæ•° FROM é­‚ç‰ç±»å‹è¡¨");
 
 	if (resultss)
 	{
@@ -101,10 +97,10 @@ void SoulStone::Load()
 			++count;
 
 		} while (resultss->NextRow());
-		sLog->outString("======¼ÓÔØ»êÓñÀàĞÍ±í %u ÌõÊı¾İ======", count);
+		sLog->outString("======åŠ è½½é­‚ç‰ç±»å‹è¡¨ %u æ¡æ•°æ®======", count);
 	}
 
-	QueryResult resultssss = WorldDatabase.PQuery("SELECT ²ÎÊı FROM __Í¨ÓÃÅäÖÃ WHERE ID = 100");
+	QueryResult resultssss = WorldDatabase.PQuery("SELECT å‚æ•° FROM __é€šç”¨é…ç½® WHERE ID = 100");
 
 	if (resultssss)
 	{
@@ -112,12 +108,12 @@ void SoulStone::Load()
 		Field * fields = resultssss->Fetch();
 		limitpageval = uint32(atoi(fields[0].GetString().c_str()));
 
-		sLog->outString("=======»êÓñ£¨¹Ì¶¨¼¤»î°æ£©³õÊ¼»¯Ò³ÃæÊıÁ¿Îª£º%d", limitpageval);
+		sLog->outString("=======é­‚ç‰ï¼ˆå›ºå®šæ¿€æ´»ç‰ˆï¼‰åˆå§‹åŒ–é¡µé¢æ•°é‡ä¸ºï¼š%d", limitpageval);
 	}
 
 }
 
-//ÖØÔØ 
+//é‡è½½ 
 void SoulStone::ReLoad()
 {
     Load();
@@ -209,7 +205,7 @@ void SoulStone::SavePlayerAllDate(Player * player)
 			if (itr->second.page == 0)
 				continue;
 
-            WorldDatabase.PExecute("REPLACE INTO Íæ¼Ò»êÓñ¼ÇÂ¼±í(Íæ¼ÒGUID,Ò³Ãæ,²å²Û1ÎïÆ·ID,²å²Û2ÎïÆ·ID,²å²Û3ÎïÆ·ID,²å²Û4ÎïÆ·ID,²å²Û5ÎïÆ·ID,²å²Û6ÎïÆ·ID,ÊÇ·ñ¼¤»îÒ³ÃæÊôĞÔ)VALUES(%u,%u,%u,%u,%u,%u,%u,%u,%u)", itr->second.guid, itr->second.page, itr->second.itemid1, itr->second.itemid2, itr->second.itemid3, itr->second.itemid4, itr->second.itemid5, itr->second.itemid6, itr->second.itemid7);
+            WorldDatabase.PExecute("REPLACE INTO ç©å®¶é­‚ç‰è®°å½•è¡¨(ç©å®¶GUID,é¡µé¢,æ’æ§½1ç‰©å“ID,æ’æ§½2ç‰©å“ID,æ’æ§½3ç‰©å“ID,æ’æ§½4ç‰©å“ID,æ’æ§½5ç‰©å“ID,æ’æ§½6ç‰©å“ID,æ˜¯å¦æ¿€æ´»é¡µé¢å±æ€§)VALUES(%u,%u,%u,%u,%u,%u,%u,%u,%u)", itr->second.guid, itr->second.page, itr->second.itemid1, itr->second.itemid2, itr->second.itemid3, itr->second.itemid4, itr->second.itemid5, itr->second.itemid6, itr->second.itemid7);
         }
     }
 }
@@ -307,22 +303,22 @@ void SoulStone::SavePlayerSlotToBase(Player * player, uint32 page, uint32 slot, 
                 switch (slot)
                 {
                 case 1:
-                    WorldDatabase.PExecute("REPLACE INTO Íæ¼Ò»êÓñ¼ÇÂ¼±í(Íæ¼ÒGUID,Ò³Ãæ,²å²Û1ÎïÆ·ID)VALUES(%u,%u,%u)", guid, page, itemid);
+                    WorldDatabase.PExecute("REPLACE INTO ç©å®¶é­‚ç‰è®°å½•è¡¨(ç©å®¶GUID,é¡µé¢,æ’æ§½1ç‰©å“ID)VALUES(%u,%u,%u)", guid, page, itemid);
                     return;
                 case 2:
-                    WorldDatabase.PExecute("REPLACE INTO Íæ¼Ò»êÓñ¼ÇÂ¼±í(Íæ¼ÒGUID,Ò³Ãæ,²å²Û2ÎïÆ·ID)VALUES(%u,%u,%u)", guid, page, itemid);
+                    WorldDatabase.PExecute("REPLACE INTO ç©å®¶é­‚ç‰è®°å½•è¡¨(ç©å®¶GUID,é¡µé¢,æ’æ§½2ç‰©å“ID)VALUES(%u,%u,%u)", guid, page, itemid);
                     return;
                 case 3:
-                    WorldDatabase.PExecute("REPLACE INTO Íæ¼Ò»êÓñ¼ÇÂ¼±í(Íæ¼ÒGUID,Ò³Ãæ,²å²Û3ÎïÆ·ID)VALUES(%u,%u,%u)", guid, page, itemid);
+                    WorldDatabase.PExecute("REPLACE INTO ç©å®¶é­‚ç‰è®°å½•è¡¨(ç©å®¶GUID,é¡µé¢,æ’æ§½3ç‰©å“ID)VALUES(%u,%u,%u)", guid, page, itemid);
                     return;
                 case 4:
-                    WorldDatabase.PExecute("REPLACE INTO Íæ¼Ò»êÓñ¼ÇÂ¼±í(Íæ¼ÒGUID,Ò³Ãæ,²å²Û4ÎïÆ·ID)VALUES(%u,%u,%u)", guid, page, itemid);
+                    WorldDatabase.PExecute("REPLACE INTO ç©å®¶é­‚ç‰è®°å½•è¡¨(ç©å®¶GUID,é¡µé¢,æ’æ§½4ç‰©å“ID)VALUES(%u,%u,%u)", guid, page, itemid);
                     return;
                 case 5:
-                    WorldDatabase.PExecute("REPLACE INTO Íæ¼Ò»êÓñ¼ÇÂ¼±í(Íæ¼ÒGUID,Ò³Ãæ,²å²Û5ÎïÆ·ID)VALUES(%u,%u,%u)", guid, page, itemid);
+                    WorldDatabase.PExecute("REPLACE INTO ç©å®¶é­‚ç‰è®°å½•è¡¨(ç©å®¶GUID,é¡µé¢,æ’æ§½5ç‰©å“ID)VALUES(%u,%u,%u)", guid, page, itemid);
                     return;
                 case 6:
-                    WorldDatabase.PExecute("REPLACE INTO Íæ¼Ò»êÓñ¼ÇÂ¼±í(Íæ¼ÒGUID,Ò³Ãæ,²å²Û6ÎïÆ·ID)VALUES(%u,%u,%u)", guid, page, itemid);
+                    WorldDatabase.PExecute("REPLACE INTO ç©å®¶é­‚ç‰è®°å½•è¡¨(ç©å®¶GUID,é¡µé¢,æ’æ§½6ç‰©å“ID)VALUES(%u,%u,%u)", guid, page, itemid);
                     return;
                 default:
                     break;
@@ -398,10 +394,10 @@ void SoulStone::AddOrRemovePlayerBuff(Player * player, uint32 itemid, uint32 old
 
 void SoulStone::PlayerBuyPage(Player * player, uint32 page)
 {
-    //Õâ¸öºÃÏñ²»ÄÜ·Åµ½ÕâÀï Òª·Åµ½ÅĞ¶¨ÊÇ·ñÓĞ¹ºÂòĞèÇóÄÇÀï Ê×Î»  È»ºóÕâÀï×îµ×ÏÂ »òĞíÒª·Å¸ö ·¢ËÍ¼¤»î²Ù×÷Âëµ½¿Í»§¶Ë
+    //è¿™ä¸ªå¥½åƒä¸èƒ½æ”¾åˆ°è¿™é‡Œ è¦æ”¾åˆ°åˆ¤å®šæ˜¯å¦æœ‰è´­ä¹°éœ€æ±‚é‚£é‡Œ é¦–ä½  ç„¶åè¿™é‡Œæœ€åº•ä¸‹ æˆ–è®¸è¦æ”¾ä¸ª å‘é€æ¿€æ´»æ“ä½œç åˆ°å®¢æˆ·ç«¯
     if (page > GetPlayerMaxPage(player) + 1)
     {
-        //ÌáÊ¾Òª°´Ë³Ğò¹ºÂòÒ³Ãæ
+        //æç¤ºè¦æŒ‰é¡ºåºè´­ä¹°é¡µé¢
         return;
     }
 
@@ -437,7 +433,7 @@ uint32 SoulStone::GetPlayerMaxPage(Player * player)
         if (itr->first == guid)
         {
             ++count;
-			sLog->outString("¶ÁÈ¡Íæ¼ÒÒ³ÃæÊı¾İ %d", itr->second.page);
+			sLog->outString("è¯»å–ç©å®¶é¡µé¢æ•°æ® %d", itr->second.page);
         }
     }
 
@@ -568,7 +564,7 @@ void SoulStone::SetActi(Player * player, uint32 page)
 
     uint32 Actiid = GetPageActi(page);
     //uint32 Actiid = GetExActiId(player,page);
-    //³¢ÊÔÔÚÕâ»ñµÃÀ©Õ¹ĞÔÒ³Ãæ¼¤»îID ¶ÔÓ¦Íæ¼Òguid  Ò³Ãæ ÒÔ¼° Ò³ÃæÄÚËùÓĞ1~6µÄÎïÆ·ID µÃµ½¼¤»îID
+    //å°è¯•åœ¨è¿™è·å¾—æ‰©å±•æ€§é¡µé¢æ¿€æ´»ID å¯¹åº”ç©å®¶guid  é¡µé¢ ä»¥åŠ é¡µé¢å†…æ‰€æœ‰1~6çš„ç‰©å“ID å¾—åˆ°æ¿€æ´»ID
 
     if (Actiid != 0)
     {
@@ -576,7 +572,7 @@ void SoulStone::SetActi(Player * player, uint32 page)
 
         if (!pProto)
         {
-            //¿ÉÒÔĞ´ÌáÊ¾Óï¾ä
+            //å¯ä»¥å†™æç¤ºè¯­å¥
             return;
         }
 
@@ -614,7 +610,7 @@ void SoulStone::RemoveActi(Player * player, uint32 page)
 
         if (!pProto)
         {
-            //¿ÉÒÔĞ´ÌáÊ¾Óï¾ä
+            //å¯ä»¥å†™æç¤ºè¯­å¥
             return;
         }
 
@@ -693,7 +689,7 @@ bool SoulStone::IsActi(Player * player, uint32 page)
 //
 //    if (!player || !pProto || !IfSoulStoneItem(itemid))
 //    {
-//        //ÌáÊ¾Î´ÖªÎÊÌâ 
+//        //æç¤ºæœªçŸ¥é—®é¢˜ 
 //        return;
 //    }
 //
@@ -701,7 +697,7 @@ bool SoulStone::IsActi(Player * player, uint32 page)
 //
 //	if (page > maxpage)
 //	{
-//		//ÌáÊ¾ÇëÎğ·Ç·¨Ê¹ÓÃ²å¼ş,²»ÄÜÊ¹ÓÃÎ´¹ºÂòµÄ»êÓñÒ³Ãæ
+//		//æç¤ºè¯·å‹¿éæ³•ä½¿ç”¨æ’ä»¶,ä¸èƒ½ä½¿ç”¨æœªè´­ä¹°çš„é­‚ç‰é¡µé¢
 //		return;
 //	}
 //
@@ -759,7 +755,7 @@ bool SoulStone::IsActi(Player * player, uint32 page)
 //    
 //    if (olditemid == 0)
 //    {
-//        ss << sCF->GetItemLink(itemid) << pProto->Name1.c_str() << "ÊÇ·ñÏâÇ¶µ½´Ë²å²Û?";
+//        ss << sCF->GetItemLink(itemid) << pProto->Name1.c_str() << "æ˜¯å¦é•¶åµŒåˆ°æ­¤æ’æ§½?";
 //        player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_VENDOR, "", GOSSIP_SENDER_SEC_SS, GOSSIP_ACTION_SS + 1, ss.str().c_str(), 0, false);
 //        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, player->GetGUID());
 //    }
@@ -767,7 +763,7 @@ bool SoulStone::IsActi(Player * player, uint32 page)
 //    {
 //        if (ItemTemplate const * pProt = sObjectMgr->GetItemTemplate(olditemid))
 //        {
-//            ss << sCF->GetItemLink(itemid) << pProto->Name1.c_str() << "ÊÇ·ñÌæ»»²å²ÛÄÚµÄ" <<sCF->GetItemLink(olditemid) << pProt->Name1.c_str();
+//            ss << sCF->GetItemLink(itemid) << pProto->Name1.c_str() << "æ˜¯å¦æ›¿æ¢æ’æ§½å†…çš„" <<sCF->GetItemLink(olditemid) << pProt->Name1.c_str();
 //            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_VENDOR, "", GOSSIP_SENDER_SEC_SS, GOSSIP_ACTION_SS + 2, ss.str().c_str(), 0, false);
 //            player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, player->GetGUID());
 //        }
@@ -793,7 +789,7 @@ void SoulStone::CanInSetToSlot(Player * player, uint32 page, uint32 slot, uint32
 
 	if (!player || !pProto || !IfSoulStoneItem(itemid))
 	{
-		//ÌáÊ¾Î´ÖªÎÊÌâ 
+		//æç¤ºæœªçŸ¥é—®é¢˜ 
 		return;
 	}
 
@@ -801,7 +797,7 @@ void SoulStone::CanInSetToSlot(Player * player, uint32 page, uint32 slot, uint32
 
 	if (page > maxpage)
 	{
-		//ÌáÊ¾ÇëÎğ·Ç·¨Ê¹ÓÃ²å¼ş,²»ÄÜÊ¹ÓÃÎ´¹ºÂòµÄ»êÓñÒ³Ãæ
+		//æç¤ºè¯·å‹¿éæ³•ä½¿ç”¨æ’ä»¶,ä¸èƒ½ä½¿ç”¨æœªè´­ä¹°çš„é­‚ç‰é¡µé¢
 		return;
 	}
 
@@ -816,7 +812,7 @@ void SoulStone::CanInSetToSlot(Player * player, uint32 page, uint32 slot, uint32
 	if (newitempage != page && newitempage != 0)
 	{
 		std::ostringstream sstr;
-		sstr << sCF->GetItemLink(itemid) << "´Ë»êÓñÖ»ÄÜÏâÇ¶ÔÚµÚ" << newitempage << "Ò³";
+		sstr << sCF->GetItemLink(itemid) << "æ­¤é­‚ç‰åªèƒ½é•¶åµŒåœ¨ç¬¬" << newitempage << "é¡µ";
 		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_VENDOR, "", GOSSIP_SENDER_SEC_SS_ERR, GOSSIP_ACTION_SS_ERR, sstr.str(), 0, false);
 		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, player->GetGUID());
 		return;
@@ -887,7 +883,7 @@ void SoulStone::CanInSetToSlot(Player * player, uint32 page, uint32 slot, uint32
 
 			if (send)
 			{
-				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_VENDOR, "", GOSSIP_SENDER_SEC_SS_ERR, GOSSIP_ACTION_SS_ERR, "µ±Ç°Ò³ÃæÖ»ÄÜÏâÇ¶Ò»¸ö´ËÀàĞÍ»êÓñ", 0, false);
+				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_VENDOR, "", GOSSIP_SENDER_SEC_SS_ERR, GOSSIP_ACTION_SS_ERR, "å½“å‰é¡µé¢åªèƒ½é•¶åµŒä¸€ä¸ªæ­¤ç±»å‹é­‚ç‰", 0, false);
 				player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, player->GetGUID());
 				return;
 			}
@@ -921,7 +917,7 @@ void SoulStone::CanInSetToSlot(Player * player, uint32 page, uint32 slot, uint32
 
 	if (olditemid == 0)
 	{
-		ss << sCF->GetItemLink(itemid) << pProto->Name1.c_str() << "ÊÇ·ñÏâÇ¶µ½´Ë²å²Û?";
+		ss << sCF->GetItemLink(itemid) << pProto->Name1.c_str() << "æ˜¯å¦é•¶åµŒåˆ°æ­¤æ’æ§½?";
 		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_VENDOR, "", GOSSIP_SENDER_SEC_SS, GOSSIP_ACTION_SS + 1, ss.str().c_str(), 0, false);
 		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, player->GetGUID());
 	}
@@ -929,7 +925,7 @@ void SoulStone::CanInSetToSlot(Player * player, uint32 page, uint32 slot, uint32
 	{
 		if (ItemTemplate const * pProt = sObjectMgr->GetItemTemplate(olditemid))
 		{
-			ss << sCF->GetItemLink(itemid) << pProto->Name1.c_str() << "ÊÇ·ñÌæ»»²å²ÛÄÚµÄ" << sCF->GetItemLink(olditemid) << pProt->Name1.c_str();
+			ss << sCF->GetItemLink(itemid) << pProto->Name1.c_str() << "æ˜¯å¦æ›¿æ¢æ’æ§½å†…çš„" << sCF->GetItemLink(olditemid) << pProt->Name1.c_str();
 			player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_VENDOR, "", GOSSIP_SENDER_SEC_SS, GOSSIP_ACTION_SS + 2, ss.str().c_str(), 0, false);
 			player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, player->GetGUID());
 		}
@@ -952,7 +948,7 @@ void SoulStone::CanRemoveSlot(Player * player, uint32 page, uint32 slot, std::st
 
 	if (page > maxpage)
 	{
-		//ÌáÊ¾ÇëÎğ·Ç·¨Ê¹ÓÃ²å¼ş,²»ÄÜÊ¹ÓÃÎ´¹ºÂòµÄ»êÓñÒ³Ãæ
+		//æç¤ºè¯·å‹¿éæ³•ä½¿ç”¨æ’ä»¶,ä¸èƒ½ä½¿ç”¨æœªè´­ä¹°çš„é­‚ç‰é¡µé¢
 		return;
 	}
 
@@ -1002,7 +998,7 @@ void SoulStone::CanRemoveSlot(Player * player, uint32 page, uint32 slot, std::st
     if (!pProt)
         return;
 
-    ss << "ÊÇ·ñ²ğĞ¶´Ë²å²ÛÖĞµÄ" << sCF->GetItemLink(olditemid) << pProt->Name1.c_str();
+    ss << "æ˜¯å¦æ‹†å¸æ­¤æ’æ§½ä¸­çš„" << sCF->GetItemLink(olditemid) << pProt->Name1.c_str();
 
     player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_VENDOR, "", GOSSIP_SENDER_SEC_SS, GOSSIP_ACTION_SS + 3, ss.str().c_str(), 0, false);
 
@@ -1051,15 +1047,15 @@ bool SoulStone::IsBuyPageReq(Player * player, uint32 page)
 
 	std::ostringstream oss;
 
-	oss << "¹ºÂò»êÓñµÚ" << page << "Ò³£º\n";
+	oss << "è´­ä¹°é­‚ç‰ç¬¬" << page << "é¡µï¼š\n";
 
     if (itr->second.itemid1 > 0 && itr->second.val1 > 0)
     {
         if (!player->HasItemCount(itr->second.itemid1, itr->second.val1))
         {
-			//ChatHandler(player->GetSession()).PSendSysMessage("ĞèÒªÎïÆ·£º%s * %d ¸ö",sCF->GetItemLink(itr->second.itemid1).c_str(),itr->second.val1);
+			//ChatHandler(player->GetSession()).PSendSysMessage("éœ€è¦ç‰©å“ï¼š%s * %d ä¸ª",sCF->GetItemLink(itr->second.itemid1).c_str(),itr->second.val1);
             //return false;
-			oss << "ĞèÒªÎïÆ·£º" << sCF->GetItemLink(itr->second.itemid1) << " * " << itr->second.val1 << "¸ö\n";
+			oss << "éœ€è¦ç‰©å“ï¼š" << sCF->GetItemLink(itr->second.itemid1) << " * " << itr->second.val1 << "ä¸ª\n";
 			send = true;
         }
     }
@@ -1068,9 +1064,9 @@ bool SoulStone::IsBuyPageReq(Player * player, uint32 page)
     {
         if (!player->HasItemCount(itr->second.itemid2, itr->second.val2))
         {
-			//ChatHandler(player->GetSession()).PSendSysMessage("ĞèÒªÎïÆ·£º%s * %d ¸ö", sCF->GetItemLink(itr->second.itemid2), itr->second.val2);
+			//ChatHandler(player->GetSession()).PSendSysMessage("éœ€è¦ç‰©å“ï¼š%s * %d ä¸ª", sCF->GetItemLink(itr->second.itemid2), itr->second.val2);
             //return false;
-			oss << "ĞèÒªÎïÆ·£º" << sCF->GetItemLink(itr->second.itemid2) << " * " << itr->second.val2 << "¸ö\n";
+			oss << "éœ€è¦ç‰©å“ï¼š" << sCF->GetItemLink(itr->second.itemid2) << " * " << itr->second.val2 << "ä¸ª\n";
 			send = true;
         }
     }
@@ -1079,9 +1075,9 @@ bool SoulStone::IsBuyPageReq(Player * player, uint32 page)
     {
         if (!player->HasItemCount(itr->second.itemid3, itr->second.val3))
         {
-			//ChatHandler(player->GetSession()).PSendSysMessage("ĞèÒªÎïÆ·£º%s * %d ¸ö", sCF->GetItemLink(itr->second.itemid3), itr->second.val3);
+			//ChatHandler(player->GetSession()).PSendSysMessage("éœ€è¦ç‰©å“ï¼š%s * %d ä¸ª", sCF->GetItemLink(itr->second.itemid3), itr->second.val3);
             //return false;
-			oss << "ĞèÒªÎïÆ·£º" << sCF->GetItemLink(itr->second.itemid3) << " * " << itr->second.val3 << "¸ö\n";
+			oss << "éœ€è¦ç‰©å“ï¼š" << sCF->GetItemLink(itr->second.itemid3) << " * " << itr->second.val3 << "ä¸ª\n";
 			send = true;
         }
     }
@@ -1090,9 +1086,9 @@ bool SoulStone::IsBuyPageReq(Player * player, uint32 page)
     {
         if (!player->HasItemCount(itr->second.itemid4, itr->second.val4))
         {
-			//ChatHandler(player->GetSession()).PSendSysMessage("ĞèÒªÎïÆ·£º%s * %d ¸ö", sCF->GetItemLink(itr->second.itemid4), itr->second.val4);
+			//ChatHandler(player->GetSession()).PSendSysMessage("éœ€è¦ç‰©å“ï¼š%s * %d ä¸ª", sCF->GetItemLink(itr->second.itemid4), itr->second.val4);
             //return false;
-			oss << "ĞèÒªÎïÆ·£º" << sCF->GetItemLink(itr->second.itemid4) << " * " << itr->second.val4 << "¸ö\n";
+			oss << "éœ€è¦ç‰©å“ï¼š" << sCF->GetItemLink(itr->second.itemid4) << " * " << itr->second.val4 << "ä¸ª\n";
 			send = true;
         }
     }
@@ -1101,9 +1097,9 @@ bool SoulStone::IsBuyPageReq(Player * player, uint32 page)
     {
         if (!player->HasItemCount(itr->second.itemid5, itr->second.val5))
         {
-			//ChatHandler(player->GetSession()).PSendSysMessage("ĞèÒªÎïÆ·£º%s * %d ¸ö", sCF->GetItemLink(itr->second.itemid5), itr->second.val5);
+			//ChatHandler(player->GetSession()).PSendSysMessage("éœ€è¦ç‰©å“ï¼š%s * %d ä¸ª", sCF->GetItemLink(itr->second.itemid5), itr->second.val5);
             //return false;
-			oss << "ĞèÒªÎïÆ·£º" << sCF->GetItemLink(itr->second.itemid5) << " * " << itr->second.val5 << "¸ö\n";
+			oss << "éœ€è¦ç‰©å“ï¼š" << sCF->GetItemLink(itr->second.itemid5) << " * " << itr->second.val5 << "ä¸ª\n";
 			send = true;
         }
     }
@@ -1111,9 +1107,9 @@ bool SoulStone::IsBuyPageReq(Player * player, uint32 page)
 
     if (player->GetMoney() < itr->second.money)
     {
-		//ChatHandler(player->GetSession()).PSendSysMessage("ĞèÒª½ğ±Ò£º%d", uint32(itr->second.money / GOLD));
+		//ChatHandler(player->GetSession()).PSendSysMessage("éœ€è¦é‡‘å¸ï¼š%d", uint32(itr->second.money / GOLD));
 		//return false;
-		oss << "ĞèÒª½ğ±Ò£º" << uint32(itr->second.money / GOLD);
+		oss << "éœ€è¦é‡‘å¸ï¼š" << uint32(itr->second.money / GOLD);
 		send = true;
     }
 
@@ -1125,7 +1121,7 @@ bool SoulStone::IsBuyPageReq(Player * player, uint32 page)
 
     player->PlayerTalkClass->ClearMenus();
 
-    player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_VENDOR, "", GOSSIP_SENDER_SEC_SS_BUY, GOSSIP_ACTION_SS_BUY + page, "ÊÇ·ñĞèÒª¹ºÂòµÚ"+std::to_string(page)+"Ò³", 0, false);
+    player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_VENDOR, "", GOSSIP_SENDER_SEC_SS_BUY, GOSSIP_ACTION_SS_BUY + page, "æ˜¯å¦éœ€è¦è´­ä¹°ç¬¬"+std::to_string(page)+"é¡µ", 0, false);
 
     player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, player->GetGUID());
 
@@ -1179,7 +1175,7 @@ void SoulStone::SetActiId(Player * player, uint32 page,uint32 itemid)
         }
     }
 
-    //SavePlayerAllDate(player);	//ÒÔ·À³öÏÖ¸´ÖÆÎïÆ·BUG
+    //SavePlayerAllDate(player);	//ä»¥é˜²å‡ºç°å¤åˆ¶ç‰©å“BUG
 }
 
 void SoulStone::AgainAddLoseBuff(Player * player)
@@ -1511,7 +1507,7 @@ public:
 
 	void OnLogin(Player* player)
     {
-        //³õÊ¼»¯»êÓñĞÅÏ¢
+        //åˆå§‹åŒ–é­‚ç‰ä¿¡æ¯
         if (!sSoulStone->IsData(player))
         {
             sSoulStone->CreatePlayerDate(player);

@@ -2,6 +2,7 @@
 #include "../../GCAddon/GCAddon.h"
 #include "../../Requirement/Requirement.h"
 
+
 std::vector<RuneTemplate> RuneVec;
 std::unordered_map<uint32/*page*/, RuneCategoryTemplate> RuneCategoryMap;
 

@@ -1,4 +1,4 @@
-//#pragma execution_character_set("utf-8")
+//
 //#include "ThunderbluffBattle.h"
 //#include "../CustomEvent/Event.h"
 //#include "../Reward/Reward.h"

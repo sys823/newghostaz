@@ -78,7 +78,7 @@
 #include "ServerMotd.h"
 #include "GameGraveyard.h"
 #include <VMapManager2.h>
-#pragma execution_character_set("utf-8")
+
 #include "../../scripts/Custom/AuthCheck/AuthCheck.h"
 #include "../../scripts/Custom/GCAddon/GCAddon.h"
 #include "../../scripts/Custom/Faker/Faker.h"

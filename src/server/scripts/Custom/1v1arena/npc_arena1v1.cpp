@@ -1,10 +1,9 @@
-﻿/*
+/*
  *
  * Copyright (C) 2013 Emu-Devstore <http://emu-devstore.com/>
  * Written by Teiby <http://www.teiby.de/>
  *
  */
-#pragma execution_character_set("utf-8")
 #include "ScriptMgr.h"
 #include "ArenaTeamMgr.h"
 #include "Common.h"

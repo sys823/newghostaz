@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "CustomScripts.h"
 #include "../CommonFunc/CommonFunc.h"
 
@@ -104,7 +103,7 @@ public:
 	}
 };
 
-//×î´óÉúÃüÖµ°Ù·Ö±ÈÉËº¦
+//æœ€å¤§ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”ä¼¤å®³
 class spell_dmg_maxhealth_pct : public SpellScriptLoader
 {
 public:
@@ -148,7 +147,7 @@ public:
 	}
 };
 
-//µ±Ç°ÉúÃüÖµ°Ù·Ö±ÈÉËº¦
+//å½“å‰ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”ä¼¤å®³
 class spell_dmg_health_pct : public SpellScriptLoader
 {
 public:
@@ -211,7 +210,7 @@ public:
 	}
 };
 
-//ËðÊ§ÉúÃüÖµ°Ù·Ö±ÈÉËº¦
+//æŸå¤±ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”ä¼¤å®³
 class spell_dmg_los_health_pct : public SpellScriptLoader
 {
 public:
@@ -274,7 +273,7 @@ public:
 };
 
 
-//×î´óÉúÃüÖµ°Ù·Ö±ÈÖÎÁÆ
+//æœ€å¤§ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”æ²»ç–—
 class spell_heal_maxhealth_pct : public SpellScriptLoader
 {
 public:
@@ -318,7 +317,7 @@ public:
 	}
 };
 
-//µ±Ç°ÉúÃüÖµ°Ù·Ö±ÈÖÎÁÆ
+//å½“å‰ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”æ²»ç–—
 class spell_heal_health_pct : public SpellScriptLoader
 {
 public:
@@ -362,7 +361,7 @@ public:
 	}
 };
 
-//ËðÊ§ÉúÃüÖµ°Ù·Ö±ÈÖÎÁÆ
+//æŸå¤±ç”Ÿå‘½å€¼ç™¾åˆ†æ¯”æ²»ç–—
 class spell_heal_los_health_pct : public SpellScriptLoader
 {
 public:
@@ -1169,7 +1168,6 @@ public:
 	}
 };
 
-
 class spell_absorb_max_hp_pct_damage : public SpellScriptLoader
 {
 public:
@@ -1322,8 +1320,8 @@ public:
 
 			owner->ApplyEnchantment(targetItem, PRISMATIC_ENCHANTMENT_SLOT, true);
 
-			owner->GetSession()->SendAreaTriggerMessage("%s»ñµÃ¶îÍâÒ»¸ö²å²Û", sCF->GetItemLink(targetItem->GetEntry()).c_str());
-			ChatHandler(owner->GetSession()).PSendSysMessage("%s»ñµÃ¶îÍâÒ»¸ö²å²Û", sCF->GetItemLink(targetItem->GetEntry()).c_str());
+			owner->GetSession()->SendAreaTriggerMessage("%sèŽ·å¾—é¢å¤–ä¸€ä¸ªæ’æ§½", sCF->GetItemLink(targetItem->GetEntry()).c_str());
+			ChatHandler(owner->GetSession()).PSendSysMessage("%sèŽ·å¾—é¢å¤–ä¸€ä¸ªæ’æ§½", sCF->GetItemLink(targetItem->GetEntry()).c_str());
 
 			return SPELL_CAST_OK;
 		}

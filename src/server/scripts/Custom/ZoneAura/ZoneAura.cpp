@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "ZoneAura.h"
 std::unordered_map<uint32/*zone*/, ZoneAuraTemplate> ZoneAuraMap;
 
@@ -6,7 +5,7 @@ void ZoneAura::Load()
 {
 	ZoneAuraMap.clear();										
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ÇøÓòID,¹â»·ID,Íæ¼Ò×îĞ¡ÑªÁ¿ FROM _ÊôĞÔµ÷Õû_ÇøÓòÆ½ºâ¹â»·" :
+		"SELECT åŒºåŸŸID,å…‰ç¯ID,ç©å®¶æœ€å°è¡€é‡ FROM _å±æ€§è°ƒæ•´_åŒºåŸŸå¹³è¡¡å…‰ç¯" :
 		"SELECT zone,aura,limitHP FROM _pvp_gap_aura");
 
 	if (result)

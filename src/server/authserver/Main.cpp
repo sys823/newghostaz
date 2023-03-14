@@ -18,7 +18,6 @@
 #include <ace/Sig_Handler.h>
 #include <openssl/opensslv.h>
 #include <openssl/crypto.h>
-
 #include "Common.h"
 #include "Database/DatabaseEnv.h"
 #include "Configuration/Config.h"
@@ -28,7 +27,7 @@
 #include "SignalHandler.h"
 #include "RealmList.h"
 #include "RealmAcceptor.h"
-#pragma execution_character_set("utf-8")
+
 #ifdef __linux__
 #include <sched.h>
 #include <sys/resource.h>
@@ -101,24 +100,24 @@ extern int main(int argc, char** argv)
     uint8 infopass[] = { 120, 105, 97, 111, 121, 117, 53, 55, 52, 52 };
     std::string ssssss = (char*)Encrypt(zzzmyqqhttp, infopass, 10, 10);//0.0.0.0
 
-    sLog->outString("\n                ¿ì½İ¼ü<Ctrl-C> ¹Ø±ÕAuthServer·şÎñÆ÷");
-    sLog->outString(("¨X¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨["));
-    sLog->outString(("¨U                                                               ¨€       ¨U"));
-    sLog->outString(("¨U     ¨€¨€¨€¨[ ¨€¨€¨€¨[   ¨€¨€¨€¨€¨[ ¨€¨€¨€¨€¨[¨€¨€¨€¨€¨[¨€¨€¨€¨€¨[      ¨U"));
-    sLog->outString(("¨U     ¨€¨X¨T¨a¨€¨X ¨€¨€¨[¨€¨X¨T¨T¨€¨[¨^¨T¨€¨X¨a¨€¨X¨T¨T¨a¨€¨X¨T¨€¨U      ¨U"));
-    sLog->outString(("¨U     ¨€¨€¨€¨U¨€¨€¨€¨€¨X ¨€¨U    ¨€¨U   ¨€ ¨a  ¨€¨€¨€¨[  ¨€¨U  ¨€¨U      ¨U"));
-    sLog->outString(("¨U     ¨€¨X¨T¨a¨€¨X¨T¨€¨U ¨€¨U    ¨€¨U  ¨€ ¨a   ¨€¨T¨T¨a  ¨€¨U  ¨€¨U      ¨U"));
-    sLog->outString(("¨U     ¨€¨U    ¨€¨U  ¨€¨U ¨^¨€¨€¨€¨X¨a¨€¨€¨€¨€¨[¨€¨€¨€¨€¨[¨€¨U  ¨€¨U      ¨U"));
-    sLog->outString(("¨U     ¨^¨a    ¨^¨a  ¨^¨a   ¨^¨T¨T¨a  ¨^¨T¨T¨T¨a¨^¨T¨T¨T¨a¨^¨a  ¨^¨a      ¨U"));
-    sLog->outString(("¨U                       ¨€¨€¨€¨€¨[ ¨€¨€¨€¨€¨[  ¨€¨€¨€¨[  ¨€¨€¨€¨€¨[      ¨U"));
-    sLog->outString(("¨U                       ¨€¨X¨T¨T¨a¨€¨X¨T¨T¨€¨[¨€¨X ¨€¨€¨[¨€¨X¨T¨T¨a      ¨U"));
-    sLog->outString(("¨U                       ¨€¨U      ¨€¨U    ¨€¨U¨€¨€¨€¨€¨X ¨€¨€¨€¨[        ¨U"));
-    sLog->outString(("¨U                       ¨€¨U      ¨€¨U    ¨€¨U¨€¨X¨T¨€¨U ¨€¨X¨T¨a        ¨U"));
-    sLog->outString(("¨U                       ¨€¨€¨€¨€¨[¨^¨€¨€¨€¨X¨a¨€¨U  ¨€¨U ¨€¨€¨€¨€¨[      ¨U"));
-    sLog->outString(("¨U                       ¨^¨T¨T¨T¨a  ¨^¨T¨T¨a  ¨^¨a  ¨^¨a ¨^¨T¨T¨T¨a      ¨U"));
-    sLog->outString(("¨U  	                          FrozenCore With Az 3.3.5a                 ¨U"));
-    sLog->outString(("¨^¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a"));
-    sLog->outString("   AuthServer°æ±¾£º%s ", GitRevision::GetFileVersionStr());
+    sLog->outString("\n                å¿«æ·é”®<Ctrl-C> å…³é—­AuthServeræœåŠ¡å™¨");
+    sLog->outString(("â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—"));
+    sLog->outString(("â•‘                                                               â–ˆ       â•‘"));
+    sLog->outString(("â•‘     â–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ•—   â–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ•—      â•‘"));
+    sLog->outString(("â•‘     â–ˆâ•”â•â•â–ˆâ•” â–ˆâ–ˆâ•—â–ˆâ•”â•â•â–ˆâ•—â•šâ•â–ˆâ•”â•â–ˆâ•”â•â•â•â–ˆâ•”â•â–ˆâ•‘      â•‘"));
+    sLog->outString(("â•‘     â–ˆâ–ˆâ–ˆâ•‘â–ˆâ–ˆâ–ˆâ–ˆâ•” â–ˆâ•‘    â–ˆâ•‘   â–ˆ â•  â–ˆâ–ˆâ–ˆâ•—  â–ˆâ•‘  â–ˆâ•‘      â•‘"));
+    sLog->outString(("â•‘     â–ˆâ•”â•â•â–ˆâ•”â•â–ˆâ•‘ â–ˆâ•‘    â–ˆâ•‘  â–ˆ â•   â–ˆâ•â•â•  â–ˆâ•‘  â–ˆâ•‘      â•‘"));
+    sLog->outString(("â•‘     â–ˆâ•‘    â–ˆâ•‘  â–ˆâ•‘ â•šâ–ˆâ–ˆâ–ˆâ•”â•â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ–ˆâ–ˆâ–ˆâ•—â–ˆâ•‘  â–ˆâ•‘      â•‘"));
+    sLog->outString(("â•‘     â•šâ•    â•šâ•  â•šâ•   â•šâ•â•â•  â•šâ•â•â•â•â•šâ•â•â•â•â•šâ•  â•šâ•      â•‘"));
+    sLog->outString(("â•‘                       â–ˆâ–ˆâ–ˆâ–ˆâ•— â–ˆâ–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ–ˆâ•—  â–ˆâ–ˆâ–ˆâ–ˆâ•—      â•‘"));
+    sLog->outString(("â•‘                       â–ˆâ•”â•â•â•â–ˆâ•”â•â•â–ˆâ•—â–ˆâ•” â–ˆâ–ˆâ•—â–ˆâ•”â•â•â•      â•‘"));
+    sLog->outString(("â•‘                       â–ˆâ•‘      â–ˆâ•‘    â–ˆâ•‘â–ˆâ–ˆâ–ˆâ–ˆâ•” â–ˆâ–ˆâ–ˆâ•—        â•‘"));
+    sLog->outString(("â•‘                       â–ˆâ•‘      â–ˆâ•‘    â–ˆâ•‘â–ˆâ•”â•â–ˆâ•‘ â–ˆâ•”â•â•        â•‘"));
+    sLog->outString(("â•‘                       â–ˆâ–ˆâ–ˆâ–ˆâ•—â•šâ–ˆâ–ˆâ–ˆâ•”â•â–ˆâ•‘  â–ˆâ•‘ â–ˆâ–ˆâ–ˆâ–ˆâ•—      â•‘"));
+    sLog->outString(("â•‘                       â•šâ•â•â•â•  â•šâ•â•â•  â•šâ•  â•šâ• â•šâ•â•â•â•      â•‘"));
+    sLog->outString(("â•‘  	                          FrozenCore With Az 3.3.5a                 â•‘"));
+    sLog->outString(("â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•"));
+    sLog->outString("   AuthServerç‰ˆæœ¬ï¼š%s ", GitRevision::GetFileVersionStr());
     //sLog->outString("   Using configuration file %s.", configFile);
     //sLog->outDetail("   %s (Library: %s)", OPENSSL_VERSION_TEXT, SSLeay_version(SSLEAY_VERSION));
 

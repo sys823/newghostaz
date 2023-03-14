@@ -1,4 +1,3 @@
-﻿#pragma execution_character_set("utf-8")
 #include "GCAddon.h"
 #include "../ItemMod/ItemMod.h"
 #include "../Requirement/Requirement.h"

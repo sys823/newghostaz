@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "RandomEnchant.h"
 #include "../ItemMod/ItemMod.h"
 #include "../Switch/Switch.h"
@@ -27,9 +26,8 @@ void RandomEnchant::Load()
 	}*/
 
 	ExtractEnchantMap.clear();
-
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ŒÔ∆∑ID,  «∑Òø…“‘Ã·»°∏Ωƒß, «∑Òø…“‘∏≤∏«∏Ωƒß from _ŒÔ∆∑_∏ΩƒßÃ·»°”Î∏≤∏«" :
+		"SELECT Áâ©ÂìÅID, ÊòØÂê¶ÂèØ‰ª•ÊèêÂèñÈôÑÈ≠î,ÊòØÂê¶ÂèØ‰ª•Ë¶ÜÁõñÈôÑÈ≠î from _Áâ©ÂìÅ_ÈôÑÈ≠îÊèêÂèñ‰∏éË¶ÜÁõñ" :
 		"SELECT entry, CanExtract,CanEnchant from _itemmod_extract_enchant");
 
 	if (result)
@@ -321,7 +319,7 @@ public:
 
 			owner->ApplyEnchantment(targetItem, false);
 
-			//“ªÃı Ù–‘ ÀÊª˙∏≤∏«
+			//‰∏ÄÊù°Â±ûÊÄß ÈöèÊú∫Ë¶ÜÁõñ
 			if (castItem->GetEntry() == atoi(sSwitch->GetFlagByIndex(ST_ENCHANT_SCROLL, 1).c_str()))
 			{
 				
@@ -329,7 +327,7 @@ public:
 				targetItem->SetEnchantment(EnchantmentSlot(slot), enchantIdVec[0], 0, 0);
 			}
 
-			//»´≤ø Ù–‘ »´≤ø∏≤∏«
+			//ÂÖ®ÈÉ®Â±ûÊÄß ÂÖ®ÈÉ®Ë¶ÜÁõñ
 			if (castItem->GetEntry() == atoi(sSwitch->GetFlagByIndex(ST_ENCHANT_SCROLL, 2).c_str()))
 			{
 				for (uint8 i = PROP_ENCHANTMENT_SLOT_0; i < MAX_ENCHANTMENT_SLOT; i++)
@@ -526,7 +524,7 @@ public:
 			//
 			//if (!roll_chance_f(itr->second.chance))
 			//{
-			//	owner->GetSession()->SendNotification("…˝º∂ ß∞‹");
+			//	owner->GetSession()->SendNotification("ÂçáÁ∫ßÂ§±Ë¥•");
 			//	return SPELL_CAST_OK;
 			//}
 			//else

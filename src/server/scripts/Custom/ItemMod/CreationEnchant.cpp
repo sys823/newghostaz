@@ -1,5 +1,6 @@
 #include "ItemMod.h"
 
+
 uint32 ItemMod::GenerateEnchantId(uint32 entry, uint8 slot)
 {
 	const ItemTemplate * temp = sObjectMgr->GetItemTemplate(entry);

@@ -20,7 +20,7 @@ Cant transmogrify rediculus items // Foereaper: would be fun to stab people with
 -- Cant think of any good way to handle this easily, could rip flagged items from cata DB
 */
 
-#pragma execution_character_set("utf-8")
+
 #include "Transmogrification.h"
 #define sT  sTransmogrification
 #define GTS session->GetAcoreString // dropped translation support, no one using?
@@ -34,7 +34,7 @@ public:
     {
         WorldSession* session = player->GetSession();
         if (sT->GetEnableTransmogInfo())
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t ÇëÑ¡ÔñĞèÒª»Ã»¯µÄ²¿Î»", EQUIPMENT_SLOT_END + 9, 0);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t è¯·é€‰æ‹©éœ€è¦å¹»åŒ–çš„éƒ¨ä½", EQUIPMENT_SLOT_END + 9, 0);
         for (uint8 slot = EQUIPMENT_SLOT_START; slot < EQUIPMENT_SLOT_END; ++slot)
         {
             if (const char* slotName = sT->GetSlotName(slot, session))
@@ -47,10 +47,10 @@ public:
         }
 #ifdef PRESETS
         if (sT->GetEnableSets())
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/RAIDFRAME/UI-RAIDFRAME-MAINASSIST:30:30:-18:0|t »Ã»¯¹ÜÀí ", EQUIPMENT_SLOT_END + 4, 0);
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/RAIDFRAME/UI-RAIDFRAME-MAINASSIST:30:30:-18:0|t å¹»åŒ–ç®¡ç† ", EQUIPMENT_SLOT_END + 4, 0);
 #endif
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Enchant_Disenchant:30:30:-18:0|t Çå³ıËùÓĞ»Ã»¯Ğ§¹û ", EQUIPMENT_SLOT_END + 2, 0, "ÄúÈ·¶¨ÒªÒÆ³ıËùÓĞ×°±¸µÄ»Ã»¯Ğ§¹ûÃ´£¿ ", 0, false);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t Ë¢ĞÂ²Ëµ¥ ", EQUIPMENT_SLOT_END + 1, 0);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Enchant_Disenchant:30:30:-18:0|t æ¸…é™¤æ‰€æœ‰å¹»åŒ–æ•ˆæœ ", EQUIPMENT_SLOT_END + 2, 0, "æ‚¨ç¡®å®šè¦ç§»é™¤æ‰€æœ‰è£…å¤‡çš„å¹»åŒ–æ•ˆæœä¹ˆï¼Ÿ ", 0, false);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t åˆ·æ–°èœå• ", EQUIPMENT_SLOT_END + 1, 0);
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
@@ -113,13 +113,13 @@ public:
                     return true;
                 }
                 if (sT->GetEnableSetInfo())
-					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t °ÑÉíÉÏµÄ»Ã»¯Ğ§¹û±£´æÎªÌ××° ", EQUIPMENT_SLOT_END + 10, 0);
+					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t æŠŠèº«ä¸Šçš„å¹»åŒ–æ•ˆæœä¿å­˜ä¸ºå¥—è£… ", EQUIPMENT_SLOT_END + 10, 0);
                 for (Transmogrification::presetIdMap::const_iterator it = sT->presetByName[player->GetGUID()].begin(); it != sT->presetByName[player->GetGUID()].end(); ++it)
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Statue_02:30:30:-18:0|t"+it->second, EQUIPMENT_SLOT_END+6, it->first);
 
                 if (sT->presetByName[player->GetGUID()].size() < sT->GetMaxSets())
-					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/GuildBankFrame/UI-GuildBankFrame-NewTab:30:30:-18:0|t ±£´æÌ××° ", EQUIPMENT_SLOT_END + 8, 0);
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t ·µ»Ø ", EQUIPMENT_SLOT_END + 1, 0);
+					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/GuildBankFrame/UI-GuildBankFrame-NewTab:30:30:-18:0|t ä¿å­˜å¥—è£… ", EQUIPMENT_SLOT_END + 8, 0);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t è¿”å› ", EQUIPMENT_SLOT_END + 1, 0);
                 player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             } break;
         case EQUIPMENT_SLOT_END+5: // Use preset
@@ -148,9 +148,9 @@ public:
                 for (Transmogrification::slotMap::const_iterator it = sT->presetById[player->GetGUID()][action].begin(); it != sT->presetById[player->GetGUID()][action].end(); ++it)
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, sT->GetItemIcon(it->second, 30, 30, -18, 0)+sT->GetItemLink(it->second, session), sender, action);
 
-				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Statue_02:30:30:-18:0|t Ê¹ÓÃÌ××° ", EQUIPMENT_SLOT_END + 5, action, "Ê¹ÓÃºó»áÈÃ×°±¸±äµÃ²»¿ÉÍË»Ø£¬²»¿É½»Ò×¡£\nÄúÈ·¶¨Òª¼ÌĞøÃ´£¿\n\n " + sT->presetByName[player->GetGUID()][action], 0, false);
-				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-LeaveItem-Opaque:30:30:-18:0|t ÒÆ³ıÌ××° ", EQUIPMENT_SLOT_END + 7, action, "ÄãÈ·¶¨ÒªÉ¾³ıÒÑ¾­±£´æµÄ¡¾ " + sT->presetByName[player->GetGUID()][action] + " ¡¿Ì××°Ã´£¿ ", 0, false);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t ·µ»Ø ", EQUIPMENT_SLOT_END+4, 0);
+				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Statue_02:30:30:-18:0|t ä½¿ç”¨å¥—è£… ", EQUIPMENT_SLOT_END + 5, action, "ä½¿ç”¨åä¼šè®©è£…å¤‡å˜å¾—ä¸å¯é€€å›ï¼Œä¸å¯äº¤æ˜“ã€‚\næ‚¨ç¡®å®šè¦ç»§ç»­ä¹ˆï¼Ÿ\n\n " + sT->presetByName[player->GetGUID()][action], 0, false);
+				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-LeaveItem-Opaque:30:30:-18:0|t ç§»é™¤å¥—è£… ", EQUIPMENT_SLOT_END + 7, action, "ä½ ç¡®å®šè¦åˆ é™¤å·²ç»ä¿å­˜çš„ã€ " + sT->presetByName[player->GetGUID()][action] + " ã€‘å¥—è£…ä¹ˆï¼Ÿ ", 0, false);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t è¿”å› ", EQUIPMENT_SLOT_END+4, 0);
                 player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             } break;
         case EQUIPMENT_SLOT_END+7: // Delete preset
@@ -197,20 +197,20 @@ public:
                     }
                 }
                 if (canSave)
-					player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/GuildBankFrame/UI-GuildBankFrame-NewTab:30:30:-18:0|t ±£´æÌ××° ", 0, 0, "ÇëÄãÉèÖÃÒª±£´æµÄÌ××°µÄÃû×Ö ", cost*sT->GetSetCostModifier() + sT->GetSetCopperCost(), true);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t Ë¢ĞÂ²Ëµ¥ ", sender, action);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t ·µ»Ø ", EQUIPMENT_SLOT_END+4, 0);
+					player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/GuildBankFrame/UI-GuildBankFrame-NewTab:30:30:-18:0|t ä¿å­˜å¥—è£… ", 0, 0, "è¯·ä½ è®¾ç½®è¦ä¿å­˜çš„å¥—è£…çš„åå­— ", cost*sT->GetSetCostModifier() + sT->GetSetCopperCost(), true);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t åˆ·æ–°èœå• ", sender, action);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t è¿”å› ", EQUIPMENT_SLOT_END+4, 0);
                 player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             } break;
         case EQUIPMENT_SLOT_END+10: // Set info
             {
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t ·µ»Ø ", EQUIPMENT_SLOT_END+4, 0);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t è¿”å› ", EQUIPMENT_SLOT_END+4, 0);
                 player->SEND_GOSSIP_MENU(sT->GetSetNpcText(), creature->GetGUID());
             } break;
 #endif
         case EQUIPMENT_SLOT_END+9: // Transmog info
             {
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t ·µ»Ø ", EQUIPMENT_SLOT_END+1, 0);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t è¿”å› ", EQUIPMENT_SLOT_END+1, 0);
                 player->SEND_GOSSIP_MENU(sT->GetTransmogNpcText(), creature->GetGUID());
             } break;
         default: // Transmogrify
@@ -331,7 +331,7 @@ public:
                 if (sT->GetFakeEntry(oldItem->GetGUID()) == newItem->GetEntry())
                     continue;
                 ++limit;
-				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, sT->GetItemIcon(newItem->GetEntry(), 30, 30, -18, 0) + sT->GetItemLink(newItem, session), slot, newItem->GetGUIDLow(), "ÓÃÕâ¼ş×°±¸»Ã»¯ÒÔºó½«ºÍÄã°ó¶¨£¬½«²»ÄÜ½»Ò×£¡\nÄãÒª¼ÌĞøÂğ£¿\n\n" + sT->GetItemIcon(newItem->GetEntry(), 40, 40, -15, -10) + sT->GetItemLink(newItem, session) + ss.str(), price, false);
+				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, sT->GetItemIcon(newItem->GetEntry(), 30, 30, -18, 0) + sT->GetItemLink(newItem, session), slot, newItem->GetGUIDLow(), "ç”¨è¿™ä»¶è£…å¤‡å¹»åŒ–ä»¥åå°†å’Œä½ ç»‘å®šï¼Œå°†ä¸èƒ½äº¤æ˜“ï¼\nä½ è¦ç»§ç»­å—ï¼Ÿ\n\n" + sT->GetItemIcon(newItem->GetEntry(), 40, 40, -15, -10) + sT->GetItemLink(newItem, session) + ss.str(), price, false);
             }
 
             for (uint8 i = INVENTORY_SLOT_BAG_START; i < INVENTORY_SLOT_BAG_END; ++i)
@@ -351,14 +351,14 @@ public:
                     if (sT->GetFakeEntry(oldItem->GetGUID()) == newItem->GetEntry())
                         continue;
                     ++limit;
-					player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, sT->GetItemIcon(newItem->GetEntry(), 30, 30, -18, 0) + sT->GetItemLink(newItem, session), slot, newItem->GetGUIDLow(), "ÓÃÕâ¼ş×°±¸»Ã»¯ÒÔºó½«ºÍÄã°ó¶¨£¬½«²»ÄÜ½»Ò×£¡\nÄãÒª¼ÌĞøÂğ£¿\n\n" + sT->GetItemIcon(newItem->GetEntry(), 40, 40, -15, -10) + sT->GetItemLink(newItem, session) + ss.str(), price, false);
+					player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, sT->GetItemIcon(newItem->GetEntry(), 30, 30, -18, 0) + sT->GetItemLink(newItem, session), slot, newItem->GetGUIDLow(), "ç”¨è¿™ä»¶è£…å¤‡å¹»åŒ–ä»¥åå°†å’Œä½ ç»‘å®šï¼Œå°†ä¸èƒ½äº¤æ˜“ï¼\nä½ è¦ç»§ç»­å—ï¼Ÿ\n\n" + sT->GetItemIcon(newItem->GetEntry(), 40, 40, -15, -10) + sT->GetItemLink(newItem, session) + ss.str(), price, false);
                 }
             }
         }
 
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Enchant_Disenchant:30:30:-18:0|t ÒÆ³ı»Ã»¯Ğ§¹û ", EQUIPMENT_SLOT_END + 3, slot, "ÄãÈ·¶¨ÒªÒÆ³ıÕâ¸ö²¿Î»µÄ»Ã»¯Ğ§¹ûÃ´£¿ ", 0, false);
-        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t Ë¢ĞÂ²Ëµ¥ ", EQUIPMENT_SLOT_END, slot);
-        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t ·µ»Ø ", EQUIPMENT_SLOT_END+1, 0);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Enchant_Disenchant:30:30:-18:0|t ç§»é™¤å¹»åŒ–æ•ˆæœ ", EQUIPMENT_SLOT_END + 3, slot, "ä½ ç¡®å®šè¦ç§»é™¤è¿™ä¸ªéƒ¨ä½çš„å¹»åŒ–æ•ˆæœä¹ˆï¼Ÿ ", 0, false);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t åˆ·æ–°èœå• ", EQUIPMENT_SLOT_END, slot);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t è¿”å› ", EQUIPMENT_SLOT_END+1, 0);
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
     }
 };

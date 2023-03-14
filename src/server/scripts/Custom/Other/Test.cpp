@@ -1,4 +1,4 @@
-#pragma execution_character_set("utf-8")
+
 #include "../AuthCheck/AuthCheck.h"
 #include "../Switch/Switch.h"
 #include "../LeaderReward/LeaderReward.h"

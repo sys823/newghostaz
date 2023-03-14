@@ -1,5 +1,4 @@
 #pragma once
-#pragma execution_character_set("utf-8")
 #include "../CommonFunc/CommonFunc.h"
 #include "../Requirement/Requirement.h"
 #include "Reward.h"
@@ -16,9 +15,9 @@ void Reward::Load()
 	RewMap.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		
-		"SELECT ½±ÀøÄ£°åID,½ð±ÒÊýÁ¿,»ý·ÖÊýÁ¿,¾­ÑéÊýÁ¿,ÈÙÓþµãÊý,¾º¼¼µãÊý,¶·ÆøµãÊý,¼¼ÄÜ»ò¹â»·×é,GMÃüÁî×é,"
-		"ÎïÆ·ID1,ÎïÆ·ÊýÁ¿1,ÎïÆ·ID2,ÎïÆ·ÊýÁ¿2,ÎïÆ·ID3,ÎïÆ·ÊýÁ¿3,ÎïÆ·ID4,ÎïÆ·ÊýÁ¿4,ÎïÆ·ID5,ÎïÆ·ÊýÁ¿5,"
-		"ÎïÆ·ID6,ÎïÆ·ÊýÁ¿6,ÎïÆ·ID7,ÎïÆ·ÊýÁ¿7,ÎïÆ·ID8,ÎïÆ·ÊýÁ¿8,ÎïÆ·ID9,ÎïÆ·ÊýÁ¿9,ÎïÆ·ID10,ÎïÆ·ÊýÁ¿10 FROM _Ä£°å_½±Àø" :
+		"SELECT å¥–åŠ±æ¨¡æ¿ID,é‡‘å¸æ•°é‡,ç§¯åˆ†æ•°é‡,ç»éªŒæ•°é‡,è£èª‰ç‚¹æ•°,ç«žæŠ€ç‚¹æ•°,æ–—æ°”ç‚¹æ•°,æŠ€èƒ½æˆ–å…‰çŽ¯ç»„,GMå‘½ä»¤ç»„,"
+		"ç‰©å“ID1,ç‰©å“æ•°é‡1,ç‰©å“ID2,ç‰©å“æ•°é‡2,ç‰©å“ID3,ç‰©å“æ•°é‡3,ç‰©å“ID4,ç‰©å“æ•°é‡4,ç‰©å“ID5,ç‰©å“æ•°é‡5,"
+		"ç‰©å“ID6,ç‰©å“æ•°é‡6,ç‰©å“ID7,ç‰©å“æ•°é‡7,ç‰©å“ID8,ç‰©å“æ•°é‡8,ç‰©å“ID9,ç‰©å“æ•°é‡9,ç‰©å“ID10,ç‰©å“æ•°é‡10 FROM _æ¨¡æ¿_å¥–åŠ±" :
 
 		"SELECT rewId,goldCount,tokenCount,xp,hrPoints,arenaPoints,statPoints,spellData,commandData,"
 		"itemId1,itemCount1,itemId2,itemCount2,itemId3,itemCount3,itemId4,itemCount4,itemId5,itemCount5,"
@@ -89,7 +88,7 @@ void Reward::Load()
 void Reward::LoadDamCreToSend()
 {
 	VCreatureDamageSend.clear();
-	QueryResult itemup = WorldDatabase.PQuery("select ÉúÎï±àºÅ,×îµÍÉËº¦Á¿,ÅÅÐÐ½±Àø,ÅÅÐÐµ¯´° from _ÉúÎï_ÉËº¦½±Àø");
+	QueryResult itemup = WorldDatabase.PQuery("select ç”Ÿç‰©ç¼–å·,æœ€ä½Žä¼¤å®³é‡,æŽ’è¡Œå¥–åŠ±,æŽ’è¡Œå¼¹çª— from _ç”Ÿç‰©_ä¼¤å®³å¥–åŠ±");
 	if (itemup)
 	{
 		int nCount = 0;
@@ -114,10 +113,10 @@ void Reward::LoadDamCreToSend()
 			nCount++;
 
 		} while (itemup->NextRow());
-		sLog->outString(">> ¶ÁÈ¡×Ô¶¨Òå¹¦ÄÜÊý¾Ý±í _ÉúÎï_ÉËº¦½±Àø,¹²%uÌõÊý¾Ý¶ÁÈ¡¼ÓÔØ...", nCount);
+		sLog->outString(">> è¯»å–è‡ªå®šä¹‰åŠŸèƒ½æ•°æ®è¡¨ _ç”Ÿç‰©_ä¼¤å®³å¥–åŠ±,å…±%uæ¡æ•°æ®è¯»å–åŠ è½½...", nCount);
 	}
 	else
-		sLog->outString(">> ¶ÁÈ¡×Ô¶¨Òå¹¦ÄÜÊý¾Ý±í _ÉúÎï_ÉËº¦½±Àø,¹²0ÌõÊý¾Ý¶ÁÈ¡¼ÓÔØ...");
+		sLog->outString(">> è¯»å–è‡ªå®šä¹‰åŠŸèƒ½æ•°æ®è¡¨ _ç”Ÿç‰©_ä¼¤å®³å¥–åŠ±,å…±0æ¡æ•°æ®è¯»å–åŠ è½½...");
 
 }
 
@@ -168,7 +167,7 @@ void Reward::Rew(Player* player, uint32 rewId,uint32 muilt)
 				player->SetUInt32Value(PLAYER_XP, player->GetUInt32Value(PLAYER_NEXT_LEVEL_XP));
 
 			std::ostringstream oss;
-			oss << "»ñµÃ" << "|cFFFFCC00[¾­Ñé]|r X " << xp;
+			oss << "èŽ·å¾—" << "|cFFFFCC00[ç»éªŒ]|r X " << xp;
 			player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 		}
 
@@ -176,15 +175,15 @@ void Reward::Rew(Player* player, uint32 rewId,uint32 muilt)
 		{
 			player->ModifyMoney(goldCount);
 			std::ostringstream oss;
-			oss << "»ñµÃ" << "|cFFFFCC00[½ð±Ò]|r" << " X " << goldCount / GOLD;
+			oss << "èŽ·å¾—" << "|cFFFFCC00[é‡‘å¸]|r" << " X " << goldCount / GOLD;
 			player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 		}
 
 		if (tokenCount > 0)
 		{
-			sCF->UpdateTokenAmount(player, tokenCount, true, "[REW]½±Àø");
+			sCF->UpdateTokenAmount(player, tokenCount, true, "[REW]å¥–åŠ±");
 			std::ostringstream oss;
-			oss << "»ñµÃ" << "|cFFFFCC00[" << sString->GetText(CORE_STR_TYPES(STR_TOKEN)) << "]|r" << " X " << tokenCount;
+			oss << "èŽ·å¾—" << "|cFFFFCC00[" << sString->GetText(CORE_STR_TYPES(STR_TOKEN)) << "]|r" << " X " << tokenCount;
 			player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 		}
 
@@ -192,7 +191,7 @@ void Reward::Rew(Player* player, uint32 rewId,uint32 muilt)
 		{
 			player->ModifyHonorPoints(hrPoints);
 			std::ostringstream oss;
-			oss << "»ñµÃ" << "|cFFFFCC00[ÈÙÓþ]|r" << " X " << hrPoints;
+			oss << "èŽ·å¾—" << "|cFFFFCC00[è£èª‰]|r" << " X " << hrPoints;
 			player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 		}
 
@@ -200,10 +199,9 @@ void Reward::Rew(Player* player, uint32 rewId,uint32 muilt)
 		{
 			player->ModifyArenaPoints(arenaPoints);
 			std::ostringstream oss;
-			oss << "»ñµÃ" << "|cFFFFCC00[¾º¼¼µã]|r" << " X " << arenaPoints;
+			oss << "èŽ·å¾—" << "|cFFFFCC00[ç«žæŠ€ç‚¹]|r" << " X " << arenaPoints;
 			player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 		}
-
 		if (statPoints > 0)
 		{
 			uint32 total = 0;
@@ -215,7 +213,7 @@ void Reward::Rew(Player* player, uint32 rewId,uint32 muilt)
 			{
 				player->stat_points[SPT_TOTLAL] += statPoints;
 				std::ostringstream oss;
-				oss << "»ñµÃ" << "|cFFFFCC00[¶·Æøµã]|r" << " X " << statPoints;
+				oss << "èŽ·å¾—" << "|cFFFFCC00[æ–—æ°”ç‚¹]|r" << " X " << statPoints;
 				player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 				sStatPoints->UpdateDB(player);
 			}
@@ -261,7 +259,7 @@ void Reward::Rew(Player* player, uint32 rewId,uint32 muilt)
 				sCustomCommand->DoCommand(player, itr->command);
 	}
 	else
-		sWorld->SendServerMessage(SERVER_MSG_STRING, sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? "Êý¾Ý±í[_rew]Î´Õý³£ÅäÖÃ" : "Êý¾Ý±í[_Ä£°å_½±Àø]Î´Õý³£ÅäÖÃ");
+		sWorld->SendServerMessage(SERVER_MSG_STRING, sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? "æ•°æ®è¡¨[_rew]æœªæ­£å¸¸é…ç½®" : "æ•°æ®è¡¨[_æ¨¡æ¿_å¥–åŠ±]æœªæ­£å¸¸é…ç½®");
 }
 
 void Reward::RewItem(Player* player, uint32 itemId, uint32 itemCount)
@@ -290,9 +288,9 @@ void Reward::RewItem(Player* player, uint32 itemId, uint32 itemCount)
 	{
 		if (ItemTemplate const* pProto = sObjectMgr->GetItemTemplate(itemId))
 		{
-			ChatHandler(player->GetSession()).PSendSysMessage("ÄãÊÕµ½ÐÂÓÊ¼þ:%s X %u", sCF->GetItemLink(itemId).c_str(), itemCount);
+			ChatHandler(player->GetSession()).PSendSysMessage("ä½ æ”¶åˆ°æ–°é‚®ä»¶:%s X %u", sCF->GetItemLink(itemId).c_str(), itemCount);
 			MailSender sender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM);
-			MailDraft draft("ÒÅÊ§µÄÎïÆ·", "Ðé¿ÕÖÐ·¢ÏÖÁËÄãÒÅÊ§µÄÎïÆ·£¬ÇëÊÕºÃ¡£");
+			MailDraft draft("é—å¤±çš„ç‰©å“", "è™šç©ºä¸­å‘çŽ°äº†ä½ é—å¤±çš„ç‰©å“ï¼Œè¯·æ”¶å¥½ã€‚");
 			SQLTransaction trans = CharacterDatabase.BeginTransaction();
 
 			uint32 stack = pProto->Stackable > 0 ? pProto->Stackable : 1;
@@ -348,7 +346,7 @@ void Reward::MailRew(Player* senderPlayer, uint32 receiverGuidLow, uint32 rewId,
 		if (tokenCount > 0)
 		{
 			if (receiver)
-				sCF->UpdateTokenAmount(receiver, tokenCount, true, "ÕÐÄ¼½±Àø");
+				sCF->UpdateTokenAmount(receiver, tokenCount, true, "æ‹›å‹Ÿå¥–åŠ±");
 			else
 				LoginDatabase.DirectPExecute("UPDATE account SET tokenAmount = tokenAmount +'%u' WHERE id = '%u'", tokenCount, receiverData->accountId);
 		}
@@ -454,12 +452,12 @@ void Reward::MailRew(Player* senderPlayer, uint32 receiverGuidLow, uint32 rewId,
 					sCustomCommand->DoCommand(receiver, itr->command);
 
 			std::ostringstream oss;
-			oss << "ÄãÊÕµ½ÐÂÓÊ¼þ£º" << titleText;
+			oss << "ä½ æ”¶åˆ°æ–°é‚®ä»¶ï¼š" << titleText;
 			receiver->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 		}
 	}
 	else
-		sWorld->SendServerMessage(SERVER_MSG_STRING, sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? "Êý¾Ý±í[_Ä£°å_ÐèÇó]Î´Õý³£ÅäÖÃ" : "Êý¾Ý±í[_req]Î´Õý³£ÅäÖÃ");
+		sWorld->SendServerMessage(SERVER_MSG_STRING, sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? "æ•°æ®è¡¨[_æ¨¡æ¿_éœ€æ±‚]æœªæ­£å¸¸é…ç½®" : "æ•°æ®è¡¨[_req]æœªæ­£å¸¸é…ç½®");
 }
 
 std::string Reward::GetDescription(uint32 rewId,bool quest)
@@ -477,22 +475,22 @@ std::string Reward::GetDescription(uint32 rewId,bool quest)
 		std::ostringstream oss;
 
 		if (xp > 0)
-			oss << "    |cFF0000FF[¾­Ñé]|r x |cFF0000FF" << xp << "|r\n";
+			oss << "    |cFF0000FF[ç»éªŒ]|r x |cFF0000FF" << xp << "|r\n";
 
 		if (goldCount > 0)
-			oss << "    |cFF0000FF[½ð±Ò]|r x |cFF0000FF" << goldCount / GOLD << "|r\n";
+			oss << "    |cFF0000FF[é‡‘å¸]|r x |cFF0000FF" << goldCount / GOLD << "|r\n";
 
 		if (tokenCount > 0)
 			oss << "    |cFF0000FF[" << sString->GetText(CORE_STR_TYPES(STR_TOKEN)) << "]|r x |cFF0000FF" << tokenCount << "|r\n";
 
 		if (hrPoints > 0)
-			oss << "    |cFF0000FF[ÈÙÓþ]|r x |cFF0000FF" << hrPoints << "|r\n";
+			oss << "    |cFF0000FF[è£èª‰]|r x |cFF0000FF" << hrPoints << "|r\n";
 
 		if (arenaPoints > 0)
-			oss << "    |cFF0000FF[¾º¼¼µã]|r x |cFF0000FF" << arenaPoints << "|r\n";
+			oss << "    |cFF0000FF[ç«žæŠ€ç‚¹]|r x |cFF0000FF" << arenaPoints << "|r\n";
 
 		if (statPoints > 0)
-			oss << "    |cFF0000FF[¶·Æøµã]|r x |cFF0000FF" << statPoints << "|r\n";
+			oss << "    |cFF0000FF[æ–—æ°”ç‚¹]|r x |cFF0000FF" << statPoints << "|r\n";
 
 
 		for (auto itr = iter->second.ItemDataVec.begin(); itr != iter->second.ItemDataVec.end(); itr++)
@@ -508,7 +506,7 @@ std::string Reward::GetDescription(uint32 rewId,bool quest)
 
 			SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(spellId);
 			if (spellInfo)
-				oss << "    |cFF0000FF[¼¼ÄÜ] [" << spellInfo->SpellName[4] << "]|r\n";
+				oss << "    |cFF0000FF[æŠ€èƒ½] [" << spellInfo->SpellName[4] << "]|r\n";
 		}
 
 		for (auto itr = iter->second.SpellDataVec.begin(); itr != iter->second.SpellDataVec.end(); itr++)
@@ -518,12 +516,12 @@ std::string Reward::GetDescription(uint32 rewId,bool quest)
 
 			SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(abs(*itr));
 			if (spellInfo)
-				oss << "    |cFF0000FF[ÔöÒæ] [" << spellInfo->SpellName[4] << "]|r\n";
+				oss << "    |cFF0000FF[å¢žç›Š] [" << spellInfo->SpellName[4] << "]|r\n";
 		}
 
 		for (auto itr = iter->second.CommandDataVec.begin(); itr != iter->second.CommandDataVec.end(); itr++)
 			if (!itr->command.empty())
-				oss << "    |cFF0000FF[ÆäËû] " << itr->des << "\n";
+				oss << "    |cFF0000FF[å…¶ä»–] " << itr->des << "\n";
 
 		return oss.str();
 	}
@@ -549,19 +547,19 @@ std::string Reward::GetAnounceText(uint32 rewId)
 		std::ostringstream oss;
 
 		if (iter->second.goldCount > 0)
-			oss << "|cFFFFCC00[½ð±Ò]|rx|cFFFFCC00" << iter->second.goldCount << " ";
+			oss << "|cFFFFCC00[é‡‘å¸]|rx|cFFFFCC00" << iter->second.goldCount << " ";
 		if (iter->second.tokenCount > 0)
 			oss << "|cFFFFCC00[" << sString->GetText(CORE_STR_TYPES(STR_TOKEN)) << "]|rx|cFFFFCC00" << iter->second.tokenCount << " ";
 		if (iter->second.xp > 0)
-			oss << "|cFFFFCC00[¾­Ñé]|rx|cFFFFCC00" << iter->second.xp << " ";
+			oss << "|cFFFFCC00[ç»éªŒ]|rx|cFFFFCC00" << iter->second.xp << " ";
 		if (iter->second.hrPoints > 0)
-			oss << "|cFFFFCC00[ÈÙÓþ]|rx|cFFFFCC00" << iter->second.hrPoints << " ";
+			oss << "|cFFFFCC00[è£èª‰]|rx|cFFFFCC00" << iter->second.hrPoints << " ";
 
 		if (iter->second.arenaPoints > 0)
-			oss << "|cFFFFCC00[¾º¼¼µã]|rx|cFFFFCC00" << iter->second.arenaPoints << " ";
+			oss << "|cFFFFCC00[ç«žæŠ€ç‚¹]|rx|cFFFFCC00" << iter->second.arenaPoints << " ";
 
 		if (iter->second.statPoints > 0)
-			oss << "|cFFFFCC00[¶·Æøµã]|rx|cFFFFCC00" << iter->second.statPoints << " ";
+			oss << "|cFFFFCC00[æ–—æ°”ç‚¹]|rx|cFFFFCC00" << iter->second.statPoints << " ";
 
 		for (auto itr = iter->second.ItemDataVec.begin(); itr != iter->second.ItemDataVec.end(); itr++)
 			oss << "" << sCF->GetItemLink(itr->itemId) << "x|cFFFFCC00" << itr->itemCount << " ";
@@ -572,7 +570,7 @@ std::string Reward::GetAnounceText(uint32 rewId)
 			if (id < 0)
 				continue;
 
-			oss << "Ñ§»á¼¼ÄÜ|cFFFFCC00[" << sSpellMgr->GetSpellInfo(abs(id))->SpellName[4] << "] ";
+			oss << "å­¦ä¼šæŠ€èƒ½|cFFFFCC00[" << sSpellMgr->GetSpellInfo(abs(id))->SpellName[4] << "] ";
 		}
 
 		for (auto itr = iter->second.SpellDataVec.begin(); itr != iter->second.SpellDataVec.end(); itr++)
@@ -581,7 +579,7 @@ std::string Reward::GetAnounceText(uint32 rewId)
 			if (id > 0)
 				continue;
 
-			oss << "»ñµÃÔöÒæ|cFFFFCC00[" << sSpellMgr->GetSpellInfo(abs(id))->SpellName[4] << "] ";
+			oss << "èŽ·å¾—å¢žç›Š|cFFFFCC00[" << sSpellMgr->GetSpellInfo(abs(id))->SpellName[4] << "] ";
 		}
 
 		oss << "|r";

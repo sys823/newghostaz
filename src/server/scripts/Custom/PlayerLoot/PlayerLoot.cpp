@@ -1,5 +1,5 @@
-#pragma execution_character_set("utf-8")
 #include "PlayerLoot.h"
+
 
 std::unordered_map<uint32/*itemid*/, PlayerLootTemplate> PlayerLootMap;
 
@@ -8,7 +8,7 @@ void PlayerLoot::Load()
 	PlayerLootMap.clear();
 
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT 物品ID,掉落数量,掉落几率,是否禁止银行掉落,是否禁止背包掉落 FROM __玩家掉落" :
+		"SELECT 鐗╁搧ID,鎺夎惤鏁伴噺,鎺夎惤鍑犵巼,鏄惁绂佹閾惰鎺夎惤,鏄惁绂佹鑳屽寘鎺夎惤 FROM __鐜╁鎺夎惤" :
 		"SELECT entry,lootCount,chance,banBank,banBag FROM _pvp_killed_loot");
 
 	if (!result) 

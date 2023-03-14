@@ -1,4 +1,3 @@
-﻿#pragma execution_character_set("utf-8")
 #include "DBCCreate.h"
 #include <fstream>
 #include <Windows.h>

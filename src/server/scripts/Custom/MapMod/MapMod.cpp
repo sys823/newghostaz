@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "MapMod.h"
 #include "../Requirement/Requirement.h"
 #include "../EquipmentManager/EquipmentManager.h"
@@ -18,7 +17,7 @@ void MapMod::Load()
     QueryResult result;
     if (result = WorldDatabase.PQuery(
         //		0	 1	   2	3	4	 5	  6	   7	8	9	10	 11	 12	  13   14  15	16	 17	 18		19
-        "SELECT Í·²¿,¾±²¿,¼ç²¿,³ÄÒÂ,ÐØ²¿,Ñü²¿,ÍÈ²¿,Ñ¥×Ó,ÊÖÍó,ÊÖ²¿,½äÖ¸,½äÖ¸,ÊÎÆ·,ÊÎÆ·,±³²¿,Ö÷ÊÖ,¸±ÊÖ,Ô¶³Ì,Õ½ÅÛ,µØÍ¼ID FROM _µØÍ¼×°±¸¿ØÖÆ"))
+        "SELECT å¤´éƒ¨,é¢ˆéƒ¨,è‚©éƒ¨,è¡¬è¡£,èƒ¸éƒ¨,è…°éƒ¨,è…¿éƒ¨,é´å­,æ‰‹è…•,æ‰‹éƒ¨,æˆ’æŒ‡,æˆ’æŒ‡,é¥°å“,é¥°å“,èƒŒéƒ¨,ä¸»æ‰‹,å‰¯æ‰‹,è¿œç¨‹,æˆ˜è¢,åœ°å›¾ID FROM _åœ°å›¾è£…å¤‡æŽ§åˆ¶"))
     {
         do
         {
@@ -36,11 +35,11 @@ void MapMod::Load()
 	result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
 
 		//		0		1		2		3			4		5				6		7		8			9			10				11		12		13
-		"SELECT µØÍ¼ID,µØÓòID,ÇøÓòID,½øÈëÐèÇóÄ£°åID,¸±±¾ÄÑ¶È,¹ÖÎïÀàÐÍ,µÈ¼¶,ÉúÃüÖµ,ÎïÀíÉËº¦Öµ»ò±¶ÂÊ,·¨ÊõÉËº¦±¶ÂÊ,ÖÎÁÆÐ§¹û±¶ÂÊ,¼õÉË°Ù·Ö±È,¿¹ÐÔÖµ,»÷É±½±ÀøÄ£°åID,"
+		"SELECT åœ°å›¾ID,åœ°åŸŸID,åŒºåŸŸID,è¿›å…¥éœ€æ±‚æ¨¡æ¿ID,å‰¯æœ¬éš¾åº¦,æ€ªç‰©ç±»åž‹,ç­‰çº§,ç”Ÿå‘½å€¼,ç‰©ç†ä¼¤å®³å€¼æˆ–å€çŽ‡,æ³•æœ¯ä¼¤å®³å€çŽ‡,æ²»ç–—æ•ˆæžœå€çŽ‡,å‡ä¼¤ç™¾åˆ†æ¯”,æŠ—æ€§å€¼,å‡»æ€å¥–åŠ±æ¨¡æ¿ID,"
 		//14			15				16		17		18			19			20						21				
-		"»÷É±½±Àø¼¸ÂÊ,»÷É±ÊÇ·ñÈ«·þÌáÊ¾,»¤¼×Öµ,¸±±¾ÌôÕ½µÈ¼¶,¹¥»÷¼ä¸ô,»÷É±½±Àø·¨±¦Öµ,»÷É±½±Àø×Ô¶¨ÒåµÈ¼¶Öµ,Àë¿ª¸±±¾ºóÊÇ·ñÖØÖÃ,"
+		"å‡»æ€å¥–åŠ±å‡ çŽ‡,å‡»æ€æ˜¯å¦å…¨æœæç¤º,æŠ¤ç”²å€¼,å‰¯æœ¬æŒ‘æˆ˜ç­‰çº§,æ”»å‡»é—´éš”,å‡»æ€å¥–åŠ±æ³•å®å€¼,å‡»æ€å¥–åŠ±è‡ªå®šä¹‰ç­‰çº§å€¼,ç¦»å¼€å‰¯æœ¬åŽæ˜¯å¦é‡ç½®,"
 		//	22    23		24		25		26	 27		28			29				30		  31				32				33				34
-		"µôÂäID1,µôÂäID2,µôÂäID3,µôÂäID4,µôÂäID5,¹â»·×é,Ëæ»ú¹â»·Êý,ÉúÃüÖµ±¶ÂÊ,¶ÓÎé»÷É±½±ÀøÄ£°åID,¶ÓÎé»÷É±½±Àø¼¸ÂÊ,»÷É±ÕÙ»½ÎïÌåID,ÊÇ·ñ¼ÓÔØÔ­µôÂä,Ëæ»ú¼¼ÄÜ×éÄ£°åID FROM _ÊôÐÔµ÷Õû_µØÍ¼" :
+		"æŽ‰è½ID1,æŽ‰è½ID2,æŽ‰è½ID3,æŽ‰è½ID4,æŽ‰è½ID5,å…‰çŽ¯ç»„,éšæœºå…‰çŽ¯æ•°,ç”Ÿå‘½å€¼å€çŽ‡,é˜Ÿä¼å‡»æ€å¥–åŠ±æ¨¡æ¿ID,é˜Ÿä¼å‡»æ€å¥–åŠ±å‡ çŽ‡,å‡»æ€å¬å”¤ç‰©ä½“ID,æ˜¯å¦åŠ è½½åŽŸæŽ‰è½,éšæœºæŠ€èƒ½ç»„æ¨¡æ¿ID FROM _å±žæ€§è°ƒæ•´_åœ°å›¾" :
 
 		//		0	1	2		3	4		5		6	7		8			9		10		11			12			13
 		"SELECT Map,Area,Zone,ReqId,Diff,ModType,Level,Health,MeleeDmg,SpellDmgMod,HealMod,ReduceDmgPct,Resistance,KillRewId,"
@@ -121,7 +120,7 @@ void MapMod::Load()
 
 
 	MapModPlayerVec.clear();
-	if (result = WorldDatabase.PQuery("SELECT µØÍ¼ID, ¸±±¾ÄÑ¶È, ¸±±¾ÌôÕ½µÈ¼¶, »ñµÃ¹â»·×é FROM _ÊôÐÔµ÷Õû_µØÍ¼_Íæ¼Ò"))
+	if (result = WorldDatabase.PQuery("SELECT åœ°å›¾ID, å‰¯æœ¬éš¾åº¦, å‰¯æœ¬æŒ‘æˆ˜ç­‰çº§, èŽ·å¾—å…‰çŽ¯ç»„ FROM _å±žæ€§è°ƒæ•´_åœ°å›¾_çŽ©å®¶"))
 	{
 		do
 		{
@@ -196,7 +195,7 @@ void MapMod::RemoveItem(Player* player)
 
 	while (!mailItems.empty())
 	{
-		MailDraft draft("ÒÅÊ§µÄÎïÆ·", "ÇëÊÕºÃÄãµÄÎïÆ·");
+		MailDraft draft("é—å¤±çš„ç‰©å“", "è¯·æ”¶å¥½ä½ çš„ç‰©å“");
 		for (uint8 i = 0; !mailItems.empty() && i < MAX_MAIL_ITEMS; ++i)
 		{
 			draft.AddItem(mailItems.front());
@@ -253,7 +252,7 @@ bool MapMod::OnEnterMap(Player* player)
 		}
 		else
 		{
-			player->GetSession()->SendNotification("ÄãÃ»ÓÐ×Ê¸ñ½øÈë¸ÃµØÍ¼£¡");
+			player->GetSession()->SendNotification("ä½ æ²¡æœ‰èµ„æ ¼è¿›å…¥è¯¥åœ°å›¾ï¼");
 			player->TeleportTo(player->m_homebindMapId, player->m_homebindX, player->m_homebindY, player->m_homebindZ, player->GetOrientation());
 			return false;
 		}
@@ -282,12 +281,11 @@ bool MapMod::OnEnterZone(Player* player, uint32 zone)
 		}
 		else
 		{
-			player->GetSession()->SendNotification("ÄãÃ»ÓÐ×Ê¸ñ½øÈë¸ÃµØÓò£¡");
+			player->GetSession()->SendNotification("ä½ æ²¡æœ‰èµ„æ ¼è¿›å…¥è¯¥åœ°åŸŸï¼");
 			player->TeleportTo(player->m_homebindMapId, player->m_homebindX, player->m_homebindY, player->m_homebindZ, player->GetOrientation());
 			return false;
 		}
 	}
-
 	return true;
 }
 
@@ -311,7 +309,7 @@ bool MapMod::OnEnterArea(Player* player, uint32 area)
 		}
 		else
 		{
-			player->GetSession()->SendNotification("ÄãÃ»ÓÐ×Ê¸ñ½øÈë¸ÃÇøÓò£¡");
+			player->GetSession()->SendNotification("ä½ æ²¡æœ‰èµ„æ ¼è¿›å…¥è¯¥åŒºåŸŸï¼");
 			player->TeleportTo(player->m_homebindMapId, player->m_homebindX, player->m_homebindY, player->m_homebindZ, player->GetOrientation());
 			return false;
 		}
@@ -325,7 +323,7 @@ void MapMod::SetMod(Creature* creature)
 	if (creature->GetEntry() == 1964 || creature->IsGuardian() || creature->IsHunterPet() || creature->IsTotem())
 		return;
 		
-	////Ð¡¶¯ÎïÖ®Àà
+	////å°åŠ¨ç‰©ä¹‹ç±»
 	//if (creature->IsCivilian())
 	//	return;
 
@@ -434,7 +432,7 @@ void MapMod::ResetInstance(Player* player, Difficulty diff, uint32 mapId)
 			break;
 		}
 
-		text += " ÒÑ±»ÖØÖÃ";
+		text += " å·²è¢«é‡ç½®";
 
 		for (uint8 i = 0; i < MAX_DIFFICULTY; ++i)
 		{
@@ -477,7 +475,7 @@ void MapMod::PopOrTele(Player* player, uint32 triggerId)
 	{
 		if (MapEntry const* mapEntry = sMapStore.LookupEntry(mapId))
 		{
-			sCF->SendAcceptOrCancel(player, 994, sReq->Notice(player, reqId, "½øÈë", mapEntry->name[4]));
+			sCF->SendAcceptOrCancel(player, 994, sReq->Notice(player, reqId, "è¿›å…¥", mapEntry->name[4]));
 			player->enter_map_at = at;
 			player->enter_map_req = reqId;
 		}

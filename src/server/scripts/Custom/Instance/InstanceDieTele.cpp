@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "InstanceDieTele.h"
 #include "../CustomEvent/Event.h"
 
@@ -8,7 +7,7 @@ void InstanceDieTele::Load()
 {
 	InstanceDieTeleMap.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT µØÍ¼ID,ÁªÃËËÀÍö´«ËÍ×ø±êID,²¿ÂäËÀÍö´«ËÍ×ø±êID,ÊÇ·ñÎ¨Ò» FROM _¸±±¾_ËÀÍö´«ËÍ" :
+		"SELECT åœ°å›¾ID,è”ç›Ÿæ­»äº¡ä¼ é€åæ ‡ID,éƒ¨è½æ­»äº¡ä¼ é€åæ ‡ID,æ˜¯å¦å”¯ä¸€ FROM _å‰¯æœ¬_æ­»äº¡ä¼ é€" :
 		"SELECT MapId,DieTelePos_A,DieTelePos_H,IsUnique FROM _instance");
 	if (!result) return;
 	do

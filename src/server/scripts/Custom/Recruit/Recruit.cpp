@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "../PrecompiledHeaders/ScriptPCH.h"
 #include "Recruit.h"
 #include "Pet.h"
@@ -24,7 +23,7 @@ void Recruit::PopMsg(Player* player, uint32 menuId, std::string text)
 	data << uint8(1);
 	data << uint8(0);
 	data << uint32(0);
-	data << "¹«¸æ";
+	data << "å…¬å‘Š";
 	data << text;
 	player->GetSession()->SendPacket(&data);
 }
@@ -93,7 +92,7 @@ bool Recruit::RecruitAcceptOrCancel(Player*player, uint32 menuId)
 				player->SetLevel(GetInsLevel(), true);
 
 		std::ostringstream oss;
-		oss << "|cFFFF1717[ÕĞÄ¼ÏµÍ³]|r´óµÀÎŞÇéÈËÓĞÇé£¬[ÕĞÄ¼Õß]|cFF0177EC" << sCF->GetNameLink(recruiter) << "|rÓë|cFF0177EC" << sCF->GetNameLink(player) << "|r½¨Á¢»ï°é¹ØÏµ";
+		oss << "|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|rå¤§é“æ— æƒ…äººæœ‰æƒ…ï¼Œ[æ‹›å‹Ÿè€…]|cFF0177EC" << sCF->GetNameLink(recruiter) << "|rä¸|cFF0177EC" << sCF->GetNameLink(player) << "|rå»ºç«‹ä¼™ä¼´å…³ç³»";
 		sWorld->SendScreenMessage(oss.str().c_str());
 		sCF->CompleteQuest(recruiter, 30003);
 	}
@@ -137,7 +136,7 @@ void Recruit::Load()
 	RecruitOrDissVec.clear();
 	QueryResult result2 = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 		//			0				1				2				3						4						5			6					7					8					9					10						11						12					13
-		"SELECT ÕĞÄ¼ĞèÇóÄ£°åID,ÕĞÄ¼Õß½±ÀøÄ£°åID,±»ÕĞÄ¼Õß½±ÀøÄ£°åID,ÕĞÄ¼Õß½â³ıÕĞÄ¼ĞèÇóÄ£°åID,±»ÕĞÄ¼Õß½â³ıÕĞÄ¼ĞèÇóÄ£°åID,ÕĞÄ¼ÊıÁ¿ÉÏÏŞ,ÊÇ·ñÔÊĞí¿çÕóÓªÕĞÄ¼,±»ÕĞÄ¼ÕßÁ¢¼´ÌáÉıµÈ¼¶,ÕĞÄ¼Õß»ñÈ¡½±ÀøÀÛ¼ÆÊ±¼ä1,ÕĞÄ¼Õß»ñÈ¡½±ÀøÄ£°åID1,ÕĞÄ¼Õß»ñÈ¡½±ÀøÀÛ¼ÆÊ±¼ä2,ÕĞÄ¼Õß»ñÈ¡½±ÀøÄ£°åID2,ÕĞÄ¼Õß»ñÈ¡½±ÀøÀÛ¼ÆÊ±¼ä3,ÕĞÄ¼Õß»ñÈ¡½±ÀøÄ£°åID3 FROM __ÕĞÄ¼" :
+		"SELECT æ‹›å‹Ÿéœ€æ±‚æ¨¡æ¿ID,æ‹›å‹Ÿè€…å¥–åŠ±æ¨¡æ¿ID,è¢«æ‹›å‹Ÿè€…å¥–åŠ±æ¨¡æ¿ID,æ‹›å‹Ÿè€…è§£é™¤æ‹›å‹Ÿéœ€æ±‚æ¨¡æ¿ID,è¢«æ‹›å‹Ÿè€…è§£é™¤æ‹›å‹Ÿéœ€æ±‚æ¨¡æ¿ID,æ‹›å‹Ÿæ•°é‡ä¸Šé™,æ˜¯å¦å…è®¸è·¨é˜µè¥æ‹›å‹Ÿ,è¢«æ‹›å‹Ÿè€…ç«‹å³æå‡ç­‰çº§,æ‹›å‹Ÿè€…è·å–å¥–åŠ±ç´¯è®¡æ—¶é—´1,æ‹›å‹Ÿè€…è·å–å¥–åŠ±æ¨¡æ¿ID1,æ‹›å‹Ÿè€…è·å–å¥–åŠ±ç´¯è®¡æ—¶é—´2,æ‹›å‹Ÿè€…è·å–å¥–åŠ±æ¨¡æ¿ID2,æ‹›å‹Ÿè€…è·å–å¥–åŠ±ç´¯è®¡æ—¶é—´3,æ‹›å‹Ÿè€…è·å–å¥–åŠ±æ¨¡æ¿ID3 FROM __æ‹›å‹Ÿ" :
 		//			0	1		2		3		4			5			6				7			8			9			10			11				12			13
 		"SELECT reqId,rewId1,rewId2,disReqId1,disReqId2,playersLimit,allowCrossFaction,insLevel,timeForRew1,timeForRewId1,timeForRew2,timeForRewId2,timeForRew3,timeForRewId3 FROM _recruit");
 	if (result2)
@@ -166,7 +165,7 @@ void Recruit::Load()
 
 	RecruitLootMap.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
-		"SELECT ÎïÆ·ID,¹²ÏíÊıÁ¿ÉÏÏŞ, ¹²Ïí¼¸ÂÊ,±»ÕĞÄ¼ÕßÍ¬Ê±»ñÈ¡½±Àø¼¸ÂÊ,±»ÕĞÄ¼ÕßÍ¬Ê±»ñÈ¡½±ÀøÎïÆ·ÉÏÏŞ FROM __ÕĞÄ¼_µôÂä¹²Ïí" :
+		"SELECT ç‰©å“ID,å…±äº«æ•°é‡ä¸Šé™, å…±äº«å‡ ç‡,è¢«æ‹›å‹Ÿè€…åŒæ—¶è·å–å¥–åŠ±å‡ ç‡,è¢«æ‹›å‹Ÿè€…åŒæ—¶è·å–å¥–åŠ±ç‰©å“ä¸Šé™ FROM __æ‹›å‹Ÿ_æ‰è½å…±äº«" :
 		"SELECT entry,shareCountLimit, shareChance,rewChanceOnShare,rewCountLimit FROM _recruit_lootshare");
 	if (result)
 	{
@@ -266,13 +265,13 @@ void Recruit::RecruitItemReward(Player* player, Item* newItem, uint32 count)
 	if (recruiter)
 	{
 		std::string itemlink = sCF->GetItemLink(newItem->GetEntry());
-		ChatHandler(recruiter->GetSession()).PSendSysMessage("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|rÄã»ñµÃ|cFF0177EC%s|rµÄ¹²ÏíµôÂä%s X %u", sCF->GetNameLink(player).c_str(), itemlink.c_str(), recruiterItemCount);
+		ChatHandler(recruiter->GetSession()).PSendSysMessage("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|rä½ è·å¾—|cFF0177EC%s|rçš„å…±äº«æ‰è½%s X %u", sCF->GetNameLink(player).c_str(), itemlink.c_str(), recruiterItemCount);
 		recruiter->AddItem(entry, recruiterItemCount);
 
 		if (followerItemCount)
 		{
 			player->AddItem(entry, followerItemCount);
-			ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|r|cFF0177EC%s|r»ñµÃÄãµÄ¹²ÏíµôÂä%s X %u£¬²¢ÇÒÄã»ñµÃ¶îÍâ½±Àø%s X %u", sCF->GetNameLink(recruiter).c_str(), itemlink.c_str(), recruiterItemCount, itemlink.c_str(), followerItemCount);
+			ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|r|cFF0177EC%s|rè·å¾—ä½ çš„å…±äº«æ‰è½%s X %uï¼Œå¹¶ä¸”ä½ è·å¾—é¢å¤–å¥–åŠ±%s X %u", sCF->GetNameLink(recruiter).c_str(), itemlink.c_str(), recruiterItemCount, itemlink.c_str(), followerItemCount);
 		}
 	}		
 }
@@ -372,19 +371,19 @@ void Recruit::RecruitTelePort(Player* player, uint32 targetGUIDLow)
 	{
 		if (target->InBattleground())
 		{
-			player->GetSession()->SendNotification("´«ËÍÊ§°Ü£¬Ä¿±êÔÚÕ½³¡ÖĞ£¡");
+			player->GetSession()->SendNotification("ä¼ é€å¤±è´¥ï¼Œç›®æ ‡åœ¨æˆ˜åœºä¸­ï¼");
 			return;
 		}
 			
 		if (target->GetMap()->IsDungeon())
 		{
-			player->GetSession()->SendNotification("´«ËÍÊ§°Ü£¬Ä¿±êÔÚ¸±±¾ÖĞ£¡");
+			player->GetSession()->SendNotification("ä¼ é€å¤±è´¥ï¼Œç›®æ ‡åœ¨å‰¯æœ¬ä¸­ï¼");
 			return;
 		}
 
 		player->TeleportTo(target->GetWorldLocation());
 	}else
-		player->GetSession()->SendNotification("´«ËÍÄ¿±ê²»ÔÚÏß£¡");
+		player->GetSession()->SendNotification("ä¼ é€ç›®æ ‡ä¸åœ¨çº¿ï¼");
 }
 
 
@@ -521,22 +520,22 @@ public:
 		{	
 			sRecruit->UpdateHasRewad(player, 1);
 			std::ostringstream oss;
-			oss << "\n\nÕâÊÇÀ´×ÔÍæ¼Ò[|cFFFF1717" << player->GetName() << "|r]µÄµÚÒ»´ÎÕĞÄ¼½±Àø\n\n×£ÄãÔÚ°¬ÔóÀ­Ë¹µÄÃ°ÏÕÖ®ÂÃ³äÂúÀÖÈ¤£¡";
-			sRew->MailRew(player, recruiterGUIDLow, sRecruit->GetTimeForRewId1(), "ÕĞÄ¼½±Àø(Ò»)", oss.str());
+			oss << "\n\nè¿™æ˜¯æ¥è‡ªç©å®¶[|cFFFF1717" << player->GetName() << "|r]çš„ç¬¬ä¸€æ¬¡æ‹›å‹Ÿå¥–åŠ±\n\nç¥ä½ åœ¨è‰¾æ³½æ‹‰æ–¯çš„å†’é™©ä¹‹æ—…å……æ»¡ä¹è¶£ï¼";
+			sRew->MailRew(player, recruiterGUIDLow, sRecruit->GetTimeForRewId1(), "æ‹›å‹Ÿå¥–åŠ±(ä¸€)", oss.str());
 		}
 		if (!hasReward2 && (player->GetTotalPlayedTime() - playedTime > sRecruit->GetTimeForRew2()) && (sRecruit->GetTimeForRew2() > 0))
 		{
 			sRecruit->UpdateHasRewad(player, 2);
 			std::ostringstream oss;
-			oss << "\n\nÕâÊÇÀ´×ÔÍæ¼Ò[|cFFFF1717" << player->GetName() << "|r]µÄµÚ¶ş´ÎÕĞÄ¼½±Àø\n\n×£ÄãÔÚ°¬ÔóÀ­Ë¹µÄÃ°ÏÕÖ®ÂÃ³äÂúÀÖÈ¤£¡";		
-			sRew->MailRew(player, recruiterGUIDLow, sRecruit->GetTimeForRewId2(), "ÕĞÄ¼½±Àø(¶ş)", oss.str());
+			oss << "\n\nè¿™æ˜¯æ¥è‡ªç©å®¶[|cFFFF1717" << player->GetName() << "|r]çš„ç¬¬äºŒæ¬¡æ‹›å‹Ÿå¥–åŠ±\n\nç¥ä½ åœ¨è‰¾æ³½æ‹‰æ–¯çš„å†’é™©ä¹‹æ—…å……æ»¡ä¹è¶£ï¼";		
+			sRew->MailRew(player, recruiterGUIDLow, sRecruit->GetTimeForRewId2(), "æ‹›å‹Ÿå¥–åŠ±(äºŒ)", oss.str());
 		}
 		if (!hasReward3 && (player->GetTotalPlayedTime() - playedTime > sRecruit->GetTimeForRew3()) && (sRecruit->GetTimeForRew3() > 0))
 		{
 			sRecruit->UpdateHasRewad(player, 3);
 			std::ostringstream oss;
-			oss << "n\nÕâÊÇÀ´×ÔÍæ¼Ò[|cFFFF1717" << player->GetName() << "|r]µÄµÚÈı´ÎÕĞÄ¼½±Àø\n\n×£ÄãÔÚ°¬ÔóÀ­Ë¹µÄÃ°ÏÕÖ®ÂÃ³äÂúÀÖÈ¤£¡";	
-			sRew->MailRew(player, recruiterGUIDLow, sRecruit->GetTimeForRewId3(), "ÕĞÄ¼½±Àø(Èı)", oss.str());
+			oss << "n\nè¿™æ˜¯æ¥è‡ªç©å®¶[|cFFFF1717" << player->GetName() << "|r]çš„ç¬¬ä¸‰æ¬¡æ‹›å‹Ÿå¥–åŠ±\n\nç¥ä½ åœ¨è‰¾æ³½æ‹‰æ–¯çš„å†’é™©ä¹‹æ—…å……æ»¡ä¹è¶£ï¼";	
+			sRew->MailRew(player, recruiterGUIDLow, sRecruit->GetTimeForRewId3(), "æ‹›å‹Ÿå¥–åŠ±(ä¸‰)", oss.str());
 		}
 	}
 };
@@ -548,7 +547,7 @@ void Recruit::UpdateHasRewad(Player* player, uint32 flag)
 	for (uint32 i = 0; i < len; i++)
 		if (RecruitInfo[i].friendGUIDLow == player->GetGUIDLow())
 		{
-			player->GetSession()->SendNotification("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|rÕĞÄ¼ÄãµÄÈËÒÑ»ñµÃ½±Àø");
+			player->GetSession()->SendNotification("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|ræ‹›å‹Ÿä½ çš„äººå·²è·å¾—å¥–åŠ±");
 			switch (flag)
 			{
 			case 1:
@@ -579,10 +578,10 @@ void AddSC_RECRUIT()
 
 void Recruit::AddMainMenu(Player* player, Object* obj)
 {
-	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "ÕĞÄ¼ĞÂµÄ»ï°é", SENDER_RECRUIT_NEW, GOSSIP_ACTION_INFO_DEF, "", 0, true);
-	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "½â³ıÕĞÄ¼¹ØÏµ", SENDER_RECRUIT_CHAR_DISS_LIST, GOSSIP_ACTION_INFO_DEF);
-	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "²é¿´ÕĞÄ¼ĞÅÏ¢", SENDER_RECRUIT_CHAR_INFO_LIST, GOSSIP_ACTION_INFO_DEF);
-	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Ö§Ô®ÔÚÏß»ï°é", SENDER_RECRUIT_CHAR_TELE_LIST, GOSSIP_ACTION_INFO_DEF);
+	player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "æ‹›å‹Ÿæ–°çš„ä¼™ä¼´", SENDER_RECRUIT_NEW, GOSSIP_ACTION_INFO_DEF, "", 0, true);
+	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "è§£é™¤æ‹›å‹Ÿå…³ç³»", SENDER_RECRUIT_CHAR_DISS_LIST, GOSSIP_ACTION_INFO_DEF);
+	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æŸ¥çœ‹æ‹›å‹Ÿä¿¡æ¯", SENDER_RECRUIT_CHAR_INFO_LIST, GOSSIP_ACTION_INFO_DEF);
+	player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "æ”¯æ´åœ¨çº¿ä¼™ä¼´", SENDER_RECRUIT_CHAR_TELE_LIST, GOSSIP_ACTION_INFO_DEF);
 	if (obj->ToCreature())
 		player->SEND_GOSSIP_MENU(obj->GetEntry(), obj->GetGUID());
 	else
@@ -602,9 +601,9 @@ bool Recruit::AddSubMenuOrDoAction(Player* player, Object* obj, uint32 sender, u
 			uint64 recruiterGUID = MAKE_NEW_GUID(GetRecruiterData(player)->guidLow, 0, HIGHGUID_PLAYER);
 
 			if (ObjectAccessor::FindPlayerInOrOutOfWorld(recruiterGUID))
-				oss << "[|cFF0177ECÔÚÏß|r]";
+				oss << "[|cFF0177ECåœ¨çº¿|r]";
 			else
-				oss << "[|cFFFF1717ÀëÏß|r]";
+				oss << "[|cFFFF1717ç¦»çº¿|r]";
 			oss << "|cFFFF1717";
 			oss << GetRecruiterData(player)->name;
 			oss << "|r";
@@ -620,9 +619,9 @@ bool Recruit::AddSubMenuOrDoAction(Player* player, Object* obj, uint32 sender, u
 			uint64 friendGUID = MAKE_NEW_GUID(friendsDataList[i]->guidLow, 0, HIGHGUID_PLAYER);
 
 			if (ObjectAccessor::FindPlayerInOrOutOfWorld(friendGUID))
-				oss << "[|cFF0177ECÔÚÏß|r]";
+				oss << "[|cFF0177ECåœ¨çº¿|r]";
 			else
-				oss << "[|cFFFF1717ÀëÏß|r]";
+				oss << "[|cFFFF1717ç¦»çº¿|r]";
 
 			oss << "|cFF0177EC";
 			oss << friendsDataList[i]->name;
@@ -640,9 +639,9 @@ bool Recruit::AddSubMenuOrDoAction(Player* player, Object* obj, uint32 sender, u
 		if (playerData)
 		{
 			std::ostringstream oss;
-			oss << "Ãû×Ö£º" << playerData->name << "\n";
-			oss << "µÈ¼¶ :" << playerData->level << "\n";;
-			oss << "¹«»á :" << sGuildMgr->GetGuildNameById(playerData->guildId) << "\n";
+			oss << "åå­—ï¼š" << playerData->name << "\n";
+			oss << "ç­‰çº§ :" << playerData->level << "\n";;
+			oss << "å…¬ä¼š :" << sGuildMgr->GetGuildNameById(playerData->guildId) << "\n";
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, oss.str(), SENDER_RECRUIT_CHAR_INFO, action);
 		}
 	}
@@ -657,14 +656,14 @@ bool Recruit::AddSubMenuOrDoAction(Player* player, Object* obj, uint32 sender, u
 			uint64 recruiterGUID = MAKE_NEW_GUID(GetRecruiterData(player)->guidLow, 0, HIGHGUID_PLAYER);
 
 			if (ObjectAccessor::FindPlayerInOrOutOfWorld(recruiterGUID))
-				oss << "[|cFF0177ECÔÚÏß|r]";
+				oss << "[|cFF0177ECåœ¨çº¿|r]";
 			else
-				oss << "[|cFFFF1717ÀëÏß|r]";
+				oss << "[|cFFFF1717ç¦»çº¿|r]";
 
 			oss << "|cFFFF1717";
 			oss << GetRecruiterData(player)->name;
 			oss << "|r";
-			player->ADD_GOSSIP_ITEM_EXTENDED(0, oss.str(), SENDER_RECRUIT_CHAR_DISMISS, 0, sReq->Notice(player, GetDissReqId2(), "ÒÆ³ı", "ÕĞÄ¼¹ØÏµ"), sReq->Golds(GetDissReqId2()), false);
+			player->ADD_GOSSIP_ITEM_EXTENDED(0, oss.str(), SENDER_RECRUIT_CHAR_DISMISS, 0, sReq->Notice(player, GetDissReqId2(), "ç§»é™¤", "æ‹›å‹Ÿå…³ç³»"), sReq->Golds(GetDissReqId2()), false);
 		}
 
 		std::vector<GlobalPlayerData const*> friendsDataList;
@@ -677,15 +676,15 @@ bool Recruit::AddSubMenuOrDoAction(Player* player, Object* obj, uint32 sender, u
 			uint64 friendGUID = MAKE_NEW_GUID(friendsDataList[i]->guidLow, 0, HIGHGUID_PLAYER);
 
 			if (ObjectAccessor::FindPlayerInOrOutOfWorld(friendGUID))
-				oss << "[|cFF0177ECÔÚÏß|r]";
+				oss << "[|cFF0177ECåœ¨çº¿|r]";
 			else
-				oss << "[|cFFFF1717ÀëÏß|r]";
+				oss << "[|cFFFF1717ç¦»çº¿|r]";
 
 			oss << "|cFF0177EC";
 			oss << friendsDataList[i]->name;
 			oss << "|r";
 
-			player->ADD_GOSSIP_ITEM_EXTENDED(0, oss.str(), SENDER_RECRUIT_CHAR_DISMISS, friendsDataList[i]->guidLow, sReq->Notice(player, GetDissReqId1(), "ÒÆ³ı", "ÕĞÄ¼¹ØÏµ"), sReq->Golds(GetDissReqId1()), false);
+			player->ADD_GOSSIP_ITEM_EXTENDED(0, oss.str(), SENDER_RECRUIT_CHAR_DISMISS, friendsDataList[i]->guidLow, sReq->Notice(player, GetDissReqId1(), "ç§»é™¤", "æ‹›å‹Ÿå…³ç³»"), sReq->Golds(GetDissReqId1()), false);
 		}
 		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, obj->GetGUID());
 	}
@@ -722,7 +721,7 @@ bool Recruit::AddSubMenuOrDoAction(Player* player, Object* obj, uint32 sender, u
 
 			if (ObjectAccessor::FindPlayerInOrOutOfWorld(recruiterGUID))
 			{
-				oss << "[|cFF0177ECÔÚÏß|r]";
+				oss << "[|cFF0177ECåœ¨çº¿|r]";
 				oss << "|cFFFF1717";
 				oss << GetRecruiterData(player)->name;
 				oss << "|r";
@@ -740,7 +739,7 @@ bool Recruit::AddSubMenuOrDoAction(Player* player, Object* obj, uint32 sender, u
 
 			if (ObjectAccessor::FindPlayerInOrOutOfWorld(friendGUID))
 			{
-				oss << "[|cFF0177ECÔÚÏß|r]";
+				oss << "[|cFF0177ECåœ¨çº¿|r]";
 				oss << "|cFF0177EC";
 				oss << friendsDataList[i]->name;
 				oss << "|r";
@@ -779,14 +778,14 @@ bool Recruit::RecruitFriend(Player* player, uint32 sender, const char* name)
 
 	if (!normalizePlayerName(pName))
 	{
-		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|rÊä³öµÄÃû×ÖÓĞÎó");
+		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|rè¾“å‡ºçš„åå­—æœ‰è¯¯");
 		return true;
 	}
 
 	uint32 GUIDLow = sWorld->GetGlobalPlayerGUID(pName);
 	if (!GUIDLow)
 	{
-		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|rÕĞÄ¼µÄÍæ¼Ò²»´æÔÚ");
+		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|ræ‹›å‹Ÿçš„ç©å®¶ä¸å­˜åœ¨");
 		return true;
 	}
 
@@ -796,7 +795,7 @@ bool Recruit::RecruitFriend(Player* player, uint32 sender, const char* name)
 
 	if (!pFriend)
 	{
-		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|rÕĞÄ¼µÄÍæ¼Ò²»ÔÚÏß");
+		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|ræ‹›å‹Ÿçš„ç©å®¶ä¸åœ¨çº¿");
 		return true;
 	}
 
@@ -805,31 +804,31 @@ bool Recruit::RecruitFriend(Player* player, uint32 sender, const char* name)
 
 	if (strcmp(ip1.c_str(), ip2.c_str()) == 0 && player->GetSession()->GetSecurity() < SEC_ADMINISTRATOR)
 	{
-		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|rÍ¬Ò»IPµÄÍæ¼Ò²»ÄÜÕĞÄ¼");
+		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|råŒä¸€IPçš„ç©å®¶ä¸èƒ½æ‹›å‹Ÿ");
 		return true;
 	}
 	
 	if (!CrossFaction() && player->GetTeamId() != pFriend->GetTeamId())
 	{
-		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|rÖ»ÄÜÕĞÄ¼Í¬Ò»ÕóÓªÍæ¼Ò");
+		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|råªèƒ½æ‹›å‹ŸåŒä¸€é˜µè¥ç©å®¶");
 		return true;
 	}
 
 	if (IsRecruited(pFriend))
 	{
-		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|r|cFF0177EC%s|rÒÑ±»ÕĞÄ¼", sCF->GetNameLink(pFriend).c_str());
+		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|r|cFF0177EC%s|rå·²è¢«æ‹›å‹Ÿ", sCF->GetNameLink(pFriend).c_str());
 		return true;
 	}
 
 	if (GetFriendAmount(player) >= GetPlayersLimit())
 	{
-		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|rÄã²»ÄÜÕĞÄ¼¸ü¶àÍæ¼Ò");
+		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|rä½ ä¸èƒ½æ‹›å‹Ÿæ›´å¤šç©å®¶");
 		return true;
 	}
 
 	if (!IsRecruitYourRecruiter(player->GetGUIDLow(), pFriend->GetGUIDLow()))
 	{
-		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|rÄã²»ÄÜÕĞÄ¼ÄãµÄÕĞÄ¼Õß");
+		ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|rä½ ä¸èƒ½æ‹›å‹Ÿä½ çš„æ‹›å‹Ÿè€…");
 		return true;
 	}
 
@@ -841,10 +840,10 @@ bool Recruit::RecruitFriend(Player* player, uint32 sender, const char* name)
 	std::ostringstream oss;
 	oss << "|cFF0177EC";
 	oss << sCF->GetNameLink(player);
-	oss << "|rÕıÔÚÕĞÄ¼Äã";
+	oss << "|ræ­£åœ¨æ‹›å‹Ÿä½ ";
 	PopMsg(pFriend, RECRUIT_MENU_ID, oss.str());
 
-	ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[ÕĞÄ¼ÏµÍ³]|rÏò|cFF0177EC%s|r·¢ËÍÕĞÄ¼ÉêÇë³É¹¦£¡",sCF->GetNameLink(pFriend).c_str());
+	ChatHandler(player->GetSession()).PSendSysMessage("|cFFFF1717[æ‹›å‹Ÿç³»ç»Ÿ]|rå‘|cFF0177EC%s|rå‘é€æ‹›å‹Ÿç”³è¯·æˆåŠŸï¼",sCF->GetNameLink(pFriend).c_str());
 
 	return true;
 }

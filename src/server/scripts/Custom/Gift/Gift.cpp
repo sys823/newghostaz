@@ -1,16 +1,14 @@
-#pragma execution_character_set("utf-8")
 #include "Gift.h"
 #include "../Reward/Reward.h"
 #include "../CommonFunc/CommonFunc.h"
 
 std::vector<GiftTemplate> GiftVec;
-
 void Gift::Load()
 {
 	GiftVec.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
 		//			0		1			2
-		"SELECT ÉÏÏßÊ±³¤,½±ÀøÄ£°åID,µ¯´°ÌáÊ¾ÎÄ±¾ from __ÉÏÏß½±ÀøÓëÌáÊ¾" :
+		"SELECT ä¸Šçº¿æ—¶é•¿,å¥–åŠ±æ¨¡æ¿ID,å¼¹çª—æç¤ºæ–‡æœ¬ from __ä¸Šçº¿å¥–åŠ±ä¸æç¤º" :
 		//		0		1	2
 		"SELECT time,rewId,notice from _gift");
 	if (!result)

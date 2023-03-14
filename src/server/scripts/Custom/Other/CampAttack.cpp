@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "../PrecompiledHeaders/ScriptPCH.h"
 #include "../CommonFunc/CommonFunc.h"
 enum Events
@@ -28,7 +27,7 @@ enum GOBS
 };
 static Position PortLocation[] =
 {
-	// ´«ËÍÃÅË¢ĞÂÎ»ÖÃ
+	// ä¼ é€é—¨åˆ·æ–°ä½ç½®
 	{ -515.860f, 17.0702f, 49.6485f, 0 }, // 0
 	{ -503.188f, 4.16218f, 51.8489f, 0 }, // 1
 	{ -500.943f, 36.2931f, 50.6729f, 0 }, // 2
@@ -111,7 +110,7 @@ public:
 				}
 				CampAttackStartFlag = false;
 				_events.ScheduleEvent(CALL_PORT, 1000);
-				sWorld->SendGlobalText("ĞÂ±øÓªµØÕıÔÚ±»¹¥»÷£¡", NULL);
+				sWorld->SendGlobalText("æ–°å…µè¥åœ°æ­£åœ¨è¢«æ”»å‡»ï¼", NULL);
 			}
 			_events.Update(diff);
 
@@ -140,7 +139,7 @@ public:
 					break;
 				case GROUND_SHAKE:
 				{
-					//É¾³ı´«ËÍÃÅ
+					//åˆ é™¤ä¼ é€é—¨
 					std::list<Creature*> NPCPorts;
 					me->GetCreatureListWithEntryInGrid(NPCPorts, NPC_PORT, 300.0f);
 					if (!NPCPorts.empty())
@@ -179,14 +178,14 @@ public:
 				case CALL_RAGNAROS:
 				{
 					Creature* ragnaros = me->SummonCreature(NPC_RAGNAROS, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(),0, TEMPSUMMON_TIMED_DESPAWN, 15000);
-					if (ragnaros) ragnaros->MonsterYell("ÕâÀï½«ÉÕ³É»Ò½ı£¬É­Â¬¿Ï£¬Ö´ĞĞÎÒµÄÒâÖ¾£¡", LANG_UNIVERSAL, NULL);
+					if (ragnaros) ragnaros->MonsterYell("è¿™é‡Œå°†çƒ§æˆç°çƒ¬ï¼Œæ£®å¢è‚¯ï¼Œæ‰§è¡Œæˆ‘çš„æ„å¿—ï¼", LANG_UNIVERSAL, NULL);
 					_events.ScheduleEvent(CALL_FIREKING, 5000);
 				}		
 					break;
 				case CALL_FIREKING:
 				{
 					Creature* fireking = me->SummonCreature(NPC_FIRE_KING, me->m_positionX + 30, me->m_positionY, me->m_positionZ, 0, TEMPSUMMON_TIMED_DESPAWN, 5 * 60000);
-					if (fireking) fireking->MonsterYell("×ñÃü£¬Î°´óµÄÖ÷ÈË£¡", LANG_UNIVERSAL, NULL);
+					if (fireking) fireking->MonsterYell("éµå‘½ï¼Œä¼Ÿå¤§çš„ä¸»äººï¼", LANG_UNIVERSAL, NULL);
 
 				}
 					break;

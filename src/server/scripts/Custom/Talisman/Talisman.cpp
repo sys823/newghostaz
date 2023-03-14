@@ -1,4 +1,3 @@
-﻿#pragma execution_character_set("utf-8")
 #include "Talisman.h"
 #include "../GCAddon/GCAddon.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -7,7 +6,6 @@
 #include "../Switch/Switch.h"
 
 std::unordered_map<uint32, uint32> TalismanMap;
-
 void Talisman::Load()
 {
 	TalismanMap.clear();

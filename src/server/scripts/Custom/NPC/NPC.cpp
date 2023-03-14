@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "NPC.h"
 #include "../CustomEvent/Event.h"
 
@@ -21,19 +20,19 @@ void Story::Load()
 	//
 	//	StoryAction action = STORY_ACTION_NONE;
 	//
-	//	if (strcmp("ø™ º", s) == 0)
+	//	if (strcmp("ÂºÄÂßã", s) == 0)
 	//		action = STORY_ACTION_START;
-	//	else if (strcmp("“∆∂Ø", s) == 0)
+	//	else if (strcmp("ÁßªÂä®", s) == 0)
 	//		action = STORY_ACTION_MOVE;
-	//	else if (strcmp("Àµª∞", s) == 0)
+	//	else if (strcmp("ËØ¥ËØù", s) == 0)
 	//		action = STORY_ACTION_SAY;
-	//	else if (strcmp("¥Û∫∞", s) == 0)
+	//	else if (strcmp("Â§ßÂñä", s) == 0)
 	//		action = STORY_ACTION_YELL;
-	//	else if (strcmp("±Ì«È", s) == 0)
+	//	else if (strcmp("Ë°®ÊÉÖ", s) == 0)
 	//		action = STORY_ACTION_EMOTE;
-	//	else if (strcmp("ººƒ‹", s) == 0)
+	//	else if (strcmp("ÊäÄËÉΩ", s) == 0)
 	//		action = STORY_ACTION_SPELL;
-	//	else if (strcmp("Ω· ¯", s) == 0)
+	//	else if (strcmp("ÁªìÊùü", s) == 0)
 	//		action = STORY_ACTION_END;
 	//
 	//	

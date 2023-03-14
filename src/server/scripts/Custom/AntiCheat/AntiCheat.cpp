@@ -1,4 +1,3 @@
-﻿#pragma execution_character_set("utf-8")
 #include "AntiCheat.h"
 #include "../Switch/Switch.h"
 #include "AccountMgr.h"

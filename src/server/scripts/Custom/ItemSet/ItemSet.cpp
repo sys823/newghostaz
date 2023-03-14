@@ -1,5 +1,6 @@
 #include "ItemSet.h"
 
+
 std::vector<ItemSetTemplate> ItemSetVec;
 std::vector<ItemSetItemsTemplate> ItemSetItemsVec;
 
@@ -97,7 +98,7 @@ void ItemSet::AddAllSpell(Player* player)
 				player->InvSetVec.push_back(ID);
 		}
 
-	//Ñ§Ï°ĞÂµÄÌ××°¼¼ÄÜ
+	//å­¦ä¹ æ–°çš„å¥—è£…æŠ€èƒ½
 	std::vector<uint32 /*spell*/> spellVec;
 
 	for (std::vector<uint32>::iterator itr = player->InvSetVec.begin(); itr != player->InvSetVec.end(); itr++)
@@ -143,7 +144,7 @@ void ItemSet::UpdateSpell(Player* player, uint32 addEntry, uint32 remEntry)
 	if (remID == addID)
 		return;
 
-	//ĞèÒªÒÆ³ı¼¼ÄÜVEC
+	//éœ€è¦ç§»é™¤æŠ€èƒ½VEC
 
 	std::vector<uint32 /*spell*/> remVec;
 
@@ -167,7 +168,7 @@ void ItemSet::UpdateSpell(Player* player, uint32 addEntry, uint32 remEntry)
 		}		
 	}
 
-	//ĞÂÌ××°¼¼ÄÜVEC
+	//æ–°å¥—è£…æŠ€èƒ½VEC
 
 	std::vector<uint32 /*spell*/> addVec;
 
@@ -191,7 +192,7 @@ void ItemSet::UpdateSpell(Player* player, uint32 addEntry, uint32 remEntry)
 			}
 	}
 
-	//È¥ÖØ
+	//å»é‡
 	for (std::vector<uint32 /*spell*/>::iterator i = remVec.begin(); i != remVec.end();)
 	{		
 		if (std::find(addVec.begin(), addVec.end(), *i) != addVec.end())
@@ -200,12 +201,12 @@ void ItemSet::UpdateSpell(Player* player, uint32 addEntry, uint32 remEntry)
 			++i;
 	}	
 
-	//ÒÆ³ı¼¼ÄÜ
+	//ç§»é™¤æŠ€èƒ½
 	for (std::vector<uint32 /*spell*/>::iterator i = remVec.begin(); i != remVec.end(); i++)
 		if (player->HasSpell(*i))
 			player->removeSpell(*i, SPEC_MASK_ALL, false);
 
-	//Ñ§Ï°¼¼ÄÜ
+	//å­¦ä¹ æŠ€èƒ½
 	for (std::vector<uint32 /*spell*/>::iterator i = addVec.begin(); i != addVec.end(); i++)
 		if (!player->HasSpell(*i))
 			player->learnSpell(*i);

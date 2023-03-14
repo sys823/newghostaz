@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "CDK.h"
 #include "../Reward/Reward.h"
 #include <fstream>
@@ -11,7 +10,7 @@ void CDKC::Load()
 	CDKMap.clear();
 
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ¶Ò»»Âë, ½±ÀøÄ£°åID FROM __¶Ò»»Âë" :
+		"SELECT å…‘æ¢ç , å¥–åŠ±æ¨¡æ¿ID FROM __å…‘æ¢ç " :
 		"SELECT cdk, rewId FROM _cdk");
 
 	if (result)
@@ -45,7 +44,7 @@ void CDKC::Create(uint32 count, uint32 rewId, std::string comment)
 {
 	for (size_t i = 0; i < count; i++)
 		WorldDatabase.DirectPExecute(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"INSERT INTO __¶Ò»»Âë(±¸×¢,¶Ò»»Âë,½±ÀøÄ£°åID) VALUES ('%s','%s','%u')" :
+		"INSERT INTO __å…‘æ¢ç (å¤‡æ³¨,å…‘æ¢ç ,å¥–åŠ±æ¨¡æ¿ID) VALUES ('%s','%s','%u')" :
 		"INSERT INTO _cdk(comment,cdk,rewId) VALUES ('%s','%s','%u')", comment, Create(), rewId);
 
 	Load();
@@ -54,18 +53,18 @@ void CDKC::Create(uint32 count, uint32 rewId, std::string comment)
 void CDKC::OutPut()
 {
 	std::ofstream outfile;
-	outfile.open("¶Ò»»Âë.txt");
+	outfile.open("å…‘æ¢ç .txt");
 
 	if (outfile.is_open())
 	{
 		if (QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-			"SELECT ±¸×¢,ID,¶Ò»»Âë,½±ÀøÄ£°åID FROM __¶Ò»»Âë ORDER BY ±¸×¢,ID" :
+			"SELECT å¤‡æ³¨,ID,å…‘æ¢ç ,å¥–åŠ±æ¨¡æ¿ID FROM __å…‘æ¢ç  ORDER BY å¤‡æ³¨,ID" :
 			"SELECT comment,id,cdk,rewId FROM _cdk ORDER BY comment,id"))
 		{
 			do
 			{
 				Field* fields = result->Fetch();
-				outfile << "[" << fields[0].GetString() << "][±àºÅ" << fields[1].GetUInt32() << "][½±Àø" << fields[3].GetUInt32() << "][" << fields[2].GetString() << "]" << std::endl;
+				outfile << "[" << fields[0].GetString() << "][ç¼–å·" << fields[1].GetUInt32() << "][å¥–åŠ±" << fields[3].GetUInt32() << "][" << fields[2].GetString() << "]" << std::endl;
 			} while (result->NextRow());
 		}
 
@@ -83,7 +82,7 @@ void CDKC::AddGossip(Player* player, Object* obj)
 	else
 		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, obj->GetGUID());
 
-	ChatHandler(player->GetSession()).PSendSysMessage("[¶Ò»»Âë]£ºÇëÊäÈëÕıÈ·µÄ¶Ò»»ÂëÀ´»»È¡½±Àø£¡");
+	ChatHandler(player->GetSession()).PSendSysMessage("[å…‘æ¢ç ]ï¼šè¯·è¾“å…¥æ­£ç¡®çš„å…‘æ¢ç æ¥æ¢å–å¥–åŠ±ï¼");
 }
 
 bool CDKC::Redeem(Player* player, uint32 sender, uint32 action, std::string cdk)
@@ -97,13 +96,13 @@ bool CDKC::Redeem(Player* player, uint32 sender, uint32 action, std::string cdk)
 		if (itr != CDKMap.end())
 		{
 			sRew->Rew(player, itr->second);
-			WorldDatabase.PExecute(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? "DELETE FROM __¶Ò»»Âë WHERE ¶Ò»»Âë = '%s'" : "DELETE FROM _CDK WHERE cdk = '%s'", cdk);
-			ChatHandler(player->GetSession()).PSendSysMessage("[¶Ò»»Âë]£º¶Ò»»Íê³É");
+			WorldDatabase.PExecute(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? "DELETE FROM __å…‘æ¢ç  WHERE å…‘æ¢ç  = '%s'" : "DELETE FROM _CDK WHERE cdk = '%s'", cdk);
+			ChatHandler(player->GetSession()).PSendSysMessage("[å…‘æ¢ç ]ï¼šå…‘æ¢å®Œæˆ");
 			CDKMap.erase(itr++);
 			return true;
 		}
 
-		ChatHandler(player->GetSession()).PSendSysMessage("[¶Ò»»Âë]£º¶Ò»»Âë´íÎó");
+		ChatHandler(player->GetSession()).PSendSysMessage("[å…‘æ¢ç ]ï¼šå…‘æ¢ç é”™è¯¯");
 		return true;
 	}
 

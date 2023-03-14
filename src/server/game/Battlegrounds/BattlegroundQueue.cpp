@@ -17,7 +17,7 @@
 #include "Channel.h"
 #include "ScriptMgr.h"
 #include <unordered_map>
-#pragma execution_character_set("utf-8")
+
 #include "../Custom/CustomEvent/FixedTimeBG/FixedTimeBG.h"
 
 std::unordered_map<uint64, uint32> BGSpamProtection;

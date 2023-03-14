@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "VIP.h"
 #include "../Custom/Requirement/Requirement.h"
 #include "../Custom/Reward/Reward.h"
@@ -14,7 +13,7 @@ void VIP::Load()
 	QueryResult result1 = WorldDatabase.PQuery(
 		sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
 		//			0		1			2			3						4							5						6					7					8				9	10	11				12
-		"SELECT ��Ա�ȼ�,��������ģ��ID,���䱶��,��Ʒ����ģʽ0���ӳɹ��ٷֱ�,��Ʒ����ģʽ1���ӳɹ��ٷֱ�,��Ʒǿ�����ӳɹ��ٷֱ�,��ӡǿ�����ӳɹ��ٷֱ�,�Ƴ���ʯ���ӳɹ��ٷֱ�,��������ģ��ID,ͼ��,����,�ݵ㽱��ģ��ID,�˵��ı� from __��Ա" :
+		"SELECT 会员等级,升级需求模板ID,掉落倍率,物品升级模式0增加成功百分比,物品升级模式1增加成功百分比,物品强化增加成功百分比,符印强化增加成功百分比,移除宝石增加成功百分比,升级后奖励模板ID,图标,名称,泡点奖励模板ID,菜单文本 from __会员" :
 		//		0		1		2		3				4			5				6			7			8	9	10		11			12
 		"SELECT vipLv,reqId,lootRate,exchangeRate_0,exchangeRate_1,strengthenRate,sigilRate,removeGemRate,rewId,icon,name,timeRewId,gossipText from _vip");
 	if (result1)
@@ -160,7 +159,7 @@ void VIP::Up(Player* player)
 				GetVIPTitle(player, title, icon);
 
 				std::ostringstream oss;
-				oss << "����µĻ�Ա�ȼ�!" << icon << title;
+				oss << "获得新的会员等级!" << icon << title;
 				player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 				player->CastSpell(player, 61456, true, NULL, NULL, player->GetGUID());
 
@@ -237,7 +236,7 @@ void VIP::AddGossip(Player* player, Object* obj)
 			maxLevel = itr->vipLv;
 
 	if (player->vipLevel < maxLevel)
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "\n<<���������Ա�ȼ�>>\n", SENDER_VIP_UP, GOSSIP_ACTION_INFO_DEF, sReq->Notice(player, GetReqId(player), "����", title), sReq->Golds(GetReqId(player)), false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "\n<<点此升级会员等级>>\n", SENDER_VIP_UP, GOSSIP_ACTION_INFO_DEF, sReq->Notice(player, GetReqId(player), "升级", title), sReq->Golds(GetReqId(player)), false);
 	
 	if (obj->ToCreature())
 		player->SEND_GOSSIP_MENU(obj->GetEntry(), obj->GetGUID());

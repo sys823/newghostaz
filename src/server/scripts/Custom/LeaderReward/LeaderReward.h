@@ -1,4 +1,5 @@
-//¸±±¾ĞÅÏ¢
+
+//å‰¯æœ¬ä¿¡æ¯
 struct LeaderRewardTemplate
 {
 	uint32 mapIdOrZoneId;
@@ -14,14 +15,14 @@ struct LeaderRewardTemplate
 
 extern std::vector<LeaderRewardTemplate> LeaderRewardVec;
 
-//Íæ¼ÒĞÅÏ¢
+//ç©å®¶ä¿¡æ¯
 struct LearderDataTemplate
 {
 	uint32 guid;
-	bool isInstance;/*ÊÇ·ñÊÇ¸±±¾*/
+	bool isInstance;/*æ˜¯å¦æ˜¯å‰¯æœ¬*/
 	uint8 diff;
-	uint32 mapIdOrZoneId;/*¸±±¾Ê¹ÓÃmapId,·Ç¸±±¾Ê¹ÓÃzoneId*/
-	//std::vector<uint32/*bossId*/> BossIdVec;/*»÷É±ºóÈç¹ûÈİÆ÷ÒÑÓĞ´Ë¹ÖÎïĞÅÏ¢ÔòÏÈÇå¿ÕÈİÆ÷ºóÑ¹Èë£¬Èç¹ûÃ»ÓĞÔòÖ±½ÓÑ¹Èë*/
+	uint32 mapIdOrZoneId;/*å‰¯æœ¬ä½¿ç”¨mapId,éå‰¯æœ¬ä½¿ç”¨zoneId*/
+	//std::vector<uint32/*bossId*/> BossIdVec;/*å‡»æ€åå¦‚æœå®¹å™¨å·²æœ‰æ­¤æ€ªç‰©ä¿¡æ¯åˆ™å…ˆæ¸…ç©ºå®¹å™¨åå‹å…¥ï¼Œå¦‚æœæ²¡æœ‰åˆ™ç›´æ¥å‹å…¥*/
 	uint32 bossId;
 };
 

@@ -1,4 +1,4 @@
-#pragma execution_character_set("utf-8")
+
 #include "LuckDraw.h"
 #include "../GCAddon/GCAddon.h"
 #include "../Requirement/Requirement.h"
@@ -12,7 +12,7 @@ void LuckDraw::Load()
 {
 	LuckDrawMap.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ÎïÆ·ID,¼¸ÂÊ,ÎïÆ·ÊıÁ¿ FROM __³é½±" :
+		"SELECT ç‰©å“ID,å‡ ç‡,ç‰©å“æ•°é‡ FROM __æŠ½å¥–" :
 		"SELECT itemId,chance,itemCount FROM _luckdraw");
 	if (!result)
 		return;
@@ -120,7 +120,7 @@ void LuckDraw::Stop(Player* player)
 	if (count < 0)
 	{
 		std::ostringstream oss1;
-		oss1 << "[ĞÒÔË³é½±]" << sCF->GetNameLink(player) << "³éµ½ÁË" << sCF->GetItemLink(itemId) << " X " << abs(count);
+		oss1 << "[å¹¸è¿æŠ½å¥–]" << sCF->GetNameLink(player) << "æŠ½åˆ°äº†" << sCF->GetItemLink(itemId) << " X " << abs(count);
 		sWorld->SendScreenMessage(oss1.str().c_str());
 	}
 }
@@ -187,7 +187,7 @@ void LuckDraw::Rew(Player* player, uint32 rewCount)
 	if (count < 0)
 	{
 		std::ostringstream oss;
-		oss << "[ĞÒÔË³é½±]" << sCF->GetNameLink(player) << "³éµ½ÁË" << sCF->GetItemLink(itemId) << " X " << abs(count);
+		oss << "[å¹¸è¿æŠ½å¥–]" << sCF->GetNameLink(player) << "æŠ½åˆ°äº†" << sCF->GetItemLink(itemId) << " X " << abs(count);
 		sWorld->SendScreenMessage(oss.str().c_str());
 	}
 }

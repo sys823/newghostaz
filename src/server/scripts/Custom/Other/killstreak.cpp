@@ -1,4 +1,4 @@
-﻿#pragma execution_character_set("utf-8")
+﻿
 #include "../PrecompiledHeaders/ScriptPCH.h"
 #include "../DataLoader/DataLoader.h"
 #include "../CommonFunc/CommonFunc.h"

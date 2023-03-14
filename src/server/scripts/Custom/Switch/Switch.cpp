@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Switch.h"
 #include "../CommonFunc/CommonFunc.h"
 #include "BattlegroundMgr.h"
@@ -13,7 +12,7 @@ void Switch::Load()
 {
 	SwitchVec.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT ID, 参数 FROM __通用配置" :
+		"SELECT ID, 鍙傛暟 FROM __閫氱敤閰嶇疆" :
 		"SELECT ID, param FROM _common_setting");
 
 	if (!result) return;

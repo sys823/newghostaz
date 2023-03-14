@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "SpiritPower.h"
 #include "../GCAddon/GCAddon.h"
 
@@ -43,12 +42,12 @@ void SpiritPower::Update(Player* player, uint32 value, bool ins, bool notice)
 	if (gap > 0)
 	{
 		if (notice)
-			ChatHandler(player->GetSession()).PSendSysMessage("[ÁéÁ¦]ÏûºÄ%u", gap);
+			ChatHandler(player->GetSession()).PSendSysMessage("[çµåŠ›]æ¶ˆè€—%u", gap);
 	}
 	else
 	{
 		if (notice)
-			ChatHandler(player->GetSession()).PSendSysMessage("[ÁéÁ¦]Ôö¼Ó%u", abs(gap));
+			ChatHandler(player->GetSession()).PSendSysMessage("[çµåŠ›]å¢åŠ %u", abs(gap));
 	}
 		
 
@@ -64,7 +63,7 @@ void SpiritPower::UpdateMax(Player* player, uint32 maxValue)
 
 	SendPacket(player);
 	CharacterDatabase.DirectPExecute("UPDATE characters SET MaxSpiritPower = %u WHERE guid = %u", maxValue, player->GetGUIDLow());
-	ChatHandler(player->GetSession()).PSendSysMessage("×î´ó[ÁéÁ¦]ÉèÖÃÎª%u", maxValue);
+	ChatHandler(player->GetSession()).PSendSysMessage("æœ€å¤§[çµåŠ›]è®¾ç½®ä¸º%u", maxValue);
 }
 
 void SpiritPower::GetDBValue(Player* player)

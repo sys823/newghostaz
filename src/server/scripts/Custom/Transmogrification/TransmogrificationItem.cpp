@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "../CommonFunc/CommonFunc.h"
 #include "../DataLoader/DataLoader.h"
 #include "../Requirement/Requirement.h"
@@ -13,7 +12,7 @@ public:
 	{
 		player->PlayerTalkClass->ClearMenus();
 		
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "ÊäÈëÎïÆ·±àºÅ", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF, "", 0, true);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "è¾“å…¥ç‰©å“ç¼–å·", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF, "", 0, true);
 		player->SEND_GOSSIP_MENU(creature->GetEntry(), creature->GetGUID());
 		return true;
 	}
@@ -31,21 +30,21 @@ public:
 		ItemTemplate const* pProto = sObjectMgr->GetItemTemplate(entry);
 		if (!pProto || entry >56806)
 		{
-			player->GetSession()->SendNotification("¸ÃÎïÆ·²»´æÔÚ,ÇëÊäÈëÕýÈ·ÎïÆ·ID£¡");
+			player->GetSession()->SendNotification("è¯¥ç‰©å“ä¸å­˜åœ¨,è¯·è¾“å…¥æ­£ç¡®ç‰©å“IDï¼");
 			return false;
 
 		}
 
 		if (pProto->Class != 4 && pProto->Class != 2)
 		{
-			player->GetSession()->SendNotification("¸ÃÎïÆ·²»ÄÜÓÃÓÚ»Ã»¯,ÇëÊäÈëÕýÈ·ÎïÆ·ID£¡");
+			player->GetSession()->SendNotification("è¯¥ç‰©å“ä¸èƒ½ç”¨äºŽå¹»åŒ–,è¯·è¾“å…¥æ­£ç¡®ç‰©å“IDï¼");
 			return false;
 		}
 
 		player->trans_item = entry;
 		player->trans_reqId = sGCAddon->GetTransReqId(entry);
 
-		std::string notice = sReq->Notice(player, player->trans_reqId, "¹ºÂò»Ã»¯ÎïÆ·\n", sCF->GetItemLink(entry));
+		std::string notice = sReq->Notice(player, player->trans_reqId, "è´­ä¹°å¹»åŒ–ç‰©å“\n", sCF->GetItemLink(entry));
 		sCF->SendAcceptOrCancel(player, 999, notice);
 		return true;
 	}

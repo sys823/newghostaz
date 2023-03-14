@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Rank.h"
 #include "../CommonFunc/CommonFunc.h"
 #include "../Reward/Reward.h"
@@ -12,12 +11,11 @@
 
 std::map<uint32, RankTemplate> RankDataMap;
 
-
 void Rank::Load()
 {
 	RankDataMap.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT µÈ¼¶,Éý¼¶Ðè´ïµ½µÄÖµ,Ãû³Æ,²Ëµ¥ÎÄ±¾,Éý¼¶½±ÀøÄ£°åID,Íæ¼ÒÃû×ÖÇ°×º FROM __×Ô¶¨ÒåµÈ¼¶" :
+		"SELECT ç­‰çº§,å‡çº§éœ€è¾¾åˆ°çš„å€¼,åç§°,èœå•æ–‡æœ¬,å‡çº§å¥–åŠ±æ¨¡æ¿ID,çŽ©å®¶åå­—å‰ç¼€ FROM __è‡ªå®šä¹‰ç­‰çº§" :
 		"SELECT level,meetValue,name,gossipText,rewId,prefix FROM _rank");
 	if (!result) return;
 	do
@@ -53,7 +51,7 @@ std::string Rank::GetName(uint32 level)
 	if (iter != RankDataMap.end())
 		return iter->second.name;
 
-	return "[ÎÞ]";
+	return "[æ— ]";
 }
 
 std::string Rank::GetGosstipText(uint32 level)
@@ -115,14 +113,14 @@ void Rank::Update(Player* player, uint32 value/* = 0*/, bool updateDB/* = false*
 	if (player->rankValue > player->maxRankValue)
 	{
 		player->rankLevel++;
-		ChatHandler(player->GetSession()).PSendSysMessage("|cffFF0000[ÐÞÁ¶ÏµÍ³]|r ½ø½×%s", GetName(player->rankLevel).c_str());
+		ChatHandler(player->GetSession()).PSendSysMessage("|cffFF0000[ä¿®ç‚¼ç³»ç»Ÿ]|r è¿›é˜¶%s", GetName(player->rankLevel).c_str());
 		sRew->Rew(player, GetRewId(player->rankLevel));
 		sMapMod->OnEnterMap(player);
 
 		player->rankValue = player->rankValue - player->maxRankValue;
 		player->maxRankValue = GetMeetValue(player->rankLevel);
 
-		//¸üÐÂÇ°×º
+		//æ›´æ–°å‰ç¼€
 		sCharNameMod->UpdatePrefix(player, GetPrefix(player->rankLevel));
 
 		if (player->rankValue > player->maxRankValue)

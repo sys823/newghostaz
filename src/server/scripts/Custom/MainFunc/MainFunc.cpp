@@ -1,4 +1,3 @@
-﻿#pragma execution_character_set("utf-8")
 #include "MainFunc.h"
 #include "../FunctionCollection/FunctionCollection.h"
 #include "../Custom/HonorRank/HonorRank.h"
@@ -176,6 +175,7 @@ void MainFunc::Load()
 	sort(MainFuncVec.begin(), MainFuncVec.end(), GreaterSort);//升序排列
 }
 
+
 bool MainFunc::Pop(uint32 ReqId)
 {
 	auto  itr = ReqMap.find(ReqId);
@@ -228,6 +228,8 @@ MFAgentTypes MainFunc::GetAgentType(Object* obj)
 
 	return MF_TYPE_NONE;
 }
+
+
 
 
 void MainFunc::GetExtraData(Player* pl, Object* obj, uint32 CurMenu, uint32 PreMenu, uint32 &RewId, std::string &Command, uint32 &PosId)

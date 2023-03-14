@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "CommonFunc.h"
 #include "../PrecompiledHeaders/ScriptPCH.h"
 #include "BattlegroundMgr.h"
@@ -83,7 +82,7 @@ void CommonFunc::UpdateTokenAmount(Player* player, uint32 amount, bool ins, std:
 
 	sGCAddon->SendTokenUpdateData(player, amount, ins);
 
-	//»ı·Ö¼àÊÓ
+	//ç§¯åˆ†ç›‘è§†
 	SQLTransaction trans = CharacterDatabase.BeginTransaction();
 	PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_TOKEN);
 	stmt->setString(0, sAntiCheat->GetTimeString());
@@ -105,7 +104,7 @@ void CommonFunc::SetOnlineRewardedCount(Player* player, uint32 count)
 	CharacterDatabase.DirectPExecute("UPDATE characters SET onlineRewardedCount = '%u' WHERE guid = '%u'", count, player->GetGUIDLow());
 }
 
-//µ¯´°
+//å¼¹çª—
 void CommonFunc::SendAcceptOrCancel(Player* player, uint32 id, std::string text, bool quest)
 {
 	if (quest)
@@ -132,7 +131,7 @@ void CommonFunc::SendAcceptOrCancel(Player* player, uint32 id, std::string text,
 	player->GetSession()->SendPacket(&data);
 }
 
-//µ¯´°ÊÂ¼ş´¦Àí
+//å¼¹çª—äº‹ä»¶å¤„ç†
 bool CommonFunc::DoAciotnAfterAccept(Player* player, uint32 id, bool quest)
 {
 	if (quest)
@@ -145,7 +144,7 @@ bool CommonFunc::DoAciotnAfterAccept(Player* player, uint32 id, bool quest)
 				if (player->AddItem(player->buy_item, player->buy_count))
 					sReq->Des(player, player->buy_reqId, player->buy_count);
 				else
-					player->GetSession()->SendNotification("¹ºÂòÊ§°Ü£¬±³°üÒÑÂú»òÎïÆ·Î¨Ò»");
+					player->GetSession()->SendNotification("è´­ä¹°å¤±è´¥ï¼ŒèƒŒåŒ…å·²æ»¡æˆ–ç‰©å“å”¯ä¸€");
 
 				player->buy_item = 0;
 				player->buy_count = 0;
@@ -160,14 +159,14 @@ bool CommonFunc::DoAciotnAfterAccept(Player* player, uint32 id, bool quest)
 
 	switch (id)
 	{
-	case 994://½øÈëµØÍ¼
+	case 994://è¿›å…¥åœ°å›¾
 		if (sReq->Check(player, player->enter_map_req))
 		{
 			sReq->Des(player, player->enter_map_req);
 			player->TeleportTo(player->enter_map_at->target_mapId, player->enter_map_at->target_X, player->enter_map_at->target_Y, player->enter_map_at->target_Z, player->enter_map_at->target_Orientation, TELE_TO_NOT_LEAVE_TRANSPORT);
 		}
 		return true;
-	case 995://Ìì¸³ÏûºÄ
+	case 995://å¤©èµ‹æ¶ˆè€—
 		sTalentReq->DoAction(player);
 		return true;
 	case 996://buy item 
@@ -176,14 +175,14 @@ bool CommonFunc::DoAciotnAfterAccept(Player* player, uint32 id, bool quest)
 			if (player->AddItem(player->buy_item, player->buy_count))
 				sReq->Des(player, player->buy_reqId, player->buy_count);
 			else
-				player->GetSession()->SendNotification("±³°üÒÑÂú");
+				player->GetSession()->SendNotification("èƒŒåŒ…å·²æ»¡");
 
 			player->buy_item  = 0;
 			player->buy_count = 0;
 			player->buy_reqId = 0;
 		}
 		return true;
-	case 997://¹ºÂò×øÆï
+	case 997://è´­ä¹°åéª‘
 		if (sReq->Check(player, player->mountReqId))
 		{
 			sReq->Des(player, player->mountReqId);
@@ -192,20 +191,20 @@ bool CommonFunc::DoAciotnAfterAccept(Player* player, uint32 id, bool quest)
 			player->mountReqId = 0;
 		}
 		return true;
-	case 999://¹ºÂò»Ã»¯
+	case 999://è´­ä¹°å¹»åŒ–
 		if (sReq->Check(player, player->trans_reqId))
 		{
 			if (Item* item = player->AddItemById(player->trans_item, 1))
 			{
 				sReq->Des(player, player->trans_reqId);
-				//Ìí¼Ó»Ã»¯±ê¼Ç
+				//æ·»åŠ å¹»åŒ–æ ‡è®°
 				//player->ApplyEnchantment(item, EnchantmentSlot(PERM_ENCHANTMENT_SLOT), false);
 				//item->SetEnchantment(EnchantmentSlot(PERM_ENCHANTMENT_SLOT), TRANS_FLAG_ENCHANT_ID, 0, 0);
 				//player->ApplyEnchantment(item, EnchantmentSlot(PERM_ENCHANTMENT_SLOT), true);
 			}
 			else
 			{
-				player->GetSession()->SendNotification("±³°üÒÑÂú");
+				player->GetSession()->SendNotification("èƒŒåŒ…å·²æ»¡");
 			}
 			player->trans_reqId = 0;
 			player->trans_item = 0;
@@ -217,7 +216,7 @@ bool CommonFunc::DoAciotnAfterAccept(Player* player, uint32 id, bool quest)
 	return false;
 }
 
-//²¥·ÅÉùÒô
+//æ’­æ”¾å£°éŸ³
 
 void CommonFunc::PlayCustomSound(Player* player, uint32 soundId)
 {
@@ -234,7 +233,7 @@ void CommonFunc::CompleteQuest(Player* player, uint32 questId)
 		player->CompleteQuest(questId);
 }
 
-//»ñÈ¡ÎïÆ·Í¼±ê¡¢Ãû×Ö¼°Á´½Ó
+//è·å–ç‰©å“å›¾æ ‡ã€åå­—åŠé“¾æ¥
 std::string CommonFunc::GetItemIcon(uint32 entry, uint32 width, uint32 height, int x, int y)
 {
 	std::ostringstream ss;
@@ -316,7 +315,7 @@ std::string CommonFunc::GetItemLink(uint32 entry)
 
 }
 
-//»ñÈ¡³É¾Íµã
+//è·å–æˆå°±ç‚¹
 uint32 CommonFunc::GetAchievementPoints(Player* player)
 {
 	CompletedAchievementMap cam = player->getAchievementMgr()->get_m_completedAchievements();
@@ -327,7 +326,7 @@ uint32 CommonFunc::GetAchievementPoints(Player* player)
 	return points;
 }
 
-//¶ÓÎé½±Àø
+//é˜Ÿä¼å¥–åŠ±
 void CommonFunc::GroupReward(Player* player, uint32 rewardTemplateId, uint32 chance)
 {
 	Group* grp = player->GetGroup();
@@ -344,7 +343,7 @@ void CommonFunc::GroupReward(Player* player, uint32 rewardTemplateId, uint32 cha
 		}
 }
 
-//additem °ü°üÂúÊ±sendmail
+//additem åŒ…åŒ…æ»¡æ—¶sendmail
 void CommonFunc::AddOrMailItem(Player* player, uint32 itemId, uint32 count)
 {
 
@@ -360,7 +359,7 @@ void CommonFunc::SetSpeed(Player* player, float multi)
 
 void CommonFunc::SendMsGToAll(std::string str, uint32 type)
 {
-	SessionMap const& smap = sWorld->GetAllSessions();//»ñÈ¡ËùÓĞÔÚÏßÍæ¼Ò
+	SessionMap const& smap = sWorld->GetAllSessions();//è·å–æ‰€æœ‰åœ¨çº¿ç©å®¶
 	for (SessionMap::const_iterator iter = smap.begin(); iter != smap.end(); ++iter)
 		if (Player* player = iter->second->GetPlayer())
 		{
@@ -390,70 +389,70 @@ void CommonFunc::GetRace(Player* player, std::string &race, std::string &raceIco
 	switch (player_race)
 	{
 	case RACE_BLOODELF:
-		race = "|cFFFF1717[Ñª¾«Áé]|r";
+		race = "|cFFFF1717[è¡€ç²¾çµ]|r";
 		if (player_race == GENDER_MALE)
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Bloodelf_Male:14:14:0:-2|t";
 		else
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Bloodelf_Female:14:14:0:-2|t";
 		break;
 	case RACE_DRAENEI:
-		race = "|cFF0177EC[µÂÀ³Äá]|r";
+		race = "|cFF0177EC[å¾·è±å°¼]|r";
 		if (player_race == GENDER_FEMALE)
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Draenei_Female:14:14:0:-2|t";
 		else
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Draenei_Male:14:14:0:-2|t";
 		break;
 	case RACE_DWARF:
-		race = "|cFF0177EC[°«ÈË]|r";
+		race = "|cFF0177EC[çŸ®äºº]|r";
 		if (player_race == GENDER_FEMALE)
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Dwarf_Female:14:14:0:-2|t";
 		else
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Dwarf_Male:14:14:0:-2|t";
 		break;
 	case RACE_GNOME:
-		race = "|cFF0177EC[ÙªÈå]|r";
+		race = "|cFF0177EC[ä¾å„’]|r";
 		if (player_race == GENDER_FEMALE)
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Gnome_Female:14:14:0:-2|t";
 		else
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Gnome_Male:14:14:0:-2|t";
 		break;
 	case RACE_HUMAN:
-		race = "|cFF0177EC[ÈËÀà]|r";
+		race = "|cFF0177EC[äººç±»]|r";
 		if (player_race == GENDER_FEMALE)
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Human_Female:14:14:0:-2|t";
 		else
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Human_Male:14:14:0:-2|t";
 		break;
 	case RACE_NIGHTELF:
-		race = "|cFF0177EC[°µÒ¹¾«Áé]|r";
+		race = "|cFF0177EC[æš—å¤œç²¾çµ]|r";
 		if (player_race == GENDER_FEMALE)
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Nightelf_Female:14:14:0:-2|t";
 		else
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Nightelf_Male:14:14:0:-2|t";
 		break;
 	case RACE_ORC:
-		race = "|cFFFF1717[ÊŞÈË]|r";
+		race = "|cFFFF1717[å…½äºº]|r";
 		if (player_race == GENDER_FEMALE)
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Orc_Female:14:14:0:-2|t";
 		else
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Orc_Male:14:14:0:-2|t";
 		break;
 	case RACE_TAUREN:
-		race = "|cFFFF1717[Å£Í·ÈË]|r";
+		race = "|cFFFF1717[ç‰›å¤´äºº]|r";
 		if (player_race == GENDER_FEMALE)
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Tauren_Female:14:14:0:-2|t";
 		else
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Tauren_Male:14:14:0:-2|t";
 		break;
 	case RACE_TROLL:
-		race = "|cFFFF1717[¾ŞÄ§]|r";
+		race = "|cFFFF1717[å·¨é­”]|r";
 		if (player_race == GENDER_FEMALE)
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Troll_Female:14:14:0:-2|t";
 		else
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Troll_Male:14:14:0:-2|t";
 		break;
 	case RACE_UNDEAD_PLAYER:
-		race = "|cFFFF1717[ÍöÁé]|r";
+		race = "|cFFFF1717[äº¡çµ]|r";
 		if (player_race == GENDER_FEMALE)
 			raceIcon = "|TInterface/ICONS/Achievement_Character_Undead_Female:14:14:0:-2|t";
 		else
@@ -469,43 +468,43 @@ void CommonFunc::GetClass(Player* player, std::string &_class, std::string &clas
 	switch (player_class)
 	{
 	case CLASS_DEATH_KNIGHT:
-		_class = "|cffC41F3B[ËÀÍöÆïÊ¿]|r";
+		_class = "|cffC41F3B[æ­»äº¡éª‘å£«]|r";
 		classIcon = "|TInterface\\icons\\Spell_Deathknight_ClassIcon:14:14:0:-2|t";
 		break;
 	case CLASS_DRUID:
-		_class = "|cffFF7D0A[µÂÂ³ÒÁ]|r";
+		_class = "|cffFF7D0A[å¾·é²ä¼Š]|r";
 		classIcon = "|TInterface\\icons\\Ability_Druid_Maul:14:14:0:-2|t";
 		break;
 	case CLASS_HUNTER:
-		_class = "|cffABD473[ÁÔÈË]|r";
+		_class = "|cffABD473[çŒäºº]|r";
 		classIcon = "|TInterface\\icons\\INV_Weapon_Bow_07:14:14:0:-2|t";
 		break;
 	case CLASS_MAGE:
-		_class = "|cff69CCF0[·¨Ê¦]|r";
+		_class = "|cff69CCF0[æ³•å¸ˆ]|r";
 		classIcon = "|TInterface\\icons\\INV_Staff_13:14:14:0:-2|t";
 		break;
 	case CLASS_PALADIN:
-		_class = "|cffF58CBA[Ê¥ÆïÊ¿]|r";
+		_class = "|cffF58CBA[åœ£éª‘å£«]|r";
 		classIcon = "|TInterface\\icons\\INV_Hammer_01:14:14:0:-2|t";
 		break;
 	case CLASS_PRIEST:
-		_class = "|cffFFFFFF[ÄÁÊ¦]|r";
+		_class = "|cffFFFFFF[ç‰§å¸ˆ]|r";
 		classIcon = "|TInterface\\icons\\INV_Staff_30:14:14:0:-2|t";
 		break;
 	case CLASS_ROGUE:
-		_class = "|cffFFF569[µÁÔô]|r";
+		_class = "|cffFFF569[ç›—è´¼]|r";
 		classIcon = "|TInterface\\icons\\INV_ThrowingKnife_04:14:14:0:-2|t";
 		break;
 	case CLASS_SHAMAN:
-		_class = "|cff0070DE[ÈøÂú¼ÀË¾]|r";
+		_class = "|cff0070DE[è¨æ»¡ç¥­å¸]|r";
 		classIcon = "|TInterface\\icons\\Spell_Nature_BloodLust:14:14:0:-2|t";
 		break;
 	case CLASS_WARLOCK:
-		_class = "|cff9482C9[ÊõÊ¿]|r";
+		_class = "|cff9482C9[æœ¯å£«]|r";
 		classIcon = "|TInterface\\icons\\Spell_Nature_FaerieFire:14:14:0:-2|t";
 		break;
 	case CLASS_WARRIOR:
-		_class = "|cffC79C6E[Õ½Ê¿]|r";
+		_class = "|cffC79C6E[æˆ˜å£«]|r";
 		classIcon = "|TInterface\\icons\\INV_Sword_27.png:14:14:0:-2|t";
 		break;
 	}
@@ -571,34 +570,34 @@ void CommonFunc::GetHRTitle(Player* player, std::string &hrTitle, std::string &h
 	{
 		switch (fakehr)
 		{
-		case 28:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_14:14:14:0:-2|t"; hrTitle = "|cFFFF1717[¸ß½×¶½¾ü]|r"; break;
-		case 27:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_13:14:14:0:-2|t"; hrTitle = "|cFFFF1717[¶½¾ü]|r"; break;
-		case 26:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_12:14:14:0:-2|t"; hrTitle = "|cFFFF1717[½«¾ü]|r"; break;
-		case 25:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_11:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ÖĞ½«]|r"; break;
-		case 24:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_10:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ÓÂÊ¿]|r"; break;
-		case 23:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_09:14:14:0:-2|t"; hrTitle = "|cFFFF1717[°Ù·ò³¤]|r"; break;
-		case 22:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_08:14:14:0:-2|t"; hrTitle = "|cFFFF1717[¾üÍÅÊ¿±ø]|r"; break;
-		case 21:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_07:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ÑªÎÀÊ¿]|r"; break;
-		case 20:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_06:14:14:0:-2|t"; hrTitle = "|cFFFF1717[Ê¯Í·ÊØÎÀ]|r"; break;
-		case 19:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_05:14:14:0:-2|t"; hrTitle = "|cFFFF1717[Ò»µÈ¾üÊ¿³¤]|r"; break;
-		case 18:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_04:14:14:0:-2|t"; hrTitle = "|cFFFF1717[¸ß½×¾üÊ¿]|r"; break;
-		case 17:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_03:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ÖĞÊ¿]|r"; break;
-		case 16:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_02:14:14:0:-2|t"; hrTitle = "|cFFFF1717[²½±ø]|r"; break;
-		case 15:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_01:14:14:0:-2|t"; hrTitle = "|cFFFF1717[³âºò]|r"; break;
-		case 14:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_14:14:14:0:-2|t"; hrTitle = "|cFF0177EC[´óÔªË§]|r"; break;
-		case 13:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_13:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÔªË§]|r"; break;
-		case 12:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_12:14:14:0:-2|t"; hrTitle = "|cFF0177EC[Í³Ë§]|r"; break;
-		case 11:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_11:14:14:0:-2|t"; hrTitle = "|cFF0177EC[Ë¾Áî]|r"; break;
-		case 10:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_10:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÉÙĞ£]|r"; break;
-		case 9:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_09:14:14:0:-2|t"; hrTitle = "|cFF0177EC[»¤ÎÀÆïÊ¿]|r"; break;
-		case 8:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_08:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÆïÊ¿¶Ó³¤]|r"; break;
-		case 7:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_07:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÆïÊ¿ÖĞÎ¾]|r"; break;
-		case 6:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_06:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÆïÊ¿]|r"; break;
-		case 5:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_05:14:14:0:-2|t"; hrTitle = "|cFF0177EC[Ê¿¹Ù³¤]|r"; break;
-		case 4:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_04:14:14:0:-2|t"; hrTitle = "|cFF0177EC[¾üÊ¿³¤]|r"; break;
-		case 3:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_03:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÖĞÊ¿]|r"; break;
-		case 2:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_02:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÏÂÊ¿]|r"; break;
-		case 1:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_01:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÁĞ±ø]|r"; break;
+		case 28:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_14:14:14:0:-2|t"; hrTitle = "|cFFFF1717[é«˜é˜¶ç£å†›]|r"; break;
+		case 27:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_13:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ç£å†›]|r"; break;
+		case 26:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_12:14:14:0:-2|t"; hrTitle = "|cFFFF1717[å°†å†›]|r"; break;
+		case 25:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_11:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ä¸­å°†]|r"; break;
+		case 24:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_10:14:14:0:-2|t"; hrTitle = "|cFFFF1717[å‹‡å£«]|r"; break;
+		case 23:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_09:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ç™¾å¤«é•¿]|r"; break;
+		case 22:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_08:14:14:0:-2|t"; hrTitle = "|cFFFF1717[å†›å›¢å£«å…µ]|r"; break;
+		case 21:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_07:14:14:0:-2|t"; hrTitle = "|cFFFF1717[è¡€å«å£«]|r"; break;
+		case 20:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_06:14:14:0:-2|t"; hrTitle = "|cFFFF1717[çŸ³å¤´å®ˆå«]|r"; break;
+		case 19:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_05:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ä¸€ç­‰å†›å£«é•¿]|r"; break;
+		case 18:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_04:14:14:0:-2|t"; hrTitle = "|cFFFF1717[é«˜é˜¶å†›å£«]|r"; break;
+		case 17:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_03:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ä¸­å£«]|r"; break;
+		case 16:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_02:14:14:0:-2|t"; hrTitle = "|cFFFF1717[æ­¥å…µ]|r"; break;
+		case 15:hrIcon = "|TInterface/ICONS/Achievement_PVP_H_01:14:14:0:-2|t"; hrTitle = "|cFFFF1717[æ–¥å€™]|r"; break;
+		case 14:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_14:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å¤§å…ƒå¸…]|r"; break;
+		case 13:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_13:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å…ƒå¸…]|r"; break;
+		case 12:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_12:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ç»Ÿå¸…]|r"; break;
+		case 11:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_11:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å¸ä»¤]|r"; break;
+		case 10:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_10:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å°‘æ ¡]|r"; break;
+		case 9:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_09:14:14:0:-2|t"; hrTitle = "|cFF0177EC[æŠ¤å«éª‘å£«]|r"; break;
+		case 8:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_08:14:14:0:-2|t"; hrTitle = "|cFF0177EC[éª‘å£«é˜Ÿé•¿]|r"; break;
+		case 7:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_07:14:14:0:-2|t"; hrTitle = "|cFF0177EC[éª‘å£«ä¸­å°‰]|r"; break;
+		case 6:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_06:14:14:0:-2|t"; hrTitle = "|cFF0177EC[éª‘å£«]|r"; break;
+		case 5:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_05:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å£«å®˜é•¿]|r"; break;
+		case 4:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_04:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å†›å£«é•¿]|r"; break;
+		case 3:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_03:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ä¸­å£«]|r"; break;
+		case 2:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_02:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ä¸‹å£«]|r"; break;
+		case 1:hrIcon = "|TInterface/ICONS/Achievement_PVP_A_01:14:14:0:-2|t"; hrTitle = "|cFF0177EC[åˆ—å…µ]|r"; break;
 		}
 
 		return;
@@ -606,38 +605,38 @@ void CommonFunc::GetHRTitle(Player* player, std::string &hrTitle, std::string &h
 
 	if (player->GetTeamId() == TEAM_ALLIANCE)
 	{
-		if (player->HasTitle(14))		{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_14:14:14:0:-2|t"; hrTitle = "|cFF0177EC[´óÔªË§]|r";		}
-		else if (player->HasTitle(13))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_13:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÔªË§]|r";		}
-		else if (player->HasTitle(12))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_12:14:14:0:-2|t"; hrTitle = "|cFF0177EC[Í³Ë§]|r";		}
-		else if (player->HasTitle(11))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_11:14:14:0:-2|t"; hrTitle = "|cFF0177EC[Ë¾Áî]|r";		}
-		else if (player->HasTitle(10))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_10:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÉÙĞ£]|r";		}
-		else if (player->HasTitle(9))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_09:14:14:0:-2|t"; hrTitle = "|cFF0177EC[»¤ÎÀÆïÊ¿]|r";	}
-		else if (player->HasTitle(8))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_08:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÆïÊ¿¶Ó³¤]|r";	}
-		else if (player->HasTitle(7))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_07:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÆïÊ¿ÖĞÎ¾]|r";	}
-		else if (player->HasTitle(6))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_06:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÆïÊ¿]|r";		}
-		else if (player->HasTitle(5))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_05:14:14:0:-2|t"; hrTitle = "|cFF0177EC[Ê¿¹Ù³¤]|r";		}
-		else if (player->HasTitle(4))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_04:14:14:0:-2|t"; hrTitle = "|cFF0177EC[¾üÊ¿³¤]|r";		}
-		else if (player->HasTitle(3))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_03:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÖĞÊ¿]|r";		}
-		else if (player->HasTitle(2))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_02:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÏÂÊ¿]|r";		}
-		else							{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_01:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ÁĞ±ø]|r";		}
+		if (player->HasTitle(14))		{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_14:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å¤§å…ƒå¸…]|r";		}
+		else if (player->HasTitle(13))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_13:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å…ƒå¸…]|r";		}
+		else if (player->HasTitle(12))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_12:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ç»Ÿå¸…]|r";		}
+		else if (player->HasTitle(11))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_11:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å¸ä»¤]|r";		}
+		else if (player->HasTitle(10))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_10:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å°‘æ ¡]|r";		}
+		else if (player->HasTitle(9))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_09:14:14:0:-2|t"; hrTitle = "|cFF0177EC[æŠ¤å«éª‘å£«]|r";	}
+		else if (player->HasTitle(8))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_08:14:14:0:-2|t"; hrTitle = "|cFF0177EC[éª‘å£«é˜Ÿé•¿]|r";	}
+		else if (player->HasTitle(7))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_07:14:14:0:-2|t"; hrTitle = "|cFF0177EC[éª‘å£«ä¸­å°‰]|r";	}
+		else if (player->HasTitle(6))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_06:14:14:0:-2|t"; hrTitle = "|cFF0177EC[éª‘å£«]|r";		}
+		else if (player->HasTitle(5))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_05:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å£«å®˜é•¿]|r";		}
+		else if (player->HasTitle(4))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_04:14:14:0:-2|t"; hrTitle = "|cFF0177EC[å†›å£«é•¿]|r";		}
+		else if (player->HasTitle(3))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_03:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ä¸­å£«]|r";		}
+		else if (player->HasTitle(2))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_02:14:14:0:-2|t"; hrTitle = "|cFF0177EC[ä¸‹å£«]|r";		}
+		else							{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_01:14:14:0:-2|t"; hrTitle = "|cFF0177EC[åˆ—å…µ]|r";		}
 		if (player->IsGameMaster())		{ hrIcon = "|TInterface/ICONS/Achievement_PVP_A_16:14:14:0:-2|t"; hrTitle = "|cFF0177EC[GM]|r";			}
 	}
 	else
 	{
-		if (player->HasTitle(28))		{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_14:14:14:0:-2|t"; hrTitle = "|cFFFF1717[¸ß½×¶½¾ü]|r";	}
-		else if (player->HasTitle(27))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_13:14:14:0:-2|t"; hrTitle = "|cFFFF1717[¶½¾ü]|r";		}
-		else if (player->HasTitle(26))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_12:14:14:0:-2|t"; hrTitle = "|cFFFF1717[½«¾ü]|r";		}
-		else if (player->HasTitle(25))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_11:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ÖĞ½«]|r";		}
-		else if (player->HasTitle(24))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_10:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ÓÂÊ¿]|r";		}
-		else if (player->HasTitle(23))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_09:14:14:0:-2|t"; hrTitle = "|cFFFF1717[°Ù·ò³¤]|r";		}
-		else if (player->HasTitle(22))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_08:14:14:0:-2|t"; hrTitle = "|cFFFF1717[¾üÍÅÊ¿±ø]|r";	}
-		else if (player->HasTitle(21))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_07:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ÑªÎÀÊ¿]|r";		}
-		else if (player->HasTitle(20))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_06:14:14:0:-2|t"; hrTitle = "|cFFFF1717[Ê¯Í·ÊØÎÀ]|r";	}
-		else if (player->HasTitle(19))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_05:14:14:0:-2|t"; hrTitle = "|cFFFF1717[Ò»µÈ¾üÊ¿³¤]|r";	}
-		else if (player->HasTitle(18))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_04:14:14:0:-2|t"; hrTitle = "|cFFFF1717[¸ß½×¾üÊ¿]|r";	}
-		else if (player->HasTitle(17))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_03:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ÖĞÊ¿]|r";		}
-		else if (player->HasTitle(16))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_02:14:14:0:-2|t"; hrTitle = "|cFFFF1717[²½±ø]|r";		}
-		else							{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_01:14:14:0:-2|t"; hrTitle = "|cFFFF1717[³âºò]|r";		}
+		if (player->HasTitle(28))		{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_14:14:14:0:-2|t"; hrTitle = "|cFFFF1717[é«˜é˜¶ç£å†›]|r";	}
+		else if (player->HasTitle(27))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_13:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ç£å†›]|r";		}
+		else if (player->HasTitle(26))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_12:14:14:0:-2|t"; hrTitle = "|cFFFF1717[å°†å†›]|r";		}
+		else if (player->HasTitle(25))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_11:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ä¸­å°†]|r";		}
+		else if (player->HasTitle(24))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_10:14:14:0:-2|t"; hrTitle = "|cFFFF1717[å‹‡å£«]|r";		}
+		else if (player->HasTitle(23))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_09:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ç™¾å¤«é•¿]|r";		}
+		else if (player->HasTitle(22))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_08:14:14:0:-2|t"; hrTitle = "|cFFFF1717[å†›å›¢å£«å…µ]|r";	}
+		else if (player->HasTitle(21))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_07:14:14:0:-2|t"; hrTitle = "|cFFFF1717[è¡€å«å£«]|r";		}
+		else if (player->HasTitle(20))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_06:14:14:0:-2|t"; hrTitle = "|cFFFF1717[çŸ³å¤´å®ˆå«]|r";	}
+		else if (player->HasTitle(19))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_05:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ä¸€ç­‰å†›å£«é•¿]|r";	}
+		else if (player->HasTitle(18))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_04:14:14:0:-2|t"; hrTitle = "|cFFFF1717[é«˜é˜¶å†›å£«]|r";	}
+		else if (player->HasTitle(17))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_03:14:14:0:-2|t"; hrTitle = "|cFFFF1717[ä¸­å£«]|r";		}
+		else if (player->HasTitle(16))	{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_02:14:14:0:-2|t"; hrTitle = "|cFFFF1717[æ­¥å…µ]|r";		}
+		else							{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_01:14:14:0:-2|t"; hrTitle = "|cFFFF1717[æ–¥å€™]|r";		}
 		if (player->IsGameMaster())		{ hrIcon = "|TInterface/ICONS/Achievement_PVP_H_16:14:14:0:-2|t"; hrTitle = "|cFFFF1717[GM]|r";			}
 	}
 }
@@ -649,41 +648,41 @@ std::string CommonFunc::GetHRTitle(uint32 rank)
 
 	switch (rank)
 	{
-	case 14:hrTitle1 = "|cFFFF1717[¸ß½×¶½¾ü]|r"; break;
-	case 13:hrTitle1 = "|cFFFF1717[¶½¾ü]|r"; break;
-	case 12:hrTitle1 = "|cFFFF1717[½«¾ü]|r"; break;
-	case 11:hrTitle1 = "|cFFFF1717[ÖĞ½«]|r"; break;
-	case 10:hrTitle1 = "|cFFFF1717[ÓÂÊ¿]|r"; break;
-	case 9: hrTitle1 = "|cFFFF1717[°Ù·ò³¤]|r"; break;
-	case 8: hrTitle1 = "|cFFFF1717[¾üÍÅÊ¿±ø]|r"; break;
-	case 7: hrTitle1 = "|cFFFF1717[ÑªÎÀÊ¿]|r"; break;
-	case 6: hrTitle1 = "|cFFFF1717[Ê¯Í·ÊØÎÀ]|r"; break;
-	case 5: hrTitle1 = "|cFFFF1717[Ò»µÈ¾üÊ¿³¤]|r"; break;
-	case 4: hrTitle1 = "|cFFFF1717[¸ß½×¾üÊ¿]|r"; break;
-	case 3: hrTitle1 = "|cFFFF1717[ÖĞÊ¿]|r"; break;
-	case 2: hrTitle1 = "|cFFFF1717[²½±ø]|r"; break;
-	case 1: hrTitle1 = "|cFFFF1717[³âºò]|r"; break;
+	case 14:hrTitle1 = "|cFFFF1717[é«˜é˜¶ç£å†›]|r"; break;
+	case 13:hrTitle1 = "|cFFFF1717[ç£å†›]|r"; break;
+	case 12:hrTitle1 = "|cFFFF1717[å°†å†›]|r"; break;
+	case 11:hrTitle1 = "|cFFFF1717[ä¸­å°†]|r"; break;
+	case 10:hrTitle1 = "|cFFFF1717[å‹‡å£«]|r"; break;
+	case 9: hrTitle1 = "|cFFFF1717[ç™¾å¤«é•¿]|r"; break;
+	case 8: hrTitle1 = "|cFFFF1717[å†›å›¢å£«å…µ]|r"; break;
+	case 7: hrTitle1 = "|cFFFF1717[è¡€å«å£«]|r"; break;
+	case 6: hrTitle1 = "|cFFFF1717[çŸ³å¤´å®ˆå«]|r"; break;
+	case 5: hrTitle1 = "|cFFFF1717[ä¸€ç­‰å†›å£«é•¿]|r"; break;
+	case 4: hrTitle1 = "|cFFFF1717[é«˜é˜¶å†›å£«]|r"; break;
+	case 3: hrTitle1 = "|cFFFF1717[ä¸­å£«]|r"; break;
+	case 2: hrTitle1 = "|cFFFF1717[æ­¥å…µ]|r"; break;
+	case 1: hrTitle1 = "|cFFFF1717[æ–¥å€™]|r"; break;
 	}
 
 	switch (rank)
 	{
-	case 14:hrTitle = "|cFF0177EC[´óÔªË§]|r"; break;
-	case 13:hrTitle = "|cFF0177EC[ÔªË§]|r"; break;
-	case 12:hrTitle = "|cFF0177EC[Í³Ë§]|r"; break;
-	case 11:hrTitle = "|cFF0177EC[Ë¾Áî]|r"; break;
-	case 10:hrTitle = "|cFF0177EC[ÉÙĞ£]|r"; break;
-	case 9: hrTitle = "|cFF0177EC[»¤ÎÀÆïÊ¿]|r"; break;
-	case 8: hrTitle = "|cFF0177EC[ÆïÊ¿¶Ó³¤]|r"; break;
-	case 7: hrTitle = "|cFF0177EC[ÆïÊ¿ÖĞÎ¾]|r"; break;
-	case 6: hrTitle = "|cFF0177EC[ÆïÊ¿]|r"; break;
-	case 5: hrTitle = "|cFF0177EC[Ê¿¹Ù³¤]|r"; break;
-	case 4: hrTitle = "|cFF0177EC[¾üÊ¿³¤]|r"; break;
-	case 3: hrTitle = "|cFF0177EC[ÖĞÊ¿]|r"; break;
-	case 2: hrTitle = "|cFF0177EC[ÏÂÊ¿]|r"; break;
-	case 1: hrTitle = "|cFF0177EC[ÁĞ±ø]|r"; break;
+	case 14:hrTitle = "|cFF0177EC[å¤§å…ƒå¸…]|r"; break;
+	case 13:hrTitle = "|cFF0177EC[å…ƒå¸…]|r"; break;
+	case 12:hrTitle = "|cFF0177EC[ç»Ÿå¸…]|r"; break;
+	case 11:hrTitle = "|cFF0177EC[å¸ä»¤]|r"; break;
+	case 10:hrTitle = "|cFF0177EC[å°‘æ ¡]|r"; break;
+	case 9: hrTitle = "|cFF0177EC[æŠ¤å«éª‘å£«]|r"; break;
+	case 8: hrTitle = "|cFF0177EC[éª‘å£«é˜Ÿé•¿]|r"; break;
+	case 7: hrTitle = "|cFF0177EC[éª‘å£«ä¸­å°‰]|r"; break;
+	case 6: hrTitle = "|cFF0177EC[éª‘å£«]|r"; break;
+	case 5: hrTitle = "|cFF0177EC[å£«å®˜é•¿]|r"; break;
+	case 4: hrTitle = "|cFF0177EC[å†›å£«é•¿]|r"; break;
+	case 3: hrTitle = "|cFF0177EC[ä¸­å£«]|r"; break;
+	case 2: hrTitle = "|cFF0177EC[ä¸‹å£«]|r"; break;
+	case 1: hrTitle = "|cFF0177EC[åˆ—å…µ]|r"; break;
 	}
 
-	return hrTitle + "»ò" + hrTitle1;
+	return hrTitle + "æˆ–" + hrTitle1;
 }
 
 void CommonFunc::UpdatePlayerNameWithHR(Player* player)
@@ -792,7 +791,7 @@ bool CommonFunc::joinBgIsAllowed(Player* player, Battleground* bg)
 	if (count > max)
 	{
 		std::ostringstream oss;
-		oss << "¼ÓÈëÕ½³¡µÄÍæ¼ÒÊıÁ¿ÒÑ´ïµ½ÉÏÏŞ£¬¼ÓÈëÊ§°Ü£¡" << count << "/" << max;
+		oss << "åŠ å…¥æˆ˜åœºçš„ç©å®¶æ•°é‡å·²è¾¾åˆ°ä¸Šé™ï¼ŒåŠ å…¥å¤±è´¥ï¼" << count << "/" << max;
 		player->GetSession()->SendNotification(oss.str().c_str());
 		return false;
 	}
@@ -938,7 +937,7 @@ std::vector<std::string> CommonFunc::SplitStr(std::string str, std::string patte
 
 std::string CommonFunc::GetPlayerTotalName(Player* player, std::string flag, bool fakeplayer, uint8 fake_class, uint8 fake_race, uint8 fake_hr, std::string fake_name, uint32 vip,uint8 gender)
 {
-	//1-Ö°Òµ 2-ÖÖ×å 3-VIP 4-¾üÏÎ 5-Ãû×Ö
+	//1-èŒä¸š 2-ç§æ— 3-VIP 4-å†›è¡” 5-åå­—
 	// 1 | 2 | 3 | 4 | 5
 	
 	std::string totalName = "";
@@ -947,17 +946,17 @@ std::string CommonFunc::GetPlayerTotalName(Player* player, std::string flag, boo
 	std::string rcIcon = "";
 	std::string gossip = "";
 
-	//»ñÈ¡Ö°Òµ
+	//è·å–èŒä¸š
 	std::string _class = "";
 	std::string classIcon = "";
 	fakeplayer ? GetClass(NULL,_class,classIcon,true,fake_class) : GetClass(player, _class, classIcon);
 
-	//»ñÈ¡ÖÖ×å
+	//è·å–ç§æ—
 	std::string race = "";
 	std::string raceIcon = "";
 	fakeplayer ? GetRace(NULL, race, raceIcon, true, fake_race, gender) : GetRace(player, race, raceIcon);
 
-	//»ñÈ¡¾üÏÎ
+	//è·å–å†›è¡”
 	std::string hrTitle = "";
 	std::string hrIcon = "";
 	fakeplayer ? GetHRTitle(NULL, hrTitle, hrIcon, true, fake_hr) : GetHRTitle(player, hrTitle, hrIcon);
@@ -978,7 +977,7 @@ std::string CommonFunc::GetPlayerTotalName(Player* player, std::string flag, boo
 		switch (nameType)
 		{
 		case 1:
-			player->realTeam == TEAM_ALLIANCE ? totalName += "|cFF0177EC[ÁªÃË]|r" : totalName += "|cFFFF1717[²¿Âä]|r";
+			player->realTeam == TEAM_ALLIANCE ? totalName += "|cFF0177EC[è”ç›Ÿ]|r" : totalName += "|cFFFF1717[éƒ¨è½]|r";
 			break;
 		case 110:
 			totalName += classIcon;
@@ -1073,7 +1072,7 @@ void CommonFunc::SetCommercePoints(Player* player)
 
 //QQMsg
 #define QQMSG_PORT		5000
-#define QQMSG_GROUP		"´´ÊÀÄ§ÊŞÍæ¼ÒÈº"
+#define QQMSG_GROUP		"åˆ›ä¸–é­”å…½ç©å®¶ç¾¤"
 std::queue<std::string> QQMsgQueue;
 
 std::string GetQQMsgTime()
@@ -1105,6 +1104,7 @@ DWORD WINAPI QQMsgThread(LPVOID i)
 
 	uint32 count = 0;
 
+
 	while (true)
 	{
 		if (!QQMsgQueue.empty())
@@ -1119,7 +1119,7 @@ DWORD WINAPI QQMsgThread(LPVOID i)
 			count++;
 
 			std::ostringstream oss;
-			oss << "¡¾ÓÎÏ·ÏûÏ¢ " << "µÚ" << count << "Ìõ " << GetQQMsgTime() << "¡¿" << QQMsgQueue.front();
+			oss << "ã€æ¸¸æˆæ¶ˆæ¯ " << "ç¬¬" << count << "æ¡ " << GetQQMsgTime() << "ã€‘" << QQMsgQueue.front();
 			QQMsgQueue.pop();
 
 			std::string msg = oss.str();
@@ -1382,13 +1382,13 @@ std::string SecTimeString(uint64 timeInSecs, bool shortText)
 
 	std::ostringstream ss;
 	if (days)
-		ss << days << (shortText ? "Ìì" : "Ìì");
+		ss << days << (shortText ? "å¤©" : "å¤©");
 	if (hours)
-		ss << hours << (shortText ? "Ê±" : "Ğ¡Ê±");
+		ss << hours << (shortText ? "æ—¶" : "å°æ—¶");
 	if (minutes)
-		ss << minutes << (shortText ? "·Ö" : "·ÖÖÓ");
+		ss << minutes << (shortText ? "åˆ†" : "åˆ†é’Ÿ");
 	if (secs || (!days && !hours && !minutes))
-		ss << secs << (shortText ? "Ãë" : "ÃëÖÓ");
+		ss << secs << (shortText ? "ç§’" : "ç§’é’Ÿ");
 
 	std::string str = ss.str();
 
@@ -1465,37 +1465,37 @@ bool IsGCValidString(std::string s, std::string description, WorldSession* sessi
 
 			switch (x)
 			{
-			case 0xE38082://¡£
-			case 0xE38090://¡¾¡¿
+			case 0xE38082://ã€‚
+			case 0xE38090://ã€ã€‘
 			case 0xE38091:
-			case 0xEFBC8C://£¬
-			case 0xE2809C://¡°¡±
+			case 0xEFBC8C://ï¼Œ
+			case 0xE2809C://â€œâ€
 			case 0xE2809D:
-			case 0xEfBC9B://£»
-			case 0xE38081://¡¢
-			case 0xEFBC9F://£¿
-			case 0xEFBC88://£¨£©
+			case 0xEfBC9B://ï¼›
+			case 0xE38081://ã€
+			case 0xEFBC9F://ï¼Ÿ
+			case 0xEFBC88://ï¼ˆï¼‰
 			case 0xEFBC89:
-			case 0xefbc87://£§
-			case 0xe288b6://¡Ã
-			case 0xefbd9e://¡«
-			case 0xe38085://¡©
-			case 0xefb99f://©|
-			case 0xefbd80://£à
-			case 0xefb9a9://©†
-			case 0xe3808e://¡º¡»
+			case 0xefbc87://ï¼‡
+			case 0xe288b6://âˆ¶
+			case 0xefbd9e://ï½
+			case 0xe38085://ã€…
+			case 0xefb99f://ï¹Ÿ
+			case 0xefbd80://ï½€
+			case 0xefb9a9://ï¹©
+			case 0xe3808e://ã€ã€
 			case 0xe3808f:
-			case 0xe38096://¡¼¡½
+			case 0xe38096://ã€–ã€—
 			case 0xe38097:
-			case 0xefbcbb://£Û£İ
+			case 0xefbcbb://ï¼»ï¼½
 			case 0xefbcbd:
-			case 0xe3808a://¡¶¡·
+			case 0xe3808a://ã€Šã€‹
 			case 0xe3808b:
-			case 0xefb99b://©x©y
+			case 0xefb99b://ï¹›ï¹œ
 			case 0xefb99c:
-			case 0xe3808c://¡¸¡¹
+			case 0xe3808c://ã€Œã€
 			case 0xe3808d:
-			case 0xe285a0://¢ñ-¢ú
+			case 0xe285a0://â… -â…©
 			case 0xe285a1:
 			case 0xe285a2:
 			case 0xe285a3:
@@ -1505,22 +1505,22 @@ bool IsGCValidString(std::string s, std::string description, WorldSession* sessi
 			case 0xe285a7:
 			case 0xe285a8:
 			case 0xe285a9:
-			case 0xe2978b://¡ğ
-			case 0xe29787://¡ó
-			case 0xe296a1://¡õ
-			case 0xe296b3://¡÷
-			case 0xe296bd://¨Œ
-			case 0xe29886://¡î
-			case 0xe2978f://¡ñ
-			case 0xe29786://¡ô
-			case 0xe296b2://¡ø
-			case 0xe296bc://¨‹
-			case 0xe29980://¡â
-			case 0xe29982://¡á
-			case 0xe2889a://?¡Ì
-			case 0xe2978e://¡ò
-			case 0xe28a99://¡Ñ
-			case 0xe28690://¡û¡ú
+			case 0xe2978b://â—‹
+			case 0xe29787://â—‡
+			case 0xe296a1://â–¡
+			case 0xe296b3://â–³
+			case 0xe296bd://â–½
+			case 0xe29886://â˜†
+			case 0xe2978f://â—
+			case 0xe29786://â—†
+			case 0xe296b2://â–²
+			case 0xe296bc://â–¼
+			case 0xe29980://â™€
+			case 0xe29982://â™‚
+			case 0xe2889a://?âˆš
+			case 0xe2978e://â—
+			case 0xe28a99://âŠ™
+			case 0xe28690://â†â†’
 			case 0xe28692://
 				IsMark = true;
 			}

@@ -1,4 +1,3 @@
-
 extern std::vector<std::string/*ban mac*/> MacBanedVec;
 
 class GateWay

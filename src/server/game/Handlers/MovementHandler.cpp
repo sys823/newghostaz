@@ -25,7 +25,7 @@
 #include "BattlegroundMgr.h"
 #include "ScriptMgr.h"
 #include "GameGraveyard.h"
-#pragma execution_character_set("utf-8")
+
 #include "../scripts/Custom/AntiCheat/AntiCheat.h"
 #include "../scripts/Custom/CustomEvent/BattleIC/BattleIC.h"
 

@@ -1,8 +1,8 @@
 /*
- *¨X¨T¨j¨T¨j¨T¨j¨j¨j¨T¨T¨j¨T¨j¨[©¤¨X¨j¨T¨T¨[ 
- *¨U¨j¨g¨U¨U¨U¨U¨U¨d¨[¨[¨U¨j¨g¨^¨j¨a¨U¨T¨T¨g
- *¨U¨m¨g¨U¨U¨U¨U¨U¨d¨m¨a¨U¨m¨p¨[¨U¨X¨p¨T¨T¨U
- *¨^¨T¨m¨m¨T¨m¨m¨T¨m¨T¨T¨m¨T¨a¨^¨T¨a¨^¨T¨T¨a
+ *â•”â•â•¦â•â•¦â•â•¦â•¦â•¦â•â•â•¦â•â•¦â•—â”€â•”â•¦â•â•â•— 
+ *â•‘â•¦â•£â•‘â•‘â•‘â•‘â•‘â• â•—â•—â•‘â•¦â•£â•šâ•¦â•â•‘â•â•â•£
+ *â•‘â•©â•£â•‘â•‘â•‘â•‘â•‘â• â•©â•â•‘â•©â•¬â•—â•‘â•”â•¬â•â•â•‘
+ *â•šâ•â•©â•©â•â•©â•©â•â•©â•â•â•©â•â•â•šâ•â•â•šâ•â•â•
  *           (http://emudevs.com)
  GameObject: (Burning Tree;191160)
  GameObject: (Burning Blaze;190570) - Deals Damage if near
@@ -10,7 +10,6 @@
 */
 
 
-#pragma execution_character_set("utf-8")
 #include "../PrecompiledHeaders/ScriptPCH.h"
 
 enum SpellIds
@@ -84,7 +83,7 @@ public:
                         events.ScheduleEvent(EVENT_BLAST_NOVA, urand(5000, 8000));
                         break;
                     case EVENT_SPAWN_FIRE:
-                        me->MonsterYell("»Ò½ı...»ÙÃğ...", LANG_UNIVERSAL, 0);
+                        me->MonsterYell("ç°çƒ¬...æ¯ç­...", LANG_UNIVERSAL, 0);
 						events.ScheduleEvent(EVENT_SPAWN_FIRE_CLEANUP, 30000);
                         events.ScheduleEvent(EVENT_SPAWN_FIRE, urand(10000, 15000));
                         SpawnFire();

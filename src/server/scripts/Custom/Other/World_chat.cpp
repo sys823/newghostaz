@@ -1,4 +1,4 @@
-#pragma execution_character_set("utf-8")
+
 #include "../CommonFunc/CommonFunc.h"
 #include "../DataLoader/DataLoader.h"
 #include "../Requirement/Requirement.h"

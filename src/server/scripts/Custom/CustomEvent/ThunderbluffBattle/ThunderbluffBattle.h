@@ -1,13 +1,12 @@
 #include "Transport.h"
 #include "TransportMgr.h"
-
 #define EVENT_THUDERBLUFF_BATTLE_ID  101
 
 const uint32 GunShipHP = 10000;
 const uint32 DmgPerThrow = 1000;
 
-//½×¶ÎÑÓ³ÙÊ±¼ä
-const uint32 TIME_PHASE_ONE_DELAY = 260 * IN_MILLISECONDS; //3·ÖµÈÈË Í¾ÖĞ2·Ö
+//é˜¶æ®µå»¶è¿Ÿæ—¶é—´
+const uint32 TIME_PHASE_ONE_DELAY = 260 * IN_MILLISECONDS; //3åˆ†ç­‰äºº é€”ä¸­2åˆ†
 const uint32 TIME_PHASE_TWO_DELAY = 610 * IN_MILLISECONDS;//
 const uint32 TIME_PHASE_THREE_DELAY = 1000 * IN_MILLISECONDS;
 const uint32 TIME_PHASE_FINAL_DELAY =  1400 * IN_MILLISECONDS;
@@ -90,10 +89,10 @@ const Position GunshipAirVehicle[7] =
 	{ 57.0f, 0.000f, 0.00f, 3.0f },
 };
 
-//·ÉÍ§´«ËÍÆ÷×ø±ê
+//é£è‰‡ä¼ é€å™¨åæ ‡
 const Position GunShipPortalPos = { 0.00f, 0.00f, 23.00f, 3.00f };
 
-//¸ßµØ´«ËÍ×ø±ê
+//é«˜åœ°ä¼ é€åæ ‡
 const Position HighLandPortalPos[4] =
 {
 	{ -1452.05f, -36.7138f, 157.544f, 2.35053f },
@@ -102,10 +101,10 @@ const Position HighLandPortalPos[4] =
 	{ -1204.1f, -5.01502f, 165.478f, 4.63998f },
 };
 
-//½ø¹¥·½Ä¹µØ×ø±ê
+//è¿›æ”»æ–¹å¢“åœ°åæ ‡
 const Position OffenseHealerPos = { -43.86f, 0.00f, 20.54f, 7.22f };
 
-//·ÀÊØ·½Ä¹×ø±ê
+//é˜²å®ˆæ–¹å¢“åæ ‡
 const Position DefenseHealerPos[4] =
 {
 	{ -1404.47f, -142.373f, 159.254f, 1.42121f },
@@ -114,7 +113,7 @@ const Position DefenseHealerPos[4] =
 	{ -1201.31f, 7.16812f, 165.2f, 4.37433f },
 };
 
-//Å£Í·ÈË½«¾ü×ø±ê
+//ç‰›å¤´äººå°†å†›åæ ‡
 const Position GeneralPos[3] =
 {
 	{ -1405.0f, -77.5565f, 158.935f, 5.12808f },
@@ -124,7 +123,7 @@ const Position GeneralPos[3] =
 
 const Position BainePos = { -1209.63f, -100.15f, 162.667f, 1.50761f };
 
-//´«ËÍ´¥·¢Æ÷×ø±ê ·ÀÖ¹½ø¹¥·½Íµboss
+//ä¼ é€è§¦å‘å™¨åæ ‡ é˜²æ­¢è¿›æ”»æ–¹å·boss
 const Position TeleTriggerPos[10] =
 {
 	{-1073.95f	,155.010f	,139.461f	,4.151f	},

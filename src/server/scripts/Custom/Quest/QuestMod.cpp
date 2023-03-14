@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "../CommonFunc/CommonFunc.h"
 #include "../FunctionCollection/FunctionCollection.h"
 #include "../Reward/Reward.h"
@@ -17,7 +16,7 @@ void QuestMod::Load()
 
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
 		//			0	1				2					3			4				5				6				7			8				9		10				11
-		"SELECT ÈÎÎñID,½ÓÊÜÈÎÎñÐèÇóÄ£°åID,ÊÇ·ñÏûºÄÐèÇó, ÈÎÎñ´«ËÍ×ø±êID, Ëæ»ú½±ÀøÄ£°åID1,Ëæ»ú½±ÀøÄ£°åID2,Ëæ»ú½±ÀøÄ£°åID3,Ëæ»ú½±ÀøÄ£°åID4,Ëæ»ú½±Àø¼¸ÂÊ1,Ëæ»ú½±Àø¼¸ÂÊ2,Ëæ»ú½±Àø¼¸ÂÊ3,Ëæ»ú½±Àø¼¸ÂÊ4 FROM _ÈÎÎñ" :
+		"SELECT ä»»åŠ¡ID,æŽ¥å—ä»»åŠ¡éœ€æ±‚æ¨¡æ¿ID,æ˜¯å¦æ¶ˆè€—éœ€æ±‚, ä»»åŠ¡ä¼ é€åæ ‡ID, éšæœºå¥–åŠ±æ¨¡æ¿ID1,éšæœºå¥–åŠ±æ¨¡æ¿ID2,éšæœºå¥–åŠ±æ¨¡æ¿ID3,éšæœºå¥–åŠ±æ¨¡æ¿ID4,éšæœºå¥–åŠ±å‡ çŽ‡1,éšæœºå¥–åŠ±å‡ çŽ‡2,éšæœºå¥–åŠ±å‡ çŽ‡3,éšæœºå¥–åŠ±å‡ çŽ‡4 FROM _ä»»åŠ¡" :
 		//			0	1		2				3			4				5		6		7			8		9			10			11
 		"SELECT questId,reqId,desReq,telePosId,randomRewId1,randomRewId2,randomRewId3,randomRewId4,rewChance1,rewChance2,rewChance3,rewChance4 FROM _quest_mod");
 
@@ -43,7 +42,7 @@ void QuestMod::Load()
 	}
 
 	result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
-		"SELECT ÈÎÎñID,½Óµ½¼¸ÂÊ FROM _ÈÎÎñ_Ëæ»úÅäÖÃ" :
+		"SELECT ä»»åŠ¡ID,æŽ¥åˆ°å‡ çŽ‡ FROM _ä»»åŠ¡_éšæœºé…ç½®" :
 		"SELECT questId,chance FROM _quest_random");
 
 	if (result)
@@ -143,9 +142,9 @@ std::string QuestMod::GetExtraDes(uint32 questId, Player* player)
 		if (sReq->IsExist(itr->second.reqId))
 		{
 			if (itr->second.desReq)
-				oss << "\n\n|cFF660066¡¸½ÓÊÜÈÎÎñÐèÒªÂú×ã²¢ÏûºÄ¡¹|r\n\n";
+				oss << "\n\n|cFF660066ã€ŒæŽ¥å—ä»»åŠ¡éœ€è¦æ»¡è¶³å¹¶æ¶ˆè€—ã€|r\n\n";
 			else
-				oss << "\n\n|cFF660066¡¸½ÓÊÜÈÎÎñÐèÒªÂú×ã¡¹|r\n\n";
+				oss << "\n\n|cFF660066ã€ŒæŽ¥å—ä»»åŠ¡éœ€è¦æ»¡è¶³ã€|r\n\n";
 
 			oss << sReq->GetDescription(itr->second.reqId, player);
 		}
@@ -154,9 +153,9 @@ std::string QuestMod::GetExtraDes(uint32 questId, Player* player)
 		{
 			if (sRew->IsExist(itr->second.randomRewId[i]) && itr->second.rewChance[i] > 0)
 			{
-				oss << "\n\n|cFF0000FF¡¸Íê³ÉÈÎÎñÓÐ";
+				oss << "\n\n|cFF0000FFã€Œå®Œæˆä»»åŠ¡æœ‰";
 				oss << itr->second.rewChance[i];
-				oss << "%¼¸ÂÊ»ñµÃ¡¹|r\n\n";
+				oss << "%å‡ çŽ‡èŽ·å¾—ã€|r\n\n";
 				oss << sRew->GetDescription(itr->second.randomRewId[i], true);
 			}
 		}
@@ -171,7 +170,7 @@ bool QuestMod::AddRandomQuest(Player* player)
 {
 	if (QuestRandomMap.empty())
 	{
-		sLog->outString("_quest_randomÎ´ÅäÖÃËæ»úÈÎÎñ");
+		sLog->outString("_quest_randomæœªé…ç½®éšæœºä»»åŠ¡");
 		return false;
 	}
 
@@ -199,7 +198,7 @@ bool QuestMod::AddRandomQuest(Player* player)
 
 	if (count > MAX_RANDOM_QUEST_COUNT)
 	{
-		oss << "Äã²»ÄÜÁìÈ¡¸ü¶àËæ»úÈÎÎñ (" << MAX_RANDOM_QUEST_COUNT << "/" << MAX_RANDOM_QUEST_COUNT << ")";
+		oss << "ä½ ä¸èƒ½é¢†å–æ›´å¤šéšæœºä»»åŠ¡ (" << MAX_RANDOM_QUEST_COUNT << "/" << MAX_RANDOM_QUEST_COUNT << ")";
 		player->GetSession()->SendNotification(oss.str().c_str());
 		return false;
 	}
@@ -254,7 +253,7 @@ bool QuestMod::AddRandomQuest(Player* player)
 		player->AddQuestAndCheckCompletion(quest, NULL);
 
 	oss.str("");
-	oss << "ÁìÈ¡Ëæ»úÈÎÎñ [" << quest->GetTitle() << "] (" << count << "/" << MAX_RANDOM_QUEST_COUNT << ")";
+	oss << "é¢†å–éšæœºä»»åŠ¡ [" << quest->GetTitle() << "] (" << count << "/" << MAX_RANDOM_QUEST_COUNT << ")";
 	player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 
 	return true;

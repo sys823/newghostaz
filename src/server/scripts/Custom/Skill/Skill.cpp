@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Skill.h"
 #include "../Reward/Reward.h"
 #include "../Requirement/Requirement.h"
@@ -44,8 +43,8 @@ void CustomSkill::Load()
 	//	CustomSkillVec.push_back(Temp);
 	//} while (result->NextRow());
 	//
-	//sort(CustomSkillCategoryVec.begin(), CustomSkillCategoryVec.end(), CategorySort);//ÉýÐòÅÅÁÐ
-	//sort(CustomSkillVec.begin(), CustomSkillVec.end(), SkillSort);//ÉýÐòÅÅÁÐ
+	//sort(CustomSkillCategoryVec.begin(), CustomSkillCategoryVec.end(), CategorySort);//å‡åºæŽ’åˆ—
+	//sort(CustomSkillVec.begin(), CustomSkillVec.end(), SkillSort);//å‡åºæŽ’åˆ—
 }
 
 std::string CustomSkill::GetSkillName(uint32 skillId)
@@ -124,14 +123,14 @@ void CustomSkill::LearnSkill(Player* player, uint32 skillId, bool learn)
 		       ++it;
 		}
 
-		ChatHandler(player->GetSession()).PSendSysMessage("Íü¼Ç%s", GetSkillName(skillId).c_str());
+		ChatHandler(player->GetSession()).PSendSysMessage("å¿˜è®°%s", GetSkillName(skillId).c_str());
 		CharacterDatabase.PQuery("DELETE FROM character_custom_skill WHERE guid = %u AND skill = %u", player->GetGUIDLow(), skillId);
 	}
 	else
 	{
 		if (std::find(player->PCustomSkillVec.begin(), player->PCustomSkillVec.end(), skillId) != player->PCustomSkillVec.end())
 		{
-			ChatHandler(player->GetSession()).PSendSysMessage("ÄãÒÑ¾­Ñ§»á%s", GetSkillName(skillId).c_str());
+			ChatHandler(player->GetSession()).PSendSysMessage("ä½ å·²ç»å­¦ä¼š%s", GetSkillName(skillId).c_str());
 			return;
 		}
 
@@ -144,11 +143,11 @@ void CustomSkill::LearnSkill(Player* player, uint32 skillId, bool learn)
 				CharacterDatabase.Execute(stmt);
 
 				player->PCustomSkillVec.push_back(skillId);
-				ChatHandler(player->GetSession()).PSendSysMessage("Ñ§»á%s", GetSkillName(skillId).c_str());
+				ChatHandler(player->GetSession()).PSendSysMessage("å­¦ä¼š%s", GetSkillName(skillId).c_str());
 				return;
 			}
 
-		ChatHandler(player->GetSession()).PSendSysMessage("Id%u²»´æÔÚ", skillId);
+		ChatHandler(player->GetSession()).PSendSysMessage("Id%uä¸å­˜åœ¨", skillId);
 	}
 }
 
@@ -185,7 +184,7 @@ void CustomSkill::AddGossip(Player* player, Object* obj)
 
 void CustomSkill::Action(Player* player, uint32 action, Object* obj)
 {
-	//Ìí¼ÓÀà±ðÏÂµÄskill²Ëµ¥
+	//æ·»åŠ ç±»åˆ«ä¸‹çš„skillèœå•
 	if (sCF->getX(action) == 250)
 	{
 		
@@ -212,14 +211,14 @@ void CustomSkill::Action(Player* player, uint32 action, Object* obj)
 			}
 		}
 		if (flag)
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "\n                 <<·µ»Ø>>\n  ", SENDER_CUSTOM_SKILL, sCF->joinXY(250 + 2, 1));
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "\n                 <<è¿”å›ž>>\n  ", SENDER_CUSTOM_SKILL, sCF->joinXY(250 + 2, 1));
 		else
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "\n             <<Î´¿ªÆôÏà¹ØÄÚÈÝ>>\n  ", SENDER_CUSTOM_SKILL, sCF->joinXY(250 + 2, 1));
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "\n             <<æœªå¼€å¯ç›¸å…³å†…å®¹>>\n  ", SENDER_CUSTOM_SKILL, sCF->joinXY(250 + 2, 1));
 
 		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, obj->GetGUID());
 	}
 
-	//µã»÷²Ëµ¥¶¯×÷
+	//ç‚¹å‡»èœå•åŠ¨ä½œ
 	if (sCF->getX(action) == 250 + 1)
 	{
 		uint32 skillId = sCF->getY(action);
@@ -238,7 +237,7 @@ void CustomSkill::Action(Player* player, uint32 action, Object* obj)
 		AddGossip(player, obj);
 	}
 
-	//·µ»ØÖ÷²Ëµ¥
+	//è¿”å›žä¸»èœå•
 	if (sCF->getX(action) == 250 + 2)
 	{
 		for (std::vector<CustomSkillCategoryTemplate>::iterator i = CustomSkillCategoryVec.begin(); i != CustomSkillCategoryVec.end(); i++)

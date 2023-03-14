@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "CreatureMod.h"
 #include "../../Reward/Reward.h"
 #include "../../CommonFunc/CommonFunc.h"
@@ -15,11 +14,11 @@ void CreatureMod::Load()
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
 
 		//		0		1		2		3			4			5			6			7
-		"SELECT ÉúÎïID,µÈ¼¶,ÉúÃüÖµ,ÎïÀíÉËº¦Öµ»ò±¶ÂÊ,·¨ÊõÉËº¦±¶ÂÊ,ÖÎÁÆÐ§¹û±¶ÂÊ,¼õÉË°Ù·Ö±È,¿¹ÐÔÖµ,"
+		"SELECT ç”Ÿç‰©ID,ç­‰çº§,ç”Ÿå‘½å€¼,ç‰©ç†ä¼¤å®³å€¼æˆ–å€çŽ‡,æ³•æœ¯ä¼¤å®³å€çŽ‡,æ²»ç–—æ•ˆæžœå€çŽ‡,å‡ä¼¤ç™¾åˆ†æ¯”,æŠ—æ€§å€¼,"
 		//8				9			10				11		12			13				14			15		16		17		18		19	
-		"»÷É±½±ÀøÄ£°åID,»÷É±½±Àø¼¸ÂÊ,»÷É±ÊÇ·ñÈ«·þÌáÊ¾,»¤¼×Öµ,¹¥»÷¼ä¸ô,Àë¿ªÔ­Î»ÖÃÖØÖÃ¾àÀë,»÷É±½±Àø·¨±¦Öµ,µôÂäID1,µôÂäID2,µôÂäID3,µôÂäID4,µôÂäID5,"
+		"å‡»æ€å¥–åŠ±æ¨¡æ¿ID,å‡»æ€å¥–åŠ±å‡ çŽ‡,å‡»æ€æ˜¯å¦å…¨æœæç¤º,æŠ¤ç”²å€¼,æ”»å‡»é—´éš”,ç¦»å¼€åŽŸä½ç½®é‡ç½®è·ç¦»,å‡»æ€å¥–åŠ±æ³•å®å€¼,æŽ‰è½ID1,æŽ‰è½ID2,æŽ‰è½ID3,æŽ‰è½ID4,æŽ‰è½ID5,"
 		//	20					21				22				23				24			25				26
-		"¶ÓÎé»÷É±½±ÀøÄ£°åID,¶ÓÎé»÷É±½±Àø¼¸ÂÊ,»÷É±½±Àø×Ô¶¨ÒåµÈ¼¶Öµ,»÷É±ÕÙ»½ÎïÌåID,¸±±¾ÌôÕ½µÈ¼¶,ÊÇ·ñ¼ÓÔØÔ­µôÂä,Ëæ»ú¼¼ÄÜ×éÄ£°åID,ÄÑ¶È FROM _ÊôÐÔµ÷Õû_ÉúÎï" :
+		"é˜Ÿä¼å‡»æ€å¥–åŠ±æ¨¡æ¿ID,é˜Ÿä¼å‡»æ€å¥–åŠ±å‡ çŽ‡,å‡»æ€å¥–åŠ±è‡ªå®šä¹‰ç­‰çº§å€¼,å‡»æ€å¬å”¤ç‰©ä½“ID,å‰¯æœ¬æŒ‘æˆ˜ç­‰çº§,æ˜¯å¦åŠ è½½åŽŸæŽ‰è½,éšæœºæŠ€èƒ½ç»„æ¨¡æ¿ID,éš¾åº¦ FROM _å±žæ€§è°ƒæ•´_ç”Ÿç‰©" :
 		//		0		1		2	3			4			5		6			7
 		"SELECT Entry,Level,Health,MeleeDmg,SpellDmgMod,HealMod,ReduceDmgPct,Resistance,"
 		//8				9			10			11		12		13				14				15		16		17		18			19	
@@ -70,7 +69,7 @@ void CreatureMod::SetMod(Creature* creature)
 	if (creature->GetEntry() == 1964 || creature->IsGuardian() || creature->IsHunterPet() || creature->IsTotem())
 		return;
 
-	////Ð¡¶¯ÎïÖ®Àà
+	////å°åŠ¨ç‰©ä¹‹ç±»
 	//if (creature->IsCivilian())
 	//	return;
 
@@ -133,11 +132,11 @@ public:
 		if (killed->C_KillRewGameObject != 0)
 			killer->SummonGameObject(killed->C_KillRewGameObject, killed->GetPositionX(), killed->GetPositionY(), killed->GetPositionZ(), killed->GetOrientation(), 0, 0, 0, 0, 0);
 
-		//»÷É±½±Àø
+		//å‡»æ€å¥–åŠ±
 		if (killed->C_KillRewId != 0 && frand(0, 100) <= killed->C_KillRewChance)
 			sRew->Rew(killer, killed->C_KillRewId);
 
-		//¶ÓÎé»÷É±½±Àø
+		//é˜Ÿä¼å‡»æ€å¥–åŠ±
 		if (killed->C_KillGroupRewId != 0)
 			if (Group* group = killer->GetGroup())
 				for (GroupReference* itr = group->GetFirstMember(); itr != NULL; itr = itr->next())
@@ -159,7 +158,7 @@ public:
             sWorld->SendScreenMessage(msg);
         }
 
-		//»÷É±¹ã²¥
+		//å‡»æ€å¹¿æ’­
 		if (killed->C_KillAnnounce)
 		{
 			const char*msg;
@@ -172,7 +171,7 @@ public:
 			sWorld->SendScreenMessage(msg);
 		}
 
-		//RankÖµ ÕýÊý-»÷É±Õß ¸ºÊý-Õû¸ö¶ÓÎé
+		//Rankå€¼ æ­£æ•°-å‡»æ€è€… è´Ÿæ•°-æ•´ä¸ªé˜Ÿä¼
 		if (killed->C_AddAddRankValue > 0)
 			sRank->Update(killer, killed->C_AddAddRankValue, true);
 		else if (killed->C_AddAddRankValue < 0)
@@ -188,7 +187,7 @@ public:
 				sRank->Update(killer, abs(killed->C_AddAddRankValue), true);
 		}
 
-		//·¨±¦Öµ ÕýÊý-»÷É±Õß ¸ºÊý-Õû¸ö¶ÓÎé
+		//æ³•å®å€¼ æ­£æ•°-å‡»æ€è€… è´Ÿæ•°-æ•´ä¸ªé˜Ÿä¼
 		if (killed->C_AddTalismanValue > 0)
 		{
 			sTalisman->AddTalismanValue(killer, killed->C_AddTalismanValue, true);

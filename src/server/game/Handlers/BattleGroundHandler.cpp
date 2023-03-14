@@ -23,7 +23,7 @@
 #include "Group.h"
 #include "ScriptMgr.h"
 #include "Config.h"
-#pragma execution_character_set("utf-8")
+
 #include "../Custom/CommonFunc/CommonFunc.h"
 #include "../Custom/Other/CFBG.h"
 #include "../Custom/DataLoader/Dataloader.h"

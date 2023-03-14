@@ -27,7 +27,7 @@
 #include "Util.h"
 #include "ScriptMgr.h"
 #include "AccountMgr.h"
-#pragma execution_character_set("utf-8")
+
 #include "../../scripts/Custom/Other/CFBG.h"
 #include "../Custom/CommonFunc/CommonFunc.h"
 #include "Config.h"

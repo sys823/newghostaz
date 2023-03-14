@@ -33,7 +33,7 @@
 #include "Transport.h"
 #include "ScriptMgr.h"
 #include "GameGraveyard.h"
-#pragma execution_character_set("utf-8")
+
 #include "../Custom/CustomEvent/FixedTimeBG/FixedTimeBG.h"
 #include "../Custom/CommonFunc/CommonFunc.h"
 #include "../Custom/DataLoader/DataLoader.h"

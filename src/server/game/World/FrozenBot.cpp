@@ -1,4 +1,4 @@
-﻿#pragma execution_character_set("utf-8")
+﻿
 #include "FrozenBot.h"
 #include "Player.h"
 #include "Config.h"

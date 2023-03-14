@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "TalentReq.h"
 #include "../Requirement/Requirement.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -9,7 +8,7 @@ void TalentReq::Load()
 {
 	TalentReqMap.clear();
 	QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
-		"SELECT Ìì¸³¼¼ÄÜID,ĞèÇóÄ£°åID from _¼¼ÄÜ_Ìì¸³¼ÓµãĞèÇó" :
+		"SELECT å¤©èµ‹æŠ€èƒ½ID,éœ€æ±‚æ¨¡æ¿ID from _æŠ€èƒ½_å¤©èµ‹åŠ ç‚¹éœ€æ±‚" :
 		"SELECT spellid,reqId from _talent_req");
 	if (result)
 	{
@@ -40,7 +39,7 @@ bool TalentReq::SendAcceptOrCancel(Player* player, uint32 spellid)
 
 	std::ostringstream oss;
 	oss << "[" << spellInfo->SpellName[4] << "]";
-	sCF->SendAcceptOrCancel(player, 995, sReq->Notice(player, i->second, "Ñ§Ï°", oss.str()));
+	sCF->SendAcceptOrCancel(player, 995, sReq->Notice(player, i->second, "å­¦ä¹ ", oss.str()));
 
 	return true;
 }

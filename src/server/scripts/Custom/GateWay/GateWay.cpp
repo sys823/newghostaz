@@ -7,7 +7,7 @@ std::string string_To_UTF8(const std::string & str)
 {
 	int nwLen = ::MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, NULL, 0);
 
-	wchar_t * pwBuf = new wchar_t[nwLen + 1];//Ò»¶¨Òª¼Ó1£¬²»È»»á³öÏÖÎ²°Í
+	wchar_t * pwBuf = new wchar_t[nwLen + 1];//ä¸€å®šè¦åŠ 1ï¼Œä¸ç„¶ä¼šå‡ºç°å°¾å·´
 	ZeroMemory(pwBuf, nwLen * 2 + 2);
 
 	::MultiByteToWideChar(CP_ACP, 0, str.c_str(), str.length(), pwBuf, nwLen);
@@ -34,7 +34,7 @@ std::string UTF8_To_string(const std::string & str)
 {
 	int nwLen = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, NULL, 0);
 
-	wchar_t * pwBuf = new wchar_t[nwLen + 1];//Ò»¶¨Òª¼Ó1£¬²»È»»á³öÏÖÎ²°Í
+	wchar_t * pwBuf = new wchar_t[nwLen + 1];//ä¸€å®šè¦åŠ 1ï¼Œä¸ç„¶ä¼šå‡ºç°å°¾å·´
 	memset(pwBuf, 0, nwLen * 2 + 2);
 
 	MultiByteToWideChar(CP_UTF8, 0, str.c_str(), str.length(), pwBuf, nwLen);
@@ -78,7 +78,7 @@ std::string GetStrByIndex(uint32 index,std::string buff)
 char* CreateAccount(std::string accountName, std::string password, std::string macAdress)
 {
 	if (sGateWay->IsMacBaned(macAdress))
-		return "·â»úÆ÷Âë";
+		return "å°æœºå™¨ç ";
 
 	AccountOpResult result = AccountMgr::CreateAccount(accountName, password, macAdress);
 
@@ -89,50 +89,50 @@ char* CreateAccount(std::string accountName, std::string password, std::string m
 		stmt->setString(1, accountName);
 		LoginDatabase.Execute(stmt);
 
-		return "×¢²á³É¹¦";
+		return "æ³¨å†ŒæˆåŠŸ";
 	}
 		
 
-	return "ÕËºÅ´æÔÚ";
+	return "è´¦å·å­˜åœ¨";
 }
 
 char* ModPassword(std::string accountName, std::string oldPassword, std::string newPassword, std::string macAdress)
 {
 	if (sGateWay->IsMacBaned(macAdress))
-		return "·â»úÆ÷Âë";
+		return "å°æœºå™¨ç ";
 
 	uint32 accountId = AccountMgr::GetId(accountName);
 
 	if (!accountId)
-		return "ÕËºÅ²»´æÔÚ";
+		return "è´¦å·ä¸å­˜åœ¨";
 
 	if (!AccountMgr::CheckPassword(accountId, oldPassword))
-		return "Ô­ÃÜÂë²»ÕıÈ·";
+		return "åŸå¯†ç ä¸æ­£ç¡®";
 
 	AccountOpResult result = AccountMgr::ChangePassword(accountId, newPassword);
 	if (result == AOR_OK)
-		return "¸ÄÃÜ³É¹¦";
+		return "æ”¹å¯†æˆåŠŸ";
 
-	return "¸ÄÃÜÊ§°Ü";
+	return "æ”¹å¯†å¤±è´¥";
 }
 
 char* ResetChar(std::string accountName, std::string password, std::string charName, std::string macAdress)
 {
 	if (sGateWay->IsMacBaned(macAdress))
-		return "·â»úÆ÷Âë";
+		return "å°æœºå™¨ç ";
 
 	uint32 accountId = AccountMgr::GetId(accountName);
 
 	if (!accountId)
-		return "ÕËºÅ²»´æÔÚ";
+		return "è´¦å·ä¸å­˜åœ¨";
 
 	if (!AccountMgr::CheckPassword(accountId, password))
-		return "ÃÜÂë´íÎó";
+		return "å¯†ç é”™è¯¯";
 
 	uint32 guid = sWorld->GetGlobalPlayerGUID(string_To_UTF8(charName));
 	
 	if (!guid)
-		return "½ÇÉ«²»´æÔÚ";
+		return "è§’è‰²ä¸å­˜åœ¨";
 
 	if (guid)
 	{
@@ -143,10 +143,10 @@ char* ResetChar(std::string accountName, std::string password, std::string charN
 			player->TeleportTo(571, 5804.15f, 624.771f, 647.767f, 0);
 		else
 			CharacterDatabase.DirectPExecute("UPDATE characters SET position_x = 5804.15,position_y = 624.771,position_z = 647.767,map = 571 WHERE guid = %d", guid);
-		return "½â¿¨³É¹¦";
+		return "è§£å¡æˆåŠŸ";
 	}
 
-	return "½â¿¨Ê§°Ü";
+	return "è§£å¡å¤±è´¥";
 }
 
 DWORD WINAPI GateWayRun(PVOID pvParam)	
@@ -197,9 +197,9 @@ DWORD WINAPI GateWayRun(PVOID pvParam)
 		{
 			std::string macAdress = GetStrByIndex(2, buff);
 			if (sGateWay->IsMacBaned(macAdress))
-				sendBuff = "·â»úÆ÷Âë";
+				sendBuff = "å°æœºå™¨ç ";
 			else
-				sendBuff = "ÑéÖ¤Í¨¹ı";
+				sendBuff = "éªŒè¯é€šè¿‡";
 		}else if (std::strcmp(opcode.c_str(), "opcode_acc") == 0)
 		{
 			std::string accountName = GetStrByIndex(2, buff);

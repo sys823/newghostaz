@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "Faker.h"
 #include "../String/myString.h"
 #include "../CommonFunc/CommonFunc.h"
@@ -7,6 +6,7 @@
 #include "BattlegroundMgr.h"
 #include "WaypointManager.h"
 #include "WorldSession.h"
+
 
 std::unordered_map<uint32, bool>FakerMap;
 std::vector<FakerLocationTemplate> FakerLocation;
@@ -20,7 +20,7 @@ void Faker::Load()
 	QueryResult result;
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT 账号ID FROM _假人_在线假人" :
+		"SELECT 璐﹀彿ID FROM _鍋囦汉_鍦ㄧ嚎鍋囦汉" :
 		"SELECT accountId FROM _faker_online"))
 	{
 		do
@@ -37,7 +37,7 @@ void Faker::Load()
 
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
 
-		"SELECT 地图ID,X坐标,Y坐标,Z坐标,O坐标 FROM _假人_在线假人_坐标" :
+		"SELECT 鍦板浘ID,X鍧愭爣,Y鍧愭爣,Z鍧愭爣,O鍧愭爣 FROM _鍋囦汉_鍦ㄧ嚎鍋囦汉_鍧愭爣" :
 		"SELECT Map,X,Y,Z,O FROM _faker_online_postion"))
 	{
 		do

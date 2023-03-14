@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "challenge.h"
 #include "Group.h"
 #include "MapManager.h"
@@ -17,7 +16,7 @@ void ChallengeMod::Load()
 
 	if (QueryResult result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
 		//		0		1			2			3
-		"SELECT µØÍ¼ID, ÌôÕ½µÈ¼¶, ÐèÇóÄ£°åID, ²Ëµ¥ÎÄ±¾ FROM _¸±±¾_ÌôÕ½Ä£Ê½" :
+		"SELECT åœ°å›¾ID, æŒ‘æˆ˜ç­‰çº§, éœ€æ±‚æ¨¡æ¿ID, èœå•æ–‡æœ¬ FROM _å‰¯æœ¬_æŒ‘æˆ˜æ¨¡å¼" :
 		//		0		1			2			3
 		"SELECT MapId, ChallengeLv, ReqId, GossipText FROM _challenge"))
 	{
@@ -111,7 +110,7 @@ void ChallengeMod::ChangeLevel(Player* leader, uint32 triggerId, uint32 challeng
 
 	Group* group = leader->GetGroup();
 
-	//¼ì²â¶ÓÎé³ÉÔ±ÊÇ·ñÔÚFBÖÐ
+	//æ£€æµ‹é˜Ÿä¼æˆå‘˜æ˜¯å¦åœ¨FBä¸­
 	if (group)
 	{
 		for (GroupReference* itr = group->GetFirstMember(); itr != NULL; itr = itr->next())
@@ -121,9 +120,9 @@ void ChallengeMod::ChangeLevel(Player* leader, uint32 triggerId, uint32 challeng
 				if (member->GetMap()->IsDungeon())
 				{
 					teleport = false;
-					ChatHandler(member->GetSession()).PSendSysMessage("ÄãÔÚ¸±±¾ÖÐ£¬Ñ¡ÔñÄÑ¶ÈÊ§°Ü");
+					ChatHandler(member->GetSession()).PSendSysMessage("ä½ åœ¨å‰¯æœ¬ä¸­ï¼Œé€‰æ‹©éš¾åº¦å¤±è´¥");
 					if (leader->GetGUID() != member->GetGUID())
-						ChatHandler(leader->GetSession()).PSendSysMessage("%sÔÚ¸±±¾ÖÐ£¬Ñ¡ÔñÄÑ¶ÈÊ§°Ü", sCF->GetNameLink(member).c_str());
+						ChatHandler(leader->GetSession()).PSendSysMessage("%såœ¨å‰¯æœ¬ä¸­ï¼Œé€‰æ‹©éš¾åº¦å¤±è´¥", sCF->GetNameLink(member).c_str());
 				}
 
 				if (reqId > 0)
@@ -131,9 +130,9 @@ void ChallengeMod::ChangeLevel(Player* leader, uint32 triggerId, uint32 challeng
 					if (!HasChallenge(member, mapId, challengeLv) && !sReq->Check(member, abs(reqId)))
 					{
 						teleport = false;
-						ChatHandler(member->GetSession()).PSendSysMessage("Î´´ïµ½½øÈëÌõ¼þ£¬Ñ¡ÔñÄÑ¶ÈÊ§°Ü");
+						ChatHandler(member->GetSession()).PSendSysMessage("æœªè¾¾åˆ°è¿›å…¥æ¡ä»¶ï¼Œé€‰æ‹©éš¾åº¦å¤±è´¥");
 						if (leader->GetGUID() != member->GetGUID())
-							ChatHandler(leader->GetSession()).PSendSysMessage("Î´´ïµ½½øÈëÌõ¼þ£¬Ñ¡ÔñÄÑ¶ÈÊ§°Ü");
+							ChatHandler(leader->GetSession()).PSendSysMessage("æœªè¾¾åˆ°è¿›å…¥æ¡ä»¶ï¼Œé€‰æ‹©éš¾åº¦å¤±è´¥");
 					}
 				}
 			}
@@ -145,14 +144,14 @@ void ChallengeMod::ChangeLevel(Player* leader, uint32 triggerId, uint32 challeng
 			if (!HasChallenge(leader, mapId, challengeLv) && !sReq->Check(leader, abs(reqId)))
 			{
 				teleport = false;
-				ChatHandler(leader->GetSession()).PSendSysMessage("Î´´ïµ½½øÈëÌõ¼þ£¬Ñ¡ÔñÄÑ¶ÈÊ§°Ü");
+				ChatHandler(leader->GetSession()).PSendSysMessage("æœªè¾¾åˆ°è¿›å…¥æ¡ä»¶ï¼Œé€‰æ‹©éš¾åº¦å¤±è´¥");
 			}
 		}
 	}
 	else if (!HasChallenge(leader, mapId, challengeLv) && !sReq->Check(leader, abs(reqId)))
 	{
 		teleport = false;
-		ChatHandler(leader->GetSession()).PSendSysMessage("Î´´ïµ½½øÈëÌõ¼þ£¬Ñ¡ÔñÄÑ¶ÈÊ§°Ü");
+		ChatHandler(leader->GetSession()).PSendSysMessage("æœªè¾¾åˆ°è¿›å…¥æ¡ä»¶ï¼Œé€‰æ‹©éš¾åº¦å¤±è´¥");
 	}
 
 	if (!teleport)
@@ -278,7 +277,7 @@ bool ChallengeMod::AddGossipOrTele(Player* player, uint32 triggerId)
 					}
 				}
 				else
-					ChatHandler(player->GetSession()).PSendSysMessage("µÈ´ý¶Ó³¤Ñ¡ÔñÄÑ¶È");
+					ChatHandler(player->GetSession()).PSendSysMessage("ç­‰å¾…é˜Ÿé•¿é€‰æ‹©éš¾åº¦");
 
 				return true;
 			}
@@ -288,7 +287,7 @@ bool ChallengeMod::AddGossipOrTele(Player* player, uint32 triggerId)
 	player->PlayerTalkClass->ClearMenus();
 
 
-	//ÍÅ¶Ó¸±±¾²»ÔÊÐíÇÐ»»ÄÑ¶È
+	//å›¢é˜Ÿå‰¯æœ¬ä¸å…è®¸åˆ‡æ¢éš¾åº¦
 	//for (auto itr = ChallengeVec.begin(); itr != ChallengeVec.end(); itr++)
 	//	if (mapId == itr->MapId)
 	//	{
@@ -296,7 +295,7 @@ bool ChallengeMod::AddGossipOrTele(Player* player, uint32 triggerId)
 	//		{
 	//			if (HasChallenge(player, itr->MapId, itr->Level) && mapEntry->IsRaid())
 	//			{
-	//				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, itr->GossipText + " - ÒÑ°ó¶¨¸ÃÄÑ¶È", triggerId, itr->Level);
+	//				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, itr->GossipText + " - å·²ç»‘å®šè¯¥éš¾åº¦", triggerId, itr->Level);
 	//				player->PlayerTalkClass->GetGossipMenu().SetMenuId(7891);
 	//				player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, player->GetGUID());
 	//				return true;
@@ -313,15 +312,15 @@ bool ChallengeMod::AddGossipOrTele(Player* player, uint32 triggerId)
 
 
 	if (!text.empty())
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, text + " - ÖØÖÃ¸ÃÄÑ¶È", triggerId, 10000, "ÖØÖÃ" + text + "\n½«½â³ý°ó¶¨£¬È·¶¨ÖØÖÃÂð£¿", 0, false);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, text + " - é‡ç½®è¯¥éš¾åº¦", triggerId, 10000, "é‡ç½®" + text + "\nå°†è§£é™¤ç»‘å®šï¼Œç¡®å®šé‡ç½®å—ï¼Ÿ", 0, false);
 
 	for (auto itr = ChallengeVec.begin(); itr != ChallengeVec.end(); itr++)
 		if (mapId == itr->MapId)
 		{
 			if (HasChallenge(player, itr->MapId, itr->Level))
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, itr->GossipText + " - ÒÑ°ó¶¨¸ÃÄÑ¶È", triggerId, itr->Level);
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, itr->GossipText + " - å·²ç»‘å®šè¯¥éš¾åº¦", triggerId, itr->Level);
 			else// if (sReq->Check(player, abs(itr->ReqId), 1, false))
-				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, itr->GossipText, triggerId, itr->Level, sReq->Notice(player, abs(itr->ReqId), "Ñ¡Ôñ", itr->GossipText), sReq->Golds(abs(itr->ReqId)), false);
+				player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, itr->GossipText, triggerId, itr->Level, sReq->Notice(player, abs(itr->ReqId), "é€‰æ‹©", itr->GossipText), sReq->Golds(abs(itr->ReqId)), false);
 		}
 
 	player->PlayerTalkClass->GetGossipMenu().SetMenuId(7891);
@@ -329,7 +328,6 @@ bool ChallengeMod::AddGossipOrTele(Player* player, uint32 triggerId)
 
 	return true;
 }
-
 
 class ChallengePlayerScript : public PlayerScript
 {
