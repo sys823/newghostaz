@@ -903,10 +903,10 @@ void ExtraEquipment::LoadPlayerData(Player* player)
 		ExtraEquipments temp;
 		temp.itemEntry = fields[0].GetUInt32();
 		temp.slot = EquipmentSlots(fields[1].GetUInt8());
-		std::vector<std::string> str_vec = sCF->SplitStr(fields[2].GetString(), " ");
+
+        Tokenizer str_vec(fields[2].GetString(), ' ');
 		for (size_t i = 0; i < str_vec.size(); i++)
-			temp.enchant[i] = (uint32)atoi(str_vec[i].c_str());		
-			
+			temp.enchant[i] = (uint32)atoi(str_vec[i]);		
 
 		player->ExtraEquimentVec.push_back(temp);
 	} while (result->NextRow());
