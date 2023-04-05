@@ -3,30 +3,30 @@
 #include "../CommonFunc/CommonFunc.h"
 #include "../CustomEvent/Event.h"
 
-//LMÈı¸öBOSSµÄentry
+//LMä¸‰ä¸ªBOSSçš„entry
 #define A_A_ENTRY 200000
 #define A_B_ENTRY 200001
 #define A_C_ENTRY 200002
 
-//BLÈı¸öBOSSµÄentry
+//BLä¸‰ä¸ªBOSSçš„entry
 #define H_A_ENTRY 200003
 #define H_B_ENTRY 200004
 #define H_C_ENTRY 200005
 
-//ÊÂ¼şID
+//äº‹ä»¶ID
 #define FACTION_BOSS_BATTLE_EVENTID 100
 
-//»ñÈ¡½±ÀøËùĞèµÄÉËº¦ºÍÖÎÁÆ
+//è·å–å¥–åŠ±æ‰€éœ€çš„ä¼¤å®³å’Œæ²»ç–—
 #define DAMAGE_FOR_REWARD 500000
 #define HEAL_FOR_REWARD 500000
 #define KILLS_FOR_REWARD 100
 #define KILLEDS_FOR_REWARD 100
 
-//½±ÀøµÄ±¦ÏäID
+//å¥–åŠ±çš„å®ç®±ID
 #define FACTION_BOSS_BATTLE_CHESTID 200000
 
-//ÇëÌá¹©ÊÂ¼ş¿ªÊ¼Ê±LMºÍBL×ø±ê
-//ÇëÌá¹©ÊÂ¼ş½áÊøÊ±´«ËÍ×ø±ê
+//è¯·æä¾›äº‹ä»¶å¼€å§‹æ—¶LMå’ŒBLåæ ‡
+//è¯·æä¾›äº‹ä»¶ç»“æŸæ—¶ä¼ é€åæ ‡
 
 
 
@@ -191,7 +191,7 @@ public:
 				}
 
 		sGameEventMgr->StopEvent(FACTION_BOSS_BATTLE_EVENTID, true);
-		sWorld->SendServerMessage(SERVER_MSG_STRING, "ÄÏº£ÕòÕ½ÒÛ½áÊø£¡");
+		sWorld->SendServerMessage(SERVER_MSG_STRING, "å—æµ·é•‡æˆ˜å½¹ç»“æŸï¼");
 	}
 };
 

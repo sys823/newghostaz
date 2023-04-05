@@ -276,7 +276,8 @@ struct boss_twin_valkyrAI : public ScriptedAI
         if( me->HasUnitState(UNIT_STATE_CASTING) )
             return;
 
-        switch( events.ExecuteEvent() )
+        uint8 eventId = events.ExecuteEvent();
+        switch(eventId)
         {
             case 0:
                 break;
@@ -294,12 +295,12 @@ struct boss_twin_valkyrAI : public ScriptedAI
             case EVENT_SUMMON_BALLS_2:
             case EVENT_SUMMON_BALLS_3:
                 {
-                    uint8 eventId = events.ExecuteEvent();
                     uint8 count = 0;
                     if( IsHeroic() )
                         count = eventId == EVENT_SUMMON_BALLS_3 ? 36 : 6;
                     else
                         count = eventId == EVENT_SUMMON_BALLS_3 ? 24 : 4;
+
                     for( uint8 i = 0; i < count; ++i )
                     {
                         float angle = rand_norm() * 2 * M_PI;
@@ -873,9 +874,13 @@ public:
         void HandleEffectPeriodic(AuraEffect const*   /*aurEff*/)
         {
             if (Unit* target = GetTarget())
+            {
                 if (target->GetDisplayId() != 11686)
+                {
                     if (Creature* me = target->ToCreature())
+                    {
                         if (Player* p = me->SelectNearestPlayer(2.75f))
+                        {
                             if (me->GetExactDist2d(p) <= 2.75f)
                             {
                                 me->AI()->DoAction(1); // despawning = true;
@@ -884,6 +889,10 @@ public:
                                 me->SetDisplayId(11686);
                                 me->DespawnOrUnsummon(1500);
                             }
+                        } 
+                    } 
+                } 
+            }
         }
 
         void Register()
