@@ -44,16 +44,16 @@ void EncodeString(LPCTSTR lpszText, LPTSTR *lpszReturn, LPCTSTR lpszKey)
 	int nTextLen = 0;
 	char *cPos = NULL;
 	char *pDest = NULL;
-	if (lpszReturn)    // ¼ÓÃÜ
+	if (lpszReturn)    // åŠ å¯†
 	{
 		nTextLen = ::_tcslen(lpszText);
 		pDest = new char[nTextLen + 3];    // ==\0
 	}
-	else    // ½âÃÜ
+	else    // è§£å¯†
 	{
-		// ²éÕÒ×Ô¶¨µÄÖĞÖ¹±ê¼Ç
+		// æŸ¥æ‰¾è‡ªå®šçš„ä¸­æ­¢æ ‡è®°
 		cPos = (LPTSTR)lpszText;
-		while (true)    // ´ÓÕâÀï¿ÉÒÔ¿´µ½£¬³ı·ÇËÑË÷µ½ÎÒÃÇ×Ô¶¨µÄÖĞÖ¹±ê¼Ç£¬·ñÔò»áÒ»Ö±ËÑË÷ÏÂÈ¥
+		while (true)    // ä»è¿™é‡Œå¯ä»¥çœ‹åˆ°ï¼Œé™¤éæœç´¢åˆ°æˆ‘ä»¬è‡ªå®šçš„ä¸­æ­¢æ ‡è®°ï¼Œå¦åˆ™ä¼šä¸€ç›´æœç´¢ä¸‹å»
 		{
 			if (*cPos == '=')
 				if (cPos[1] == '=')
@@ -61,7 +61,7 @@ void EncodeString(LPCTSTR lpszText, LPTSTR *lpszReturn, LPCTSTR lpszKey)
 						break;
 			cPos++;
 		}
-		if (!cPos)    // Ã»ÓĞÕÒµ½½áÊø±ê¼Ç£¬Ò²²»ÊÇ¼ÓÃÜ
+		if (!cPos)    // æ²¡æœ‰æ‰¾åˆ°ç»“æŸæ ‡è®°ï¼Œä¹Ÿä¸æ˜¯åŠ å¯†
 			return;
 		nTextLen = cPos - lpszText;
 		pDest = (LPTSTR)lpszText;
@@ -72,18 +72,18 @@ void EncodeString(LPCTSTR lpszText, LPTSTR *lpszReturn, LPCTSTR lpszKey)
 	int k = 0;
 	int t = nTextLen;
 	int cn = 0;
-	for (int a = 0; a < nKeyLen; a++)    // ½«ÃÜÔ¿ËùÓĞÖµ¼ÓÆğÀ´
+	for (int a = 0; a < nKeyLen; a++)    // å°†å¯†é’¥æ‰€æœ‰å€¼åŠ èµ·æ¥
 		cn += lpszKey[a];
 
 	for (; i < nTextLen; i++)
 	{
-		if (lpszReturn)    // ¼ÓÃÜ
+		if (lpszReturn)    // åŠ å¯†
 		{
 			pDest[i] = lpszText[i] + t;
 			pDest[i] = pDest[i] ^ lpszKey[k];
 			pDest[i] = pDest[i] ^ cn;
 		}
-		else    // ½âÃÜ£¬Ë³ĞòÓë¼ÓÃÜÊ±Ïà·´
+		else    // è§£å¯†ï¼Œé¡ºåºä¸åŠ å¯†æ—¶ç›¸å
 		{
 			pDest[i] = lpszText[i] ^ cn;
 			pDest[i] = pDest[i] ^ lpszKey[k];

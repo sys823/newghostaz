@@ -23,12 +23,12 @@ public:
 
 		int32 value = sSwitch->GetValue(ST_WORLD_CHAT);
 
-		//-1 ÎŞÏŞÖÆ 0 ¹Ø±Õ >0 ÏûºÄ <-1 ÀäÈ´Ê±¼ä
+		//-1 æ— é™åˆ¶ 0 å…³é—­ >0 æ¶ˆè€— <-1 å†·å´æ—¶é—´
 
 
 		if (value == 0)
 		{
-			player->GetSession()->SendNotification("ÊÀ½çÁÄÌì¹¦ÄÜÎ´¿ªÆô!");
+			player->GetSession()->SendNotification("ä¸–ç•ŒèŠå¤©åŠŸèƒ½æœªå¼€å¯!");
 			return true;
 		}
 		
@@ -51,7 +51,7 @@ public:
 				uint32 cd = abs(player->worldChatTimer) / IN_MILLISECONDS;
 
 				std::ostringstream oss;
-				oss << "ÊÀ½çÁÄÌì½«ÔÚ" << cd << "sºóÀäÈ´£¡";
+				oss << "ä¸–ç•ŒèŠå¤©å°†åœ¨" << cd << "såå†·å´ï¼";
 				player->GetSession()->SendNotification(oss.str().c_str());
 				return true;
 			}
@@ -74,12 +74,12 @@ public:
 
 		int32 value = sSwitch->GetValue(ST_FACTION_CHAT);
 
-		//-1 ÎŞÏŞÖÆ 0 ¹Ø±Õ >0 ÏûºÄ <-1 ÀäÈ´Ê±¼ä
+		//-1 æ— é™åˆ¶ 0 å…³é—­ >0 æ¶ˆè€— <-1 å†·å´æ—¶é—´
 
 
 		if (value == 0)
 		{
-			player->GetSession()->SendNotification("ÕóÓªÁÄÌì¹¦ÄÜÎ´¿ªÆô!");
+			player->GetSession()->SendNotification("é˜µè¥èŠå¤©åŠŸèƒ½æœªå¼€å¯!");
 			return true;
 		}
 
@@ -103,7 +103,7 @@ public:
 				uint32 cd = abs(player->factionChatTimer) / IN_MILLISECONDS;
 
 				std::ostringstream oss;
-				oss << "ÕóÓªÁÄÌì½«ÔÚ" << cd << "sºóÀäÈ´£¡";
+				oss << "é˜µè¥èŠå¤©å°†åœ¨" << cd << "såå†·å´ï¼";
 				player->GetSession()->SendNotification(oss.str().c_str());
 				return true;
 			}
@@ -127,7 +127,7 @@ public:
 		
 		if (!player->faction)
 		{
-			ChatHandler(player->GetSession()).PSendSysMessage("Äã»¹Ã»ÓĞ¼ÓÈëÈÎºÎÃÅÅÉ£¡");
+			ChatHandler(player->GetSession()).PSendSysMessage("ä½ è¿˜æ²¡æœ‰åŠ å…¥ä»»ä½•é—¨æ´¾ï¼");
 			return true;
 		}
 

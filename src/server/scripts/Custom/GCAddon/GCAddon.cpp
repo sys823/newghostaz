@@ -449,7 +449,10 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 		sLog->outString("收到魂玉扩展操作码4");
 		std::string str = SplitStr(msg, 1);
 		std::vector<std::string> vec = sSoulStoneEx->split(str, "#");
-
+        if (vec.size() != 2)
+        {
+            return false;
+        }
 		uint32 page = atoi(vec[0].c_str());
 		uint32 slot = atoi(vec[1].c_str());
 

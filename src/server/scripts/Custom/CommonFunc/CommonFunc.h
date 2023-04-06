@@ -1,4 +1,4 @@
-﻿extern bool CampAttackStartFlag;
+extern bool CampAttackStartFlag;
 
 class CommonFunc
 {
@@ -19,6 +19,7 @@ public:
 
 	uint32 GetTokenAmount(Player* player);
 	uint32 GetTotalTokenAmount(Player* player);
+    void UpdateTotalTokenAmount(Player* player, uint32 amount);
 	void UpdateTokenAmount(Player* player, uint32 amount, bool ins, std::string action = "");
 	void SetOnlineRewardedCount(Player* player, uint32 count);
 

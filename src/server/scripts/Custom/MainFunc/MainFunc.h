@@ -45,6 +45,8 @@ enum MFTypes
 	MF_MAIL,					//邮箱
 	MF_ALT_CLASS,				//转职
 	MF_CDK,						//兑换码
+    MF_PAIHANG,                 //排行榜
+    MF_LQ_JF,                   //充值领取积分
 };
 
 struct MainFuncTemplate

@@ -64,7 +64,7 @@ uint32 CommonFunc::GetTokenAmount(Player* player)
 
 uint32 CommonFunc::GetTotalTokenAmount(Player* player)
 {
-	QueryResult result = LoginDatabase.PQuery("SELECT totalTokenAmount FROM account WHERE id = '%u'", player->GetSession()->GetAccountId());
+	QueryResult result = LoginDatabase.PQuery("SELECT totalTokenAmount FROM characters WHERE guid = '%u'", player->GetGUIDLow());
 	if (!result) return 0;
 	else
 	{
@@ -73,12 +73,20 @@ uint32 CommonFunc::GetTotalTokenAmount(Player* player)
 	}
 }
 
+void CommonFunc::UpdateTotalTokenAmount(Player* player, uint32 amount)
+{
+    CharacterDatabase.DirectPExecute("UPDATE characters SET totalTokenAmount = totalTokenAmount + '%u' WHERE guid = '%u'", amount, player->GetGUIDLow());
+}
+
 void CommonFunc::UpdateTokenAmount(Player* player, uint32 amount, bool ins, std::string action)
 {
 	if (ins)
 		LoginDatabase.DirectPExecute("UPDATE account SET tokenAmount = tokenAmount + '%u' WHERE id = '%u'", amount, player->GetSession()->GetAccountId());
 	else
 		LoginDatabase.DirectPExecute("UPDATE account SET tokenAmount = tokenAmount - '%u' WHERE id = '%u'", amount, player->GetSession()->GetAccountId());
+
+    if (!ins)
+        UpdateTotalTokenAmount(player, amount);
 
 	sGCAddon->SendTokenUpdateData(player, amount, ins);
 

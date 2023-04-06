@@ -5,7 +5,7 @@
 #include "../Command/CustomCommand.h"
 #include "../GCAddon/GCAddon.h"
 #include "../LuckDraw/LuckDraw.h"
-
+#include "../Paihang/paihang.h"
 class WhenLogin : PlayerScript
 {
 public:
@@ -63,7 +63,7 @@ public:
 					player->removeSpell(27764, SPEC_MASK_ALL, true);
 			}
 		}
-
+        sPaiHang->SendAndClearBufforGG(player, true);
 		//player->LootCheckLoad();
 	}
 };

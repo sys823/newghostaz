@@ -13,7 +13,7 @@
 #define SENDER_RANK						9001
 #define SENDER_FACTION					9002
 #define SENDER_MORPH					9003
-
+#define SENDER_ZY   					9004
 //enum FunctionTypes
 //{
 //	FT_START,

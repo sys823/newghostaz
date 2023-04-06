@@ -146,6 +146,7 @@ set(scripts_STAT_SRCS
   ${AC_SCRIPTS_DIR}/EasternKingdoms/zone_westfall.cpp
   ${AC_SCRIPTS_DIR}/EasternKingdoms/zone_silverpine_forest.cpp
   ${AC_SCRIPTS_DIR}/EasternKingdoms/Karazhan/instance_karazhan.cpp
+  ${AC_SCRIPTS_DIR}/EasternKingdoms/Karazhan/boss_chess_event.cpp
   ${AC_SCRIPTS_DIR}/EasternKingdoms/Karazhan/boss_nightbane.cpp
   ${AC_SCRIPTS_DIR}/EasternKingdoms/Karazhan/karazhan.cpp
   ${AC_SCRIPTS_DIR}/EasternKingdoms/Karazhan/boss_curator.cpp

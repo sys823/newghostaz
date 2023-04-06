@@ -30,6 +30,7 @@
 #include "../Talisman/Talisman.h"
 #include "../AuthCheck/AuthCheck.h"
 #include "../CDK/CDK.h"
+#include "../Paihang/paihang.h"
 
 //ALTER TABLE _function ADD PopText TEXT	DEFAULT NULL AFTER MenuText;
 
@@ -166,6 +167,10 @@ void MainFunc::Load()
 			Temp.FuncType = MF_MAIL;
 		else if (strcmp("转职", str) == 0)
 			Temp.FuncType = MF_ALT_CLASS;
+        else if (strcmp("排行榜", str) == 0)
+            Temp.FuncType = MF_PAIHANG;
+        else if (strcmp("积分领取", str) == 0)
+            Temp.FuncType = MF_LQ_JF;
 		else
 			Temp.FuncType = MF_NONE;
 
@@ -312,6 +317,9 @@ void MainFunc::DoAction(Player* pl, Object* obj, uint32 sender, uint32 action)
 
 	switch (sender)
 	{
+    case SENDER_ZY:
+        AddGossip(pl, obj, 0);
+        return;
 	case SENDER_HR_MENU:
 		sHR->AddNextHRMenu(pl, obj);
 		return;
@@ -512,6 +520,12 @@ void MainFunc::DoAction(Player* pl, Object* obj, uint32 sender, uint32 action)
 	case MF_SHOW_ACTIVE_EVENTS:
 		sEvent->AddEventList(pl, obj);
 		break;
+    case MF_PAIHANG:
+        sPaiHang->AddPaiHangList(pl, obj, CurMenu);
+        break;
+    case MF_LQ_JF:
+        sPaiHang->LQJF(pl);
+        break;
 	case MF_UPGRADE_HR:
 		sHR->AddNextHRMenu(pl, obj);
 		break;
