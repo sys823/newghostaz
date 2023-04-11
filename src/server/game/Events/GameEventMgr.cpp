@@ -262,7 +262,7 @@ void GameEventMgr::LoadFromDB()
     {
         uint32 oldMSTime = getMSTime();
                                                 //       1           2                           3                         4          5       6        7             8            9            10
-        QueryResult result = WorldDatabase.Query("SELECT eventEntry, UNIX_TIMESTAMP(start_time), UNIX_TIMESTAMP(end_time), occurence, length, holiday, holidayStage, description, world_event, announce, sendlist FROM game_event");
+        QueryResult result = WorldDatabase.Query("SELECT eventEntry, UNIX_TIMESTAMP(start_time), UNIX_TIMESTAMP(end_time), occurence, length, holiday, holidayStage, description, world_event, announce, eventlist FROM game_event");
         if (!result)
         {
             mGameEvent.clear();
