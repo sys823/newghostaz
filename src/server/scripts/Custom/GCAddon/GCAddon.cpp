@@ -124,7 +124,7 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 	}
 	else if (IsOpcode(opcode, "GC_C_STATPOINTS"))
 	{
-        sLog->outString("op = %s", msg.c_str());
+        //sLog->outString("op = %s", msg.c_str());
 		uint32 action = atoi(SplitStr(msg, 1).c_str());
 		uint32 id = atoi(SplitStr(msg, 2).c_str());
 
