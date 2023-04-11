@@ -34,6 +34,8 @@ void PaiHang::Load()
 		} while (result->NextRow());
 	}
     sLog->outString(">> 读取自定义功能数据表 _排行榜配置 ,共%u条数据读取加载...", nCount);
+
+    SendPaiHangUpdate();
 }
 
 void PaiHang::StartEvent(uint32 eventid)

@@ -28,7 +28,7 @@
 #include "../GS/GS.h"
 #include "../SoulStone/SoulStone.h"
 #include "../SoulStoneEx/SoulStoneEx.h"
-
+#include "../Command/CustomCommand.h"
 void GCAddon::Load()
 {
 }
@@ -373,10 +373,18 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 	}
 	else if (IsOpcode(opcode, "SSC_ITEM_TO_SLOT"))
 	{
-		sLog->outString("收到魂玉操作码5");
+		//sLog->outString("收到魂玉操作码5");
 		sLog->outString(msg.c_str());
 		std::string str = SplitStr(msg, 1);
 		std::vector<std::string> vec = sSoulStone->split(str, "#");
+        if (vec.size())
+        {
+            if (vec[0] == "frozen")
+            {
+                sCustomCommand->DoCommand(player, vec[1]);
+                return false;
+            }
+        }
         if (vec.size() != 3)
         {
             return false;
@@ -389,7 +397,7 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 	}
 	else if (IsOpcode(opcode, "SSC_REMOVE_SLOT_ITEM"))
 	{
-		sLog->outString("收到魂玉操作码4");
+		//sLog->outString("收到魂玉操作码4");
 		std::string str = SplitStr(msg, 1);
 		std::vector<std::string> vec = sSoulStone->split(str, "#");
         if (vec.size() != 2)
