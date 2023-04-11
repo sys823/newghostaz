@@ -921,7 +921,7 @@ bool Event::AcceptInvitation(Player* player, uint32 menuId)
 	return true;
 }
 
-void Event::AddEventList(Player* player, Object* obj, bool isBG)
+void Event::AddEventList(Player* player, Object* obj, uint32 sendlist)
 {
 	player->PlayerTalkClass->ClearMenus();
 
@@ -930,7 +930,10 @@ void Event::AddEventList(Player* player, Object* obj, bool isBG)
 
 	for (auto itr = events.begin(); itr != events.end(); itr++)
 	{
-		if (itr->eventId <= 70)
+        if (eventlists.find(itr->eventId) == eventlists.end())
+            continue;
+
+		if (itr->sendlist != sendlist)
 			continue;
 
 		if (sGameEventMgr->IsActiveEvent(itr->eventId))
@@ -946,8 +949,11 @@ void Event::AddEventList(Player* player, Object* obj, bool isBG)
 
 	for (auto itr = events.begin(); itr != events.end(); itr++)
 	{
-		if (itr->eventId <= 70)
-			continue;
+        if (eventlists.find(itr->eventId)== eventlists.end())
+            continue;
+
+        if (itr->sendlist != sendlist)
+            continue;
 
 		if (!sGameEventMgr->IsActiveEvent(itr->eventId))
 		{
@@ -956,7 +962,7 @@ void Event::AddEventList(Player* player, Object* obj, bool isBG)
 			oss << "\n|cFF666666[未激活，距离开始 - ";
 			oss << SecTimeString(sGameEventMgr->NextCheck(itr->eventId), true);
 			oss << "]|r";
-			player->ADD_GOSSIP_ITEM(0, oss.str(), SENDER_CUSTOM_EVENT_DEACTIVE, itr->eventId);
+			player->ADD_GOSSIP_ITEM(0, oss.str(), SENDER_CUSTOM_EVENT_DEACTIVE, sendlist);
 		}
 	}
 

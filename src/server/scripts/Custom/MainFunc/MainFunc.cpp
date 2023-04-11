@@ -350,7 +350,7 @@ void MainFunc::DoAction(Player* pl, Object* obj, uint32 sender, uint32 action)
 		CloseMenu(pl);
 		return;
 	case SENDER_CUSTOM_EVENT_DEACTIVE:
-		sEvent->AddEventList(pl, obj);
+		sEvent->AddEventList(pl, obj, action);
 		return;
 	case SENDER_CUSTOM_SKILL:
 		sCustomSkill->Action(pl, action, obj);
@@ -518,7 +518,7 @@ void MainFunc::DoAction(Player* pl, Object* obj, uint32 sender, uint32 action)
 		sCDK->AddGossip(pl, obj);
 		break;
 	case MF_SHOW_ACTIVE_EVENTS:
-		sEvent->AddEventList(pl, obj);
+		sEvent->AddEventList(pl, obj, CurMenu);
 		break;
     case MF_PAIHANG:
         sPaiHang->AddPaiHangList(pl, obj, CurMenu);

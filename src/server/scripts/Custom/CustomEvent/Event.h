@@ -211,7 +211,7 @@ public:
 	uint32 GetFactionMembers(EventFactionId faction);
 	bool DiedTele(Player* player);
 	bool SendAreaSpiritHealerQueryOpcode(Player* player);
-	void AddEventList(Player* player, Object* obj, bool isBG = false);
+	void AddEventList(Player* player, Object* obj, uint32 sendlist);
 	void GetTelePos(uint32 posId, uint32 &map, float &x, float &y, float &z, float &o);
 	bool GobUnk1Check(Unit* target, GameObject *const gob);
 	bool IpCheck(Player* player); 
@@ -220,6 +220,8 @@ public:
 	void SummonSoulHealer();
 	void SendScreenMessage(std::string text, EventFactionId faction = 0, bool onlydead = false);
 	bool Valid(){ if (_EventId == 0 || _EventType < C_ET_LINE || _EventId == BGIC_EVENT_ID) return false; return true; }
+
+    std::set<uint32> eventlists;
 private:
 	/*_game_event*/
 	uint32 _EventId;
