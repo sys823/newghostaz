@@ -292,12 +292,12 @@ void PaiHang::AddPaiHangList(Player* pPlayer, Object* obj, uint32 typesid)
 
 void PaiHang::LQJF(Player* player)
 {
-    QueryResult result = LoginDatabase.PQuery("SELECT jf_new,jf_old,jf_one,jf_day from account where id= %u", player->GetSession()->GetAccountId());
+    QueryResult result = LoginDatabase.PQuery("SELECT jf_new,jf_one,jf_day from account where id= %u", player->GetSession()->GetAccountId());
     if (result)
     {
         uint32 jf_new = result->Fetch()[0].GetUInt32();
-        int32 jf_one = result->Fetch()[2].GetInt32();
-        int32 jf_day = result->Fetch()[3].GetInt32();
+        int32 jf_one = result->Fetch()[1].GetInt32();
+        int32 jf_day = result->Fetch()[2].GetInt32();
         //============================================
         if (jf_new == 0)
         {
