@@ -200,7 +200,7 @@ void usage(const char* prog)
 /// Launch the Trinity server
 extern int main(int argc, char** argv)
 {
-    SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
+    //SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
     ///- Command line parsing to get the configuration file name
     char const* configFile = _ACORE_CORE_CONFIG;
     int c = 1;

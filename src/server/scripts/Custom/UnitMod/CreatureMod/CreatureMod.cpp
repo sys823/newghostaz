@@ -155,7 +155,7 @@ public:
             else
                 msg = sString->Format(sString->GetText(STR_KILL_CREATRE), sCF->GetNameLink(killer).c_str(), killed->GetCreatureTemplate()->Name.c_str());
 
-            sWorld->SendScreenMessage(msg);
+            sWorld->SendGlobalText(msg, NULL);
         }
 
 		//击杀广播
@@ -168,7 +168,7 @@ public:
 			else
 				msg = sString->Format(sString->GetText(CORE_STR_TYPES(STR_KILL_CREATRE)), sCF->GetNameLink(killer).c_str(), killed->GetCreatureTemplate()->Name.c_str());
 
-			sWorld->SendScreenMessage(msg);
+            sWorld->SendGlobalText(msg, NULL);
 		}
 
 		//Rank值 正数-击杀者 负数-整个队伍
