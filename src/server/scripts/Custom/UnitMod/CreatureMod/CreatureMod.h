@@ -5,7 +5,7 @@ struct CreautreModTemplate
 	uint8 Level;										//等级
 	uint32 Health;										//生命值
 	int32 Armor;										//护甲-1 creature_template表确定
-	uint32 MeleeDmg;									//物理伤害
+    float MeleeDmg;									//物理伤害
 	float SpellDmgMod;									//法术伤害倍率
 	float HealMod;										//治疗倍率
 	float ReduceDmgPct;									//减伤百分比
