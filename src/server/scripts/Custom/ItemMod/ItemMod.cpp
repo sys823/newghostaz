@@ -140,7 +140,7 @@ void ItemMod::LoadBuyEquipSaleUse()
 
 	ItemUseVec.clear();
 	result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ?
-		"SELECT 物品ID,需求模板ID,奖励模板ID,获得奖励几率,GM命令组,触发技能ID1,触发技能ID2,触发技能ID3 from  _物品_当使用时" :
+		"SELECT 物品ID,需求模板ID,奖励模板ID,获得奖励几率,GM命令组,触发技能ID1,触发技能ID2,触发技能ID3,使用删除 from  _物品_当使用时" :
 		"SELECT entry,reqId,rewId,rewChance,command,spell1,spell2,spell3 from _itemmod_on_use");
 	if (result)
 	{
@@ -156,6 +156,7 @@ void ItemMod::LoadBuyEquipSaleUse()
 			Temp.spellId1	= fields[5].GetUInt32();
 			Temp.spellId2	= fields[6].GetUInt32();
 			Temp.spellId3	= fields[7].GetUInt32();
+            Temp.usedel    = fields[8].GetBool();
 			ItemUseVec.push_back(Temp);
 		} while (result->NextRow());
 	}
@@ -573,7 +574,7 @@ void ItemMod::GetSaleInfo(uint32 entry, uint32 &rewId, uint32 &rewChance, std::s
 			break;
 		}
 }
-void ItemMod::GetUseInfo(uint32 entry, uint32 &reqId, uint32 &rewId, uint32 &rewChance, std::string &command, uint32 &spellId1, uint32 &spellId2, uint32 &spellId3)
+void ItemMod::GetUseInfo(uint32 entry, uint32 &reqId, uint32 &rewId, uint32 &rewChance, std::string &command, uint32 &spellId1, uint32 &spellId2, uint32 &spellId3, bool& usedel)
 {
 	const ItemTemplate * temp = sObjectMgr->GetItemTemplate(entry);
 	if (!temp)
@@ -590,6 +591,7 @@ void ItemMod::GetUseInfo(uint32 entry, uint32 &reqId, uint32 &rewId, uint32 &rew
 			spellId1 = itr->spellId1;
 			spellId2 = itr->spellId2;
 			spellId3 = itr->spellId3;
+            usedel = itr->usedel;
 			break;
 		}
 }

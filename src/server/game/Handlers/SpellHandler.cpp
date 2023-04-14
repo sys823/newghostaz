@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -196,7 +196,8 @@ void WorldSession::HandleUseItemOpcode(WorldPacket& recvPacket)
         uint32 spellId2 = 0;
         uint32 spellId3 = 0;
         std::string command = "";
-        sItemMod->GetUseInfo(proto->ItemId, reqId, rewId, chance, command, spellId1, spellId2, spellId3);
+        bool usedel = false;
+        sItemMod->GetUseInfo(proto->ItemId, reqId, rewId, chance, command, spellId1, spellId2, spellId3, usedel);
 
 
         if (!sReq->Check(pUser, reqId))
@@ -261,6 +262,13 @@ void WorldSession::HandleUseItemOpcode(WorldPacket& recvPacket)
 
         if (!command.empty())
             sCustomCommand->DoCommand(pUser, command);
+
+        if (usedel)
+        {
+            uint32 counst = 1;
+            pUser->DestroyItemCount(pItem, counst, true);
+            return;
+        }
     }
 
     // check also  BIND_WHEN_PICKED_UP and BIND_QUEST_ITEM for .additem or .additemset case by GM (not binded at adding to inventory)

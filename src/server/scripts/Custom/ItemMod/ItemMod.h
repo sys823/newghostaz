@@ -159,6 +159,7 @@ struct ItemUseTemplate
 	uint32 spellId1;
 	uint32 spellId2;
 	uint32 spellId3;
+    bool usedel;
 };
 extern std::vector<ItemUseTemplate> ItemUseVec;
 
@@ -370,7 +371,7 @@ public:
 	uint32 GetBuyMaxCount(uint32 entry, uint32 vendor, uint8 slot);
 	uint32 GetEquipInfo(uint32 entry);
 	void GetSaleInfo(uint32 entry, uint32 &rewId, uint32 &rewChance, std::string &command);
-	void GetUseInfo(uint32 entry, uint32 &reqId, uint32 &rewId, uint32 &rewChance, std::string &command, uint32 &spellId1, uint32 &spellId2, uint32 &spellId3);
+	void GetUseInfo(uint32 entry, uint32 &reqId, uint32 &rewId, uint32 &rewChance, std::string &command, uint32 &spellId1, uint32 &spellId2, uint32 &spellId3, bool &usedel);
 
 	uint8 getSlot(uint32 sender); 
 	uint32 getEnchant(uint32 sender);
