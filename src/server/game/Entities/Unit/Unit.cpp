@@ -12289,8 +12289,8 @@ uint32 Unit::MeleeDamageBonusDone(Unit* victim, uint32 pdamage, WeaponAttackType
         if (Player* modOwner = GetSpellModOwner())
             modOwner->ApplySpellMod(spellProto->Id, SPELLMOD_DAMAGE, tmpDamage);
 
-    if (Creature* c_attacker = ToCreature())
-        tmpDamage *= c_attacker->C_SpellDmgMod;
+    /*if (Creature* c_attacker = ToCreature())
+        tmpDamage *= c_attacker->C_SpellDmgMod;*/
 
     // bonus result can be negative
     return uint32(std::max(tmpDamage, 0.0f));
