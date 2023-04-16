@@ -796,10 +796,10 @@ class Creature : public Unit, public GridObject<Creature>, public MovableMapObje
         time_t GetLastDamagedTime() const { return _lastDamagedTime; }
         void SetLastDamagedTime(time_t val)
         {
-            SelectLevel(false);
             _lastDamagedTime = val;
             if (!val)
             {
+                SelectLevel(false);
                 ISDam_Player.clear();
                 ISTmpDam_Player.clear();
                 m_paidam.clear();
