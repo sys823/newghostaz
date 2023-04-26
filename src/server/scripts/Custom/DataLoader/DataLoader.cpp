@@ -267,7 +267,7 @@ void DataLoader::LoadAll()
 	sRune->Load();
 	sGS->Load();
 	sItemMod->InitUIItemEntryData();
-	sLFGMgr->LoadRewards();
+	//sLFGMgr->LoadRewards();
 	sCDK->Load();
 	sCharPvpTop->LoadTopSys();
 	sGvgSys->LoadgvgSys();

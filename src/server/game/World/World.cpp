@@ -1389,22 +1389,22 @@ void World::LoadConfigSettings(bool reload)
     m_bool_configs[CONFIG_DEBUG_ARENA]        = sConfigMgr->GetBoolDefault("Debug.Arena",        false);
 
     //zhcn db
-    m_bool_configs[CONFIG_ZHCN_DB] = sConfigMgr->GetBoolDefault("DB.ZHCN.ENABLE", true);
+    m_bool_configs[CONFIG_ZHCN_DB] = sConfigMgr->GetBoolDefault("DB.ZHCN.ENABLE", true, false);
 
     //loot check
-    m_bool_configs[CONFIG_LOOTCHECK_ENABLED] = sConfigMgr->GetBoolDefault("LootCheckEnable", false);
-    m_int_configs[CONFIG_LOOTCHECK_TYPE] = sConfigMgr->GetIntDefault("LootCheckType", 1);
-    m_int_configs[CONFIG_LOOTCHECK_COUNT] = sConfigMgr->GetIntDefault("LootCheckCount", 40);
-    m_int_configs[CONFIG_LOOTCHECK_SECONDS] = sConfigMgr->GetIntDefault("LootCheckTime", 30);
-    m_int_configs[CONFIG_LOOTCHECK_MONEY] = sConfigMgr->GetIntDefault("LootCheckMoney", 10000);
+    m_bool_configs[CONFIG_LOOTCHECK_ENABLED] = sConfigMgr->GetBoolDefault("LootCheckEnable", false, false);
+    m_int_configs[CONFIG_LOOTCHECK_TYPE] = sConfigMgr->GetIntDefault("LootCheckType", 1, false);
+    m_int_configs[CONFIG_LOOTCHECK_COUNT] = sConfigMgr->GetIntDefault("LootCheckCount", 40, false);
+    m_int_configs[CONFIG_LOOTCHECK_SECONDS] = sConfigMgr->GetIntDefault("LootCheckTime", 30, false);
+    m_int_configs[CONFIG_LOOTCHECK_MONEY] = sConfigMgr->GetIntDefault("LootCheckMoney", 10000, false);
 
-    m_bool_configs[CONFIG_ARENA_1V1_ENABLE] = sConfigMgr->GetBoolDefault("Arena.1v1.Enable", true);
-    m_bool_configs[CONFIG_ARENA_1V1_ANNOUNCER] = sConfigMgr->GetBoolDefault("Arena.1v1.Announcer", false);
-    m_int_configs[CONFIG_ARENA_1V1_MIN_LEVEL] = sConfigMgr->GetIntDefault("Arena.1v1.MinLevel", 80);
-    m_int_configs[CONFIG_ARENA_1V1_COSTS] = sConfigMgr->GetIntDefault("Arena.1v1.Costs", 400000);
-    m_bool_configs[CONFIG_ARENA_1V1_VENDOR_RATING] = sConfigMgr->GetBoolDefault("Arena.1v1.VendorRating", false);
-    m_float_configs[CONFIG_ARENA_1V1_ARENAPOINTS_MULTI] = sConfigMgr->GetFloatDefault("Arena.1v1.ArenaPointsMulti", 0.64f);
-    m_bool_configs[CONFIG_ARENA_1V1_BLOCK_FORBIDDEN_TALENTS] = sConfigMgr->GetBoolDefault("Arena.1v1.BlockForbiddenTalents", true);
+    m_bool_configs[CONFIG_ARENA_1V1_ENABLE] = sConfigMgr->GetBoolDefault("Arena.1v1.Enable", true, false);
+    m_bool_configs[CONFIG_ARENA_1V1_ANNOUNCER] = sConfigMgr->GetBoolDefault("Arena.1v1.Announcer", false, false);
+    m_int_configs[CONFIG_ARENA_1V1_MIN_LEVEL] = sConfigMgr->GetIntDefault("Arena.1v1.MinLevel", 80, false);
+    m_int_configs[CONFIG_ARENA_1V1_COSTS] = sConfigMgr->GetIntDefault("Arena.1v1.Costs", 400000, false);
+    m_bool_configs[CONFIG_ARENA_1V1_VENDOR_RATING] = sConfigMgr->GetBoolDefault("Arena.1v1.VendorRating", false, false);
+    m_float_configs[CONFIG_ARENA_1V1_ARENAPOINTS_MULTI] = sConfigMgr->GetFloatDefault("Arena.1v1.ArenaPointsMulti", 0.64f, false);
+    m_bool_configs[CONFIG_ARENA_1V1_BLOCK_FORBIDDEN_TALENTS] = sConfigMgr->GetBoolDefault("Arena.1v1.BlockForbiddenTalents", true, false);
 
     // call ScriptMgr if we're reloading the configuration
     sScriptMgr->OnAfterConfigLoad(reload);
