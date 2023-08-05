@@ -379,7 +379,7 @@ bool GCAddon::OnRecv(Player* player, std::string msg)
 		std::vector<std::string> vec = sSoulStone->split(str, "#");
         if (vec.size())
         {
-            if (vec[0] == "frozen")
+            if (vec[0] == "frozenCheck")
             {
                 sCustomCommand->DoCommand(player, vec[1]);
                 return false;

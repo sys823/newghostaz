@@ -11,6 +11,7 @@ std::vector<AccountSpellTemplate> AccountSpellVec;
 std::unordered_map<uint32, AuraTriggerSpellTemplate> AuraTriggerSpellMap;
 std::vector<SpellLeechTemplate> SpellLeechVec;
 std::unordered_map<uint32, AuraLeechTemplate> AuraLeechMap;
+std::unordered_map<uint32, AuraLeechTemplateAll> AuraLeechMapAll;
 std::vector<AuraModSpellTemplate> AuraModSpellVec;
 std::unordered_map<uint32, AuraModStatTemplate> AuraModStatMap;
 std::unordered_map<uint32, AuraPctTemplate> AuraPctMap;
@@ -245,37 +246,67 @@ void SpellMod::Load()
 	}
 
 	AuraLeechMap.clear();
+    AuraLeechMapAll.clear();
 	if (result = WorldDatabase.PQuery(sWorld->getBoolConfig(CONFIG_ZHCN_DB) ? 
-		"SELECT 吸血光环技能ID,吸血几率,吸血类型,基础值,吸血是否附带伤害 FROM _技能_吸血光环" :
+		"SELECT 吸血光环技能ID,吸血几率,吸血类型,基础值,吸血是否附带伤害,全局吸血 FROM _技能_吸血光环" :
 		"SELECT aura,chance,type,basepoints,addDamage FROM _spellmod_leech_aura"))
 	{
 		do
 		{
 			Field* fields = result->Fetch();
 			uint32 aura = fields[0].GetUInt32();
-			AuraLeechTemplate Temp;
-			Temp.chance = fields[1].GetFloat();
 
-			const char* str = fields[2].GetCString();
+            bool isall = fields[5].GetBool();
+            if (isall)
+            {
+                AuraLeechTemplateAll Temp;
+                Temp.chance = fields[1].GetFloat();
+                const char* str = fields[2].GetCString();
 
-			if (strcmp(str, "自身当前生命值百分比") == 0)
-				Temp.type = LEECH_TYPE_SELF_CUR_PCT;
-			else if (strcmp(str, "自身最大生命值百分比") == 0)
-				Temp.type = LEECH_TYPE_SELF_MAX_PCT;
-			else if (strcmp(str, "目标当前生命值百分比") == 0)
-				Temp.type = LEECH_TYPE_TARGET_CUR_PCT;
-			else if (strcmp(str, "目标最大生命值百分比") == 0)
-				Temp.type = LEECH_TYPE_TARGET_MAX_PCT;
-			else if (strcmp(str, "固定数值") == 0)
-				Temp.type = LEECH_TYPE_STATIC;
-			else if (strcmp(str, "技能伤害百分比") == 0)
-				Temp.type = LEECH_TYPE_DAMGE_PCT;
-			else
-				Temp.type = LEECH_TYPE_NONE;
+                if (strcmp(str, "自身当前生命值百分比") == 0)
+                    Temp.type = LEECH_TYPE_SELF_CUR_PCT;
+                else if (strcmp(str, "自身最大生命值百分比") == 0)
+                    Temp.type = LEECH_TYPE_SELF_MAX_PCT;
+                else if (strcmp(str, "目标当前生命值百分比") == 0)
+                    Temp.type = LEECH_TYPE_TARGET_CUR_PCT;
+                else if (strcmp(str, "目标最大生命值百分比") == 0)
+                    Temp.type = LEECH_TYPE_TARGET_MAX_PCT;
+                else if (strcmp(str, "固定数值") == 0)
+                    Temp.type = LEECH_TYPE_STATIC;
+                else if (strcmp(str, "技能伤害百分比") == 0)
+                    Temp.type = LEECH_TYPE_DAMGE_PCT;
+                else
+                    Temp.type = LEECH_TYPE_NONE;
 
-			Temp.basepoints = fields[3].GetFloat();
-			Temp.addDmg = fields[4].GetBool();
-			AuraLeechMap.insert(std::make_pair(aura, Temp));
+                Temp.basepoints = fields[3].GetFloat();
+                Temp.addDmg = fields[4].GetBool();
+                AuraLeechMapAll.insert(std::make_pair(aura, Temp));
+            }
+            else
+            {
+                AuraLeechTemplate Temp;
+                Temp.chance = fields[1].GetFloat();
+                const char* str = fields[2].GetCString();
+
+                if (strcmp(str, "自身当前生命值百分比") == 0)
+                    Temp.type = LEECH_TYPE_SELF_CUR_PCT;
+                else if (strcmp(str, "自身最大生命值百分比") == 0)
+                    Temp.type = LEECH_TYPE_SELF_MAX_PCT;
+                else if (strcmp(str, "目标当前生命值百分比") == 0)
+                    Temp.type = LEECH_TYPE_TARGET_CUR_PCT;
+                else if (strcmp(str, "目标最大生命值百分比") == 0)
+                    Temp.type = LEECH_TYPE_TARGET_MAX_PCT;
+                else if (strcmp(str, "固定数值") == 0)
+                    Temp.type = LEECH_TYPE_STATIC;
+                else if (strcmp(str, "技能伤害百分比") == 0)
+                    Temp.type = LEECH_TYPE_DAMGE_PCT;
+                else
+                    Temp.type = LEECH_TYPE_NONE;
+
+                Temp.basepoints = fields[3].GetFloat();
+                Temp.addDmg = fields[4].GetBool();
+                AuraLeechMap.insert(std::make_pair(aura, Temp));
+            }
 		} while (result->NextRow());
 	}
 
@@ -1079,6 +1110,49 @@ bool SpellMod::AuraTrigger(Unit* caster, Unit* victim, SpellInfo const* auraSpel
 	return false;
 }
 
+void SpellMod::HealOnDamageAll(Unit* caster, Unit* target, uint32 &damage)
+{
+    for (std::unordered_map<uint32, AuraLeechTemplateAll>::iterator it = AuraLeechMapAll.begin(); it != AuraLeechMapAll.end(); it++)
+    {
+        if (caster->HasAura(it->first))
+        {
+            if (roll_chance_f(it->second.chance))
+            {
+                uint32 amount = 0;
+
+                switch (it->second.type)
+                {
+                case LEECH_TYPE_SELF_CUR_PCT:
+                    amount = caster->GetHealth() * it->second.basepoints / 100;
+                    break;
+                case LEECH_TYPE_SELF_MAX_PCT:
+                    amount = caster->GetHealth() * it->second.basepoints / 100;
+                    break;
+                case LEECH_TYPE_TARGET_CUR_PCT:
+                    amount = target->GetMaxHealth() * it->second.basepoints / 100;
+                    break;
+                case LEECH_TYPE_TARGET_MAX_PCT:
+                    amount = target->GetMaxHealth() * it->second.basepoints / 100;
+                    break;
+                case LEECH_TYPE_STATIC:
+                    amount = it->second.basepoints;
+                    break;
+                case LEECH_TYPE_DAMGE_PCT:
+                    amount = damage * it->second.basepoints / 100;
+                    break;
+                }
+                SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(it->first);
+                if (amount != 0)
+                {
+                    if (it->second.addDmg)
+                        damage += amount;
+                    if (caster->IsAlive())
+                        caster->HealBySpell(caster, spellInfo, amount);
+                }
+            }
+        }
+    }
+}
 
 void SpellMod::HealOnDamage(Unit* caster, Unit* target, SpellInfo const* spellInfo, uint32 &damage)
 {

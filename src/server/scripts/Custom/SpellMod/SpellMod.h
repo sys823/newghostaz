@@ -135,6 +135,17 @@ struct AuraLeechTemplate
 
 extern std::unordered_map<uint32, AuraLeechTemplate> AuraLeechMap;
 
+
+struct AuraLeechTemplateAll
+{
+    float chance;
+    LeechTypes type;
+    float basepoints;
+    bool addDmg;
+};
+
+extern std::unordered_map<uint32, AuraLeechTemplateAll> AuraLeechMapAll;
+
 enum AuraTriggerIgnoreMask
 {
 	AURA_TRIGGER_IGNORE_BOSS = 1,
@@ -216,6 +227,8 @@ public:
 	bool Ignore(uint32 ignoreMask, Unit* target);
 	bool AuraTrigger(Unit* caster, Unit* victim, SpellInfo const* auraSpellInfo, SpellInfo const* procSpell, uint32 procFlags, Unit*  &target, AuraEffect* triggeredByAura);
 	void HealOnDamage(Unit* caster, Unit* target, SpellInfo const* spellInfo, uint32 &damage);
+
+    void HealOnDamageAll(Unit* caster, Unit* target, uint32 &damage);
 
 	void GetParams_PctOnStat(const char* strAuraType, const char* strStatType, AuraType &auraType, int32 &misc, int32 &miscB);
 	void GetParams_Pct(const char* strAuraType, const char* strModType, AuraType &auraType, int32 &misc, int32 &miscB);
