@@ -12294,6 +12294,10 @@ uint32 Unit::MeleeDamageBonusDone(Unit* victim, uint32 pdamage, WeaponAttackType
             tmpDamage *= c_attacker->C_SpellDmgMod;
     }
 
+    uint32 adddamage = 0;
+    sSpellMod->HealOnDamageAll(this, victim, adddamage);
+    tmpDamage += float(adddamage);
+
     // bonus result can be negative
     return uint32(std::max(tmpDamage, 0.0f));
 }
@@ -16641,6 +16645,7 @@ void Unit::Kill(Unit* killer, Unit* victim, bool durabilityLoss, WeaponAttackTyp
                     {
                         hasLooterGuid = true;
                         creature->SetLootRecipient(looter);   // update creature loot recipient to the allowed looter.
+                        group->killCreature.insert(creature->GetGUID());
                     }
                 }
             }

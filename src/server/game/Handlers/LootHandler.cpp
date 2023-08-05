@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -637,6 +637,8 @@ void WorldSession::HandleLootMasterGiveOpcode(WorldPacket& recvData)
         return;
     }
 
+
+    //Player* target = ObjectAccessor::FindPlayer(MAKE_NEW_GUID(target_playerguid, 0, HIGHGUID_PLAYER));
     Player* target = ObjectAccessor::GetPlayer(*_player, MAKE_NEW_GUID(target_playerguid, 0, HIGHGUID_PLAYER));
     if (!target)
     {
@@ -654,6 +656,15 @@ void WorldSession::HandleLootMasterGiveOpcode(WorldPacket& recvData)
         return;
     }
 
+    /*
+    if (!_player->IsInSameRaidWith(target))
+    {
+        _player->SendLootError(lootguid, LOOT_ERROR_MASTER_OTHER);
+        //sLog->outDebug(LOG_FILTER_NETWORKIO, "MasterLootItem: Player %s tried to give an item to ineligible player %s !", GetPlayer()->GetName().c_str(), target->GetName().c_str());
+        return;
+    }*/
+
+    
     if (!_player->IsInRaidWith(target))
     {
         _player->SendLootError(lootguid, LOOT_ERROR_MASTER_OTHER);

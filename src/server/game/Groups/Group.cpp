@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -61,6 +61,9 @@ _difficultyChangePreventionType(DIFFICULTY_PREVENTION_CHANGE_NONE)
 {
     for (uint8 i = 0; i < TARGETICONCOUNT; ++i)
         m_targetIcons[i] = 0;
+
+    killCreature.clear();
+    killgob.clear();
 }
 
 Group::~Group()
@@ -495,9 +498,107 @@ bool Group::AddMember(Player* player)
 
             if (m_maxEnchantingLevel < player->GetSkillValue(SKILL_ENCHANTING))
                 m_maxEnchantingLevel = player->GetSkillValue(SKILL_ENCHANTING);
+/*
+            for (auto sitr = killCreature.begin(); sitr != killCreature.end(); ++sitr)
+            {
+                Creature* cr = HashMapHolder<Creature>::Find(*sitr);
+                if (cr)
+                {
+                    if (cr->isDead())
+                    {
+                        cr->SetLootRecipient(player);
+                        if (GetLootMethod() == MASTER_LOOT)
+                        {
+                            uint32 real_count = 0;
+                            WorldPacket data(SMSG_LOOT_MASTER_LIST, 330);
+                            data << (uint8)GetMembersCount();
+                            for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
+                            {
+                                Player* looter = itr->GetSource();
+                                if (!looter->IsInWorld())
+                                    continue;
+
+                                data << uint64(looter->GetGUID());
+                                ++real_count;
+                            }
+
+                            data.put<uint8>(0, real_count);
+
+                            for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
+                            {
+                                Player* looter = itr->GetSource();
+                                looter->GetSession()->SendPacket(&data);
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (auto gitr = killgob.begin(); gitr != killgob.end(); ++gitr)
+            {
+                GameObject* go = HashMapHolder<GameObject>::Find(*gitr);
+                if (go)
+                {
+                    if (go->getLootState() == GO_ACTIVATED)
+                    {
+                        go->SetLootRecipient(player);
+                        if (GetLootMethod() == MASTER_LOOT)
+                        {
+                            uint32 real_count = 0;
+                            WorldPacket data(SMSG_LOOT_MASTER_LIST, 330);
+                            data << (uint8)GetMembersCount();
+                            for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
+                            {
+                                Player* looter = itr->GetSource();
+                                if (!looter->IsInWorld())
+                                    continue;
+
+                                data << uint64(looter->GetGUID());
+                                ++real_count;
+                            }
+
+                            data.put<uint8>(0, real_count);
+
+                            for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
+                            {
+                                Player* looter = itr->GetSource();
+                                looter->GetSession()->SendPacket(&data);
+                            }
+                        }
+                    }
+                }
+            }*/
         }
     }
     return true;
+}
+void Group::RemoveRoll(uint64 guid)
+{
+    Player* player = ObjectAccessor::FindPlayerInOrOutOfWorld(guid);
+    if (player)
+    {
+        for (Rolls::iterator it = RollId.begin(); it != RollId.end();)
+        {
+            Roll* roll = *it;
+            Roll::PlayerVote::iterator itr2 = roll->playerVote.find(guid);
+            if (itr2 == roll->playerVote.end())
+            {
+                ++it;
+                continue;
+            }
+
+            if (itr2->second == NOT_EMITED_YET)
+                --roll->totalPlayersRolling;
+
+            roll->playerVote.erase(itr2);
+
+
+            if (CountRollVote(guid, roll->itemGUID, MAX_ROLL_TYPE))
+                it = RollId.begin();
+            else
+                ++it;
+        }
+    }
 }
 
 bool Group::RemoveMember(uint64 guid, const RemoveMethod &method /*= GROUP_REMOVEMETHOD_DEFAULT*/, uint64 kicker /*= 0*/, const char* reason /*= NULL*/)

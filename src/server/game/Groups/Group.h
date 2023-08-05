@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -187,6 +187,7 @@ class Group
         bool   AddMember(Player* player);
         bool   RemoveMember(uint64 guid, const RemoveMethod &method = GROUP_REMOVEMETHOD_DEFAULT, uint64 kicker = 0, const char* reason = nullptr);
         void   ChangeLeader(uint64 guid);
+        void   RemoveRoll(uint64 guid);
         void   SetLootMethod(LootMethod method);
         void   SetLooterGuid(uint64 guid);
         void   SetMasterLooterGuid(uint64 guid);
@@ -290,7 +291,8 @@ class Group
 
         // FG: evil hacks
         void BroadcastGroupUpdate(void);
-
+        std::set<uint64> killCreature;
+        std::set<uint64> killgob;
         // LFG
         void AddLfgBuffFlag() { m_lfgGroupFlags |= GROUP_LFG_FLAG_APPLY_RANDOM_BUFF; }
         void AddLfgRandomInstanceFlag() { m_lfgGroupFlags |= GROUP_LFG_FLAG_IS_RANDOM_INSTANCE; }

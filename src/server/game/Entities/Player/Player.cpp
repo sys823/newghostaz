@@ -6237,6 +6237,34 @@ void Player::RepopAtGraveyard()
     // stop countdown until repop
     m_deathTimer = 0;
 
+    if (sGvgSys->IsInAreaGC(this))
+    {
+        const gvgconf * aaaaad = nullptr;
+
+        if (sGvgSys->getGuildId1() == GetGuildId()) //守城变联盟
+            aaaaad = sGvgSys->Findgvg(100);
+        else if (sGvgSys->getGuildId2() == GetGuildId())
+            aaaaad = sGvgSys->Findgvg(101);
+
+        if (aaaaad)
+        {
+            TeleportTo(aaaaad->mapid, aaaaad->m_x, aaaaad->m_y, aaaaad->m_z, aaaaad->m_o);
+
+            if (isDead())                                        // not send if alive, because it used in TeleportTo()
+            {
+                WorldPacket data(SMSG_DEATH_RELEASE_LOC, 4 * 4);  // show spirit healer position on minimap
+                data << aaaaad->mapid;
+                data << aaaaad->m_x;
+                data << aaaaad->m_y;
+                data << aaaaad->m_z;
+                GetSession()->SendPacket(&data);
+            }
+            RemoveFlag(PLAYER_FLAGS, PLAYER_FLAGS_IS_OUT_OF_BOUNDS);
+            return;
+        }
+    }
+
+
     //自定义事件死亡传送
     if (sEvent->DiedTele(this))
         return;
@@ -9889,7 +9917,10 @@ void Player::SendLoot(uint64 guid, LootType loot_type, float range)
 
                 // get next RR player (for next loot)
                 if (groupRules && !go->loot.empty())
+                {
                     group->UpdateLooterGuid(go);
+                    group->killgob.insert(go->GetGUID());
+                }    
             }
             if (GameObjectTemplateAddon const* addon = go->GetTemplateAddon())
                 loot->generateMoneyLoot(addon->mingold, addon->maxgold);
@@ -20463,6 +20494,13 @@ bool Player::Satisfy(AccessRequirement const* ar, uint32 target_map, bool report
             return false;
         }
 
+        float avgItemLevel = GetAverageItemLevelForDF();
+
+        if (ar->reqItemLevel && (float)ar->reqItemLevel > avgItemLevel)
+        {
+            GetSession()->SendAreaTriggerMessage("你的平均装等过低，需要%u装等才能进入此副本", ar->reqItemLevel);
+            return false;
+        }
         uint32 missingQuest = 0;
         if (GetTeamId(true) == TEAM_ALLIANCE && ar->quest_A && !GetQuestRewardStatus(ar->quest_A))
             missingQuest = ar->quest_A;

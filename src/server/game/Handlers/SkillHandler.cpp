@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -22,6 +22,9 @@ void WorldSession::HandleLearnTalentOpcode(WorldPacket & recvData)
     uint32 talent_id, requested_rank;
     recvData >> talent_id >> requested_rank;
 
+    if (!_player->IsAlive())
+        return;
+
     _player->LearnTalent(talent_id, requested_rank);
     _player->SendTalentsInfoData(false);
 }
@@ -31,6 +34,8 @@ void WorldSession::HandleLearnPreviewTalents(WorldPacket& recvPacket)
 #if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
     sLog->outDebug(LOG_FILTER_NETWORKIO, "CMSG_LEARN_PREVIEW_TALENTS");
 #endif
+    if (!_player->IsAlive())
+        return;
 
     if (!TalentReqMap.empty())
     {
@@ -61,6 +66,9 @@ void WorldSession::HandleLearnPreviewTalents(WorldPacket& recvPacket)
 
 void WorldSession::HandleTalentWipeConfirmOpcode(WorldPacket & recvData)
 {
+    if (!_player->IsAlive())
+        return;
+
 #if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
     sLog->outDebug(LOG_FILTER_NETWORKIO, "MSG_TALENT_WIPE_CONFIRM");
 #endif
@@ -98,6 +106,9 @@ void WorldSession::HandleTalentWipeConfirmOpcode(WorldPacket & recvData)
 
 void WorldSession::HandleUnlearnSkillOpcode(WorldPacket& recvData)
 {
+    if (!_player->IsAlive())
+        return;
+
     uint32 skillId;
     recvData >> skillId;
 
