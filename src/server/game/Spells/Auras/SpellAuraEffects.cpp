@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -3657,6 +3657,14 @@ void AuraEffect::HandleModMechanicImmunity(AuraApplication const* aurApp, uint8 
             target->RemoveMovementImpairingAuras(false);
         else
             target->RemoveAurasWithMechanic(mechanic, AURA_REMOVE_BY_DEFAULT, GetId());
+    }
+
+    if (!apply)
+    {
+        if (Aura * myau = target->GetAura(66193))
+        {
+            myau->GetEffect(0)->ChangeAmount(myau->GetEffect(0)->GetBaseAmount());
+        }
     }
 }
 

@@ -482,6 +482,14 @@ void Aura::_ApplyForTarget(Unit* target, Unit* caster, AuraApplication * auraApp
 
     m_applications[target->GetGUID()] = auraApp;
 
+    if (m_spellInfo->Id == 66193 && !target->HasAura(1044))
+    {
+        if (!GetEffect(0)->GetAmount())
+            GetEffect(0)->ChangeAmount(GetEffect(0)->GetBaseAmount());
+       
+        //GetCasterGUID()
+        //sLog->outString(" getbase = %i am = %i  ", GetEffect(0)->GetBaseAmount(), GetEffect(0)->GetAmount());
+    }
     // set infinity cooldown state for spells
     if (caster && caster->GetTypeId() == TYPEID_PLAYER)
     {
