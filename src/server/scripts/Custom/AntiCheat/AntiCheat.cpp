@@ -203,7 +203,7 @@ bool AntiCheat::CheckMovementInfo(Unit* unit, MovementInfo const& movementInfo)
 
 		if (pl->UnderACKmount())
 		{
-			if (diffdist > 70.0f)
+			if (diffdist > 800.0f)
 			{
 				SaveAndNotice(pl, AC_TELE);
 				return true;
@@ -211,7 +211,7 @@ bool AntiCheat::CheckMovementInfo(Unit* unit, MovementInfo const& movementInfo)
 		}
 		else
 		{
-			if (diffdist > 70.0f)
+			if (diffdist > 800.0f)
 				SaveAndNotice(pl, AC_TELE);
 			else
 				SaveAndNotice(pl, AC_SPEED);

@@ -1110,7 +1110,7 @@ bool SpellMod::AuraTrigger(Unit* caster, Unit* victim, SpellInfo const* auraSpel
 	return false;
 }
 
-void SpellMod::HealOnDamageAll(Unit* caster, Unit* target, uint32 &damage)
+void SpellMod::HealOnDamageAll(Unit* caster, Unit* target, uint32 &damage, bool melee)
 {
     for (std::unordered_map<uint32, AuraLeechTemplateAll>::iterator it = AuraLeechMapAll.begin(); it != AuraLeechMapAll.end(); it++)
     {
@@ -1145,7 +1145,13 @@ void SpellMod::HealOnDamageAll(Unit* caster, Unit* target, uint32 &damage)
                 if (amount != 0)
                 {
                     if (it->second.addDmg)
-                        damage += amount;
+                    {
+                        if (melee)
+                            damage = amount;
+                        else
+                            damage += amount;
+                    }
+                        
                     if (caster->IsAlive())
                         caster->HealBySpell(caster, spellInfo, amount);
                 }

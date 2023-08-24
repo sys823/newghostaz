@@ -228,7 +228,7 @@ public:
 	bool AuraTrigger(Unit* caster, Unit* victim, SpellInfo const* auraSpellInfo, SpellInfo const* procSpell, uint32 procFlags, Unit*  &target, AuraEffect* triggeredByAura);
 	void HealOnDamage(Unit* caster, Unit* target, SpellInfo const* spellInfo, uint32 &damage);
 
-    void HealOnDamageAll(Unit* caster, Unit* target, uint32 &damage);
+    void HealOnDamageAll(Unit* caster, Unit* target, uint32 &damage,bool melee = false);
 
 	void GetParams_PctOnStat(const char* strAuraType, const char* strStatType, AuraType &auraType, int32 &misc, int32 &miscB);
 	void GetParams_Pct(const char* strAuraType, const char* strModType, AuraType &auraType, int32 &misc, int32 &miscB);
