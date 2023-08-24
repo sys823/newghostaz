@@ -1262,19 +1262,19 @@ public:
 		return new spell_item_socket_SpellScript();
 	}
 };
-/*
+
 #define PRISMATIC_ENCHANTMENT_1 4555
 #define PRISMATIC_ENCHANTMENT_2 4556
 #define PRISMATIC_ENCHANTMENT_3 4557
 
-class spell_item_socket : public SpellScriptLoader
+class spell_item_socket2 : public SpellScriptLoader
 {
 public:
-	spell_item_socket() : SpellScriptLoader("spell_item_socket") { }
+	spell_item_socket2() : SpellScriptLoader("spell_item_socket2") { }
 
-	class spell_item_socket_SpellScript : public SpellScript
+	class spell_item_socket_SpellScript2 : public SpellScript
 	{
-		PrepareSpellScript(spell_item_socket_SpellScript);
+		PrepareSpellScript(spell_item_socket_SpellScript2);
 
 		SpellCastResult CheckCast()
 		{
@@ -1296,11 +1296,12 @@ public:
 			uint32 prismatic = targetItem->GetEnchantmentId(PRISMATIC_ENCHANTMENT_SLOT);
 
 			if (SpellItemEnchantmentEntry const* enchantEntry = sSpellItemEnchantmentStore.LookupEntry(prismatic))
-				for (uint8 s = 0; s < MAX_ITEM_ENCHANTMENT_EFFECTS; ++s)
+				for (uint8 s = 0; s < MAX_SPELL_ITEM_ENCHANTMENT_EFFECTS; ++s)
 					if (enchantEntry->type[s] == ITEM_ENCHANTMENT_TYPE_PRISMATIC_SOCKET)
 						prismaticCount += enchantEntry->amount[s];
 
-			if (count + prismaticCount >= MAX_ITEM_PROTO_SOCKETS)
+            uint32 allkcount = count + prismaticCount;
+			if (allkcount >= MAX_ITEM_PROTO_SOCKETS)
 				return SPELL_FAILED_MAX_SOCKETS;
 
 			owner->ApplyEnchantment(targetItem, PRISMATIC_ENCHANTMENT_SLOT, false);
@@ -1328,16 +1329,16 @@ public:
 
 		void Register() override
 		{
-			OnCheckCast += SpellCheckCastFn(spell_item_socket_SpellScript::CheckCast);
+			OnCheckCast += SpellCheckCastFn(spell_item_socket_SpellScript2::CheckCast);
 		}
 	};
 
 	SpellScript* GetSpellScript() const override
 	{
-		return new spell_item_socket_SpellScript();
+		return new spell_item_socket_SpellScript2();
 	}
 };
-*/
+
 void AddSC_SpellScripts()
 {
 	//new spell_dmg_maxhealth_pct();
@@ -1364,6 +1365,7 @@ void AddSC_SpellScripts()
 	//new spell_absorb_max_hp_pct_damage();
 
 	new spell_item_socket();
+    new spell_item_socket2();
 }
 
 

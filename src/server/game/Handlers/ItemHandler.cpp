@@ -1676,9 +1676,6 @@ void WorldSession::HandleSocketOpcode(WorldPacket& recvData)
             // no prismatic socket
             if (!itemTarget->GetEnchantmentId(PRISMATIC_ENCHANTMENT_SLOT))
                 return;
-
-            if (i != firstPrismatic)
-                return;
         }
 
         // tried to put normal gem in meta socket
