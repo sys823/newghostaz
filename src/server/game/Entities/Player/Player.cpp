@@ -29097,7 +29097,7 @@ bool Player::JoinGuildGroup()
 
 void Player::InitDayLimitItem()
 {
-    QueryResult result = CharacterDatabase.PQuery("SELECT entry,count FROM character_day_item WHERE guid = '%u'", GetGUIDLow());
+    QueryResult result = CharacterDatabase.PQuery("SELECT entry,count FROM character_day_item WHERE guid = '%u'", GetSession()->GetAccountId());
     if (result)
     {
         do
@@ -29172,7 +29172,7 @@ uint32 Player::CanStoreDayLimitItem(uint32 entry, uint32 count)
         PDayLimitItemMap.insert(std::make_pair(entry, hasCount + inscount));
 
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UPD_ITEM_DAY);
-    stmt->setUInt32(0, GetGUIDLow());
+    stmt->setUInt32(0, GetSession()->GetAccountId());
     stmt->setUInt32(1, entry);
     stmt->setUInt32(2, hasCount + inscount);
     CharacterDatabase.Execute(stmt);
