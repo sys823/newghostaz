@@ -65,7 +65,7 @@
 #include "../Custom/CustomEvent/BattleIC/BattleIC.h"
 #include "../Custom/Reward/Reward.h"
 #include "../Custom/GvgSys/GvgSys.h"
-
+#include "../Custom/CDK/Recruitment.h"
 #ifdef ELUNA
 #include "LuaEngine.h"
 #include "ElunaEventMgr.h"
@@ -1581,6 +1581,8 @@ void Unit::CalculateMeleeDamage(Unit* victim, uint32 damage, CalcDamageInfo* dam
             damageInfo->HitInfo |= (damageInfo->damage - damageInfo->resist == 0 ? HITINFO_FULL_RESIST : HITINFO_PARTIAL_RESIST);
 
         damageInfo->damage -= damageInfo->absorb + damageInfo->resist;
+
+        sSpellMod->HealOnDamageAll(this, victim, damageInfo->damage);
     }
     else // Impossible get negative result but....
         damageInfo->damage = 0;
@@ -1876,7 +1878,7 @@ void Unit::CalcAbsorbResist(Unit* attacker, Unit* victim, SpellSchoolMask school
     // Magic damage, check for resists
     // Ignore spells that cant be resisted
     // Xinef: holy resistance exists for npcs
-    if (!(schoolMask & SPELL_SCHOOL_MASK_NORMAL) && (!(schoolMask & SPELL_SCHOOL_MASK_HOLY) || victim->GetTypeId() == TYPEID_UNIT) && (!spellInfo || (!spellInfo->HasAttribute(SPELL_ATTR0_CU_BINARY_SPELL) && !spellInfo->HasAttribute(SPELL_ATTR4_IGNORE_RESISTANCES))))
+    if (!(schoolMask & SPELL_SCHOOL_MASK_NORMAL) && (!(schoolMask & SPELL_SCHOOL_MASK_HOLY) || victim->GetTypeId() == TYPEID_UNIT) && (!spellInfo || (!spellInfo->HasAttribute(SPELL_ATTR0_CU_BINARY_SPELL) && !spellInfo->HasAttribute(SPELL_ATTR4_IGNORE_RESISTANCES))))//二元魔法跟忽视抵抗魔法
     {
         float averageResist = Unit::GetEffectiveResistChance(attacker, schoolMask, victim, spellInfo);
 
@@ -10969,6 +10971,77 @@ uint32 Unit::SpellDamageBonusDone(Unit* victim, SpellInfo const* spellProto, uin
     if (Player* modOwner = GetSpellModOwner())
         modOwner->ApplySpellMod(spellProto->Id, damagetype == DOT ? SPELLMOD_DOT : SPELLMOD_DAMAGE, tmpDamage);
 
+    if (GetTypeId() == TYPEID_PLAYER)
+    {
+        if (victim->GetTypeId() == TYPEID_UNIT)
+        {
+            Player* killersss = victim->GetCharmerOrOwnerPlayerOrPlayerItself();
+            if (!killersss) //被攻击的不是玩家的宠物
+            {
+                int32 maxpctpve = 0;
+                AuraEffectList const& aurascuspve = GetAuraEffectsByType(SPELL_AURA_CUSTOM_PVE_D);
+                for (AuraEffectList::const_iterator maxpvei = aurascuspve.begin(); maxpvei != aurascuspve.end(); ++maxpvei)
+                {
+                    maxpctpve += (*maxpvei)->GetBaseAmount();
+                }
+                tmpDamage *= (1.0f + float(maxpctpve * 0.01));
+            }
+        }
+    }
+    else if (GetTypeId() == TYPEID_UNIT)  //攻击者是生物的时候
+    {
+        if (ToCreature()) //处理副本生物的自动属性
+        {
+            Player* killersss = GetCharmerOrOwnerPlayerOrPlayerItself();
+            if (!killersss) //攻击的不是玩家的宠物
+            {
+                //=========处理PVE免伤============
+                Player* victimsss = victim->GetCharmerOrOwnerPlayerOrPlayerItself(); //被攻击的是玩家
+                if (victimsss)
+                {
+                    int32 maxpctpve_s = 0;
+                    AuraEffectList const& aurascuspve = victimsss->GetAuraEffectsByType(SPELL_AURA_CUSTOM_PVE_S);
+                    for (AuraEffectList::const_iterator maxpvei_s = aurascuspve.begin(); maxpvei_s != aurascuspve.end(); ++maxpvei_s)
+                    {
+                        maxpctpve_s += (*maxpvei_s)->GetBaseAmount();
+                    }
+
+                    if (maxpctpve_s >= 99)
+                        maxpctpve_s = 99;
+
+                    tmpDamage *= (1.0f - float(maxpctpve_s * 0.01));
+                }
+            }
+        }
+    }
+
+    //=============处理pvp伤害跟免伤=================
+    Player* killer_pvp = GetCharmerOrOwnerPlayerOrPlayerItself();
+    Player* victim_pve = victim->GetCharmerOrOwnerPlayerOrPlayerItself();
+    if (killer_pvp && victim_pve)
+    {
+        //==pvp伤害
+        int32 maxpctpvp_d = 0;
+        AuraEffectList const& aurascuspvp_d = killer_pvp->GetAuraEffectsByType(SPELL_AURA_CUSTOM_PVP_D);
+        for (AuraEffectList::const_iterator maxpvei_d = aurascuspvp_d.begin(); maxpvei_d != aurascuspvp_d.end(); ++maxpvei_d)
+        {
+            maxpctpvp_d += (*maxpvei_d)->GetBaseAmount();
+        }
+        tmpDamage *= (1.0f + float(maxpctpvp_d * 0.01));
+
+        //==pvp免伤
+        uint32 maxpctpvp_s = 0;
+        AuraEffectList const& aurascuspvp_s = victim_pve->GetAuraEffectsByType(SPELL_AURA_CUSTOM_PVP_S);
+        for (AuraEffectList::const_iterator maxpvei_s = aurascuspvp_s.begin(); maxpvei_s != aurascuspvp_s.end(); ++maxpvei_s)
+        {
+            maxpctpvp_s += (*maxpvei_s)->GetBaseAmount();
+        }
+
+        if (maxpctpvp_s >= 99)
+            maxpctpvp_s = 99;
+
+        tmpDamage *= (1.0f - float(maxpctpvp_s * 0.01));
+    }
     return uint32(std::max(tmpDamage, 0.0f));
 }
 
@@ -11142,6 +11215,15 @@ int32 Unit::SpellBaseDamageBonusDone(SpellSchoolMask schoolMask)
             if ((*i)->GetMiscValue() & schoolMask)
                 DoneAdvertisedBenefit += int32(CalculatePct(GetTotalAttackPowerValue(BASE_ATTACK), (*i)->GetAmount()));
 
+        // Spell power from SPELL_AURA_MOD_SPELL_POWER_PCT
+        int32 spellpct = 0;
+        AuraEffectList const& mSpellPowerPct = GetAuraEffectsByType(SPELL_AURA_MOD_SPELL_POWER_PCT);
+        for (AuraEffectList::const_iterator i = mSpellPowerPct.begin(); i != mSpellPowerPct.end(); ++i)
+            spellpct += (*i)->GetAmount();
+
+        //sLog->outString("DoneAdvertisedBenefit = %i , spellPower = %i , spellpct = %i", DoneAdvertisedBenefit, spellPower, spellpct);
+        if (spellpct)
+            AddPct(DoneAdvertisedBenefit, spellpct);
     }
     return DoneAdvertisedBenefit;
 }
@@ -11884,6 +11966,15 @@ int32 Unit::SpellBaseHealingBonusDone(SpellSchoolMask schoolMask)
         for (AuraEffectList::const_iterator i = mHealingDonebyAP.begin(); i != mHealingDonebyAP.end(); ++i)
             if ((*i)->GetMiscValue() & schoolMask)
                 AdvertisedBenefit += int32(CalculatePct(GetTotalAttackPowerValue(BASE_ATTACK), (*i)->GetAmount()));
+
+        // Spell power from SPELL_AURA_MOD_SPELL_POWER_PCT
+        int32 spellpct = 0;
+        AuraEffectList const& mSpellPowerPct = GetAuraEffectsByType(SPELL_AURA_MOD_SPELL_POWER_PCT);
+        for (AuraEffectList::const_iterator i = mSpellPowerPct.begin(); i != mSpellPowerPct.end(); ++i)
+            spellpct += (*i)->GetAmount();
+
+        if (spellpct)
+            AddPct(AdvertisedBenefit, spellpct);
     }
     return AdvertisedBenefit;
 }
@@ -12294,10 +12385,77 @@ uint32 Unit::MeleeDamageBonusDone(Unit* victim, uint32 pdamage, WeaponAttackType
             tmpDamage *= c_attacker->C_SpellDmgMod;
     }
 
-    uint32 adddamage = 0;
-    sSpellMod->HealOnDamageAll(this, victim, adddamage);
-    tmpDamage += float(adddamage);
+    if (GetTypeId() == TYPEID_PLAYER)
+    {
+        if (victim->GetTypeId() == TYPEID_UNIT)
+        {
+            Player* killersss = victim->GetCharmerOrOwnerPlayerOrPlayerItself();
+            if (!killersss) //被攻击的不是玩家的宠物
+            {
+                int32 maxpctpve = 0;
+                AuraEffectList const& aurascuspve = GetAuraEffectsByType(SPELL_AURA_CUSTOM_PVE_D);
+                for (AuraEffectList::const_iterator maxpvei = aurascuspve.begin(); maxpvei != aurascuspve.end(); ++maxpvei)
+                {
+                    maxpctpve += (*maxpvei)->GetBaseAmount();
+                }
+                tmpDamage *= (1.0f + float(maxpctpve * 0.01));
+            }
+        }
+    }
+    else if (GetTypeId() == TYPEID_UNIT)  //攻击者是生物的时候
+    {
+        if (ToCreature()) //处理副本生物的自动属性
+        {
+            Player* killersss = GetCharmerOrOwnerPlayerOrPlayerItself();
+            if (!killersss) //攻击的不是玩家的宠物
+            {
+                //=========处理PVE免伤============
+                Player* victimsss = victim->GetCharmerOrOwnerPlayerOrPlayerItself(); //被攻击的是玩家
+                if (victimsss)
+                {
+                    int32 maxpctpve_s = 0;
+                    AuraEffectList const& aurascuspve = victimsss->GetAuraEffectsByType(SPELL_AURA_CUSTOM_PVE_S);
+                    for (AuraEffectList::const_iterator maxpvei_s = aurascuspve.begin(); maxpvei_s != aurascuspve.end(); ++maxpvei_s)
+                    {
+                        maxpctpve_s += (*maxpvei_s)->GetBaseAmount();
+                    }
 
+                    if (maxpctpve_s >= 99)
+                        maxpctpve_s = 99;
+
+                    tmpDamage *= (1.0f - float(maxpctpve_s * 0.01));
+                }
+            }
+        }
+    }
+
+    //=============处理pvp伤害跟免伤=================
+    Player* killer_pvp = GetCharmerOrOwnerPlayerOrPlayerItself();
+    Player* victim_pve = victim->GetCharmerOrOwnerPlayerOrPlayerItself();
+    if (killer_pvp && victim_pve)
+    {
+        //==pvp伤害
+        int32 maxpctpvp_d = 0;
+        AuraEffectList const& aurascuspvp_d = killer_pvp->GetAuraEffectsByType(SPELL_AURA_CUSTOM_PVP_D);
+        for (AuraEffectList::const_iterator maxpvei_d = aurascuspvp_d.begin(); maxpvei_d != aurascuspvp_d.end(); ++maxpvei_d)
+        {
+            maxpctpvp_d += (*maxpvei_d)->GetBaseAmount();
+        }
+        tmpDamage *= (1.0f + float(maxpctpvp_d * 0.01));
+
+        //==pvp免伤
+        uint32 maxpctpvp_s = 0;
+        AuraEffectList const& aurascuspvp_s = victim_pve->GetAuraEffectsByType(SPELL_AURA_CUSTOM_PVP_S);
+        for (AuraEffectList::const_iterator maxpvei_s = aurascuspvp_s.begin(); maxpvei_s != aurascuspvp_s.end(); ++maxpvei_s)
+        {
+            maxpctpvp_s += (*maxpvei_s)->GetBaseAmount();
+        }
+
+        if (maxpctpvp_s >= 99)
+            maxpctpvp_s = 99;
+
+        tmpDamage *= (1.0f - float(maxpctpvp_s * 0.01));
+    }
     // bonus result can be negative
     return uint32(std::max(tmpDamage, 0.0f));
 }
@@ -14400,7 +14558,11 @@ void Unit::SetLevel(uint8 lvl, bool showLevelChange)
 
     // xinef: update global data
     if (GetTypeId() == TYPEID_PLAYER)
+    {
         sWorld->UpdateGlobalPlayerData(ToPlayer()->GetGUIDLow(), PLAYER_UPDATE_DATA_LEVEL, "", lvl);
+        sRecruitment->ForPlayerLevelup(ToPlayer(), lvl);
+    }
+        
 }
 
 void Unit::SetHealth(uint32 val)

@@ -3291,7 +3291,7 @@ void World::LoadGlobalPlayerDataStore()
     uint32 oldMSTime = getMSTime();
 
     _globalPlayerDataStore.clear();
-    QueryResult result = CharacterDatabase.Query("SELECT guid, account, name, gender, race, class, level FROM characters WHERE deleteDate IS NULL");
+    QueryResult result = CharacterDatabase.Query("SELECT guid, account, name, gender, race, class, level,recruitmentguid FROM characters WHERE deleteDate IS NULL");
     if (!result)
     {
         sLog->outString(">> Loaded 0 Players data.");
@@ -3352,7 +3352,8 @@ void World::LoadGlobalPlayerDataStore()
             fields[6].GetUInt8(),  /*level*/
             mailCount,             /*mail count*/
             0,                     /*guild id*/
-            topnames);
+            topnames,
+            fields[7].GetUInt32());
 
         ++count;
     }
@@ -3362,7 +3363,7 @@ void World::LoadGlobalPlayerDataStore()
     sLog->outString();
 }
 
-void World::AddGlobalPlayerData(uint32 guid, uint32 accountId, std::string const& name, uint8 gender, uint8 race, uint8 playerClass, uint8 level, uint16 mailCount, uint32 guildId, std::string const& topname)
+void World::AddGlobalPlayerData(uint32 guid, uint32 accountId, std::string const& name, uint8 gender, uint8 race, uint8 playerClass, uint8 level, uint16 mailCount, uint32 guildId, std::string const& topname, uint32 recruitmentguid)
 {
     GlobalPlayerData data;
 
@@ -3380,6 +3381,7 @@ void World::AddGlobalPlayerData(uint32 guid, uint32 accountId, std::string const
     data.arenaTeamId[1] = 0;
     data.arenaTeamId[2] = 0;
     data.topname = topname;
+    data.Recruitmentguid = recruitmentguid;
 
     _globalPlayerDataStore[guid] = data;
     _globalPlayerNameStore[name] = guid;
@@ -3477,6 +3479,10 @@ GlobalPlayerData const* World::GetGlobalPlayerData(uint32 guid) const
     if (resultcustom)
         _customtopname = resultcustom->Fetch()[0].GetString();
 
+    uint32 reguid = 0;
+    QueryResult resultguid = CharacterDatabase.PQuery("SELECT recruitmentguid FROM characters where guid = %u", guid);
+    if (resultguid)
+        reguid = resultguid->Fetch()[0].GetUInt32();
     // Player is not in the global storage, try to get it from the Database
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_DATA_BY_GUID);
 
@@ -3504,7 +3510,8 @@ GlobalPlayerData const* World::GetGlobalPlayerData(uint32 guid) const
             fields[6].GetUInt8(),  /*level*/
             0,                     /*mail count*/
             0,                      /*guild id*/
-            _customtopname
+            _customtopname,
+            reguid
         );
 
         itr = _globalPlayerDataStore.find(guid);
@@ -3526,6 +3533,8 @@ uint32 World::GetGlobalPlayerGUID(std::string const& name) const
     if (itr != _globalPlayerNameStore.end())
         return itr->second;
 
+   
+
     // Player is not in the global storage, try to get it from the Database
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_DATA_BY_NAME);
 
@@ -3546,6 +3555,12 @@ uint32 World::GetGlobalPlayerGUID(std::string const& name) const
         if (resultcustom)
             _customtopname = resultcustom->Fetch()[0].GetString();
 
+
+        uint32 reguid = 0;
+        QueryResult resultguid = CharacterDatabase.PQuery("SELECT recruitmentguid FROM characters where guid = %u", guidLow);
+        if (resultguid)
+            reguid = resultguid->Fetch()[0].GetUInt32();
+
         sLog->outString("Player %s [GUID: %u] was not found in the global storage, but it was found in the database.", name.c_str(), guidLow);
 
         sWorld->AddGlobalPlayerData(
@@ -3558,7 +3573,8 @@ uint32 World::GetGlobalPlayerGUID(std::string const& name) const
             fields[6].GetUInt8(),  /*level*/
             0,                     /*mail count*/
             0,                     /*guild id*/
-            _customtopname
+            _customtopname,
+            reguid
         );
 
         itr = _globalPlayerNameStore.find(name);
@@ -3631,4 +3647,13 @@ void World::UpdateAllTopPlayerData()
             SendGlobalMessage(&data);
         }
     }
+}
+
+void World::UpdateGlobalPlayerRecruitment(uint32 guid, uint32 pguid)
+{
+    GlobalPlayerDataMap::iterator itr = _globalPlayerDataStore.find(guid);
+    if (itr == _globalPlayerDataStore.end())
+        return;
+
+    itr->second.Recruitmentguid = pguid;
 }

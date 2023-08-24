@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -611,6 +611,7 @@ struct GlobalPlayerData
     std::string topname;
     std::string prefix;
     std::string suffix;
+    uint32 Recruitmentguid;
 };
 
 enum GlobalPlayerUpdateMask
@@ -834,7 +835,7 @@ class World
         void LoadGlobalPlayerDataStore();
         uint32 GetGlobalPlayerGUID(std::string const& name) const;
         GlobalPlayerData const* GetGlobalPlayerData(uint32 guid) const;
-        void AddGlobalPlayerData(uint32 guid, uint32 accountId, std::string const& name, uint8 gender, uint8 race, uint8 playerClass, uint8 level, uint16 mailCount, uint32 guildId, std::string const& topname);
+        void AddGlobalPlayerData(uint32 guid, uint32 accountId, std::string const& name, uint8 gender, uint8 race, uint8 playerClass, uint8 level, uint16 mailCount, uint32 guildId, std::string const& topname, uint32 recruitmentguid);
         void UpdateNamePrefixSuffix(Player* player, std::string prefix, std::string suffix);
         void UpdateTopPlayerData(uint32 guid, std::string const& name);
         void UpdateAllTopPlayerData();
@@ -845,7 +846,7 @@ class World
         void UpdateGlobalPlayerArenaTeam(uint32 guid, uint8 slot, uint32 arenaTeamId);
         void UpdateGlobalNameData(uint32 guidLow, std::string const& oldName, std::string const& newName);
         void DeleteGlobalPlayerData(uint32 guid, std::string const& name);
-
+        void UpdateGlobalPlayerRecruitment(uint32 guid, uint32 pguid);
         void ProcessCliCommands();
         void QueueCliCommand(CliCommandHolder* commandHolder) { cliCmdQueue.add(commandHolder); }
 

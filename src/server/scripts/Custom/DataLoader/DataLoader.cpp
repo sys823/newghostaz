@@ -69,6 +69,7 @@
 #include "../CharPvpTop/CharPvpTop.h"
 #include "../GvgSys/GvgSys.h"
 #include "../Paihang/paihang.h"
+#include "../CDK/Recruitment.h"
 /*-----------------------------------------------------------*/
 /*-----------------------------------------------------------*/
 /*-------------------数据加载区--------------------------------*/
@@ -272,6 +273,7 @@ void DataLoader::LoadAll()
 	sCharPvpTop->LoadTopSys();
 	sGvgSys->LoadgvgSys();
     sPaiHang->Load();
+    sRecruitment->LoadWorld();
 }
 
 class DataLoaderWorldScript : public WorldScript

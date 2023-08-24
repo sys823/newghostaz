@@ -95,7 +95,7 @@ void AddSC_PvP_System();
 void AddSC_CreatureKillRew();
 void AddSC_ITEM_MOD();
 void AddSC_TRANS_ITEM_NPC();
-
+void AddSC_recruitment_npc();
 //boss
 void AddSC_boss_darksaw();
 void AddSC_BossScript_Collection();
@@ -968,6 +968,7 @@ void AddWorldScripts()
 
     AddSC_WhenLogin();
 
+    AddSC_recruitment_npc();
     //fix
     AddSC_queldelar();
 
