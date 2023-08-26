@@ -25,6 +25,7 @@
 #include "../../scripts/Custom/Switch/Switch.h"
 #include "../../scripts/Custom/GvgSys/GvgSys.h"
 #include "../../scripts/Custom/Paihang/paihang.h"
+#include "../../scripts/Custom/CDK/Recruitment.h"
 #include "ArenaTeam.h"
 #ifdef ELUNA
 #include "LuaEngine.h"
@@ -147,7 +148,7 @@ bool GameEventMgr::StartEvent(uint16 event_id, bool overwrite)
                 sCharPvpTop->isfirst = true;
             }
         }
-
+        sRecruitment->ResetAllDmg(event_id);
         sGvgSys->StartEventSys(event_id);
 
         AddActiveEvent(event_id);

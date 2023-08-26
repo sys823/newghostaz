@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -608,4 +608,6 @@ void CharacterDatabaseConnection::DoPrepareStatements()
 
     PrepareStatement(CHAR_SEL_LOOTCHECK, "SELECT lootcheckcount,lootcheckbancount FROM characters WHERE guid = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_UPD_LOOTCHECK, "UPDATE characters SET lootcheckcount = ?,lootcheckbancount = ? WHERE guid = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_SEL_DMG_PH, "SELECT guid, dmgph FROM characters where dmgph >0", CONNECTION_SYNCH);
+    
 }

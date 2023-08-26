@@ -20498,7 +20498,7 @@ bool Player::Satisfy(AccessRequirement const* ar, uint32 target_map, bool report
 
         if (ar->reqItemLevel && (float)ar->reqItemLevel > avgItemLevel)
         {
-            GetSession()->SendAreaTriggerMessage("你的平均装等过低，需要%u装等才能进入此副本", ar->reqItemLevel);
+            GetSession()->SendAreaTriggerMessage("你的平均装等%1.f，需要%u装等才能进入此副本", avgItemLevel, ar->reqItemLevel);
             return false;
         }
         uint32 missingQuest = 0;

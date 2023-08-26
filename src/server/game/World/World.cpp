@@ -85,6 +85,7 @@
 #include "../Custom/ItemMod/ItemMod.h"
 #include "../../scripts/Custom/CharPvpTop/CharPvpTop.h"
 #include "../../scripts/Custom/GvgSys/GvgSys.h"
+#include "../../scripts/Custom/CDK/Recruitment.h"
 #include "FrozenBot.h"
 
 #ifdef ELUNA
@@ -1922,6 +1923,7 @@ void World::SetInitialWorldSettings()
     sLog->outString("Initializing SpellInfo precomputed data..."); // must be called after loading items, professions, spells and pretty much anything
     sObjectMgr->InitializeSpellInfoPrecomputedData();
 
+    sRecruitment->loadAllChar();
     ///- Initialize game time and timers
     sLog->outString("Initialize game time and timers");
     m_gameTime = time(nullptr);

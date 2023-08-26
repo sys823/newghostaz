@@ -151,7 +151,7 @@ class Field
                 return 0;
             }
             #endif
-
+            //sLog->outString("Warning: GetUInt64() on non-bigint field. Using type: %llu.", FieldTypeToString(data.type));
             if (data.raw)
                 return *reinterpret_cast<uint64*>(data.value);
             return static_cast<uint64>(atol((char*)data.value));

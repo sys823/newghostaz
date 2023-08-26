@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -536,7 +536,7 @@ enum CharacterDatabaseStatements
         CHAR_REP_TALISMAN,
         CHAR_SEL_LOOTCHECK,
         CHAR_UPD_LOOTCHECK,
-
+        CHAR_SEL_DMG_PH,
     MAX_CHARACTERDATABASE_STATEMENTS
 };
 

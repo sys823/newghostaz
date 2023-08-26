@@ -85,12 +85,16 @@ enum SwithTypes
     PAIHANG_EVENTID = 82,
     JF_CZ_SC = 83,
     JF_CZ_DAY =84,
+    MY_DMG_PH = 85,  //挑战需求ID
+    MY_DMG_PH_EVENTID = 86, //挑战重置事件ID
+    MY_DMG_PH_TIIME = 87, //挑战时间
     ST_CF_GOLD_JF = 99,
     ST_SS = 100,				//魂玉开关
     ST_SSEX = 101,				//魂玉扩展开关
     FB_CLEARSPELL = 103,
     ST_SS_CXREQ = 110,			//魂玉开关
     ST_SSEX_CXREQ = 111,		//魂玉扩展开关
+
 
     MY_DQ_RENWUREW = 206,//完成一个任务给多少分配点
     MY_DQ_CHENGJIUREW = 207,//完成一个成就给多少分配点
