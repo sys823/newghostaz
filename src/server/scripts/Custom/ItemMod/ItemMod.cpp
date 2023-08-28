@@ -1216,7 +1216,13 @@ void ItemMod::ExchangeItem(Player* player, Item* item, uint32 update/*0 升级 1
 				uint32 vipRate		= 0;
 				uint32 hrRate		= 0;
 				uint32 stoneRate	= 0;
-
+                uint32 luckitem = sSwitch->GetValueByIndex(UPDATE_ITEM_LUCKY, 1);
+                uint32 luckprob = sSwitch->GetValueByIndex(UPDATE_ITEM_LUCKY, 2);
+                uint32 luckitemmax = sSwitch->GetValueByIndex(UPDATE_ITEM_LUCKY, 3);
+                uint32 fbitem = sSwitch->GetValue(UPDATE_ITEM_FB);
+                uint32 useluckcount = 0;
+                uint32  PlayerLuckyItemCount = player->GetItemCount(luckitem);  //判断幸运宝石有多少个
+                uint32  PlayerFBItemCount = player->GetItemCount(fbitem);  //判断防爆宝石有多少个
 				if (update == 0)
 				{
 					vipRate			= sVIP->GetRate(player, VIP_RATE_ITEM_EXCHANGE_0);
@@ -1230,9 +1236,53 @@ void ItemMod::ExchangeItem(Player* player, Item* item, uint32 update/*0 升级 1
 
 				uint32 rate = ItemExchangeInfo[i].chance + vipRate + hrRate;
 
-				if (rate < 100)
-					update == 0 ? rate += GetRateAndDes(player, RATE_ITEM_EXCHANGE_0) : rate += GetRateAndDes(player, RATE_ITEM_EXCHANGE_1);
+                if (rate < 100)
+                {
+                    if (update == 0)
+                    {
+                        rate += GetRateAndDes(player, RATE_ITEM_EXCHANGE_0);
+                        if (PlayerLuckyItemCount >= luckitemmax)
+                        {
+                            if (luckprob*luckitemmax + rate >= 100)
+                            {
+                                if ((100 - rate) % luckprob == 0)
+                                    useluckcount = (100 - rate) / luckprob;
+                                else
+                                    useluckcount = uint32((100 - rate) / luckprob + 1);
+                                rate = 100;
+                            }
+                            else
+                            {
+                                useluckcount = luckitemmax;
+                                rate = rate + luckitemmax * luckprob;
+                            }
+                        }
+                        else
+                        {
+                            if (luckprob*PlayerLuckyItemCount + rate >= 100)
+                            {
+                                if ((100 - rate) % luckprob == 0)
+                                    useluckcount = (100 - rate) / luckprob;
+                                else
+                                    useluckcount = uint32((100 - rate) / luckprob + 1);
+                                rate = 100;
+                            }
+                            else
+                            {
+                                useluckcount = PlayerLuckyItemCount;
+                                rate = rate + PlayerLuckyItemCount * luckprob;
+                            }
+                        }
+                    }
+                    else
+                        rate += GetRateAndDes(player, RATE_ITEM_EXCHANGE_1);
+                }
 
+                if (useluckcount)
+                {
+                    ChatHandler(player->GetSession()).PSendSysMessage("使用%u个%s,增加了%u升级成功几率", useluckcount, sCF->GetItemLink(luckitem).c_str(), useluckcount*luckprob);
+                    player->DestroyItemCount(luckitem, useluckcount, true, false);
+                }
 
 				if (urand(1, 100) > rate)
 				{		
@@ -1244,13 +1294,22 @@ void ItemMod::ExchangeItem(Player* player, Item* item, uint32 update/*0 升级 1
 
 					if (ItemExchangeInfo[i].destroyOnFail)
 					{
-						player->DestroyItem(item->GetBagSlot(), item->GetSlot(), true);
-						oss << ",被摧毁！";
+                        if (PlayerFBItemCount)
+                        {
+                            uint32 desitemcount = 1;
+                            player->DestroyItemCount(fbitem, desitemcount, true, false);
+                            oss << ",防爆宝石作用下被保留成功！";
+                        }
+                        else
+                        {
+                            player->DestroyItem(item->GetBagSlot(), item->GetSlot(), true);
+                            oss << ",被摧毁！";
+                        }
 					}
 					
 					player->GetSession()->SendAreaTriggerMessage(oss.str().c_str());
 
-					if (ItemExchangeInfo[i].destroyOnFail)
+					if (ItemExchangeInfo[i].destroyOnFail && !PlayerFBItemCount)
 						sReq->Des(player, ItemExchangeInfo[i].reqId, 1, expItemId);
 					else
 						sReq->Des(player, ItemExchangeInfo[i].reqId);
