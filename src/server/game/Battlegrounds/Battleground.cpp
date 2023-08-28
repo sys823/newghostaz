@@ -1033,10 +1033,10 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
             {
                 BattlegroundScoreMap::const_iterator score_itr = PlayerScores.find(player->GetGUID());
                 if (score_itr != PlayerScores.end())                         // player not found...
-                    if (score_itr->second->DamageDone >= sFTB->GetRewDmg(GetBgTypeID())
-                        || score_itr->second->HealingDone >= sFTB->GetRewHeal(GetBgTypeID())
-                        || score_itr->second->KillingBlows >= sFTB->GetRewKills(GetBgTypeID())
-                        || score_itr->second->Deaths >= sFTB->GetRewKilleds(GetBgTypeID()))
+                    if ((score_itr->second->DamageDone >= sFTB->GetRewDmg(GetBgTypeID())
+                        || score_itr->second->HealingDone >= sFTB->GetRewHeal(GetBgTypeID()))
+                        && score_itr->second->KillingBlows >= sFTB->GetRewKills(GetBgTypeID())
+                        && score_itr->second->Deaths >= sFTB->GetRewKilleds(GetBgTypeID()))
                         sFTB->RewardPlayer(player, GetBgTypeID(), true);
             }
         }
@@ -1050,10 +1050,10 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
             {
                 BattlegroundScoreMap::const_iterator score_itr = PlayerScores.find(player->GetGUID());
                 if (score_itr != PlayerScores.end())                         // player not found...
-                    if (score_itr->second->DamageDone >= sFTB->GetRewDmg(GetBgTypeID())
-                        || score_itr->second->HealingDone >= sFTB->GetRewHeal(GetBgTypeID())
-                        || score_itr->second->KillingBlows >= sFTB->GetRewKills(GetBgTypeID())
-                        || score_itr->second->Deaths >= sFTB->GetRewKilleds(GetBgTypeID()))
+                    if ((score_itr->second->DamageDone >= sFTB->GetRewDmg(GetBgTypeID())
+                        || score_itr->second->HealingDone >= sFTB->GetRewHeal(GetBgTypeID()))
+                        && score_itr->second->KillingBlows >= sFTB->GetRewKills(GetBgTypeID())
+                        && score_itr->second->Deaths >= sFTB->GetRewKilleds(GetBgTypeID()))
                         sFTB->RewardPlayer(player, GetBgTypeID(), false);
             }
         }
