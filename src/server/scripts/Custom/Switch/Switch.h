@@ -88,14 +88,15 @@ enum SwithTypes
     MY_DMG_PH = 85,  //挑战需求ID
     MY_DMG_PH_EVENTID = 86, //挑战重置事件ID
     MY_DMG_PH_TIIME = 87, //挑战时间
+    UPDATE_ITEM_LUCKY = 88,    //幸运宝石ID#每个幸运宝石增加的几率#最多可以用多少个
+    UPDATE_ITEM_FB = 89,       //防爆宝石的ID
     ST_CF_GOLD_JF = 99,
     ST_SS = 100,				//魂玉开关
     ST_SSEX = 101,				//魂玉扩展开关
     FB_CLEARSPELL = 103,
     ST_SS_CXREQ = 110,			//魂玉开关
     ST_SSEX_CXREQ = 111,		//魂玉扩展开关
-    UPDATE_ITEM_LUCKY = 112,    //幸运宝石ID#每个幸运宝石增加的几率#最多可以用多少个
-    UPDATE_ITEM_FB = 113,       //防爆宝石的ID
+    
 
     MY_DQ_RENWUREW = 206,//完成一个任务给多少分配点
     MY_DQ_CHENGJIUREW = 207,//完成一个成就给多少分配点

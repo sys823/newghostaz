@@ -1423,14 +1423,6 @@ void Unit::CalculateMeleeDamage(Unit* victim, uint32 damage, CalcDamageInfo* dam
             damage *= (-ToCreature()->C_MeleeDmg);
     }
 
-    if (GetTypeId() == TYPEID_PLAYER)
-    {
-        if (victim->GetTypeId() == TYPEID_PLAYER)
-            damage *= ToPlayer()->p_PVP_meleeDmgMod;
-        else
-            damage *= ToPlayer()->p_PVE_meleeDmgMod;
-    }
-
     damage = damageInfo->target->MeleeDamageBonusTaken(this, damage, damageInfo->attackType);
 
     // Script Hook For CalculateMeleeDamage -- Allow scripts to change the Damage pre class mitigation calculations
@@ -12387,6 +12379,11 @@ uint32 Unit::MeleeDamageBonusDone(Unit* victim, uint32 pdamage, WeaponAttackType
 
     if (GetTypeId() == TYPEID_PLAYER)
     {
+        if (victim->GetTypeId() == TYPEID_PLAYER)
+            tmpDamage *= ToPlayer()->p_PVP_meleeDmgMod;
+        else
+            tmpDamage *= ToPlayer()->p_PVE_meleeDmgMod;
+
         if (victim->GetTypeId() == TYPEID_UNIT)
         {
             Player* killersss = victim->GetCharmerOrOwnerPlayerOrPlayerItself();
