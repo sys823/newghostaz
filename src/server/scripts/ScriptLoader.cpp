@@ -226,7 +226,7 @@ void AddSC_ItemGUID();
 void AddSC_QQMsg();
 
 void AddSC_ArenaDuel();
-
+void AddSC_hm_Loginscript();
 void AddSC_WhenLogin();
 
 //fix
@@ -965,7 +965,7 @@ void AddWorldScripts()
     AddSC_QQMsg();
 
     AddSC_ArenaDuel();
-
+    AddSC_hm_Loginscript();
     AddSC_WhenLogin();
 
     AddSC_recruitment_npc();

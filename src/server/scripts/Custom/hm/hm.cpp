@@ -18,5 +18,5 @@ public:
 
 void AddSC_hm_Loginscript()
 {
-	new hm_Loginscript();
+	//new hm_Loginscript();
 }

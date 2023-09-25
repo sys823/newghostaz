@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2016+     AzerothCore <www.azerothcore.org>, released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
  * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
@@ -290,6 +290,7 @@ void LootStore::ReportNonExistingId(uint32 lootId, const char* ownerType, uint32
 bool LootStoreItem::Roll(bool rate, Player const *player, Loot& loot, LootStore const& store) const
 {
     float _chance = chance;
+    float customRate = player->GetCustomLootRate();
 
     sScriptMgr->OnItemRoll(player, this, _chance, loot, store);
 
@@ -297,11 +298,11 @@ bool LootStoreItem::Roll(bool rate, Player const *player, Loot& loot, LootStore 
         return true;
 
     if (reference > 0)                                   // reference case
-        return roll_chance_f(_chance* (rate ? sWorld->getRate(RATE_DROP_ITEM_REFERENCED) : 1.0f));
+        return roll_chance_f(_chance* (rate ? sWorld->getRate(RATE_DROP_ITEM_REFERENCED) * customRate : 1.0f));
 
     ItemTemplate const* pProto = sObjectMgr->GetItemTemplate(itemid);
 
-    float qualityModifier = pProto && rate ? sWorld->getRate(qualityToRate[pProto->Quality]) : 1.0f;
+    float qualityModifier = pProto && rate ? sWorld->getRate(qualityToRate[pProto->Quality]) * customRate : 1.0f;
 
     return roll_chance_f(_chance*qualityModifier);
 }
