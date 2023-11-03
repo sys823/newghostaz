@@ -289,20 +289,21 @@ void LootStore::ReportNonExistingId(uint32 lootId, const char* ownerType, uint32
 // RATE_DROP_ITEMS is no longer used for all types of entries
 bool LootStoreItem::Roll(bool rate, Player const *player, Loot& loot, LootStore const& store) const
 {
-    float _chance = chance;
     float customRate = player->GetCustomLootRate();
 
+    float _chance = chance * customRate;
+    
     sScriptMgr->OnItemRoll(player, this, _chance, loot, store);
 
     if (_chance >= 100.0f)
         return true;
 
     if (reference > 0)                                   // reference case
-        return roll_chance_f(_chance* (rate ? sWorld->getRate(RATE_DROP_ITEM_REFERENCED) * customRate : 1.0f));
+        return roll_chance_f(_chance* (rate ? sWorld->getRate(RATE_DROP_ITEM_REFERENCED) : 1.0f));
 
     ItemTemplate const* pProto = sObjectMgr->GetItemTemplate(itemid);
 
-    float qualityModifier = pProto && rate ? sWorld->getRate(qualityToRate[pProto->Quality]) * customRate : 1.0f;
+    float qualityModifier = pProto && rate ? sWorld->getRate(qualityToRate[pProto->Quality]) : 1.0f;
 
     return roll_chance_f(_chance*qualityModifier);
 }
